@@ -1,0 +1,2362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Science Detectives</title>
+<meta name="description" content="Solids, liquids and gases, particles, separating mixtures, dissolving and clever thinking for Year 3 and Year 4.">
+<meta name="theme-color" content="#14746F">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Learning">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<link rel="icon" href="/icons/favicon-64.png" sizes="64x64">
+<link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#E4EFEE; --paper:#FAFDFD; --paper-2:#EAF4F3; --ink:#15302E; --ink-soft:#4A6462; --line:#BCD5D3;
+  --leaf:#14746F; --leaf-deep:#0B534F; --leaf-soft:#CDE8E5; --on-leaf:#FFFFFF;
+  --sun:#D9841C; --sun-soft:#FBE6C7; --sun-deep:#A56209;
+  --sky:#2F76A8; --sky-soft:#D8E9F4;
+  --berry:#B23F4B; --berry-soft:#F6DCDE;
+  --bark:#8AA3A1;
+  --glass:#BFE3E0; --liquid:#35B3A8; --liquid-dark:#0E6F68;
+  --overlay:rgba(12,32,30,.58);
+  --read:'Andika','Trebuchet MS',Verdana,system-ui,sans-serif;
+  --round:'Fredoka','Andika','Trebuchet MS',system-ui,sans-serif;
+  font-size:20px;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#101F1E; --paper:#192E2C; --paper-2:#203A38; --ink:#E3EFEE; --ink-soft:#A2BAB8; --line:#33514E;
+    --leaf:#4FBFB4; --leaf-deep:#2C8F86; --leaf-soft:#1D3B39; --on-leaf:#08201E;
+    --sun:#EDBB55; --sun-soft:#463619; --sun-deep:#B98A2C;
+    --sky:#72B6E2; --sky-soft:#1E3A4B;
+    --berry:#EC8490; --berry-soft:#4C2A30;
+    --bark:#6C8785; --glass:#2A4B49; --liquid:#3FC4B8; --liquid-dark:#9BE6DE;
+    --overlay:rgba(0,0,0,.62);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#101F1E; --paper:#192E2C; --paper-2:#203A38; --ink:#E3EFEE; --ink-soft:#A2BAB8; --line:#33514E;
+  --leaf:#4FBFB4; --leaf-deep:#2C8F86; --leaf-soft:#1D3B39; --on-leaf:#08201E;
+  --sun:#EDBB55; --sun-soft:#463619; --sun-deep:#B98A2C;
+  --sky:#72B6E2; --sky-soft:#1E3A4B;
+  --berry:#EC8490; --berry-soft:#4C2A30;
+  --bark:#6C8785; --glass:#2A4B49; --liquid:#3FC4B8; --liquid-dark:#9BE6DE;
+  --overlay:rgba(0,0,0,.62);
+  color-scheme:dark;
+}
+:root[data-size="big"]{font-size:23px}
+
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--read);line-height:1.5;min-height:100vh;-webkit-tap-highlight-color:transparent}
+img,svg{max-width:100%}
+button{font:inherit;color:inherit}
+h1,h2,h3{font-family:var(--round);line-height:1.15;margin:0}
+.wrap{max-width:820px;margin:0 auto;padding:1rem 1rem 2rem}
+.hidden{display:none!important}
+:focus-visible{outline:4px solid var(--sun);outline-offset:3px;border-radius:10px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:3.1rem;padding:.4rem 1.4rem;border-radius:999px;border:3px solid var(--line);background:var(--paper);font-family:var(--round);font-weight:600;font-size:1.05rem;cursor:pointer;box-shadow:0 4px 0 var(--line);transition:transform .08s,box-shadow .08s;text-decoration:none;user-select:none}
+.btn:active:not(:disabled){transform:translateY(3px);box-shadow:0 1px 0 var(--line)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn-go{background:var(--leaf);border-color:var(--leaf);color:var(--on-leaf);box-shadow:0 5px 0 var(--leaf-deep)}
+.btn-go:active:not(:disabled){box-shadow:0 2px 0 var(--leaf-deep)}
+.btn-sun{background:var(--sun-soft);border-color:var(--sun);box-shadow:0 4px 0 var(--sun)}
+.btn-wide{width:100%}
+.btn-icon{width:3.1rem;padding:0;flex:none;font-size:1.3rem}
+.btn-small{min-height:2.5rem;font-size:.9rem;padding:.2rem 1rem;box-shadow:0 3px 0 var(--line)}
+.row{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center}
+.stack{display:grid;gap:.75rem}
+
+/* Flask the lab mascot */
+.fl-bench{stroke:var(--bark);stroke-width:7;stroke-linecap:round;fill:none}
+.fl-body{fill:var(--glass);stroke:var(--liquid-dark);stroke-width:3.5;stroke-linejoin:round}
+.fl-liquid{fill:var(--liquid);stroke:none}
+.fl-rim{fill:var(--liquid-dark)}
+.fl-eye{fill:#FFFFFF;stroke:var(--liquid-dark);stroke-width:2.5}
+.fl-pupil{fill:#14302E}
+.fl-mouth{fill:none;stroke:var(--liquid-dark);stroke-width:3;stroke-linecap:round}
+.fl-bub{fill:var(--liquid);opacity:.75}
+.flask{transition:filter .4s}
+.flask.happy{animation:hop .6s ease}
+.flask.happy .fl-bub{animation:rise .7s ease}
+.flask.sleepy .fl-pupil{display:none}
+.flask.sleepy .fl-bub{display:none}
+@keyframes hop{0%,100%{transform:translateY(0)}35%{transform:translateY(-14px) rotate(-4deg)}65%{transform:translateY(0)}80%{transform:translateY(-4px)}}
+@keyframes rise{0%{transform:translateY(6px);opacity:.2}100%{transform:translateY(-4px);opacity:.9}}
+
+/* Home */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:1rem;padding:1.25rem 0 .5rem}
+.hero h1{font-size:2.5rem;font-weight:700;letter-spacing:-.5px}
+.hero p{margin:.4rem 0 0;color:var(--ink-soft);font-size:1.1rem;max-width:30ch}
+.hero .flask{width:clamp(120px,26vw,185px);height:auto;display:block}
+.notice{background:var(--sun-soft);border:3px solid var(--sun);border-radius:20px;padding:.9rem 1.1rem;margin:1rem 0}
+.resume{background:var(--sky-soft);border:3px solid var(--sky);border-radius:24px;padding:1.1rem 1.2rem;margin:1rem 0;display:grid;gap:.75rem}
+.resume h2{font-size:1.35rem}
+.resume p{margin:0;color:var(--ink-soft)}
+.sets{display:grid;gap:1rem;margin-top:1.25rem}
+.sets h2.label{font-size:1.4rem}
+.setcard{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:1rem;align-items:center;text-align:left;width:100%;padding:1rem 1.1rem;border-radius:26px;border:3px solid var(--line);background:var(--paper);cursor:pointer;box-shadow:0 5px 0 var(--line)}
+.setcard:active:not(:disabled){transform:translateY(3px);box-shadow:0 2px 0 var(--line)}
+.setcard .emoji{font-size:2.4rem;width:3.6rem;height:3.6rem;display:grid;place-items:center;border-radius:18px;background:var(--paper-2)}
+.setcard .sc-title{font-family:var(--round);font-weight:600;font-size:1.3rem;line-height:1.2}
+.setcard .meta{color:var(--ink-soft);font-size:.95rem}
+.setcard .go{font-family:var(--round);font-weight:600;color:var(--leaf);font-size:1rem;white-space:nowrap}
+.setcard.locked{opacity:.7;cursor:not-allowed}
+.setcard.locked .go{color:var(--ink-soft)}
+.stars{display:inline-flex;gap:2px;font-size:1.1rem;letter-spacing:1px}
+.star-on{color:var(--sun)}
+.star-off{color:var(--line)}
+.homefoot{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.5rem}
+.result-head .flask{width:150px;height:auto;display:block;margin:0 auto .5rem}
+
+/* Knowledge list */
+.knows{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.5rem}
+.know{font-size:.85rem;background:var(--paper-2);border:2px solid var(--line);border-radius:999px;padding:.1rem .6rem;color:var(--ink-soft)}
+
+/* Quiz top */
+.topbar{display:flex;align-items:center;gap:.75rem;position:sticky;top:0;z-index:20;background:var(--bg);padding:.6rem 0 .4rem}
+.topbar .where{flex:1;min-width:0}
+.topbar .where b{font-family:var(--round);font-size:1.05rem;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topbar .where span{color:var(--ink-soft);font-size:.9rem}
+.pill{font-family:var(--round);font-weight:600;background:var(--sun-soft);border:3px solid var(--sun);border-radius:999px;padding:.25rem .85rem;white-space:nowrap}
+.pill.fire{background:var(--berry-soft);border-color:var(--berry);animation:pulse 1s ease infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
+.track-wrap{position:relative;height:3.4rem;margin:.2rem 0 .6rem}
+.track-wrap .track{position:absolute;left:0;right:0;bottom:.55rem;height:12px;border-radius:99px;background:var(--bark);opacity:.35}
+.track-wrap .fill{position:absolute;left:0;bottom:.55rem;height:12px;border-radius:99px;background:var(--leaf);transition:width .5s ease}
+.track-wrap .walker{position:absolute;bottom:.3rem;width:3.6rem;transform:translateX(-50%);transition:left .5s ease}
+.track-wrap .walker .fl-bench{display:none}
+.track-wrap .goal{position:absolute;right:-.2rem;bottom:.6rem;font-size:1.4rem}
+
+/* Question card */
+.card{background:var(--paper);border:3px solid var(--line);border-radius:30px;padding:1.2rem 1.2rem 1.5rem;box-shadow:0 6px 0 var(--line)}
+.sec-tag{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--round);font-weight:600;font-size:.95rem;padding:.2rem .8rem;border-radius:999px;background:var(--paper-2);border:2px solid var(--line);color:var(--ink-soft)}
+.prompt{display:flex;gap:.75rem;align-items:flex-start;margin:.9rem 0 1rem}
+.prompt h2{font-size:1.35rem;font-weight:600;flex:1}
+.speak{flex:none;width:2.8rem;height:2.8rem;border-radius:50%;border:3px solid var(--sky);background:var(--sky-soft);cursor:pointer;font-size:1.15rem;display:grid;place-items:center}
+.qtext{font-size:1.45rem;line-height:1.6;margin:0 0 1.1rem}
+.blank{display:inline-block;min-width:4.6em;border-bottom:4px dashed var(--sky);text-align:center;color:var(--sky);font-weight:700;padding:0 .2em}
+.blank.filled{border-bottom-style:solid}
+
+/* Choice */
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(6.5rem,1fr));gap:.8rem}
+.opts.long{grid-template-columns:1fr}
+.opt{min-height:4rem;border-radius:20px;border:3px solid var(--line);background:var(--paper-2);font-size:1.3rem;font-weight:700;cursor:pointer;padding:.5rem 1rem;box-shadow:0 4px 0 var(--line);text-align:center;display:flex;align-items:center;justify-content:center;gap:.5rem;flex-direction:column}
+.opts.long .opt{font-size:1.15rem;text-align:left;align-items:flex-start;font-weight:400}
+.opt:active:not(:disabled){transform:translateY(3px);box-shadow:0 1px 0 var(--line)}
+.opt.sel{border-color:var(--sky);background:var(--sky-soft);box-shadow:0 4px 0 var(--sky)}
+.opt.ok{border-color:var(--leaf);background:var(--leaf-soft);box-shadow:0 4px 0 var(--leaf)}
+.opt.no{border-color:var(--berry);background:var(--berry-soft);box-shadow:0 4px 0 var(--berry)}
+
+/* Chips, bins, blanks */
+.bank{display:flex;flex-wrap:wrap;gap:.65rem;justify-content:center;min-height:4rem;padding:.8rem;border-radius:22px;background:var(--paper-2);border:3px dashed var(--line);margin-bottom:1rem}
+.bank-label{width:100%;text-align:center;color:var(--ink-soft);font-size:.9rem}
+.chip{display:inline-flex;align-items:center;justify-content:center;min-height:3.2rem;min-width:3.2rem;padding:.2rem 1.05rem;border-radius:16px;background:var(--sun-soft);border:3px solid var(--sun);font-size:1.2rem;font-weight:700;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;box-shadow:0 4px 0 var(--sun)}
+.chip.sel{background:var(--sky-soft);border-color:var(--sky);box-shadow:0 0 0 4px var(--sky)}
+.chip.dragging{opacity:.3}
+.chip.ok{background:var(--leaf-soft);border-color:var(--leaf);box-shadow:0 4px 0 var(--leaf)}
+.chip.no{background:var(--berry-soft);border-color:var(--berry);box-shadow:0 4px 0 var(--berry)}
+.ghost{position:fixed;left:0;top:0;z-index:1000;pointer-events:none;transform:translate(-50%,-60%) scale(1.1);opacity:.95}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(10rem,1fr));gap:.9rem}
+.bin{min-height:9rem;border:3px dashed var(--line);border-radius:22px;padding:.7rem;display:flex;flex-direction:column;gap:.6rem;cursor:pointer}
+.bin h3{font-size:1.05rem;text-align:center}
+.bin .hint{font-size:.85rem;color:var(--ink-soft);text-align:center;margin-top:-.4rem}
+.bin .inside{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center}
+.over{border-color:var(--sky)!important;background:var(--sky-soft)!important}
+.poemtext{font-size:1.25rem;line-height:1.5;margin:0}
+.poemtext .line{display:block;margin:0 0 .9rem}
+.nowrap{white-space:nowrap}
+.slot{display:inline-flex;vertical-align:middle;align-items:center;justify-content:center;min-width:5.5rem;min-height:3.2rem;margin:0 .15rem;border-bottom:4px dashed var(--sky);border-radius:12px 12px 4px 4px;background:var(--sky-soft);cursor:pointer;line-height:1.2}
+.slot .chip{box-shadow:none}
+
+/* Order (drag to sequence) */
+.orderlist{display:grid;gap:.6rem;margin-bottom:.8rem}
+.ord{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:.7rem;align-items:center;padding:.6rem .8rem;border-radius:18px;border:3px solid var(--line);background:var(--paper-2);font-size:1.05rem;line-height:1.35;touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab;text-align:left}
+.ord .num{font-family:var(--round);font-weight:700;width:2rem;height:2rem;display:grid;place-items:center;border-radius:50%;background:var(--sun-soft);border:2px solid var(--sun);flex:none;font-size:.95rem}
+.ord.dragging{opacity:.35}
+.ord.ok{border-color:var(--leaf);background:var(--leaf-soft)}
+.ord.no{border-color:var(--berry);background:var(--berry-soft)}
+.ord-move{display:flex;flex-direction:column;gap:.2rem}
+.ord-move button{width:2.1rem;height:1.6rem;border-radius:8px;border:2px solid var(--line);background:var(--paper);cursor:pointer;font-size:.8rem;line-height:1;padding:0}
+.ord-move button:disabled{opacity:.3;cursor:default}
+
+/* Match lines */
+.match{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);column-gap:clamp(2.6rem,11vw,6rem)}
+.match-col{display:grid;grid-template-columns:minmax(0,1fr);gap:.7rem;align-content:stretch;position:relative;z-index:2}
+.match svg.lines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;overflow:visible}
+.m-item{position:relative;min-width:0;overflow-wrap:anywhere;display:flex;align-items:center;gap:.5rem;min-height:4rem;padding:.45rem .8rem;border-radius:18px;border:3px solid var(--line);background:var(--paper-2);cursor:pointer;touch-action:none;user-select:none;-webkit-user-select:none;text-align:left;font-size:1.05rem;line-height:1.3}
+.m-item.left{font-weight:700;font-size:1.15rem}
+.m-item.right{padding-left:1.15rem}
+.m-item .dot{position:absolute;top:50%;width:18px;height:18px;border-radius:50%;background:var(--paper);border:4px solid var(--ink-soft);transform:translateY(-50%)}
+.m-item.left .dot{right:-11px}
+.m-item.right .dot{left:-11px}
+.m-item.sel{border-color:var(--sky);background:var(--sky-soft)}
+.m-item.linked .dot{background:var(--sky);border-color:var(--sky)}
+.m-item.ok{border-color:var(--leaf);background:var(--leaf-soft)}
+.m-item.no{border-color:var(--berry);background:var(--berry-soft)}
+.m-item.ok .dot{background:var(--leaf);border-color:var(--leaf)}
+.m-item.no .dot{background:var(--berry);border-color:var(--berry)}
+.lines path{fill:none;stroke-width:5;stroke-linecap:round}
+
+/* Tick-or-cross grid */
+.gridq{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.gridq table{border-collapse:separate;border-spacing:4px;margin:0 auto}
+.gridq th{font-family:var(--round);font-weight:600;font-size:.88rem;line-height:1.2;color:var(--ink-soft);padding:.2rem .3rem;vertical-align:bottom;max-width:7.5rem;min-width:4.6rem}
+.gridq th.rowhead{text-align:right;vertical-align:middle;color:var(--ink);font-size:1.05rem;white-space:nowrap;padding-right:.5rem}
+.cell{width:3.4rem;height:3.4rem;border-radius:14px;border:3px solid var(--line);background:var(--paper-2);font-size:1.5rem;font-weight:700;cursor:pointer;padding:0;line-height:1}
+.cell.tick{color:var(--leaf-deep);border-color:var(--leaf);background:var(--leaf-soft)}
+.cell.cross{color:var(--berry);border-color:var(--berry);background:var(--berry-soft)}
+.cell.ok{box-shadow:inset 0 0 0 3px var(--leaf)}
+.cell.no{box-shadow:inset 0 0 0 3px var(--berry);opacity:.85}
+.cell .mark-was{display:block;font-size:.65rem;font-weight:400;color:var(--ink-soft)}
+
+/* True / false rows */
+.tflist{display:grid;gap:.7rem}
+.tfrow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.7rem;align-items:center;padding:.6rem .8rem;border-radius:18px;border:3px solid var(--line);background:var(--paper-2);font-size:1.08rem;line-height:1.35}
+.tfrow.ok{border-color:var(--leaf);background:var(--leaf-soft)}
+.tfrow.no{border-color:var(--berry);background:var(--berry-soft)}
+.tfbtns{display:flex;gap:.4rem;flex:none}
+.tfbtns button{min-width:4rem;min-height:2.8rem;border-radius:14px;border:3px solid var(--line);background:var(--paper);font-family:var(--round);font-weight:600;cursor:pointer;font-size:.95rem}
+.tfbtns button[aria-pressed="true"]{background:var(--sky-soft);border-color:var(--sky)}
+.tfbtns button:disabled{cursor:default}
+.tfrow.ok .tfbtns button[aria-pressed="true"]{background:var(--leaf);border-color:var(--leaf);color:var(--on-leaf)}
+.tfrow.no .tfbtns button[aria-pressed="true"]{background:var(--berry);border-color:var(--berry);color:#fff}
+
+/* Spell */
+.boxes{display:grid;gap:.35rem;justify-content:center;margin:.5rem 0 1.2rem}
+.box{width:100%;aspect-ratio:.8;padding:0;border-radius:12px;border:3px solid var(--line);background:var(--paper-2);display:grid;place-items:center;font-size:1.6em;font-weight:700;cursor:pointer;color:var(--ink)}
+.box.next{border-color:var(--sky);box-shadow:0 0 0 3px var(--sky-soft)}
+.box.ok{border-color:var(--leaf);background:var(--leaf-soft)}
+.box.no{border-color:var(--berry);background:var(--berry-soft)}
+.tiles{display:flex;flex-wrap:wrap;gap:.55rem;justify-content:center}
+.tile{width:3.2rem;height:3.2rem;border-radius:14px;border:3px solid var(--sun);background:var(--sun-soft);font-size:1.6rem;font-weight:700;cursor:pointer;box-shadow:0 4px 0 var(--sun)}
+.tile:disabled{opacity:.25;cursor:default;box-shadow:none}
+.tile:active:not(:disabled){transform:translateY(3px);box-shadow:0 1px 0 var(--sun)}
+.clue{font-size:1.3rem;line-height:1.6;background:var(--paper-2);border-radius:20px;padding:.9rem 1.1rem;margin:0 0 1rem;border-left:8px solid var(--sun)}
+
+/* Type */
+.write{width:100%;font-family:var(--read);font-size:1.35rem;padding:.8rem 1rem;border-radius:18px;border:3px solid var(--line);background:var(--paper-2);color:var(--ink);line-height:1.5}
+.write:focus{outline:none;border-color:var(--sky);box-shadow:0 0 0 4px var(--sky-soft)}
+.tip{color:var(--ink-soft);font-size:1rem;margin:.6rem 0 0}
+.typeline{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap}
+.typeline .write{flex:1;min-width:10rem}
+.hintbox{margin:.7rem 0 0;background:var(--sun-soft);border-left:8px solid var(--sun);border-radius:14px;padding:.6rem .9rem;font-size:1.05rem}
+
+/* Figures: diagrams, apparatus, tables and charts */
+.figure{background:var(--paper-2);border:3px solid var(--line);border-radius:22px;padding:1rem;margin:0 0 1rem;text-align:center}
+.figure svg{width:100%;max-width:27rem;height:auto}
+.fig-bg{fill:var(--paper)}
+.fig-ink{fill:none;stroke:var(--ink);stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round}
+.fig-fill{fill:var(--ink)}
+.fig-glass{fill:var(--glass);stroke:var(--liquid-dark);stroke-width:3.5;stroke-linejoin:round}
+.fig-liquid{fill:var(--liquid);opacity:.85}
+.fig-part{fill:var(--leaf-deep)}
+.fig-part2{fill:var(--sun-deep)}
+.fig-grid{fill:none;stroke:var(--line);stroke-width:2}
+.fig-bar{fill:var(--sky)}
+.fig-bar2{fill:var(--sun)}
+.fig-label{fill:var(--ink);font-family:var(--round);font-size:13px;font-weight:600}
+.fig-small{fill:var(--ink-soft);font-family:var(--round);font-size:11px}
+.fig-head{fill:var(--ink-soft);font-family:var(--round);font-size:11px;font-weight:600}
+.fig-sand{fill:var(--sun-deep);opacity:.8}
+.fig-magnet{fill:var(--berry)}
+.fig-iron{fill:var(--bark)}
+.fig-heat{fill:none;stroke:var(--sun);stroke-width:3;stroke-linecap:round}
+.fig-arrow{fill:none;stroke:var(--sky);stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round}
+.fig-dirty{fill:#8A7048;opacity:.75}
+.fig-clean{fill:var(--sky);opacity:.35}
+
+/* Drawing pad */
+.padwrap{display:grid;gap:.7rem}
+.pad{width:100%;aspect-ratio:3/2;border-radius:20px;border:3px solid var(--line);background:#FFFFFF;touch-action:none;cursor:crosshair;display:block}
+.padtools{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;justify-content:center}
+.swatch{width:2.5rem;height:2.5rem;border-radius:50%;border:3px solid var(--line);cursor:pointer;padding:0}
+.swatch[aria-pressed="true"]{box-shadow:0 0 0 4px var(--sky);border-color:var(--paper)}
+.padnote{color:var(--ink-soft);font-size:.95rem;text-align:center;margin:0}
+
+/* Badges */
+.badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(8.5rem,1fr));gap:.7rem;margin-top:.7rem}
+.badge{display:grid;gap:.15rem;justify-items:center;text-align:center;padding:.7rem .5rem;border-radius:18px;border:3px solid var(--line);background:var(--paper-2)}
+.badge.on{border-color:var(--sun);background:var(--sun-soft)}
+.badge .bi{font-size:1.9rem;line-height:1}
+.badge.off .bi{filter:grayscale(1);opacity:.35}
+.badge b{font-family:var(--round);font-size:.95rem;font-weight:600}
+.badge small{color:var(--ink-soft);font-size:.8rem;line-height:1.25}
+.badge-pop{display:flex;gap:.6rem;align-items:center;background:var(--sun-soft);border:3px solid var(--sun);border-radius:18px;padding:.5rem .8rem;margin:.6rem 0 0}
+.badge-pop .bi{font-size:1.8rem}
+
+/* Bottom sheet */
+.dock-space{height:9rem}
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--bg);border-top:3px solid var(--line);padding:.8rem 1rem calc(.8rem + env(safe-area-inset-bottom))}
+.dock .inner{max-width:820px;margin:0 auto}
+.dock.good{background:var(--leaf-soft);border-color:var(--leaf)}
+.dock.bad{background:var(--berry-soft);border-color:var(--berry)}
+.dock.part{background:var(--sun-soft);border-color:var(--sun)}
+.fb{max-height:48vh;overflow:auto;margin-bottom:.8rem}
+.fb h3{font-size:1.45rem;display:flex;gap:.5rem;align-items:center}
+.fb .gain{font-family:var(--round);font-size:1rem;font-weight:600;margin-left:auto;white-space:nowrap}
+.fb p{margin:.45rem 0 0;font-size:1.1rem;line-height:1.55}
+.fb .ans{font-weight:700}
+.fb .why{background:var(--paper);border-radius:14px;padding:.5rem .8rem;margin-top:.6rem!important}
+
+/* Overlay & modal */
+.overlay{position:fixed;inset:0;z-index:100;background:var(--overlay);display:grid;place-items:center;padding:1rem}
+.modal{background:var(--paper);border-radius:30px;border:3px solid var(--line);padding:1.5rem;max-width:30rem;width:100%;text-align:center;display:grid;gap:1rem;max-height:92vh;overflow:auto}
+.modal h2{font-size:1.6rem}
+.modal p{margin:0;font-size:1.1rem;color:var(--ink-soft)}
+.modal .flask{width:150px;margin:0 auto;display:block}
+
+/* Results */
+.result-head{text-align:center;padding:1rem 0}
+.big-stars{font-size:3.4rem;letter-spacing:.3rem;line-height:1}
+.big-stars span{display:inline-block}
+.big-stars .star-on{animation:pop .5s both}
+.big-stars span:nth-child(2){animation-delay:.2s}
+.big-stars span:nth-child(3){animation-delay:.4s}
+@keyframes pop{0%{transform:scale(0)}70%{transform:scale(1.25)}100%{transform:scale(1)}}
+.result-head .score-big{font-family:var(--round);font-size:2.6rem;font-weight:700;margin:.4rem 0 0}
+.result-head p{margin:.3rem 0;font-size:1.15rem;color:var(--ink-soft)}
+.bars{display:grid;gap:.9rem;margin:1rem 0}
+.bar-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.3rem .8rem;align-items:center;font-size:1.05rem}
+.bar{grid-column:1/-1;height:16px;border-radius:99px;background:var(--paper-2);border:2px solid var(--line);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--leaf);border-radius:99px}
+.review{margin-top:1rem}
+.review details{border:3px solid var(--line);border-radius:20px;background:var(--paper-2);padding:.4rem 1rem}
+.review summary{cursor:pointer;font-family:var(--round);font-weight:600;padding:.4rem 0}
+.review li{margin:.6rem 0;font-size:1.05rem}
+.review ol{padding-left:1.3rem}
+
+/* History & settings */
+.page-head{display:flex;align-items:center;gap:.75rem;padding:.8rem 0}
+.page-head h1{font-size:1.8rem;flex:1}
+.hist{display:grid;gap:1rem}
+.hist .card{padding:1rem 1.1rem}
+.hist table{width:100%;border-collapse:collapse;font-size:1rem;margin-top:.5rem}
+.hist td,.hist th{text-align:left;padding:.35rem .3rem;border-bottom:2px solid var(--paper-2)}
+.hist th{color:var(--ink-soft);font-weight:400;font-size:.9rem}
+.scroll-x{overflow-x:auto}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(11rem,1fr));gap:.8rem;margin-top:.6rem}
+.gallery figure{margin:0}
+.gallery img{width:100%;border-radius:16px;border:3px solid var(--line);background:#fff;display:block}
+.gallery figcaption{color:var(--ink-soft);font-size:.85rem;margin-top:.25rem;text-align:center}
+.setting{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.8rem 0;border-bottom:2px solid var(--paper-2);flex-wrap:wrap}
+.setting b{font-family:var(--round);font-weight:600;font-size:1.1rem}
+.setting small{display:block;color:var(--ink-soft);font-size:.9rem}
+.seg{display:inline-flex;border:3px solid var(--line);border-radius:999px;overflow:hidden}
+.seg button{border:0;background:transparent;padding:.45rem .95rem;cursor:pointer;font-family:var(--round);font-weight:600;min-height:2.6rem}
+.seg button[aria-pressed="true"]{background:var(--leaf);color:var(--on-leaf)}
+
+@media (max-width:520px){
+  :root{font-size:18px}
+  :root[data-size="big"]{font-size:21px}
+  .hero h1{font-size:2rem}
+  .card{padding:1rem .8rem 1.2rem;border-radius:24px}
+  .setcard{grid-template-columns:auto minmax(0,1fr)}
+  .setcard .go{grid-column:1/-1;text-align:right}
+  .m-item{font-size:.96rem;padding:.4rem .55rem}
+  .m-item.left{font-size:1rem;text-align:center;justify-content:center}
+  .match{column-gap:2.4rem}
+  .qtext{font-size:1.28rem}
+  .ord{font-size:.96rem;padding:.5rem .6rem;gap:.5rem}
+  .tfrow{font-size:.98rem;grid-template-columns:1fr;gap:.5rem}
+  .tfbtns{justify-content:flex-end}
+  .cell{width:2.9rem;height:2.9rem;font-size:1.3rem}
+  .gridq th{font-size:.78rem;min-width:4rem}
+  .gridq th.rowhead{font-size:.95rem}
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<main id="app" class="wrap" aria-live="polite"></main>
+<div id="dock" class="dock hidden"><div class="inner" id="dockInner"></div></div>
+<div id="layer"></div>
+<script>
+/* ==========================================================================
+   CONTENT — 6 sets for Year 3 / Year 4 science, built from the Y3 final
+   review packet: states of matter, the particle model, separating mixtures
+   and dissolving. Every set covers every topic, so a learner can start at
+   any set. The English is kept short and plain on purpose: the thinking
+   should be the hard part, not the reading.
+   ========================================================================== */
+const SETS = [
+/* ---------------------------- SET 1 ---------------------------- */
+{
+  id:1, title:'Ice and Steam', emoji:'🧊', about:'Water as a solid, a liquid and a gas',
+  aligns:['States of matter','Particle model','Sieving and magnets','Soluble and insoluble','Evaporation','Fair tests'],
+  sections:[
+    {key:'states', items:[
+      {t:'choice', prompt:'Pick the right state.', text:'Ice is water that is very cold. What state is ice?',
+        opts:['Solid','Liquid','Gas'], ans:0,
+        explain:'Ice keeps its own shape. Put a cube of ice in a bowl and it stays a cube, so ice is a solid.'},
+      {t:'sort', prompt:'Put each one in the right box.',
+        bins:[['Solid','keeps its own shape'],['Liquid','flows and can be poured'],['Gas','spreads out to fill the space']],
+        chips:[['ice',0],['a rock',0],['water',1],['milk',1],['steam',2],['air',2]],
+        explain:'Ice and rock keep their shape. Water and milk flow. Steam and air spread out and fill every corner.'},
+      {t:'choice', prompt:'What happens?', long:true, text:'You pour water into a tall thin glass. What does the water do?',
+        opts:['It takes the shape of the glass','It keeps the shape it had before','It turns into a solid'], ans:0,
+        explain:'A liquid always takes the shape of its container. The amount of water does not change — only its shape.'},
+      {t:'type', prompt:'Type one word.', text:'Joe blows a bubble. Inside the bubble there is a ______.',
+        accept:['gas'], hint:'Solid, liquid or gas?',
+        explain:'Joe blows air into the bubble, and air is a gas. The gas pushes out on all sides, which is why a bubble is round.'}
+    ]},
+    {key:'particles', items:[
+      {t:'choice', prompt:'Look at the particles.', fig:'partsolid', text:'The little balls are particles. Which state is this?',
+        opts:['Solid','Liquid','Gas'], ans:0,
+        explain:'The particles are packed tightly in neat rows and cannot swap places. That is a solid.'},
+      {t:'grid', prompt:'Tick ✓ or cross ✗ in every box.',
+        cols:['Keeps its own shape','Takes the shape of its container','Can flow','Fills all of the container'],
+        rows:[['Solid',[1,0,0,0]],['Liquid',[0,1,1,0]],['Gas',[0,1,1,1]]],
+        explain:'A solid keeps its shape. A liquid takes the shape of the bottom of its container and can flow. A gas does that too, and it also spreads out until it fills every corner.'},
+      {t:'fill', prompt:'Drag the right word into each gap.',
+        lines:['In a {solid} the particles are packed close together.','In a {liquid} the particles can slide past each other.','In a {gas} the particles are far apart.'],
+        decoys:['bubble','metal'],
+        explain:'Particles are closest in a solid, a little looser in a liquid, and far apart in a gas.'},
+      {t:'choice', prompt:'Think about the particles.', long:true, text:'Ice melts into water. What happens to the particles?',
+        opts:['They start to slide past each other','They stop moving','They disappear'], ans:0,
+        explain:'Melting never destroys particles. They just get enough energy to slide past each other, so the water can flow.'}
+    ]},
+    {key:'mixtures', items:[
+      {t:'match', prompt:'Match each tool to the job it does.',
+        left:[{label:'Sieve'},{label:'Magnet'},{label:'Filter funnel'},{label:'Hand picking'}],
+        right:['splits big bits from small bits','pulls out iron and steel','catches a solid that will not dissolve','picks out big things you can see'],
+        explain:'Look for the difference between the things you want to split. Different size → sieve. Magnetic → magnet. Solid mixed in a liquid → filter. Big and easy to see → your hands.'},
+      {t:'sort', prompt:'Will a magnet pick it up?',
+        bins:[['A magnet picks it up','magnetic'],['A magnet does not','not magnetic']],
+        chips:[['iron nail',0],['steel paper clip',0],['plastic spoon',1],['wooden brick',1],['glass marble',1],['iron filings',0]],
+        explain:'Only iron and steel are pulled by a magnet here. Plastic, wood and glass are not magnetic at all.'},
+      {t:'choice', prompt:'What happens?', fig:'sieve', long:true, text:'Sam pours a mix of rice and flour into a sieve. What happens?',
+        opts:['The flour falls through and the rice stays on top','The rice falls through and the flour stays on top','Nothing falls through at all'], ans:0,
+        explain:'A sieve has small holes. Anything smaller than a hole drops through. Flour grains are much smaller than rice grains.'},
+      {t:'type', prompt:'Type one word.', text:'A tool with lots of tiny holes that splits big bits from small bits is a ______.',
+        accept:['sieve'], hint:'There is probably one in your kitchen.',
+        explain:'A sieve. The holes let small bits through and hold big bits back.'}
+    ]},
+    {key:'dissolving', items:[
+      {t:'sort', prompt:'Stir each one into a glass of water.',
+        bins:[['It dissolves','you cannot see it any more'],['It does not dissolve','you can still see it']],
+        chips:[['salt',0],['sugar',0],['coffee powder',0],['sand',1],['rice',1],['small stones',1]],
+        explain:'Salt, sugar and coffee break up into bits far too small to see, so they dissolve. Sand, rice and stones stay whole and sink.'},
+      {t:'tfgrid', prompt:'True or false?',
+        rows:[['Some solids dissolve in water.', true], ['Every solid dissolves in water.', false],
+              ['A solid that dissolves is called soluble.', true], ['A solid that does not dissolve is called soluble.', false]],
+        explain:'Some solids dissolve, but not all of them. Soluble means it DOES dissolve. A solid that does NOT dissolve is insoluble, so the last line uses the wrong word. Read every word carefully!'},
+      {t:'choice', prompt:'Where did it go?', long:true, text:'You stir salt into water until you cannot see it. Where is the salt now?',
+        opts:['Still there, in bits too small to see','Gone for ever','It turned into water'], ans:0,
+        explain:'Nothing is lost. The salt has broken into tiny bits spread all through the water. Taste it and it is still salty.'},
+      {t:'type', prompt:'Type one word.', text:'A solid that will not dissolve is called ______.',
+        accept:['insoluble'], hint:'It starts with "in", like "in-visible".',
+        explain:'Insoluble. The "in" at the front means "not", so insoluble means "not soluble".'}
+    ]},
+    {key:'think', items:[
+      {t:'match', prompt:'Read the table. Which is A, B and C?', fig:'logic1',
+        left:[{label:'A'},{label:'B'},{label:'C'}],
+        right:['a rock','oil','oxygen'],
+        explain:'A keeps its own shape, so A is the solid: a rock. B can be poured but does not fill the container, so B is the liquid: oil. C fills all of the container, so C is the gas: oxygen.'},
+      {t:'choice', prompt:'Find the odd one out.', text:'Three of these are solids. Which one is NOT a solid?',
+        opts:['milk','ice','wood','rock'], ans:0,
+        explain:'Milk flows and takes the shape of its cup, so milk is a liquid. The other three all keep their own shape.'},
+      {t:'order', prompt:'Put the steps in the right order.',
+        items:['Pour the salty water into a flat dish','Leave the dish in a warm place','The water turns into a gas and goes into the air','Dry white salt is left in the dish'],
+        explain:'This is called evaporation. The water leaves as a gas, but salt cannot turn into a gas so easily, so the salt stays behind.'},
+      {t:'choice', prompt:'Explain why.', long:true, text:'Why can a filter funnel NOT take the sugar out of sugary water?',
+        opts:['The sugar broke into bits too small for the paper to catch','Sugar is magnetic','Filter paper has no holes at all'], ans:0,
+        explain:'Filter paper catches bits that are bigger than its holes. Dissolved sugar is far smaller than those holes, so it flows straight through with the water.'}
+    ]},
+    {key:'investigate', items:[
+      {t:'choice', prompt:'Predict what happens.', fig:'filterdirty', long:true,
+        text:'Muddy water is poured through a filter. What drips out at the bottom?',
+        opts:['Water that is much cleaner','Water that is muddier than before','Nothing at all'], ans:0,
+        explain:'Mud does not dissolve, so the paper catches it and cleaner water drips through. It is not perfectly clean — very tiny bits still get past.'},
+      {t:'choice', prompt:'Plan a fair test.', long:true,
+        text:'Ann wants to find out if hot water dissolves sugar faster. What must she keep the same?',
+        opts:['The amount of sugar and the amount of water','The temperature of the water','The colour of the spoon only'], ans:0,
+        explain:'In a fair test you change ONE thing. Ann is changing the temperature, so everything else must stay the same — or she will not know what caused the change.'},
+      {t:'tfgrid', prompt:'True or false?',
+        rows:[['When you separate a mixture, the materials stay the same.', true],
+              ['Rice is still rice after you take it out of a mixture.', true],
+              ['An iron nail has the same properties as salt.', false],
+              ['Separating a mixture turns salt into sugar.', false]],
+        explain:'Separating just moves things apart. It never changes what they are made of. An iron nail and salt are very different: one is magnetic and hard, the other dissolves.'},
+      {t:'draw', prompt:'Draw the particles.',
+        tip:'Draw a box of solid particles and a box of gas particles. Put the solid ones close together in rows. Put the gas ones far apart.',
+        explain:'Scientists draw particles as little balls all the time. It is the quickest way to show why a solid keeps its shape and a gas does not.'}
+    ]}
+  ]
+},
+/* ---------------------------- SET 2 ---------------------------- */
+{
+  id:2, title:'Kitchen Science', emoji:'🥤', about:'Drinks, sugar and things you find at home',
+  aligns:['States of matter','Particle model','Choosing a method','Dissolving speed','Reading a chart','Fair tests'],
+  sections:[
+    {key:'states', items:[
+      {t:'choice', prompt:'Pick the right state.', text:'Orange juice is poured from a bottle into a cup. What state is orange juice?',
+        opts:['Liquid','Solid','Gas'], ans:0,
+        explain:'It pours and it takes the shape of the cup, so orange juice is a liquid.'},
+      {t:'sort', prompt:'Put each one in the right box.',
+        bins:[['Solid','keeps its own shape'],['Liquid','flows and can be poured'],['Gas','spreads out to fill the space']],
+        chips:[['a sugar cube',0],['cold butter',0],['cooking oil',1],['milk',1],['steam from a kettle',2],['the air in a balloon',2]],
+        explain:'A sugar cube and cold butter hold their shape. Oil and milk pour. Steam and air spread out.'},
+      {t:'choice', prompt:'Which one?', text:'Which state always keeps its own shape?',
+        opts:['A solid','A liquid','A gas'], ans:0,
+        explain:'Only a solid keeps its own shape. Liquids and gases both take the shape of whatever holds them.'},
+      {t:'type', prompt:'Type one word.', text:'When water gets very cold it freezes into a solid called ______.',
+        accept:['ice'], hint:'You put it in a drink on a hot day.',
+        explain:'Ice. It is the same water — the particles have just slowed down and locked into place.'}
+    ]},
+    {key:'particles', items:[
+      {t:'choice', prompt:'Look at the particles.', fig:'partgas', text:'The little balls are particles. Which state is this?',
+        opts:['Gas','Solid','Liquid'], ans:0,
+        explain:'The particles are far apart with lots of empty space between them, and they zoom about. That is a gas.'},
+      {t:'grid', prompt:'Tick ✓ or cross ✗ in every box.',
+        cols:['Particles are very close together','Particles stay in one place','Particles are far apart'],
+        rows:[['Solid',[1,1,0]],['Liquid',[1,0,0]],['Gas',[0,0,1]]],
+        explain:'Solid particles are close AND stay put. Liquid particles are still close but they move around each other. Gas particles are far apart and never stay put.'},
+      {t:'choice', prompt:'Explain why.', long:true, text:'You can squash a gas into a smaller space, but you cannot squash a liquid much. Why?',
+        opts:['There is a lot of empty space between gas particles','Gas particles are softer','Gas is lighter than liquid'], ans:0,
+        explain:'Squashing means pushing particles closer. A gas has big gaps to close up. A liquid has almost no gaps left, so it barely squashes at all.'},
+      {t:'fill', prompt:'Drag the right word into each gap.',
+        lines:['A {solid} keeps its own shape.','A {liquid} can be poured into a cup.','A {gas} spreads out to fill the whole room.'],
+        decoys:['bubble','spoon'],
+        explain:'These three sentences are the quickest test there is. Ask: does it keep its shape, can it be poured, does it fill the room?'}
+    ]},
+    {key:'mixtures', items:[
+      {t:'choice', prompt:'What happens?', fig:'magnetsep', long:true,
+        text:'Tom mixes an iron nail, salt and rice. He holds a magnet just above the mixture. What happens?',
+        opts:['The nail jumps up to the magnet','The salt jumps up to the magnet','Everything jumps up to the magnet'], ans:0,
+        explain:'A magnet pulls iron and steel. The nail is iron, so it jumps. Salt and rice are not magnetic, so they stay where they are.'},
+      {t:'match', prompt:'Match each mixture to the best way to separate it.',
+        left:[{label:'Rice and cereal'},{label:'Water and sand'},{label:'Iron filings and beans'},{label:'Pens and pencils'}],
+        right:['use a sieve','use a filter funnel','use a magnet','pick them out by hand'],
+        explain:'Rice and cereal are different sizes → sieve. Sand will not dissolve in water → filter. Iron is magnetic → magnet. Pens and pencils are big and easy to see → hands.'},
+      {t:'choice', prompt:'Explain why.', long:true, text:'Why can you NOT use a sieve to split a blue marble from a green marble?',
+        opts:['They are the same size, so both stay on top','Marbles are magnetic','Marbles dissolve in water'], ans:0,
+        explain:'A sieve only sorts by SIZE. The marbles are the same size, so the sieve cannot tell them apart. Your hands can, because you can see the colour.'},
+      {t:'type', prompt:'Type one word.', text:'Iron and steel are the metals that are pulled by a ______.',
+        accept:['magnet'], hint:'It sticks to the fridge door.',
+        explain:'A magnet. Most other metals, such as copper and aluminium, are not pulled at all.'}
+    ]},
+    {key:'dissolving', items:[
+      {t:'tfgrid', prompt:'True or false?',
+        rows:[['Only white powders dissolve.', false], ['A dissolved solid is still there in the water.', true],
+              ['Hot water makes a solid dissolve faster.', true], ['Small pieces dissolve faster than big pieces.', true]],
+        explain:'Colour makes no difference — orange squash powder dissolves too. Heat and small pieces both speed dissolving up, because the water can get at more of the solid.'},
+      {t:'choice', prompt:'Read the chart.', fig:'dissolvebars', long:true,
+        text:'The chart shows how long a sugar cube took to dissolve. In which water was it fastest?',
+        opts:['Hot water','Warm water','Cold water'], ans:0,
+        explain:'The shortest bar means the shortest time. Hot water took only 20 seconds. Heat makes the water particles move faster, so they break the sugar up more quickly.'},
+      {t:'sort', prompt:'Stir each one into water.',
+        bins:[['It dissolves','soluble'],['It does not dissolve','insoluble']],
+        chips:[['instant coffee',0],['bath salts',0],['sugar',0],['flour',1],['chalk',1],['candle wax',1]],
+        explain:'Flour looks like it might dissolve, but it only makes the water cloudy — leave it and it settles. Chalk and wax do not dissolve either.'},
+      {t:'choice', prompt:'What does this tell you?', long:true,
+        text:'You stir sugar into hot tea until it vanishes. The tea still tastes sweet. What does that prove?',
+        opts:['The sugar is still there, in tiny bits','The sugar has gone','The sugar turned into tea'], ans:0,
+        explain:'Your tongue can find the sugar even when your eyes cannot. Dissolving hides a solid; it never destroys it.'}
+    ]},
+    {key:'think', items:[
+      {t:'match', prompt:'Read the table. Which is A, B and C?', fig:'logic2',
+        left:[{label:'A'},{label:'B'},{label:'C'}],
+        right:['iron filings','salt','sand'],
+        explain:'A is picked up by a magnet, so A is the iron filings. B dissolves and is white, so B is the salt. C does neither, so C is the sand.'},
+      {t:'choice', prompt:'Find the odd one out.', text:'Which one is the odd one out?',
+        opts:['sugar','salt','sand','coffee powder'], ans:2,
+        explain:'Sugar, salt and coffee all dissolve in water. Sand does not, so sand is the odd one out.'},
+      {t:'order', prompt:'Put the steps in the right order.',
+        items:['Fold the filter paper and put it in the funnel','Stand the funnel on top of an empty jar','Pour the muddy water into the funnel','Cleaner water drips into the jar'],
+        explain:'Set the equipment up first, then pour. If you pour before the funnel is over the jar, the water goes on the table!'},
+      {t:'choice', prompt:'Is he right?', long:true, text:'Ben says, "All metals are magnetic." Is Ben right?',
+        opts:['No — only some metals, like iron and steel, are magnetic','Yes — every metal is magnetic','Yes — but only when the metal is cold'], ans:0,
+        explain:'Try it on a copper coin or an aluminium can and nothing happens. Only a few metals, mainly iron, steel, nickel and cobalt, are magnetic.'}
+    ]},
+    {key:'investigate', items:[
+      {t:'choice', prompt:'Who made the best prediction?', long:true,
+        text:'Three children make a filter and pour dirty water through it. Who is right?',
+        opts:['"The water will be less dirty."','"The water will stay just as dirty."','"The water will be completely clean."'], ans:0,
+        explain:'A filter catches the bits that do not dissolve, so the water gets much cleaner — but very tiny bits and anything dissolved still slip through. "Less dirty" is the careful answer.'},
+      {t:'choice', prompt:'Plan a fair test.', long:true,
+        text:'Mia tests if stirring makes salt dissolve faster. She stirs cup 1 and does not stir cup 2. What must be the same in both cups?',
+        opts:['The amount of salt and the amount of water','How much she stirs each cup','The day of the week'], ans:0,
+        explain:'Stirring is the ONE thing she is changing. If cup 1 also had less water or more salt, she would not know which change made the difference.'},
+      {t:'tfgrid', prompt:'True or false?',
+        rows:[['A fair test changes only one thing.', true], ['You should measure carefully in a test.', true],
+              ['It is fine to change three things at once.', false], ['Doing a test twice helps you check your answer.', true]],
+        explain:'Change one thing, measure carefully, and repeat. Those three habits are what turn a guess into an experiment.'},
+      {t:'draw', prompt:'Draw the equipment.',
+        tip:'Draw a filter funnel standing on a jar. Show the muddy water going in at the top and the cleaner water dripping out at the bottom.',
+        explain:'Drawing the set-up before you start is what scientists do. It helps you spot a missing piece before you spill anything.'}
+    ]}
+  ]
+},
+/* ---------------------------- SET 3 ---------------------------- */
+{
+  id:3, title:'Beach Lab', emoji:'🏖️', about:'Sand, salt and sea water',
+  aligns:['States of matter','Particle model','Filtering and sieving','Salt water and evaporation','Logic tables','Fair tests'],
+  sections:[
+    {key:'states', items:[
+      {t:'choice', prompt:'Pick the right state.', text:'Sea water flows into any rock pool and fills the bottom of it. What state is sea water?',
+        opts:['Liquid','Solid','Gas'], ans:0,
+        explain:'It flows and takes the shape of the pool, so sea water is a liquid.'},
+      {t:'sort', prompt:'Put each one in the right box.',
+        bins:[['Solid','keeps its own shape'],['Liquid','flows and can be poured'],['Gas','spreads out to fill the space']],
+        chips:[['a sea shell',0],['dry sand',0],['sea water',1],['sun cream',1],['the wind',2],['air in a beach ball',2]],
+        explain:'Dry sand is the tricky one. It pours like a liquid, but look closely: every tiny grain keeps its own shape. Sand is a solid — just a solid in very small pieces.'},
+      {t:'choice', prompt:'Which one?', long:true, text:'Which state takes the shape of its container AND spreads out until it fills all of it?',
+        opts:['A gas','A liquid','A solid'], ans:0,
+        explain:'A liquid only fills the bottom of its container. A gas keeps spreading until it fills every corner.'},
+      {t:'type', prompt:'Type one word.', text:'Sea water is a ______ because it flows and takes the shape of the rock pool.',
+        accept:['liquid'], hint:'Solid, liquid or gas?',
+        explain:'A liquid. Flowing and taking the shape of the container are the two big clues.'}
+    ]},
+    {key:'particles', items:[
+      {t:'choice', prompt:'Look at the particles.', fig:'partliquid', text:'The little balls are particles. Which state is this?',
+        opts:['Liquid','Solid','Gas'], ans:0,
+        explain:'The particles are still touching, but they are jumbled up and can slide past each other. That is a liquid.'},
+      {t:'grid', prompt:'Tick ✓ or cross ✗ in every box.',
+        cols:['Keeps its own shape','Takes the shape of its container','Can be squashed smaller'],
+        rows:[['Solid',[1,0,0]],['Liquid',[0,1,0]],['Gas',[0,1,1]]],
+        explain:'Only a solid keeps its own shape. A liquid and a gas both take the shape of the container, but only a gas can be squashed much, because only a gas has big gaps between its particles.'},
+      {t:'choice', prompt:'Explain why.', long:true, text:'Spilled sea water spreads out flat, but a pebble never does. Why not?',
+        opts:['Liquid particles can slide past each other, solid ones cannot','Water is heavier than a pebble','Pebbles are magnetic'], ans:0,
+        explain:'In a solid the particles are locked into place, so the shape stays. In a liquid they slide, so the water spreads until something stops it.'},
+      {t:'fill', prompt:'Drag the right word into each gap.',
+        lines:['The particles in a {solid} are locked in place.','The particles in a {liquid} slide over each other.','The particles in a {gas} fly far apart.'],
+        decoys:['shell','wave'],
+        explain:'Locked, sliding, flying — three words that tell you everything about the three states.'}
+    ]},
+    {key:'mixtures', items:[
+      {t:'choice', prompt:'What is left behind?', fig:'funnel', long:true,
+        text:'Sara pours a mix of sand and water into a filter funnel. What stays on the filter paper?',
+        opts:['The sand','The water','Nothing stays'], ans:0,
+        explain:'Sand does not dissolve, and the grains are bigger than the holes in the paper. So the water drips through and the sand is trapped.'},
+      {t:'sort', prompt:'Pour the mixture through filter paper.',
+        bins:[['Goes through the paper','it is a liquid or it has dissolved'],['Stays on the paper','it is a solid that will not dissolve']],
+        chips:[['water',0],['dissolved salt',0],['dissolved sugar',0],['sand',1],['small shells',1],['seaweed',1]],
+        explain:'Anything dissolved is far too small to be caught, so it flows through with the water. Whole solids are trapped.'},
+      {t:'match', prompt:'Match each tool to its job.',
+        left:[{label:'Sieve'},{label:'Filter funnel'},{label:'Magnet'},{label:'Evaporating dish'}],
+        right:['sorts stones from sand by size','takes sand out of sea water','takes iron nails out of dry sand','gets the salt back out of sea water'],
+        explain:'Each tool uses a different difference: size, dissolving, magnetism, and turning into a gas.'},
+      {t:'type', prompt:'Type one word.', text:'Leave sea water in a warm dish until all the water has gone. What is left is dry ______.',
+        accept:['salt'], hint:'It makes the sea taste the way it does.',
+        explain:'Salt. The water turns into a gas and floats away, but the salt cannot, so it is left behind.'}
+    ]},
+    {key:'dissolving', items:[
+      {t:'tfgrid', prompt:'True or false?',
+        rows:[['Sea water is salty because salt has dissolved in it.', true], ['You can see the grains of salt in clear sea water.', false],
+              ['Stirring makes salt dissolve faster.', true], ['The salt is destroyed when it dissolves.', false]],
+        explain:'The salt is still there — you just cannot see it, because it has broken into bits far too small for your eyes. Stirring spreads it about faster.'},
+      {t:'choice', prompt:'Explain why.', long:true, text:'Sea water looks clear, even though there is salt in it. Why?',
+        opts:['The bits of salt are far too small to see','There is no salt in it after all','Salt is invisible when it is wet'], ans:0,
+        explain:'Dissolving breaks a solid into pieces thousands of times smaller than a grain. Light goes straight past them, so the water still looks clear.'},
+      {t:'sort', prompt:'Stir each one into a jar of water.',
+        bins:[['It dissolves','soluble'],['It does not dissolve','insoluble']],
+        chips:[['sea salt',0],['sugar',0],['bath salts',0],['sand',1],['a shell',1],['a pebble',1]],
+        explain:'The salts and sugar break up and vanish into the water. The shell, pebble and sand just sit at the bottom.'},
+      {t:'choice', prompt:'What is left?', fig:'evaporating', long:true,
+        text:'A dish of sea water is left in a warm place for two days. What is in the dish now?',
+        opts:['Dry white salt','Clear water','Completely nothing'], ans:0,
+        explain:'The water evaporated — it turned into a gas and drifted away. Salt cannot do that so easily, so it stayed as white crystals.'}
+    ]},
+    {key:'think', items:[
+      {t:'match', prompt:'Read the table. Which is A, B and C?', fig:'logic3',
+        left:[{label:'A'},{label:'B'},{label:'C'}],
+        right:['salt','iron filings','pebbles'],
+        explain:'A dissolves, so A is the salt. B is picked up by a magnet, so B is the iron filings. C is neither, and it is in big pieces, so C is the pebbles.'},
+      {t:'choice', prompt:'Find the odd one out.', text:'Which one is the odd one out?',
+        opts:['pebble','shell','sea water','driftwood'], ans:2,
+        explain:'A pebble, a shell and driftwood are all solids that keep their own shape. Sea water is a liquid, so it is the odd one out.'},
+      {t:'order', prompt:'Put the steps in the right order.',
+        items:['Scoop up some sea water in a jar','Pour it through a filter to take out the sand','Leave the clear water in a warm, sunny dish','Dry salt is left in the dish'],
+        explain:'Take out the sand first. If you evaporate before filtering, the sand and the salt end up mixed together in the dish.'},
+      {t:'choice', prompt:'Why is he wrong?', long:true,
+        text:'Ravi says, "If I filter sea water, the salt will stay on the paper." Why is Ravi wrong?',
+        opts:['The salt has dissolved, so it goes through with the water','Salt is magnetic and sticks to the funnel','Filter paper has no holes in it'], ans:0,
+        explain:'Filtering only catches solids that have NOT dissolved. Dissolved salt is far smaller than the holes, so it goes straight through.'}
+    ]},
+    {key:'investigate', items:[
+      {t:'choice', prompt:'Read the chart.', fig:'poolbars', long:true,
+        text:'The chart shows how much salt was found in four rock pools. Which pool had the most salt?',
+        opts:['Pool C','Pool A','Pool D'], ans:0,
+        explain:'The tallest bar has the most. Pool C reaches 9 grams, which is higher than every other bar.'},
+      {t:'choice', prompt:'Plan a fair test.', long:true,
+        text:'Two children test whether big sand grains let water drain through faster than small ones. What must they keep the same?',
+        opts:['The amount of water they pour in','The size of the sand grains','How long they wait, but nothing else'], ans:0,
+        explain:'The grain size is the one thing they are changing. Everything else — the amount of water, the size of the pot, the time — has to match.'},
+      {t:'tfgrid', prompt:'True or false?',
+        rows:[['Sand does not dissolve in water.', true], ['Salt does not dissolve in water.', false],
+              ['A filter can take sand out of water.', true], ['A filter can take dissolved salt out of water.', false]],
+        explain:'Sand stays whole, so a filter catches it. Salt dissolves, so a filter cannot. To get salt back you need to evaporate the water instead.'},
+      {t:'draw', prompt:'Draw the rock pool.',
+        tip:'Draw a rock pool with sand at the bottom and salty water above it. Draw the sun shining down on the pool.',
+        explain:'That sun is doing real science: it warms the water, the water evaporates, and the pool slowly gets saltier.'}
+    ]}
+  ]
+},
+/* ---------------------------- SET 4 ---------------------------- */
+{
+  id:4, title:'The Magnet Test', emoji:'🧲', about:'Metals, materials and sorting by property',
+  aligns:['States of matter','Particle model','Magnetic materials','Choosing a method','Logic tables','Fair tests'],
+  sections:[
+    {key:'states', items:[
+      {t:'choice', prompt:'Pick the right state.', text:'A steel paper clip keeps its shape wherever you put it. What state is it?',
+        opts:['Solid','Liquid','Gas'], ans:0,
+        explain:'It keeps its own shape, so it is a solid. Almost every metal is a solid at room temperature.'},
+      {t:'sort', prompt:'Put each one in the right box.',
+        bins:[['Solid','keeps its own shape'],['Liquid','flows and can be poured'],['Gas','spreads out to fill the space']],
+        chips:[['a steel nail',0],['copper wire',0],['runny honey',1],['water',1],['steam',2],['the bubbles in a fizzy drink',2]],
+        explain:'Honey is slow, but it still flows and takes the shape of its jar, so honey is a liquid.'},
+      {t:'choice', prompt:'Which one?', long:true, text:'Which state has NO fixed shape and NO fixed amount of space?',
+        opts:['A gas','A liquid','A solid'], ans:0,
+        explain:'A liquid has no fixed shape, but it does keep the same amount. A gas keeps spreading, so it has neither.'},
+      {t:'type', prompt:'Type one word.', text:'At room temperature nearly every metal is a ______, because it keeps its own shape.',
+        accept:['solid','solids'], hint:'Solid, liquid or gas?',
+        explain:'A solid. Metals have to be heated until they are extremely hot before they melt into a liquid.'}
+    ]},
+    {key:'particles', items:[
+      {t:'choice', prompt:'Look at the three jars.', fig:'states3', text:'Which jar shows a liquid?',
+        opts:['Jar A','Jar B','Jar C'], ans:1,
+        explain:'Jar B has particles that are still touching but jumbled up, and they only fill the bottom of the jar. That is a liquid.'},
+      {t:'grid', prompt:'Tick ✓ or cross ✗ in every box.',
+        cols:['Has a fixed shape','Has a fixed amount','Spreads out to fill any container'],
+        rows:[['Solid',[1,1,0]],['Liquid',[0,1,0]],['Gas',[0,0,1]]],
+        explain:'A solid has both a fixed shape and a fixed amount. A liquid keeps the amount but loses the shape. A gas keeps neither.'},
+      {t:'choice', prompt:'Think about the particles.', long:true,
+        text:'A steel nail is hard and keeps its shape. What does that tell you about its particles?',
+        opts:['They are packed tightly and held in place','They are far apart with gaps','They slide around freely'], ans:0,
+        explain:'Hard and stiff means the particles cannot move past each other. That is exactly what a solid is.'},
+      {t:'fill', prompt:'Drag the right word into each gap.',
+        lines:['A {solid} has a fixed shape and a fixed amount.','A {liquid} has a fixed amount but no fixed shape.','A {gas} has no fixed shape and no fixed amount.'],
+        decoys:['nail','jar'],
+        explain:'Read them in order and you can see the pattern: each state keeps one less thing fixed than the one before.'}
+    ]},
+    {key:'mixtures', items:[
+      {t:'sort', prompt:'Will a magnet pick it up?',
+        bins:[['A magnet picks it up','magnetic'],['A magnet does not','not magnetic']],
+        chips:[['iron nail',0],['steel screw',0],['steel paper clip',0],['aluminium can',1],['copper coin',1],['rubber band',1]],
+        explain:'Iron and steel are magnetic. Aluminium and copper are metals too, but a magnet will not touch them.'},
+      {t:'choice', prompt:'Pick the best method.', fig:'magnetsep', long:true,
+        text:'A jar holds iron filings mixed with dry sand. What is the quickest way to separate them?',
+        opts:['Hold a magnet just above the mixture','Pour it through a filter funnel','Leave it in the sun'], ans:0,
+        explain:'Only the iron is magnetic, so a magnet lifts it straight out and leaves the sand behind. No water needed at all.'},
+      {t:'match', prompt:'Match the difference to the tool that uses it.',
+        left:[{label:'They are different sizes'},{label:'One of them is magnetic'},{label:'One will not dissolve in water'},{label:'Both are big and easy to see'}],
+        right:['use a sieve','use a magnet','use a filter funnel','pick them out by hand'],
+        explain:'Always start by asking what is DIFFERENT about the two things. That difference tells you which tool to reach for.'},
+      {t:'tfgrid', prompt:'True or false?',
+        rows:[['All metals are magnetic.', false], ['Iron is magnetic.', true],
+              ['Plastic is magnetic.', false], ['A magnet can separate iron from sand.', true]],
+        explain:'Only a few metals are magnetic — mainly iron, steel, nickel and cobalt. Copper, gold and aluminium are not, and nor is plastic.'}
+    ]},
+    {key:'dissolving', items:[
+      {t:'sort', prompt:'Stir each one into a jar of water.',
+        bins:[['It dissolves','soluble'],['It does not dissolve','insoluble']],
+        chips:[['salt',0],['sugar',0],['instant coffee',0],['iron filings',1],['sand',1],['plastic beads',1]],
+        explain:'Metals and plastics do not dissolve in water. Salt, sugar and coffee do.'},
+      {t:'choice', prompt:'Think it through.', long:true, text:'Which of these mixtures could you NOT separate with a magnet?',
+        opts:['Salt and sugar','Iron filings and sand','Steel pins and rice'], ans:0,
+        explain:'A magnet only helps when ONE thing in the mixture is magnetic. Neither salt nor sugar is, so the magnet does nothing at all.'},
+      {t:'tfgrid', prompt:'True or false?',
+        rows:[['Sugar dissolves in water.', true], ['Iron filings dissolve in water.', false],
+              ['You can get a dissolved solid back by evaporating the water.', true], ['Filtering takes a dissolved solid out of water.', false]],
+        explain:'Dissolved things go straight through a filter. Evaporating is the trick that brings them back.'},
+      {t:'type', prompt:'Type one word.', text:'When a solid dissolves in a liquid, the clear mixture we get is called a ______.',
+        accept:['solution'], hint:'It starts with the same letters as "soluble".',
+        explain:'A solution. Salt water is a solution: the salt is still in there, spread all the way through.'}
+    ]},
+    {key:'think', items:[
+      {t:'match', prompt:'Read the table. Which is A, B, C and D?', fig:'logic4',
+        left:[{label:'A'},{label:'B'},{label:'C'},{label:'D'}],
+        right:['iron filings','salt','grey gravel','white pebbles'],
+        explain:'A is the only magnetic one, so A is the iron filings. B is small and white and it dissolves, so B is the salt. C is big and not white, so C is the grey gravel. D is big and white: the white pebbles.'},
+      {t:'choice', prompt:'Use the same table.', long:true,
+        text:'Look at the table again. Which TWO could you separate from each other using a sieve?',
+        opts:['B and C','A and B','C and D'], ans:0,
+        explain:'A sieve sorts by SIZE only. B is in small pieces and C is in big pieces, so the sieve can split them. A and B are both small, and C and D are both big, so the sieve is no help there.'},
+      {t:'order', prompt:'Put the steps in the right order.',
+        items:['Hold a magnet over the mixture to lift out the iron','Stir what is left into water so the salt dissolves','Pour it through a filter to catch the sand','Leave the clear water to dry and get the salt back'],
+        explain:'Take out the magnetic bit while everything is still dry, then use water to split what is left. Each step removes exactly one thing.'},
+      {t:'choice', prompt:'Explain why.', long:true,
+        text:'Why is it a good idea to lift the iron out with a magnet BEFORE you add any water?',
+        opts:['Dry iron filings are much easier for a magnet to pick up','Iron dissolves in water','A magnet only works underwater'], ans:0,
+        explain:'Once the filings are wet they clump together and stick to the jar, so the magnet cannot lift them cleanly. Doing the dry step first saves a lot of mess.'}
+    ]},
+    {key:'investigate', items:[
+      {t:'choice', prompt:'Read the chart.', fig:'magnetbars', long:true,
+        text:'Three magnets were tested to see how many paper clips each could hold. Which magnet is strongest?',
+        opts:['Magnet B','Magnet A','Magnet C'], ans:0,
+        explain:'The tallest bar wins. Magnet B held 14 clips, while A held 9 and C held only 5.'},
+      {t:'choice', prompt:'Plan a fair test.', long:true,
+        text:'Jo tests whether a magnet still works through thick card as well as through thin paper. What must she keep the same?',
+        opts:['The same magnet and the same paper clips','How thick the card is','The colour of the card'], ans:0,
+        explain:'The thickness is the one thing she is changing. If she also swapped the magnet, she would not know which change caused the difference.'},
+      {t:'tfgrid', prompt:'True or false?',
+        rows:[['A fair test changes only one thing at a time.', true], ['Doing a test twice makes your answer safer.', true],
+              ['A prediction is a careful guess you make before you test.', true], ['If a result surprises you, you should hide it.', false]],
+        explain:'A surprising result is the most interesting thing in science. It usually means there is something new to find out.'},
+      {t:'draw', prompt:'Draw the test.',
+        tip:'Draw a magnet held over a pile of rice mixed with iron nails. Show which bits jump up to the magnet and which bits stay behind.',
+        explain:'Only the nails should be on the magnet. Rice is not magnetic, so every grain stays exactly where it was.'}
+    ]}
+  ]
+},
+/* ---------------------------- SET 5 ---------------------------- */
+{
+  id:5, title:'Rain and Puddles', emoji:'🌧️', about:'Water changing state, and where puddles go',
+  aligns:['States of matter','Changing state','Evaporation and condensation','Dissolving speed','Reading a chart','Fair tests'],
+  sections:[
+    {key:'states', items:[
+      {t:'choice', prompt:'Where did it go?', long:true, text:'A puddle dries up on a sunny day. What happened to the water?',
+        opts:['It turned into a gas and went into the air','It sank up into the sky as water','It turned into a solid'], ans:0,
+        explain:'The water turned into an invisible gas called water vapour. It did not vanish — it is still in the air around you.'},
+      {t:'sort', prompt:'Put each one in the right box.',
+        bins:[['Solid','keeps its own shape'],['Liquid','flows and can be poured'],['Gas','spreads out to fill the space']],
+        chips:[['an ice cube',0],['a frozen puddle',0],['rain',1],['a puddle',1],['water vapour',2],['the air around us',2]],
+        explain:'All six are water or air in different states. Ice is solid water, rain is liquid water, and water vapour is water as a gas.'},
+      {t:'choice', prompt:'What is this called?', long:true, text:'Water can be a solid, a liquid or a gas. What do scientists call these three?',
+        opts:['The three states of matter','The three colours of water','The three sizes of water'], ans:0,
+        explain:'Solid, liquid and gas are the three states of matter. Most substances can be all three if you change the temperature enough.'},
+      {t:'type', prompt:'Type one word.', text:'When a liquid slowly turns into a gas we say it ______.',
+        accept:['evaporates','evaporate'], hint:'It starts with "e", like "escape".',
+        explain:'It evaporates. Warmth and wind both make evaporation happen faster.'}
+    ]},
+    {key:'particles', items:[
+      {t:'choice', prompt:'Think about the particles.', long:true, text:'When water evaporates, what happens to its particles?',
+        opts:['They break away from each other and spread far apart','They lock together into neat rows','They disappear completely'], ans:0,
+        explain:'The particles get enough energy to break free and fly off on their own. Every single one still exists — they are just spread through the air.'},
+      {t:'grid', prompt:'Tick ✓ or cross ✗ in every box. All three are water!',
+        cols:['Particles are locked in rows','Particles slide past each other','Particles fly far apart'],
+        rows:[['Ice',[1,0,0]],['Water',[0,1,0]],['Water vapour',[0,0,1]]],
+        explain:'Ice, water and water vapour are all made of exactly the same particles. Only the way those particles are arranged and how fast they move has changed.'},
+      {t:'choice', prompt:'Which one?', long:true, text:'Which has the MOST space between its particles?',
+        opts:['Water vapour, a gas','Water, a liquid','Ice, a solid'], ans:0,
+        explain:'A gas has huge gaps between its particles. That is why the same amount of water takes up far more room as a gas than as ice.'},
+      {t:'fill', prompt:'Drag the right word into each gap.',
+        lines:['When ice melts it turns into {water}.','When water evaporates it turns into a {gas}.','When water vapour cools it turns back into a {liquid}.'],
+        decoys:['ice','wind'],
+        explain:'Melting, evaporating and cooling back down. Water goes round and round between the three states for ever.'}
+    ]},
+    {key:'mixtures', items:[
+      {t:'choice', prompt:'Pick the best tool.', fig:'funnel', long:true,
+        text:'Water from a puddle has bits of leaf and grit in it. Which tool will clean it best?',
+        opts:['A filter funnel','A magnet','A ruler'], ans:0,
+        explain:'Leaf and grit do not dissolve, so filter paper traps them and cleaner water drips through.'},
+      {t:'sort', prompt:'Pour the puddle water through a filter.',
+        bins:[['Caught by the filter','it did not dissolve'],['Goes through the filter','a liquid, or it dissolved']],
+        chips:[['bits of leaf',0],['grit',0],['tiny stones',0],['water',1],['dissolved salt',1],['dissolved sugar',1]],
+        explain:'A filter is a size test. Whole solids are too big to pass. Water and anything dissolved slip straight through.'},
+      {t:'match', prompt:'Match each change to what it does.',
+        left:[{label:'Melting'},{label:'Freezing'},{label:'Evaporating'},{label:'Condensing'}],
+        right:['a solid turns into a liquid','a liquid turns into a solid','a liquid turns into a gas','a gas turns back into a liquid'],
+        explain:'These four words are opposites in pairs. Melting undoes freezing, and condensing undoes evaporating.'},
+      {t:'type', prompt:'Type one word.', text:'Water vapour touches a cold window and turns back into a liquid. This is called ______.',
+        accept:['condensation','condensing'], hint:'It starts with "con".',
+        explain:'Condensation. It is the reason a cold window goes misty on a chilly morning.'}
+    ]},
+    {key:'dissolving', items:[
+      {t:'choice', prompt:'Read the chart and work it out.', fig:'dissolvebars', long:true,
+        text:'The chart shows how long a sugar cube took to dissolve. How many seconds LONGER did it take in cold water than in hot water?',
+        opts:['60 seconds','20 seconds','100 seconds'], ans:0,
+        explain:'Cold took 80 seconds and hot took 20 seconds. 80 take away 20 is 60 seconds longer. Reading a chart often means doing a little sum as well.'},
+      {t:'tfgrid', prompt:'True or false?',
+        rows:[['Rain water can dissolve things as it flows over rocks.', true], ['A puddle with salt in it is a solution.', true],
+              ['Dissolving makes a solid vanish for ever.', false], ['Warmer water makes solids dissolve faster.', true]],
+        explain:'Water is very good at dissolving things. That is how the sea got salty in the first place — rain washed salts off the land for millions of years.'},
+      {t:'sort', prompt:'Stir each one into a jar of water.',
+        bins:[['It dissolves','soluble'],['It does not dissolve','insoluble']],
+        chips:[['sugar',0],['salt',0],['orange squash powder',0],['grit',1],['a leaf',1],['a plastic bottle top',1]],
+        explain:'Powders that vanish into the water are soluble. Anything you can still see afterwards is insoluble.'},
+      {t:'choice', prompt:'Work it out.', long:true, text:'A puddle dries up and leaves a faint white ring on the ground. What is the ring made of?',
+        opts:['Things that were dissolved in the water','Water that is somehow still there','Nothing real — it is just a shadow'], ans:0,
+        explain:'The water evaporated and left its dissolved solids behind, just like salt left in an evaporating dish. That ring is the proof they were there all along.'}
+    ]},
+    {key:'think', items:[
+      {t:'match', prompt:'Read the table. Which is A, B and C?', fig:'logic5',
+        left:[{label:'A'},{label:'B'},{label:'C'}],
+        right:['cooking oil','sugar','a steel pin'],
+        explain:'A is a liquid, so A is the cooking oil. B dissolves in water, so B is the sugar. C is picked up by a magnet, so C is the steel pin.'},
+      {t:'choice', prompt:'Find the odd one out.', text:'Which one is the odd one out?',
+        opts:['filtering','melting','freezing','evaporating'], ans:0,
+        explain:'Melting, freezing and evaporating all change a material from one state to another. Filtering does not change anything — it just separates a mixture.'},
+      {t:'order', prompt:'Put the water cycle in order.',
+        items:['The sun warms the sea and water evaporates','Water vapour rises high and cools into tiny drops','The tiny drops join together to make clouds','Rain falls back down to the ground'],
+        explain:'Water goes round this loop for ever. The rain in your puddle today may have been in the sea last month.'},
+      {t:'choice', prompt:'Explain why.', long:true, text:'A puddle dries up faster on a windy day than on a still day. Why?',
+        opts:['The wind carries the water vapour away, so more can evaporate','The wind makes the puddle colder','The wind pushes the water down into the ground'], ans:0,
+        explain:'If the air just above the puddle is already full of water vapour, evaporation slows down. Wind sweeps that damp air away and lets more water escape.'}
+    ]},
+    {key:'investigate', items:[
+      {t:'choice', prompt:'Predict what happens.', long:true,
+        text:'Three puddles are exactly the same size. Which one will dry up first?',
+        opts:['The one in a warm, sunny, windy spot','The one in the cold shade','The one under an upside-down box'], ans:0,
+        explain:'Warmth and wind both speed evaporation up. The puddle under a box has nowhere for its vapour to go, so it dries slowest of all.'},
+      {t:'choice', prompt:'Plan a fair test.', long:true,
+        text:'Sam wants to know if puddles dry faster in the sun. What must be the same about his two dishes of water?',
+        opts:['The amount of water and the size of the dish','Where he puts them','Nothing needs to match'], ans:0,
+        explain:'Sunshine is the one thing he is changing. If one dish also held more water, he would not know which thing made the difference.'},
+      {t:'tfgrid', prompt:'True or false?',
+        rows:[['Evaporation happens faster when it is warm.', true], ['Evaporation happens faster when it is windy.', true],
+              ['A puddle in the shade dries faster than one in the sun.', false], ['Water that evaporates is gone for ever.', false]],
+        explain:'Warm and windy both speed it up. And nothing is lost — the water comes back as rain later on.'},
+      {t:'draw', prompt:'Draw the water cycle.',
+        tip:'Draw the sun, the sea, a cloud and rain falling. Draw arrows to show the water going round and round.',
+        explain:'Those arrows are the whole idea: the same water keeps travelling round, changing state as it goes.'}
+    ]}
+  ]
+},
+/* ---------------------------- SET 6 ---------------------------- */
+{
+  id:6, title:'The Science Detective', emoji:'🔍', about:'Mystery mixtures and careful thinking',
+  aligns:['States of matter','Particle model','Choosing a method','Solutions','Logic tables','Working out a plan'],
+  sections:[
+    {key:'states', items:[
+      {t:'choice', prompt:'Solve the clue.', long:true,
+        text:'A mystery substance takes the shape of its jar, but it only fills the bottom half. What is it?',
+        opts:['A liquid','A solid','A gas'], ans:0,
+        explain:'A gas would spread out and fill the whole jar. A solid would keep its own shape. Only a liquid does both of these things at once.'},
+      {t:'sort', prompt:'Put each one in the right box.',
+        bins:[['Solid','keeps its own shape'],['Liquid','flows and can be poured'],['Gas','spreads out to fill the space']],
+        chips:[['a marble',0],['a coin',0],['vinegar',1],['lemon juice',1],['helium in a balloon',2],['air in a bicycle tyre',2]],
+        explain:'Both gases here are trapped inside something. Let them out and they would spread through the whole room.'},
+      {t:'choice', prompt:'Solve the clue.', long:true,
+        text:'Clue 1: it keeps its own shape. Clue 2: a magnet picks it up. What could it be?',
+        opts:['An iron nail','Water','Air'], ans:0,
+        explain:'Clue 1 rules out water and air, because neither keeps its shape. Clue 2 fits iron perfectly. Two clues together can pin down one answer.'},
+      {t:'type', prompt:'Type one word.', text:'A ______ has a fixed shape AND a fixed amount of space.',
+        accept:['solid'], hint:'Solid, liquid or gas?',
+        explain:'A solid. A liquid keeps the amount but not the shape, and a gas keeps neither.'}
+    ]},
+    {key:'particles', items:[
+      {t:'choice', prompt:'Look at the three jars.', fig:'states3', text:'Which jar shows a gas?',
+        opts:['Jar A','Jar B','Jar C'], ans:2,
+        explain:'Jar C has just a few particles, spread far apart, filling the whole jar right to the top. That is a gas.'},
+      {t:'grid', prompt:'Tick ✓ or cross ✗ in every box.',
+        cols:['Particles touch each other','Particles can change places','Particles fill the whole container'],
+        rows:[['Solid',[1,0,0]],['Liquid',[1,1,0]],['Gas',[0,1,1]]],
+        explain:'Read down the middle column: only the solid keeps its particles in fixed places. That one difference is why a solid has a shape and the others do not.'},
+      {t:'choice', prompt:'Solve the clue.', long:true,
+        text:'A detective squeezes a sealed bag and it gets much smaller. What is inside the bag?',
+        opts:['A gas','A liquid','A solid'], ans:0,
+        explain:'Squeezing pushes particles closer together. Only a gas has big enough gaps to squash. A liquid or a solid barely changes at all.'},
+      {t:'fill', prompt:'Drag the right word into each gap.',
+        lines:['Particles in a {solid} cannot swap places.','Particles in a {liquid} swap places but stay touching.','Particles in a {gas} are far apart and very fast.'],
+        decoys:['clue','jar'],
+        explain:'Cannot swap, swap while touching, far apart. Those three lines explain nearly everything about the three states.'}
+    ]},
+    {key:'mixtures', items:[
+      {t:'choice', prompt:'Choose the plan that works.', long:true,
+        text:'You have a mixture of salt and sand. Which plan will separate them properly?',
+        opts:['Add water, filter out the sand, then evaporate to get the salt back','Hold a magnet over the mixture','Pour it through a sieve and stop there'], ans:0,
+        explain:'Salt dissolves and sand does not, so water splits them. The filter catches the sand and evaporating brings the salt back. Neither a magnet nor a sieve can tell salt from sand.'},
+      {t:'match', prompt:'Match each mixture to the best method.',
+        left:[{label:'Sand and gravel'},{label:'Iron filings and sugar'},{label:'Chalk powder and water'},{label:'Marbles and counters'}],
+        right:['use a sieve','use a magnet','use a filter funnel','pick them out by hand'],
+        explain:'Ask what is different each time: size, magnetism, dissolving, or just being big enough to grab.'},
+      {t:'order', prompt:'Put the plan in the right order.',
+        items:['Stir the mixture into warm water','The salt dissolves but the sand does not','Pour it through a filter to take out the sand','Leave the clear water to evaporate'],
+        explain:'Each step does one job. Dissolve, separate, then recover. Skip a step and the salt and sand end up mixed again.'},
+      {t:'tfgrid', prompt:'True or false?',
+        rows:[['A sieve sorts things by size.', true], ['A magnet sorts things by colour.', false],
+              ['A filter catches solids that do not dissolve.', true], ['Evaporating brings back a solid that dissolved.', true]],
+        explain:'A magnet sorts by one thing only: whether the material is magnetic. Colour makes no difference at all.'}
+    ]},
+    {key:'dissolving', items:[
+      {t:'choice', prompt:'Read the chart.', fig:'sugarbars', long:true,
+        text:'The chart shows how much sugar is in four drinks. Which drink has the MOST sugar?',
+        opts:['Cola','Lemonade','Orange'], ans:0,
+        explain:'Cola has the tallest bar at 11 grams. Lemonade is next with 9 grams, then orange with 7, and water has none at all.'},
+      {t:'choice', prompt:'Use the same chart to work it out.', fig:'sugarbars', long:true,
+        text:'A new drink is sweeter than Orange but less sweet than Lemonade. How much sugar could it have?',
+        opts:['8 grams','5 grams','12 grams'], ans:0,
+        explain:'Orange has 7 grams and lemonade has 9, so the new drink must be between them. 8 grams is the only answer that fits both clues.'},
+      {t:'tfgrid', prompt:'True or false?',
+        rows:[['A solution is clear, so you can see through it.', true], ['Insoluble means it does not dissolve.', true],
+              ['Big lumps dissolve faster than small grains.', false], ['Stirring helps a solid dissolve.', true]],
+        explain:'Small grains dissolve faster, not slower, because the water can touch far more of the sugar at once. That is why caster sugar beats a sugar cube.'},
+      {t:'type', prompt:'Type one word.', text:'Sugar dissolves in water, so we say that sugar is ______.',
+        accept:['soluble'], hint:'The opposite of insoluble.',
+        explain:'Soluble. Salt and sugar are soluble in water. Sand and chalk are not.'}
+    ]},
+    {key:'think', items:[
+      {t:'match', prompt:'Read the table. Which is A, B, C and D?', fig:'logic6',
+        left:[{label:'A'},{label:'B'},{label:'C'},{label:'D'}],
+        right:['steel pins','sugar','water','sand'],
+        explain:'A is magnetic, so A is the steel pins. B dissolves, so B is the sugar. C is a liquid, so C is the water. D does none of those things, so D is the sand.'},
+      {t:'choice', prompt:'Solve the case.', long:true,
+        text:'A white powder dissolves in water, and a magnet does not pick it up. Which could it be?',
+        opts:['Salt','Sand','Iron filings'], ans:0,
+        explain:'Iron filings are magnetic, so they are out. Sand does not dissolve, so it is out too. Salt fits both clues.'},
+      {t:'order', prompt:'Put the detective steps in the right order.',
+        items:['Look carefully at the mystery mixture','Ask what is different about the parts','Choose the tool that uses that difference','Try it, then check the result'],
+        explain:'Look, compare, choose, check. Use that order on any mixture in the world and it will work.'},
+      {t:'choice', prompt:'Design the test.', long:true,
+        text:'Two white powders look exactly the same. One dissolves and one does not. What is the best test?',
+        opts:['Stir a spoon of each into its own glass of water','Look at them again from further away','Weigh them both on a balance'], ans:0,
+        explain:'Test the property that is actually different. Looking and weighing tell you nothing about dissolving — only water can answer that question.'}
+    ]},
+    {key:'investigate', items:[
+      {t:'choice', prompt:'Why do scientists do this?', long:true, text:'Why do scientists repeat a test more than once?',
+        opts:['To check the result was not just a one-off','To use up more time','To make the answer a bigger number'], ans:0,
+        explain:'Anything can go oddly once. If the same thing happens three times, you can start to trust it.'},
+      {t:'choice', prompt:'What should he do?', long:true,
+        text:'Ali predicts that a big sugar lump dissolves faster than loose sugar grains. He tests it, and the grains win. What should Ali do?',
+        opts:['Change what he thinks, because the test showed him something new','Say the test must have been wrong','Do nothing and keep his first idea'], ans:0,
+        explain:'A prediction is only a good guess. When the evidence disagrees, the evidence wins — and Ali has learned something real.'},
+      {t:'tfgrid', prompt:'True or false?',
+        rows:[['A prediction can turn out to be wrong.', true], ['A wrong prediction still teaches you something.', true],
+              ['Scientists change their idea when the evidence says so.', true], ['You should only write down the results you liked.', false]],
+        explain:'Writing down every result, even the awkward ones, is what makes an experiment honest.'},
+      {t:'draw', prompt:'Design your own mystery.',
+        tip:'Draw a jar holding your own mystery mixture. Then draw the tool you would use to separate it.',
+        explain:'If you can name the difference between the parts, you can always name the tool. That is the whole trick.'}
+    ]}
+  ]
+}
+];
+
+const SECTIONS = {
+  states:{name:'Solid, Liquid, Gas', icon:'🧊'},
+  particles:{name:'Tiny Particles', icon:'⚛️'},
+  mixtures:{name:'Separating', icon:'🧲'},
+  dissolving:{name:'Dissolving', icon:'🥤'},
+  think:{name:'Think It Out', icon:'🧠'},
+  investigate:{name:'Test It', icon:'🔬'}
+};
+
+/* ============ UTILITIES ============ */
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const shuffle = a => { a = [...a]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const shuffleNotSame = a => { if (a.length < 2) return [...a]; let s; do { s = shuffle(a); } while (s.every((v, i) => v === a[i])); return s; };
+const norm = s => String(s).toLowerCase().replace(/[’']/g, '').replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim();
+const fmtTime = ms => { const s = Math.max(0, Math.round(ms / 1000)); const m = Math.floor(s / 60); return m ? `${m} min ${s % 60} sec` : `${s} sec`; };
+const fmtDate = t => { const d = new Date(t); return d.toLocaleDateString(undefined, {day:'numeric', month:'short'}) + ', ' + d.toLocaleTimeString(undefined, {hour:'2-digit', minute:'2-digit'}); };
+const pick = a => a[Math.floor(Math.random() * a.length)];
+const PASS = 60;
+
+/* Seeded shuffle: every learner gets their own set order, and that order
+   never changes again once it is saved. */
+function mulberry32(a) {
+  return function () {
+    a = a + 0x6D2B79F5 | 0;
+    let t = Math.imul(a ^ a >>> 15, 1 | a);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+function seededShuffle(arr, seed) {
+  const rnd = mulberry32(seed >>> 0), a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+  return a;
+}
+
+function lev(a, b) { // optimal string alignment distance (forgives swapped letters)
+  const d = Array.from({length: a.length + 1}, (_, i) => [i, ...Array(b.length).fill(0)]);
+  for (let j = 1; j <= b.length; j++) d[0][j] = j;
+  for (let i = 1; i <= a.length; i++) for (let j = 1; j <= b.length; j++) {
+    const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+    d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + cost);
+    if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) d[i][j] = Math.min(d[i][j], d[i - 2][j - 2] + 1);
+  }
+  return d[a.length][b.length];
+}
+const tolFor = w => w.length >= 8 ? 2 : w.length >= 4 ? 1 : 0;
+/* One-word answers: ignore case, punctuation and a leading a/an/the, and
+   forgive a slip or two of the pen. Short words still need to be exact. */
+function answerMatches(input, accept) {
+  const t = norm(input).replace(/^(a|an|the)\s+/, '');
+  if (!t) return false;
+  return accept.some(a => {
+    const k = norm(a);
+    if (t === k) return true;
+    const kw = k.split(' '), tw = t.split(' ');
+    if (kw.length !== tw.length) return false;
+    return kw.every((w, i) => w === tw[i] || (tolFor(w) > 0 && lev(tw[i], w) <= tolFor(w)));
+  });
+}
+/* Greedy word wrap, for text inside an SVG diagram. */
+function wrapText(text, max) {
+  const out = []; let cur = '';
+  for (const w of String(text).split(' ')) {
+    if (!cur) cur = w;
+    else if ((cur + ' ' + w).length <= max) cur += ' ' + w;
+    else { out.push(cur); cur = w; }
+  }
+  if (cur) out.push(cur);
+  return out;
+}
+
+function flask(cls = '') {
+  return `<svg class="flask ${cls}" viewBox="0 0 130 100" aria-hidden="true">
+    <path class="fl-bench" d="M8 94 H122"/>
+    <circle class="fl-bub" cx="65" cy="17" r="4.5"/><circle class="fl-bub" cx="56" cy="8" r="3"/><circle class="fl-bub" cx="73" cy="5" r="2.5"/>
+    <rect class="fl-rim" x="51" y="24" width="28" height="7" rx="3.5"/>
+    <path class="fl-body" d="M56 30 V48 L31 80 Q28 90 37 90 H93 Q102 90 99 80 L74 48 V30 Z"/>
+    <path class="fl-liquid" d="M48 62 L31 80 Q28 90 37 90 H93 Q102 90 99 80 L82 62 Z"/>
+    <circle class="fl-eye" cx="56" cy="72" r="6.5"/><circle class="fl-eye" cx="74" cy="72" r="6.5"/>
+    <circle class="fl-pupil" cx="57.5" cy="73" r="2.8"/><circle class="fl-pupil" cx="75.5" cy="73" r="2.8"/>
+    <path class="fl-mouth" d="M59 83 q6 5 12 0"/>
+  </svg>`;
+}
+
+/* ============ DIAGRAMS, TABLES AND CHARTS ============
+   Built from small helpers so every table and chart in the app looks the
+   same and the numbers in the questions come from the same place. */
+const dot = (x, y, r = 13, cls = 'fig-part') => `<circle class="${cls}" cx="${x}" cy="${y}" r="${r}"/>`;
+const dots = (list, r = 13, cls = 'fig-part', dx = 0, dy = 0) => list.map(([x, y]) => dot(x + dx, y + dy, r, cls)).join('');
+
+const SOLID_POS = [];
+for (let c = 0; c < 5; c++) for (let rw = 0; rw < 4; rw++) SOLID_POS.push([58 + c * 36, 42 + rw * 32]);
+const LIQUID_POS = [[46,146],[74,148],[102,144],[130,149],[158,145],[186,148],[212,144],
+  [58,120],[86,123],[114,118],[142,122],[170,119],[198,123],
+  [48,94],[76,97],[104,92],[132,96],[160,93],[188,97],[214,93],
+  [62,68],[92,71],[120,66],[150,70],[180,67]];
+const GAS_POS = [[60,45],[150,38],[205,62],[48,95],[112,88],[185,112],[72,140],[160,148]];
+const partBox = inner => `<rect class="fig-glass" x="24" y="18" width="212" height="146" rx="12"/>${inner}`;
+
+/* A tick-and-cross table, exactly like the ones on the worksheet. */
+function tableFig(cols, rows, cap) {
+  const cw = 98, rh = 36, lw = 42, pad = 10;
+  const heads = cols.map(c => wrapText(c, 13));
+  const headLines = Math.max(...heads.map(h => h.length));
+  const top = 12 + headLines * 13;
+  const w = pad * 2 + lw + cols.length * cw;
+  const h = top + rows.length * rh + 8;
+  let svg = '';
+  heads.forEach((lines, i) => {
+    const x = pad + lw + i * cw + cw / 2;
+    lines.forEach((line, li) => {
+      svg += `<text class="fig-head" x="${x}" y="${12 + (li + 1) * 13}" text-anchor="middle">${esc(line)}</text>`;
+    });
+  });
+  rows.forEach(([label, marks], r) => {
+    const y = top + r * rh;
+    svg += `<text class="fig-label" x="${pad + lw - 8}" y="${y + rh / 2 + 5}" text-anchor="end">${esc(label)}</text>`;
+    marks.forEach((m, i) => {
+      const x = pad + lw + i * cw;
+      svg += `<rect class="fig-grid" x="${x + 4}" y="${y + 3}" width="${cw - 8}" height="${rh - 6}" rx="7"/>`
+           + `<text class="fig-label" x="${x + cw / 2}" y="${y + rh / 2 + 6}" text-anchor="middle" style="font-size:17px">${m ? '✓' : '✗'}</text>`;
+    });
+  });
+  return {box:`0 0 ${w} ${h}`, cap, svg};
+}
+
+/* A simple bar chart. The numbers in the question come from this list. */
+function barFig(items, unit, cap) {
+  const bw = 50, gap = 30, left = 44, top = 18, plotH = 132, base = top + plotH;
+  const max = Math.max(...items.map(i => i[1]));
+  const step = max <= 12 ? (max <= 6 ? 2 : max <= 10 ? 2 : 4) : 20;
+  const w = left + items.length * (bw + gap) + 18;
+  const h = base + 52;
+  let svg = `<path class="fig-grid" d="M${left - 8} ${base} H${w - 10}"/>`;
+  for (let v = 0; v <= max; v += step) {
+    const y = base - v / max * plotH;
+    svg += `<path class="fig-grid" d="M${left - 8} ${y} H${w - 10}" stroke-dasharray="4 5"/>`
+         + `<text class="fig-small" x="${left - 14}" y="${y + 4}" text-anchor="end">${v}</text>`;
+  }
+  items.forEach(([label, v], i) => {
+    const x = left + i * (bw + gap) + gap / 2;
+    const bh = max ? v / max * plotH : 0;
+    if (bh > 0) svg += `<rect class="${i % 2 ? 'fig-bar2' : 'fig-bar'}" x="${x}" y="${base - bh}" width="${bw}" height="${bh}" rx="5"/>`;
+    svg += `<text class="fig-label" x="${x + bw / 2}" y="${base - bh - 7}" text-anchor="middle">${v}</text>`;
+    wrapText(label, 9).forEach((line, li) => {
+      svg += `<text class="fig-small" x="${x + bw / 2}" y="${base + 18 + li * 13}" text-anchor="middle">${esc(line)}</text>`;
+    });
+  });
+  svg += `<text class="fig-small" x="2" y="${top - 5}" text-anchor="start">${esc(unit)}</text>`;
+  return {box:`0 0 ${w} ${h}`, cap, svg};
+}
+
+const FIGURES = {
+  partsolid:{box:'0 0 260 182', cap:'Particles packed in neat rows', svg:partBox(dots(SOLID_POS, 14))},
+  partliquid:{box:'0 0 260 182', cap:'Particles touching but jumbled up', svg:partBox(dots(LIQUID_POS, 13))},
+  partgas:{box:'0 0 260 182', cap:'A few particles spread far apart', svg:partBox(dots(GAS_POS, 13))},
+  states3:{box:'0 0 340 196', cap:'Three jars of particles, labelled A, B and C',
+    svg:[0, 1, 2].map(i => {
+      const x = 15 + i * 110;
+      const inner = i === 0
+        ? dots([[36,105],[60,105],[84,105],[36,129],[60,129],[84,129],[36,153],[60,153],[84,153]], 9, 'fig-part', x - 15, 0)
+        : i === 1
+        ? dots([[34,152],[58,155],[82,150],[28,130],[52,133],[76,128],[96,136],[38,110],[62,106],[86,112]], 9, 'fig-part', x - 15, 0)
+        : dots([[40,55],[80,70],[30,100],[70,120],[50,145],[90,150]], 9, 'fig-part', x - 15, 0);
+      return `<rect class="fig-glass" x="${x}" y="35" width="90" height="130" rx="10"/>${inner}`
+           + `<text class="fig-label" x="${x + 45}" y="188" text-anchor="middle">${'ABC'[i]}</text>`;
+    }).join('')},
+  sieve:{box:'0 0 300 196', cap:'A sieve with big grains on top and small ones falling through',
+    svg:'<path class="fig-ink" d="M55 52 L78 110 H222 L245 52"/><path class="fig-ink" d="M78 110 H222"/>'
+      + [96,120,144,168,192].map(x => `<path class="fig-ink" d="M${x} 103 V117" stroke-width="2.5"/>`).join('')
+      + dots([[100,96],[128,100],[156,94],[184,99]], 10, 'fig-part2')
+      + dots([[112,132],[142,146],[172,136],[126,162]], 4.5, 'fig-sand')
+      + '<path class="fig-ink" d="M92 156 a58 30 0 0 0 116 0"/>'
+      + dots([[132,176],[152,179],[172,176],[142,170],[162,171]], 4.5, 'fig-sand')},
+  funnel:{box:'0 0 260 236', cap:'A filter funnel standing on a jar',
+    svg:'<rect class="fig-glass" x="80" y="152" width="100" height="76" rx="8"/>'
+      + '<rect class="fig-clean" x="85" y="200" width="90" height="24" rx="4"/>'
+      + '<path class="fig-glass" d="M55 30 H205 L142 118 V176 H118 V118 Z"/>'
+      + '<path class="fig-dirty" d="M72 42 H188 L130 118 Z"/>'
+      + dots([[112,100],[130,108],[148,100],[122,88],[140,88]], 5, 'fig-sand')
+      + '<path class="fig-ink" d="M75 40 L130 118 L185 40" stroke-width="2.5"/>'
+      + dot(130, 190, 5, 'fig-clean')},
+  magnetsep:{box:'0 0 280 200', cap:'A magnet held over a tray of mixture',
+    svg:'<path class="fig-magnet" d="M90 74 V48 a50 50 0 0 1 100 0 V74 H164 V48 a24 24 0 0 0 -48 0 V74 Z"/>'
+      + dots([[103,84],[99,94],[108,96],[177,84],[173,94],[182,96]], 5, 'fig-iron')
+      + '<path class="fig-ink" d="M52 150 h176 l-14 30 H66 Z"/>'
+      + dots([[80,164],[104,170],[128,162],[152,170],[176,164],[200,169],[92,176],[140,176],[188,176]], 5, 'fig-sand')
+      + '<path class="fig-arrow" d="M120 140 V116 M114 124 L120 116 L126 124"/>'
+      + '<path class="fig-arrow" d="M162 140 V116 M156 124 L162 116 L168 124"/>'},
+  evaporating:{box:'0 0 270 190', cap:'A dish of salty water drying in the sun',
+    svg:'<circle cx="228" cy="34" r="20" class="fig-bar2"/>'
+      + [0,45,90,135,180,225,270,315].map(a => { const r = a * Math.PI / 180, c = Math.cos(r), s = Math.sin(r);
+          return `<path class="fig-heat" d="M${(228 + 27 * c).toFixed(1)} ${(34 + 27 * s).toFixed(1)} L${(228 + 36 * c).toFixed(1)} ${(34 + 36 * s).toFixed(1)}"/>`; }).join('')
+      + '<path class="fig-glass" d="M52 118 a72 44 0 0 0 144 0 Z"/>'
+      + '<path class="fig-ink" d="M52 118 H196" stroke-width="3"/>'
+      + [88,124,160].map((x, i) => `<path class="fig-arrow" d="M${x} 108 q-9 -16 0 -30 q9 -14 0 -28"/>`).join('')
+      + [[96,140],[120,146],[144,140],[108,152],[132,152]].map(([x, y]) =>
+          `<rect class="fig-fill" x="${x}" y="${y}" width="9" height="9" rx="2"/>`).join('')},
+  filterdirty:{box:'0 0 300 168', cap:'Muddy water before and after filtering',
+    svg:'<rect class="fig-glass" x="22" y="34" width="76" height="104" rx="9"/>'
+      + '<rect class="fig-dirty" x="27" y="66" width="66" height="67" rx="5"/>'
+      + '<text class="fig-small" x="60" y="156" text-anchor="middle">before</text>'
+      + '<rect class="fig-glass" x="202" y="34" width="76" height="104" rx="9"/>'
+      + '<rect class="fig-clean" x="207" y="66" width="66" height="67" rx="5"/>'
+      + '<text class="fig-small" x="240" y="156" text-anchor="middle">after</text>'
+      + '<path class="fig-arrow" d="M112 86 H182 M172 76 L182 86 L172 96"/>'
+      + '<text class="fig-small" x="147" y="70" text-anchor="middle">filter</text>'},
+  logic1:tableFig(['Keeps its own shape','Can be poured','Fills all of the container'],
+    [['A',[1,0,0]],['B',[0,1,0]],['C',[0,0,1]]], 'A table of clues about A, B and C'),
+  logic2:tableFig(['A magnet picks it up','It dissolves in water','It is white'],
+    [['A',[1,0,0]],['B',[0,1,1]],['C',[0,0,0]]], 'A table of clues about A, B and C'),
+  logic3:tableFig(['It dissolves in water','A magnet picks it up','It is in big pieces'],
+    [['A',[1,0,0]],['B',[0,1,0]],['C',[0,0,1]]], 'A table of clues about A, B and C'),
+  logic4:tableFig(['A magnet picks it up','It is in small pieces','It is white'],
+    [['A',[1,1,0]],['B',[0,1,1]],['C',[0,0,0]],['D',[0,0,1]]], 'A table of clues about A, B, C and D'),
+  logic5:tableFig(['It is a liquid','It dissolves in water','A magnet picks it up'],
+    [['A',[1,0,0]],['B',[0,1,0]],['C',[0,0,1]]], 'A table of clues about A, B and C'),
+  logic6:tableFig(['It dissolves in water','A magnet picks it up','It is a liquid'],
+    [['A',[0,1,0]],['B',[1,0,0]],['C',[0,0,1]],['D',[0,0,0]]], 'A table of clues about A, B, C and D'),
+  dissolvebars:barFig([['Hot',20],['Warm',45],['Cold',80]], 'seconds', 'Time for a sugar cube to dissolve'),
+  poolbars:barFig([['A',4],['B',6],['C',9],['D',2]], 'grams', 'Salt found in four rock pools'),
+  magnetbars:barFig([['A',9],['B',14],['C',5]], 'clips', 'Paper clips each magnet could hold'),
+  sugarbars:barFig([['Lemonade',9],['Cola',11],['Orange',7],['Water',0]], 'grams', 'Sugar in four drinks')
+};
+
+/* ============ BADGES ============ */
+const BADGES = [
+  {id:'first',  icon:'🔬', name:'Lab Opened',     desc:'Finish your first whole set',        got:s => setsFinished(s) >= 1},
+  {id:'three',  icon:'⭐',        name:'Star Collector', desc:'Win 3 stars on three sets',          got:s => threeStarSets(s) >= 3},
+  {id:'perfect',icon:'💯', name:'Perfect Run',    desc:'Score 100% on a whole set',          got:s => Object.values(s.sets).some(r => r.best && r.best.pct === 100)},
+  {id:'grid',   icon:'✅',        name:'Table Master',   desc:'Fill 5 tick-and-cross tables perfectly', got:s => s.stats.grid >= 5},
+  {id:'logic',  icon:'🔍', name:'Detective',      desc:'Crack 4 clue tables',                got:s => s.stats.logic >= 4},
+  {id:'chart',  icon:'📊', name:'Chart Reader',   desc:'Read 4 charts correctly',            got:s => s.stats.chart >= 4},
+  {id:'fair',   icon:'⚖️',  name:'Fair Tester',    desc:'Get 8 "Test It" questions right',    got:s => s.stats.fair >= 8},
+  {id:'artist', icon:'🎨', name:'Lab Artist',     desc:'Draw 3 science diagrams',            got:s => s.stats.draw >= 3},
+  {id:'streak', icon:'🔥', name:'On Fire',        desc:'Get 6 questions right in a row',     got:s => s.stats.streak >= 6},
+  {id:'master', icon:'🏆', name:'Chief Scientist',desc:'Finish every set in the lab',        got:s => setsFinished(s) >= SETS.length}
+];
+
+/* ============ STORAGE (kept in this browser) ============ */
+const KEY = 'scienceDetectives.v1';
+const freshStats = () => ({grid:0, logic:0, chart:0, fair:0, draw:0, streak:0, fix:0});
+const fresh = () => ({v:1, seed:null, order:null, sets:{}, gallery:[], badges:[], stats:freshStats(),
+  current:null, lastRun:null, settings:{size:'normal', theme:'auto', sound:true, unlockAll:false}});
+let S = fresh();
+let storageOK = true;
+function load() {
+  try {
+    const raw = localStorage.getItem(KEY);
+    if (raw) {
+      const d = JSON.parse(raw);
+      S = Object.assign(fresh(), d);
+      S.settings = Object.assign(fresh().settings, d.settings || {});
+      S.stats = Object.assign(freshStats(), d.stats || {});
+    }
+  } catch (e) { storageOK = false; }
+  if (S.seed === null || S.seed === undefined) S.seed = (Math.random() * 4294967296) >>> 0;
+  setOrder();
+}
+/* Writes progress. If the browser is full, drop the oldest drawings rather
+   than losing every star the child has earned. */
+function save() {
+  S.updatedAt = Date.now();
+  for (let attempt = 0; attempt < 6; attempt++) {
+    try { localStorage.setItem(KEY, JSON.stringify(S)); storageOK = true; return true; }
+    catch (e) {
+      if (S.gallery.length) { S.gallery.pop(); continue; }
+      storageOK = false; return false;
+    }
+  }
+  storageOK = false;
+  return false;
+}
+function applySettings() {
+  const r = document.documentElement;
+  r.dataset.size = S.settings.size;
+  if (S.settings.theme === 'auto') r.removeAttribute('data-theme'); else r.dataset.theme = S.settings.theme;
+}
+/* The learner's personal set order. Built once, then only ever added to. */
+function setOrder() {
+  const ids = SETS.map(s => s.id);
+  const kept = (S.order || []).filter(id => ids.includes(id));
+  const missing = ids.filter(id => !kept.includes(id));
+  if (missing.length || kept.length !== (S.order || []).length) {
+    S.order = [...kept, ...(missing.length > 1 ? seededShuffle(missing, S.seed + kept.length) : missing)];
+  }
+  return S.order;
+}
+const orderPos = id => setOrder().indexOf(id);
+
+/* ============ SOUND + READ ALOUD ============ */
+let actx = null;
+function beep(kind) {
+  if (!S.settings.sound) return;
+  try {
+    actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+    const notes = kind === 'good' ? [523, 659, 784] : kind === 'part' ? [523, 587] : [330, 262];
+    notes.forEach((f, i) => {
+      const o = actx.createOscillator(), g = actx.createGain();
+      o.type = 'sine'; o.frequency.value = f;
+      g.gain.setValueAtTime(0.0001, actx.currentTime + i * 0.1);
+      g.gain.exponentialRampToValueAtTime(0.16, actx.currentTime + i * 0.1 + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, actx.currentTime + i * 0.1 + 0.22);
+      o.connect(g); g.connect(actx.destination);
+      o.start(actx.currentTime + i * 0.1); o.stop(actx.currentTime + i * 0.1 + 0.25);
+    });
+  } catch (e) {}
+}
+const canSpeak = 'speechSynthesis' in window;
+function speak(text) {
+  if (!canSpeak) return;
+  try {
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(String(text).replace(/_+/g, ' blank '));
+    u.lang = 'en-GB'; u.rate = 0.9; u.pitch = 1.05;
+    speechSynthesis.speak(u);
+  } catch (e) {}
+}
+
+/* ============ CONTENT HELPERS ============ */
+const getSet = id => SETS.find(s => s.id === id);
+const blanksOf = item => { const out = []; item.lines.forEach(l => l.replace(/\{([^}]+)\}/g, (m, w) => { out.push(w); return m; })); return out; };
+function itemTotal(item) {
+  switch (item.t) {
+    case 'sort':   return item.chips.length;
+    case 'match':  return item.left.length;
+    case 'fill':   return blanksOf(item).length;
+    case 'order':  return item.items.length;
+    case 'grid':   return item.rows.length * item.cols.length;
+    case 'tfgrid': return item.rows.length;
+    case 'draw':   return 0;
+    default: return 1;
+  }
+}
+function flat(set) { if (!set._flat) { set._flat = []; set.sections.forEach(sec => sec.items.forEach(item => set._flat.push({sec:sec.key, item}))); } return set._flat; }
+const setTotal = set => flat(set).reduce((a, q) => a + itemTotal(q.item), 0);
+const starsFor = pct => pct >= 90 ? 3 : pct >= 70 ? 2 : pct >= 50 ? 1 : 0;
+const starRow = n => `<span class="stars" aria-label="${n} of 3 stars">${[0,1,2].map(i => `<span class="${i < n ? 'star-on' : 'star-off'}">★</span>`).join('')}</span>`;
+const setsFinished = s => Object.values(s.sets).filter(r => r && r.best).length;
+const threeStarSets = s => Object.values(s.sets).filter(r => r && r.best && starsFor(r.best.pct) === 3).length;
+/* Unlocking follows the learner's own order, not the set numbers. */
+function isUnlocked(id) {
+  if (S.settings.unlockAll) return true;
+  const pos = orderPos(id);
+  if (pos <= 0) return true;
+  const prev = S.sets[setOrder()[pos - 1]];
+  return !!(prev && prev.best && prev.best.pct >= PASS);
+}
+function questionLabel(item) { return item.text || item.tip || item.prompt; }
+function answerText(item) {
+  switch (item.t) {
+    case 'choice': return item.opts[item.ans];
+    case 'sort':   return item.bins.map((b, bi) => `${b[0]}: ${item.chips.filter(c => c[1] === bi).map(c => c[0]).join(', ')}`).join('. ');
+    case 'type':   return item.accept[0];
+    case 'match':  return item.left.map((l, i) => `${l.label} goes with ${item.right[i]}`).join('. ');
+    case 'fill':   return item.lines.map(l => l.replace(/\{([^}]+)\}/g, '$1')).join(' ');
+    case 'order':  return item.items.map((t, i) => `${i + 1}. ${t}`).join('. ');
+    case 'grid':   return item.rows.map(([label, want]) => `${label}: ${want.map((m, i) => `${item.cols[i]} ${m ? 'yes' : 'no'}`).join(', ')}`).join('. ');
+    case 'tfgrid': return item.rows.map(([text, want]) => `${want ? 'True' : 'False'}: ${text}`).join('. ');
+    default: return '';
+  }
+}
+function speakText(item) {
+  const bits = [item.prompt];
+  if (item.text) bits.push(item.text.replace(/_{2,}/g, ' blank '));
+  if (item.tip) bits.push(item.tip);
+  if (item.t === 'choice') bits.push(item.opts.join(', or '));
+  if (item.t === 'fill') bits.push(item.lines.map(l => l.replace(/\{[^}]+\}/g, 'blank')).join(' '));
+  if (item.t === 'order') bits.push(item.items.join('. '));
+  if (item.t === 'tfgrid') bits.push(item.rows.map(r => r[0]).join('. '));
+  return bits.join('. ');
+}
+function blankify(text, word) {
+  const parts = String(text).split(/_{2,}/);
+  if (parts.length < 2) return esc(text);
+  return esc(parts[0]) + (word
+    ? `<span class="blank filled">${esc(word)}</span>`
+    : '<span class="blank"><span class="sr">blank</span>&nbsp;</span>') + esc(parts.slice(1).join(' '));
+}
+
+/* ============ AUTO-SCROLL WHILE DRAGGING ============ */
+function autoScroller(onScroll) {
+  let y = null, raf = null;
+  const step = () => {
+    if (y === null) { raf = null; return; }
+    const dockH = dock.classList.contains('hidden') ? 0 : dock.offsetHeight;
+    const bottom = window.innerHeight - dockH;
+    let d = 0;
+    if (y > bottom - 70) d = Math.min(20, (y - (bottom - 70)) / 3 + 2);
+    else if (y < 120) d = -Math.min(20, (120 - y) / 3 + 2);
+    if (d) { const before = window.scrollY; window.scrollBy(0, d); if (window.scrollY !== before && onScroll) onScroll(); }
+    raf = requestAnimationFrame(step);
+  };
+  return {update(ny) { y = ny; if (!raf) raf = requestAnimationFrame(step); }, stop() { y = null; }};
+}
+
+/* ============ DRAG + TAP HELPER (chips into zones) ============ */
+function dnd(root, o) {
+  let suppress = false;
+  root.addEventListener('pointerdown', e => {
+    const chip = e.target.closest('.chip[data-id]');
+    if (!chip || o.locked() || e.button > 0) return;
+    e.preventDefault();
+    const id = chip.dataset.id, sx = e.clientX, sy = e.clientY;
+    let ghost = null, over = null, lx = sx, ly = sy;
+    const findZone = () => {
+      const hit = document.elementFromPoint(lx, ly);
+      const z = hit && hit.closest('[data-drop]');
+      const zone = z && root.contains(z) ? z : null;
+      if (zone !== over) { if (over) over.classList.remove('over'); if (zone) zone.classList.add('over'); over = zone; }
+    };
+    const scroller = autoScroller(findZone);
+    const move = ev => {
+      lx = ev.clientX; ly = ev.clientY;
+      if (!ghost) {
+        if (Math.hypot(ev.clientX - sx, ev.clientY - sy) < 8) return;
+        ghost = chip.cloneNode(true); ghost.classList.add('ghost'); ghost.classList.remove('sel');
+        document.body.appendChild(ghost); chip.classList.add('dragging');
+      }
+      ghost.style.left = ev.clientX + 'px'; ghost.style.top = ev.clientY + 'px';
+      scroller.update(ev.clientY);
+      findZone();
+    };
+    const end = ev => {
+      scroller.stop();
+      window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', end); window.removeEventListener('pointercancel', end);
+      if (over) over.classList.remove('over');
+      if (ghost) { suppress = true; setTimeout(() => { suppress = false; }, 0); ghost.remove(); chip.classList.remove('dragging'); if (ev.type === 'pointerup' && over) o.drop(id, over.dataset.drop); }
+      else if (ev.type === 'pointerup') setTimeout(() => o.tap(id), 0);
+    };
+    window.addEventListener('pointermove', move); window.addEventListener('pointerup', end); window.addEventListener('pointercancel', end);
+  });
+  root.addEventListener('click', e => {
+    if (o.locked() || suppress || e.target.closest('.chip')) return;
+    const z = e.target.closest('[data-drop]');
+    if (z) o.zoneTap(z.dataset.drop);
+  });
+  root.addEventListener('keydown', e => {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    if (o.locked()) return;
+    const chip = e.target.closest('.chip[data-id]');
+    const z = e.target.closest('[data-drop]');
+    if (chip) { e.preventDefault(); e.stopPropagation(); o.tap(chip.dataset.id); }
+    else if (z) { e.preventDefault(); e.stopPropagation(); o.zoneTap(z.dataset.drop); }
+  });
+}
+
+/* ============ QUESTION TYPES ============ */
+const TYPES = {};
+
+TYPES.choice = (item, root, changed) => {
+  let sel = -1, locked = false;
+  root.innerHTML = `${item.text ? `<p class="qtext" id="qt">${blankify(item.text, null)}</p>` : ''}
+    <div class="opts ${item.long ? 'long' : ''}" role="group" aria-label="Answers">${item.opts.map((o, i) =>
+      `<button class="opt" data-i="${i}">${esc(o)}</button>`).join('')}</div>`;
+  const btns = $$('.opt', root);
+  btns.forEach(b => b.addEventListener('click', () => {
+    if (locked) return;
+    sel = +b.dataset.i;
+    btns.forEach(x => { x.classList.toggle('sel', x === b); x.setAttribute('aria-pressed', x === b); });
+    if (item.text && /_{2,}/.test(item.text)) $('#qt', root).innerHTML = blankify(item.text, item.opts[sel]);
+    changed();
+  }));
+  return {
+    ready: () => sel >= 0,
+    check() {
+      locked = true;
+      btns.forEach((b, i) => { b.disabled = true; b.classList.remove('sel'); if (i === item.ans) b.classList.add('ok'); else if (i === sel) b.classList.add('no'); });
+      return {e: sel === item.ans ? 1 : 0, t: 1, answer: esc(item.opts[item.ans])};
+    }
+  };
+};
+
+TYPES.sort = (item, root, changed) => {
+  const chips = shuffle(item.chips.map((c, i) => ({id:i, w:c[0], b:c[1], state:''})));
+  const place = {};
+  let sel = null, locked = false;
+  const chipHtml = c => `<span class="chip ${sel === c.id ? 'sel' : ''} ${c.state}" data-id="${c.id}" role="button" tabindex="0">${esc(c.w)}</span>`;
+  function draw() {
+    const inBank = chips.filter(c => place[c.id] === undefined);
+    root.innerHTML = `<div class="bank" data-drop="bank"><span class="bank-label">${inBank.length ? 'Drag a card to a box, or tap a card and then tap a box.' : 'All sorted! Tap Check when you are ready.'}</span>${inBank.map(chipHtml).join('')}</div>
+      <div class="bins">${item.bins.map((b, bi) => `<div class="bin" data-drop="${bi}" tabindex="0" role="button" aria-label="Box: ${esc(b[0])}"><h3>${esc(b[0])}</h3><div class="hint">${esc(b[1])}</div><div class="inside">${chips.filter(c => place[c.id] === bi).map(chipHtml).join('')}</div></div>`).join('')}</div>`;
+  }
+  function drop(id, zone) { id = +id; if (zone === 'bank') delete place[id]; else place[id] = +zone; sel = null; draw(); changed(); }
+  draw();
+  dnd(root, {
+    locked: () => locked,
+    tap(id) { id = +id; if (place[id] !== undefined) { delete place[id]; sel = null; } else sel = sel === id ? null : id; draw(); changed(); },
+    drop,
+    zoneTap(zone) { if (sel !== null) drop(sel, zone); }
+  });
+  return {
+    ready: () => Object.keys(place).length === chips.length,
+    check() {
+      locked = true; let e = 0;
+      chips.forEach(c => { const ok = place[c.id] === c.b; c.state = ok ? 'ok' : 'no'; if (ok) e++; });
+      sel = null; draw();
+      return {e, t: chips.length, answer: item.bins.map((b, bi) => `<b>${esc(b[0])}:</b> ${item.chips.filter(c => c[1] === bi).map(c => esc(c[0])).join(', ')}`).join('<br>')};
+    }
+  };
+};
+
+TYPES.fill = (item, root, changed) => {
+  const answers = blanksOf(item);
+  const words = shuffle([...answers, ...item.decoys]).map((w, i) => ({id:i, w}));
+  const slots = answers.map(() => null);
+  const spare = item.decoys.length;
+  let sel = null, locked = false, marks = null;
+  function draw() {
+    let k = 0;
+    const lines = item.lines.map(l => {
+      const parts = l.split(/(\{[^}]+\})/);
+      let out = '';
+      for (let pi = 0; pi < parts.length; pi++) {
+        const part = parts[pi];
+        if (!/^\{[^}]+\}$/.test(part)) { out += esc(part); continue; }
+        const si = k++, cid = slots[si], w = cid === null ? null : words[cid];
+        let punct = '';
+        if (parts[pi + 1]) { const m = parts[pi + 1].match(/^[,.!?;:]+/); if (m) { punct = m[0]; parts[pi + 1] = parts[pi + 1].slice(punct.length); } }
+        out += `<span class="nowrap"><span class="slot" data-drop="${si}" role="button" tabindex="0" aria-label="Gap ${si + 1}${w ? ': ' + esc(w.w) : ''}">${w ? `<span class="chip ${marks ? (marks[si] ? 'ok' : 'no') : ''}" data-id="${w.id}">${esc(w.w)}</span>` : ''}</span>${esc(punct)}</span>`;
+      }
+      return `<span class="line">${out}</span>`;
+    }).join('');
+    const bank = words.filter(w => !slots.includes(w.id));
+    root.innerHTML = `<div class="bank" data-drop="bank"><span class="bank-label">Drag a card into a gap, or tap a card and then tap a gap. ${spare} card${spare === 1 ? ' is' : 's are'} left over!</span>${bank.map(w => `<span class="chip ${sel === w.id ? 'sel' : ''}" data-id="${w.id}" role="button" tabindex="0">${esc(w.w)}</span>`).join('')}</div><p class="poemtext">${lines}</p>`;
+  }
+  function drop(id, zone) {
+    id = +id; const from = slots.indexOf(id);
+    if (zone === 'bank') { if (from >= 0) slots[from] = null; }
+    else { const si = +zone; const prev = slots[si]; if (from >= 0) slots[from] = prev; slots[si] = id; }
+    sel = null; draw(); changed();
+  }
+  draw();
+  dnd(root, {
+    locked: () => locked,
+    tap(id) { id = +id; if (slots.includes(id)) drop(id, 'bank'); else { sel = sel === id ? null : id; draw(); } },
+    drop,
+    zoneTap(zone) { if (sel !== null) drop(sel, zone); else if (zone !== 'bank' && slots[+zone] !== null) drop(slots[+zone], 'bank'); }
+  });
+  return {
+    ready: () => slots.every(s => s !== null),
+    check() {
+      locked = true;
+      marks = slots.map((cid, si) => cid !== null && words[cid].w === answers[si]);
+      draw();
+      return {e: marks.filter(Boolean).length, t: answers.length, answer: item.lines.map(l => esc(l).replace(/\{([^}]+)\}/g, '<b>$1</b>')).join('<br>')};
+    }
+  };
+};
+
+TYPES.type = (item, root, changed) => {
+  root.innerHTML = `<p class="qtext" id="qt">${blankify(item.text, null)}</p>
+    <div class="typeline">
+      <label class="sr" for="wr">Your answer</label>
+      <input id="wr" class="write" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" maxlength="24" placeholder="Type one word">
+      ${item.hint ? '<button class="btn btn-small" id="hintBtn" type="button">💡 Hint</button>' : ''}
+    </div>
+    <div id="hintOut"></div>`;
+  const inp = $('#wr', root), qt = $('#qt', root);
+  inp.addEventListener('input', () => { qt.innerHTML = blankify(item.text, inp.value.trim()); changed(); });
+  const hb = $('#hintBtn', root);
+  if (hb) hb.onclick = () => { $('#hintOut', root).innerHTML = `<p class="hintbox">💡 ${esc(item.hint)}</p>`; hb.disabled = true; inp.focus(); };
+  return {
+    ready: () => norm(inp.value).length >= 1,
+    check() {
+      inp.readOnly = true;
+      const ok = answerMatches(inp.value, item.accept);
+      qt.innerHTML = blankify(item.text, inp.value.trim());
+      inp.style.borderColor = ok ? 'var(--leaf)' : 'var(--berry)';
+      const exact = item.accept.some(a => norm(a) === norm(inp.value).replace(/^(a|an|the)\s+/, ''));
+      return {e: ok ? 1 : 0, t: 1, answer: esc(item.accept[0]), nearly: ok && !exact};
+    },
+    focus: () => inp.focus()
+  };
+};
+
+/* The tick-or-cross table from the worksheet. Tap a box to cycle it. */
+TYPES.grid = (item, root, changed) => {
+  const state = item.rows.map(() => item.cols.map(() => 0)); // 0 blank, 1 tick, 2 cross
+  let locked = false, marks = null;
+  function draw() {
+    root.innerHTML = `<div class="gridq"><table>
+      <thead><tr><th></th>${item.cols.map(c => `<th scope="col">${esc(c)}</th>`).join('')}</tr></thead>
+      <tbody>${item.rows.map(([label], r) => `<tr><th class="rowhead" scope="row">${esc(label)}</th>${item.cols.map((col, c) => {
+        const v = state[r][c], ok = marks ? marks[r][c] : null;
+        return `<td><button type="button" class="cell ${v === 1 ? 'tick' : v === 2 ? 'cross' : ''} ${ok === true ? 'ok' : ok === false ? 'no' : ''}"
+          data-r="${r}" data-c="${c}" ${locked ? 'disabled' : ''}
+          aria-label="${esc(label)}, ${esc(col)}: ${v === 1 ? 'tick' : v === 2 ? 'cross' : 'not answered yet'}">${v === 1 ? '✓' : v === 2 ? '✗' : ''}</button></td>`;
+      }).join('')}</tr>`).join('')}</tbody></table></div>
+      <p class="tip">Tap a box to change it: empty → ✓ → ✗ → empty. Fill in every box.</p>`;
+  }
+  root.addEventListener('click', e => {
+    const b = e.target.closest('.cell');
+    if (!b || locked) return;
+    const r = +b.dataset.r, c = +b.dataset.c;
+    state[r][c] = (state[r][c] + 1) % 3;
+    draw(); changed();
+  });
+  draw();
+  return {
+    ready: () => state.every(row => row.every(v => v !== 0)),
+    check() {
+      locked = true;
+      marks = state.map((row, r) => row.map((v, c) => (v === 1) === (item.rows[r][1][c] === 1)));
+      draw();
+      return {e: marks.flat().filter(Boolean).length, t: item.rows.length * item.cols.length,
+        answer: item.rows.map(([label, want]) => `<b>${esc(label)}:</b> ${want.map((m, i) => `${esc(item.cols[i])} ${m ? '✓' : '✗'}`).join(' · ')}`).join('<br>')};
+    }
+  };
+};
+
+/* Several statements, each one true or false. One star per row. */
+TYPES.tfgrid = (item, root, changed) => {
+  const given = item.rows.map(() => null);
+  let locked = false, marks = null;
+  function draw() {
+    root.innerHTML = `<div class="tflist">${item.rows.map(([text], i) => `
+      <div class="tfrow ${marks ? (marks[i] ? 'ok' : 'no') : ''}">
+        <span>${esc(text)}</span>
+        <span class="tfbtns" role="group" aria-label="True or false: ${esc(text)}">
+          <button type="button" data-i="${i}" data-v="1" aria-pressed="${given[i] === true}" ${locked ? 'disabled' : ''}>True</button>
+          <button type="button" data-i="${i}" data-v="0" aria-pressed="${given[i] === false}" ${locked ? 'disabled' : ''}>False</button>
+        </span>
+      </div>`).join('')}</div>`;
+  }
+  root.addEventListener('click', e => {
+    const b = e.target.closest('[data-v]');
+    if (!b || locked) return;
+    given[+b.dataset.i] = b.dataset.v === '1';
+    draw(); changed();
+  });
+  draw();
+  return {
+    ready: () => given.every(a => a !== null),
+    check() {
+      locked = true;
+      marks = given.map((a, i) => a === item.rows[i][1]);
+      draw();
+      return {e: marks.filter(Boolean).length, t: item.rows.length,
+        answer: item.rows.map(([text, want]) => `<b>${want ? 'True' : 'False'}</b> — ${esc(text)}`).join('<br>')};
+    }
+  };
+};
+
+const LINE_COLORS = ['var(--sky)', 'var(--sun)', '#8E6AC8', '#D0668E', '#2E9C96', '#C07A34'];
+TYPES.match = (item, root, changed, cleanups) => {
+  const n = item.left.length;
+  const rightOrder = shuffleNotSame(item.right.map((_, i) => i));
+  const conn = {};
+  let sel = null, temp = null, locked = false, result = false;
+  root.innerHTML = `<p class="tip" style="margin:0 0 .9rem">Drag from a box on one side to a box on the other, or tap one on each side.</p>
+    <div class="match">
+      <svg class="lines" aria-hidden="true"></svg>
+      <div class="match-col">${item.left.map((l, i) => `<button class="m-item left" data-side="L" data-i="${i}"><span>${esc(l.label)}</span><span class="dot"></span></button>`).join('')}</div>
+      <div class="match-col">${rightOrder.map(ri => `<button class="m-item right" data-side="R" data-i="${ri}">${esc(item.right[ri])}<span class="dot"></span></button>`).join('')}</div>
+    </div>
+    <div class="row" style="justify-content:flex-end;margin-top:.9rem"><button class="btn btn-small" id="clearLines" type="button">Clear lines</button></div>`;
+  const box = $('.match', root), svg = $('svg.lines', root);
+  const itemEl = (side, i) => box.querySelector(`.m-item[data-side="${side}"][data-i="${i}"]`);
+  const dotPt = el => { const b = box.getBoundingClientRect(), r = el.getBoundingClientRect(); return {x: (el.dataset.side === 'L' ? r.right : r.left) - b.left, y: r.top + r.height / 2 - b.top}; };
+  const curve = (a, b) => { const dx = (b.x - a.x) * 0.45; return `M${a.x} ${a.y} C${a.x + dx} ${a.y} ${b.x - dx} ${b.y} ${b.x} ${b.y}`; };
+  function redraw() {
+    let html = '';
+    Object.entries(conn).forEach(([li, ri]) => {
+      const a = dotPt(itemEl('L', li)), b = dotPt(itemEl('R', ri));
+      let color = LINE_COLORS[li % LINE_COLORS.length], extra = '';
+      if (result) { const ok = +li === +ri; color = ok ? 'var(--leaf)' : 'var(--berry)'; if (!ok) extra = 'stroke-dasharray="10 8"'; }
+      html += `<path d="${curve(a, b)}" stroke="${color}" ${extra}/>`;
+    });
+    if (temp) { const bb = box.getBoundingClientRect(); html += `<path d="${curve(dotPt(temp.el), {x: temp.cx - bb.left, y: temp.cy - bb.top})}" stroke="var(--ink-soft)" stroke-dasharray="6 7"/>`; }
+    svg.innerHTML = html;
+    $$('.m-item', box).forEach(el => {
+      const side = el.dataset.side, i = +el.dataset.i;
+      el.classList.toggle('linked', side === 'L' ? conn[i] !== undefined : Object.values(conn).includes(i));
+      el.classList.toggle('sel', !!sel && sel.side === side && sel.i === i);
+    });
+  }
+  function link(li, ri) { for (const k in conn) if (conn[k] === ri) delete conn[k]; conn[li] = ri; sel = null; redraw(); changed(); }
+  function unlink(side, i) { if (side === 'L') delete conn[i]; else for (const k in conn) if (conn[k] === i) delete conn[k]; }
+  function tapItem(side, i) {
+    if (sel && sel.side !== side) { side === 'L' ? link(i, sel.i) : link(sel.i, i); return; }
+    if (sel && sel.side === side && sel.i === i) { unlink(side, i); sel = null; redraw(); changed(); return; }
+    sel = {side, i}; redraw();
+  }
+  box.addEventListener('pointerdown', e => {
+    const el = e.target.closest('.m-item');
+    if (!el || locked || e.button > 0) return;
+    e.preventDefault();
+    const side = el.dataset.side, i = +el.dataset.i, sx = e.clientX, sy = e.clientY;
+    let dragging = false;
+    const scroller = autoScroller(() => { if (temp) redraw(); });
+    const move = ev => {
+      if (!dragging && Math.hypot(ev.clientX - sx, ev.clientY - sy) > 10) dragging = true;
+      if (dragging) { temp = {el, cx: ev.clientX, cy: ev.clientY}; sel = {side, i}; scroller.update(ev.clientY); redraw(); }
+    };
+    const end = ev => {
+      scroller.stop();
+      window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', end); window.removeEventListener('pointercancel', end);
+      if (dragging) {
+        temp = null;
+        const hit = document.elementFromPoint(ev.clientX, ev.clientY);
+        const t = hit && hit.closest('.m-item');
+        if (ev.type === 'pointerup' && t && box.contains(t) && t.dataset.side !== side) { const j = +t.dataset.i; side === 'L' ? link(i, j) : link(j, i); }
+        else { sel = null; redraw(); }
+      } else if (ev.type === 'pointerup') tapItem(side, i);
+    };
+    window.addEventListener('pointermove', move); window.addEventListener('pointerup', end); window.addEventListener('pointercancel', end);
+  });
+  box.addEventListener('click', e => { const el = e.target.closest('.m-item'); if (el && e.detail === 0 && !locked) tapItem(el.dataset.side, +el.dataset.i); });
+  $('#clearLines', root).addEventListener('click', () => { if (locked) return; for (const k in conn) delete conn[k]; sel = null; redraw(); changed(); });
+  const ro = new ResizeObserver(() => redraw()); ro.observe(box);
+  cleanups.push(() => ro.disconnect());
+  requestAnimationFrame(redraw);
+  return {
+    ready: () => Object.keys(conn).length === n,
+    check() {
+      locked = true; result = true; let e = 0;
+      for (let i = 0; i < n; i++) {
+        const ok = conn[i] === i; if (ok) e++;
+        itemEl('L', i).classList.add(ok ? 'ok' : 'no');
+        const r = itemEl('R', i), rOk = Object.entries(conn).some(([li, ri]) => ri === i && +li === i);
+        r.classList.add(rOk ? 'ok' : 'no');
+      }
+      $$('.m-item', box).forEach(b => b.disabled = true);
+      $('#clearLines', root).disabled = true;
+      redraw();
+      return {e, t: n, answer: item.left.map((l, i) => `<b>${esc(l.label)}</b> ➜ ${esc(item.right[i])}`).join('<br>')};
+    }
+  };
+};
+
+/* Put the steps in the right order: drag them, or use the little arrows. */
+TYPES.order = (item, root, changed) => {
+  const n = item.items.length;
+  let seq = shuffleNotSame(item.items.map((_, i) => i));
+  let locked = false, marks = null, dragPos = -1;
+  function draw() {
+    root.innerHTML = `<p class="tip" style="margin:0 0 .9rem">Drag a card up or down, or use the ▲ ▼ arrows, until the order is right.</p>
+      <div class="orderlist">${seq.map((si, p) => `
+        <div class="ord ${dragPos === p ? 'dragging' : ''} ${marks ? (marks[p] ? 'ok' : 'no') : ''}" data-p="${p}" role="listitem" aria-label="Position ${p + 1}: ${esc(item.items[si])}">
+          <span class="num">${p + 1}</span>
+          <span>${esc(item.items[si])}</span>
+          <span class="ord-move">
+            <button type="button" data-up="${p}" aria-label="Move up" ${p === 0 || locked ? 'disabled' : ''}>▲</button>
+            <button type="button" data-down="${p}" aria-label="Move down" ${p === n - 1 || locked ? 'disabled' : ''}>▼</button>
+          </span>
+        </div>`).join('')}</div>`;
+  }
+  function move(from, to) {
+    if (to < 0 || to >= n || from === to) return;
+    const [x] = seq.splice(from, 1); seq.splice(to, 0, x);
+  }
+  draw();
+  root.addEventListener('click', e => {
+    if (locked) return;
+    const up = e.target.closest('[data-up]'), dn = e.target.closest('[data-down]');
+    if (up) { const p = +up.dataset.up; move(p, p - 1); draw(); changed(); const f = $(`[data-up="${p - 1}"]`, root); if (f) f.focus(); }
+    else if (dn) { const p = +dn.dataset.down; move(p, p + 1); draw(); changed(); const f = $(`[data-down="${p + 1}"]`, root); if (f) f.focus(); }
+  });
+  root.addEventListener('pointerdown', e => {
+    const el = e.target.closest('.ord');
+    if (!el || locked || e.button > 0 || e.target.closest('.ord-move')) return;
+    e.preventDefault();
+    const sy = e.clientY;
+    dragPos = +el.dataset.p;
+    let ghost = null;
+    const scroller = autoScroller(() => {});
+    const place = y => {
+      const rows = $$('.ord', root);
+      let target = dragPos;
+      for (let i = 0; i < rows.length; i++) {
+        const r = rows[i].getBoundingClientRect();
+        if (y > r.top && y < r.bottom) { target = i; break; }
+        if (i === 0 && y <= r.top) target = 0;
+        if (i === rows.length - 1 && y >= r.bottom) target = rows.length - 1;
+      }
+      if (target !== dragPos) { move(dragPos, target); dragPos = target; draw(); }
+    };
+    const onMove = ev => {
+      if (!ghost) {
+        if (Math.abs(ev.clientY - sy) < 8) return;
+        ghost = el.cloneNode(true);
+        ghost.classList.add('ghost'); ghost.classList.remove('dragging');
+        ghost.style.width = el.getBoundingClientRect().width + 'px';
+        document.body.appendChild(ghost);
+        draw();
+      }
+      ghost.style.left = ev.clientX + 'px'; ghost.style.top = ev.clientY + 'px';
+      scroller.update(ev.clientY);
+      place(ev.clientY);
+    };
+    const end = () => {
+      scroller.stop();
+      window.removeEventListener('pointermove', onMove); window.removeEventListener('pointerup', end); window.removeEventListener('pointercancel', end);
+      if (ghost) { ghost.remove(); changed(); }
+      dragPos = -1; draw();
+    };
+    window.addEventListener('pointermove', onMove); window.addEventListener('pointerup', end); window.addEventListener('pointercancel', end);
+  });
+  return {
+    ready: () => true,
+    check() {
+      locked = true;
+      marks = seq.map((si, p) => si === p);
+      draw();
+      return {e: marks.filter(Boolean).length, t: n, answer: item.items.map((t, i) => `<b>${i + 1}.</b> ${esc(t)}`).join('<br>')};
+    }
+  };
+};
+
+/* Draw a diagram. Saved as a small picture in My Lab Book. */
+const PEN_COLORS = ['#1F2A37', '#C0392B', '#2F76A8', '#2E8B57', '#D9841C', '#8E6AC8'];
+TYPES.draw = (item, root, changed) => {
+  root.innerHTML = `<p class="clue">${esc(item.tip)}</p>
+    <div class="padwrap">
+      <canvas id="pad" class="pad" width="600" height="400" aria-label="Drawing area. Use a finger, a pen or a mouse."></canvas>
+      <div class="padtools" role="group" aria-label="Drawing tools">
+        ${PEN_COLORS.map((c, i) => `<button type="button" class="swatch" data-c="${i}" style="background:${c}" aria-label="Colour ${i + 1}" aria-pressed="${i === 0}"></button>`).join('')}
+        <button type="button" class="btn btn-small" id="undoBtn">↶ Undo</button>
+        <button type="button" class="btn btn-small" id="clearPad">Start again</button>
+      </div>
+      <p class="padnote">Draw your diagram, then tap Save. There are no wrong answers here.</p>
+    </div>`;
+  const cv = $('#pad', root), ctx = cv.getContext('2d');
+  let strokes = [], cur = null, color = PEN_COLORS[0], locked = false;
+  function repaint() {
+    ctx.fillStyle = '#FFFFFF'; ctx.fillRect(0, 0, cv.width, cv.height);
+    ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    for (const s of strokes.concat(cur ? [cur] : [])) {
+      if (s.pts.length < 2) { ctx.fillStyle = s.c; ctx.beginPath(); ctx.arc(s.pts[0].x, s.pts[0].y, s.w / 2, 0, 7); ctx.fill(); continue; }
+      ctx.strokeStyle = s.c; ctx.lineWidth = s.w;
+      ctx.beginPath(); ctx.moveTo(s.pts[0].x, s.pts[0].y);
+      for (let i = 1; i < s.pts.length; i++) ctx.lineTo(s.pts[i].x, s.pts[i].y);
+      ctx.stroke();
+    }
+  }
+  const pos = e => { const r = cv.getBoundingClientRect(); return {x: (e.clientX - r.left) * cv.width / r.width, y: (e.clientY - r.top) * cv.height / r.height}; };
+  cv.addEventListener('pointerdown', e => {
+    if (locked) return;
+    e.preventDefault(); cv.setPointerCapture(e.pointerId);
+    cur = {c: color, w: 6, pts: [pos(e)]}; repaint();
+  });
+  cv.addEventListener('pointermove', e => { if (!cur) return; cur.pts.push(pos(e)); repaint(); });
+  const stop = () => { if (!cur) return; strokes.push(cur); cur = null; repaint(); changed(); };
+  cv.addEventListener('pointerup', stop);
+  cv.addEventListener('pointercancel', stop);
+  cv.addEventListener('pointerleave', stop);
+  $$('.swatch', root).forEach(b => b.onclick = () => {
+    color = PEN_COLORS[+b.dataset.c];
+    $$('.swatch', root).forEach(x => x.setAttribute('aria-pressed', x === b));
+  });
+  $('#undoBtn', root).onclick = () => { if (locked) return; strokes.pop(); repaint(); changed(); };
+  $('#clearPad', root).onclick = () => { if (locked) return; strokes = []; repaint(); changed(); };
+  repaint();
+  return {
+    ready: () => strokes.length > 0,
+    check() {
+      locked = true;
+      let url = '';
+      try {
+        const small = document.createElement('canvas');
+        small.width = 420; small.height = 280;
+        const sc = small.getContext('2d');
+        sc.fillStyle = '#FFFFFF'; sc.fillRect(0, 0, 420, 280);
+        sc.drawImage(cv, 0, 0, 420, 280);
+        url = small.toDataURL('image/png');
+      } catch (e) {}
+      return {e: 0, t: 0, picture: url, strokes: strokes.length};
+    }
+  };
+};
+
+/* ============ APP ============ */
+const app = $('#app'), dock = $('#dock'), dockInner = $('#dockInner'), layer = $('#layer');
+let screen = 'home', Q = null, timer = null, paused = false, cleanups = [], streak = 0;
+
+function runCleanups() { cleanups.forEach(f => { try { f(); } catch (e) {} }); cleanups = []; }
+function showLayer(html) { layer.innerHTML = html; const b = $('button', layer); if (b) b.focus(); }
+function hideLayer() { layer.innerHTML = ''; }
+function confirmBox({title, text, yes, no = 'Cancel', onYes, bot = false}) {
+  showLayer(`<div class="overlay" role="dialog" aria-modal="true" aria-labelledby="cbT"><div class="modal">${bot ? flask() : ''}<h2 id="cbT">${esc(title)}</h2><p>${esc(text)}</p><button class="btn btn-go btn-wide" id="cbYes">${esc(yes)}</button>${no === null ? '' : `<button class="btn btn-wide" id="cbNo">${esc(no)}</button>`}</div></div>`);
+  $('#cbYes').onclick = () => { hideLayer(); onYes(); };
+  const nb = $('#cbNo'); if (nb) nb.onclick = hideLayer;
+}
+
+function go(name) {
+  screen = name; runCleanups(); hideLayer(); stopTimer();
+  dock.className = 'dock hidden'; dockInner.innerHTML = ''; Q = null;
+  ({home:renderHome, quiz:openQuiz, results:renderResults, history:renderHistory, settings:renderSettings}[name] || renderHome)();
+  if (name !== 'quiz') window.scrollTo(0, 0);
+}
+
+/* ---------- Home ---------- */
+function renderHome() {
+  const c = S.current;
+  let resume = '';
+  if (c) {
+    const set = getSet(c.setId), done = Object.keys(c.answers).length;
+    resume = `<section class="resume" aria-labelledby="rsT">
+      <h2 id="rsT">⏸ Paused: ${set.emoji} ${esc(set.title)}</h2>
+      <p>${done} of ${c.queue.length} questions done${c.mode === 'fix' ? ' while fixing mistakes' : ''}. Time so far: ${fmtTime(c.elapsed)}.</p>
+      <div class="row"><button class="btn btn-go" id="contBtn">▶ Continue</button><button class="btn" id="discardBtn">Start over</button></div>
+    </section>`;
+  }
+  const order = setOrder();
+  app.innerHTML = `
+    <header class="hero">
+      <div><h1>Science Detectives</h1><p>Solids, liquids and gases, mixtures, dissolving — and clever thinking.</p></div>
+      ${flask()}
+    </header>
+    ${storageOK ? '' : '<div class="notice">This browser is not saving progress right now. You can still play, but results may be lost when you close the page.</div>'}
+    ${resume}
+    <section class="sets" aria-labelledby="setsT">
+      <h2 class="label" id="setsT">Choose a set</h2>
+      ${order.map((id, pos) => {
+        const set = getSet(id), rec = S.sets[id], open = isUnlocked(id), best = rec && rec.best;
+        const meta = !open ? `🔒 Score ${PASS}% or more on set ${pos} to open this one`
+          : best ? `Best: ${best.e} of ${best.t} (${best.pct}%)`
+          : `${flat(set).length} questions, ${setTotal(set)} stars to win`;
+        return `<button class="setcard ${open ? '' : 'locked'}" data-set="${id}" ${open ? '' : 'aria-disabled="true"'}>
+          <span class="emoji" aria-hidden="true">${set.emoji}</span>
+          <span><span class="sc-title">Set ${pos + 1}: ${esc(set.title)}</span><br><span class="meta">${esc(set.about)}</span><br><span class="meta">${meta}</span></span>
+          <span class="go">${open ? (best ? starRow(starsFor(best.pct)) : 'Start ▶') : 'Locked'}</span>
+        </button>`;
+      }).join('')}
+    </section>
+    <section class="card" style="margin-top:1.25rem">
+      <h2 style="font-size:1.15rem">What every set covers</h2>
+      <div class="knows">${Object.values(SECTIONS).map(s => `<span class="know">${s.icon} ${esc(s.name)}</span>`).join('')}</div>
+      <p class="tip">Every set covers all six topics, so you can start with any set you like.</p>
+    </section>
+    <nav class="homefoot" aria-label="More">
+      <button class="btn btn-sun" id="histBtn">🏆 My results</button>
+      <button class="btn" id="setBtn">⚙️ Settings for grown-ups</button>
+      <a class="btn" href="/">🏠 All activities</a>
+    </nav>`;
+  if (c) {
+    $('#contBtn').onclick = () => go('quiz');
+    $('#discardBtn').onclick = () => confirmBox({title:'Start over?', text:'The answers in your paused set will be cleared.', yes:'Yes, clear it', no:'Keep it', onYes(){ S.current = null; save(); go('home'); }});
+  }
+  $$('.setcard').forEach(b => b.onclick = () => {
+    const id = +b.dataset.set;
+    if (!isUnlocked(id)) {
+      const pos = orderPos(id);
+      let t = pos - 1; while (t > 0 && !isUnlocked(order[t])) t--;
+      confirmBox({title:'This set is locked', text:`Score ${PASS}% or more on set ${pos} to open this one. You can do it!`, yes:`Go to set ${t + 1}`, no:'Close', bot:true, onYes(){ tryStart(order[t]); }});
+      return;
+    }
+    tryStart(id);
+  });
+  $('#histBtn').onclick = () => go('history');
+  $('#setBtn').onclick = () => go('settings');
+}
+
+function tryStart(id, mode = 'full', queue = null) {
+  const c = S.current;
+  if (c && c.setId === id && mode === 'full') {
+    confirmBox({title:'That set is paused', text:'Do you want to keep going from where you stopped?', yes:'▶ Continue', no:'Start again', onYes(){ go('quiz'); }});
+    $('#cbNo').onclick = () => { hideLayer(); startSet(id, mode, queue); };
+    return;
+  }
+  if (c) { confirmBox({title:'You have a paused set', text:`Starting now will clear your paused set: ${getSet(c.setId).title}.`, yes:'Start the new set', no:'Cancel', onYes(){ startSet(id, mode, queue); }}); return; }
+  startSet(id, mode, queue);
+}
+function startSet(id, mode = 'full', queue = null) {
+  const f = flat(getSet(id));
+  S.current = {setId:id, mode, queue: queue || f.map((_, i) => i), answers:{}, elapsed:0, started:Date.now()};
+  streak = 0;
+  save(); go('quiz');
+}
+
+/* ---------- Quiz ---------- */
+function startTimer() {
+  stopTimer();
+  let last = Date.now(), ticks = 0;
+  timer = setInterval(() => { const now = Date.now(); if (S.current && !paused) { S.current.elapsed += now - last; if (++ticks % 5 === 0) save(); } last = now; }, 1000);
+}
+function stopTimer() { if (timer) clearInterval(timer); timer = null; }
+function openQuiz() { if (!S.current) return go('home'); paused = false; renderQuestion(); if (screen === 'quiz' && S.current) startTimer(); }
+function tally(c) { let e = 0, t = 0; Object.values(c.answers).forEach(a => { e += a.e; t += a.t; }); return {e, t}; }
+
+function renderQuestion() {
+  runCleanups();
+  const c = S.current, set = getSet(c.setId), f = flat(set);
+  const pos = c.queue.findIndex(i => !c.answers[i]);
+  if (pos < 0) return finishRun();
+  const idx = c.queue[pos], {sec, item} = f[idx];
+  const done = c.queue.length - c.queue.filter(i => !c.answers[i]).length;
+  const pct = done / c.queue.length;
+  const {e, t} = tally(c);
+  const fig = item.fig ? FIGURES[item.fig] : null;
+  app.innerHTML = `
+    <div class="topbar">
+      <button class="btn btn-icon" id="pauseBtn" aria-label="Pause">⏸</button>
+      <span class="where"><b>${set.emoji} ${esc(set.title)}</b><span>Question ${done + 1} of ${c.queue.length}</span></span>
+      ${streak >= 3 ? `<span class="pill fire" aria-label="${streak} right in a row">🔥 ${streak}</span>` : ''}
+      <span class="pill" id="scorePill" aria-label="${e} stars out of ${t}">⭐ ${e}/${t}</span>
+    </div>
+    <div class="track-wrap" aria-hidden="true">
+      <div class="track"></div><div class="fill" style="width:${pct * 100}%"></div>
+      <div class="walker" style="left:${pct * 100}%">${flask()}</div><div class="goal">🏁</div>
+    </div>
+    <article class="card" id="qcard">
+      <span class="sec-tag">${SECTIONS[sec].icon} ${SECTIONS[sec].name}</span>
+      <div class="prompt"><h2>${esc(item.prompt)}</h2>${canSpeak ? '<button class="speak" id="speakBtn" aria-label="Read the question out loud">🔊</button>' : ''}</div>
+      ${fig ? `<div class="figure"><svg viewBox="${fig.box}" role="img" aria-label="${esc(fig.cap)}">${fig.svg}</svg></div>` : ''}
+      <div id="qbody"></div>
+    </article>
+    <div class="dock-space" id="dockSpace"></div>`;
+  const body = $('#qbody');
+  const h = TYPES[item.t](item, body, () => { const b = $('#checkBtn'); if (b) b.disabled = !h.ready(); }, cleanups);
+  Q = {idx, item, sec, h, checked:false};
+  const sb = $('#speakBtn'); if (sb) sb.onclick = () => speak(speakText(item));
+  $('#pauseBtn').onclick = pause;
+  dock.className = 'dock';
+  dockInner.innerHTML = `<button class="btn btn-go btn-wide" id="checkBtn" disabled>${item.t === 'draw' ? 'Save my drawing' : 'Check my answer'}</button>`;
+  $('#checkBtn').onclick = doCheck;
+  $('#checkBtn').disabled = !h.ready();
+  syncDockSpace();
+}
+function syncDockSpace() { const sp = $('#dockSpace'); if (sp) sp.style.height = (dock.offsetHeight + 24) + 'px'; }
+
+function doCheck() {
+  if (!Q || Q.checked || !Q.h.ready()) return;
+  const c = S.current, set = getSet(c.setId), item = Q.item;
+  const res = Q.h.check();
+  Q.checked = true;
+  c.answers[Q.idx] = {e: res.e, t: res.t};
+
+  if (item.t === 'draw' && res.picture) { S.gallery.unshift({setId:set.id, img:res.picture, tip:item.tip, date:Date.now()}); S.gallery = S.gallery.slice(0, 12); }
+
+  const full = res.t > 0 && res.e === res.t;
+  if (item.t === 'grid' && full) S.stats.grid++;
+  if (item.t === 'draw') S.stats.draw++;
+  if (item.fig && /^logic/.test(item.fig) && full) S.stats.logic++;
+  if (item.fig && /bars$/.test(item.fig) && full) S.stats.chart++;
+  if (Q.sec === 'investigate' && full) S.stats.fair++;
+  if (res.t > 0) { streak = full ? streak + 1 : 0; if (streak > S.stats.streak) S.stats.streak = streak; }
+
+  const earned = newBadges();
+  save();
+
+  const {e, t} = tally(c);
+  const pill = $('#scorePill'); pill.textContent = `⭐ ${e}/${t}`; pill.setAttribute('aria-label', `${e} stars out of ${t}`);
+
+  const kind = res.t === 0 || res.e === res.t ? 'good' : res.e === 0 ? 'bad' : 'part';
+  let title, body = '';
+  if (item.t === 'draw') {
+    title = '🎨 Good diagram!';
+    body = `<p>Your drawing is saved in My Lab Book. ${res.strokes > 12 ? 'You put a lot of detail into that one!' : 'Come back any time and draw another.'}</p>`;
+  } else {
+    title = kind === 'good' ? '✅ ' + pick(['Great thinking!', 'You got it!', 'Spot on!', 'Well done!', 'Exactly right!'])
+      : kind === 'part' ? '🌟 ' + pick(['Almost!', 'So close!', 'Good work, nearly all of it!'])
+      : '💪 ' + pick(['Nice try!', 'Good try!', 'Not quite yet.']);
+    if (item.t === 'type' && res.nearly) body += `<p>Right word — just watch the spelling: <b>${esc(item.accept[0])}</b>.</p>`;
+    if (kind !== 'good') body += `<p><span class="ans">The answer:</span><br>${res.answer}</p>`;
+    if (kind === 'part' && res.t > 2) body += `<p>You got ${res.e} of the ${res.t} parts right.</p>`;
+  }
+  if (item.explain) body += `<p class="why">💡 ${esc(item.explain)}</p>`;
+  if (streak === 3) body += `<p>🔥 Three right in a row!</p>`;
+  else if (streak >= 6) body += `<p>🔥 ${streak} in a row — you are on fire!</p>`;
+  earned.forEach(b => { body += `<div class="badge-pop"><span class="bi">${b.icon}</span><span><b>New badge: ${esc(b.name)}</b><br><small>${esc(b.desc)}</small></span></div>`; });
+
+  const gain = res.t ? `+${res.e} of ${res.t}` : 'Saved';
+  const last = c.queue.every(i => c.answers[i]);
+  dock.className = 'dock ' + kind;
+  dockInner.innerHTML = `<div class="fb" role="status"><h3>${title}<span class="gain">${gain}</span></h3>${body}</div>
+    <button class="btn btn-go btn-wide" id="nextBtn">${last ? '🏁 See my results' : 'Next question ▶'}</button>`;
+  $('#nextBtn').onclick = next;
+  $('#nextBtn').focus({preventScroll:true});
+  syncDockSpace();
+  beep(res.t === 0 ? 'good' : kind);
+  if (kind === 'good') { const b = $('.walker .flask'); if (b) { b.classList.remove('happy'); void b.offsetWidth; b.classList.add('happy'); } }
+}
+function next() { if (!Q || !Q.checked) return; renderQuestion(); window.scrollTo(0, 0); const f = Q && Q.h && Q.h.focus; if (f && matchMedia('(pointer: fine)').matches) f(); }
+
+function newBadges() {
+  const out = [];
+  BADGES.forEach(b => { if (!S.badges.includes(b.id) && b.got(S)) { S.badges.push(b.id); out.push(b); } });
+  return out;
+}
+
+function pause() {
+  if (!S.current) return;
+  paused = true; save();
+  const {e, t} = tally(S.current);
+  showLayer(`<div class="overlay" role="dialog" aria-modal="true" aria-labelledby="pT"><div class="modal">${flask('sleepy')}<h2 id="pT">Paused</h2>
+    <p>You have ${e} of ${t} stars so far. Your place is saved, so you can come back any time.</p>
+    <button class="btn btn-go btn-wide" id="resumeBtn">▶ Keep going</button>
+    <button class="btn btn-wide" id="homeBtn">Save and go home</button></div></div>`);
+  $('#resumeBtn').onclick = resumeQuiz;
+  $('#homeBtn').onclick = () => go('home');
+}
+function resumeQuiz() { paused = false; hideLayer(); }
+
+function finishRun() {
+  stopTimer();
+  const c = S.current, set = getSet(c.setId), f = flat(set);
+  let e = 0, t = 0; const bySec = {};
+  c.queue.forEach(i => { const a = c.answers[i], s = f[i].sec; bySec[s] = bySec[s] || {e:0, t:0}; if (a) { e += a.e; t += a.t; bySec[s].e += a.e; bySec[s].t += a.t; } });
+  const pct = t ? Math.round(e / t * 100) : 0;
+  const order = setOrder(), pos = orderPos(set.id), nextId = pos >= 0 && pos + 1 < order.length ? order[pos + 1] : null;
+  const wasOpen = nextId !== null && isUnlocked(nextId);
+  const rec = S.sets[set.id] = S.sets[set.id] || {attempts:[], best:null};
+  rec.attempts.unshift({mode:c.mode, e, t, pct, time:c.elapsed, date:Date.now()});
+  rec.attempts = rec.attempts.slice(0, 20);
+  if (c.mode === 'full' && (!rec.best || pct > rec.best.pct || (pct === rec.best.pct && c.elapsed < rec.best.time))) rec.best = {e, t, pct, time:c.elapsed, date:Date.now()};
+  if (c.mode === 'fix') S.stats.fix++;
+  S.lastRun = {setId:set.id, mode:c.mode, e, t, pct, time:c.elapsed, bySec, answers:c.answers, queue:c.queue,
+    newlyOpen: nextId !== null && !wasOpen && isUnlocked(nextId)};
+  S.current = null;
+  const earned = newBadges();
+  S.lastRun.badges = earned.map(b => b.id);
+  save();
+  go('results');
+}
+
+/* ---------- Results ---------- */
+function renderResults() {
+  const r = S.lastRun; if (!r) return go('home');
+  const set = getSet(r.setId), f = flat(set), stars = starsFor(r.pct);
+  const order = setOrder(), pos = orderPos(set.id);
+  const nextSet = pos + 1 < order.length ? getSet(order[pos + 1]) : null;
+  const nextOpen = nextSet && isUnlocked(nextSet.id);
+  const wrong = r.queue.filter(i => r.answers[i] && r.answers[i].t > 0 && r.answers[i].e < r.answers[i].t);
+  const msg = r.mode === 'fix'
+    ? (r.e === r.t ? 'You fixed every single mistake. Brilliant!' : `You fixed ${r.e} of ${r.t}. Keep going — you are getting better!`)
+    : stars === 3 ? 'Outstanding work, detective!' : stars === 2 ? 'Really good science!' : stars === 1 ? 'Good effort — keep practising!' : 'Every scientist starts somewhere. Try again!';
+  const gotBadges = (r.badges || []).map(id => BADGES.find(b => b.id === id)).filter(Boolean);
+  app.innerHTML = `
+    <div class="result-head">
+      ${flask(stars >= 2 ? 'happy' : '')}
+      <h1 id="rT" class="sr">Results</h1>
+      <div class="big-stars" aria-label="${stars} of 3 stars">${[0,1,2].map(i => `<span class="${i < stars ? 'star-on' : 'star-off'}">★</span>`).join('')}</div>
+      <p class="score-big">${r.e} / ${r.t}</p>
+      <p>${r.pct}% — ${esc(msg)}</p>
+      <p>Time: ${fmtTime(r.time)}</p>
+      ${r.newlyOpen && nextSet ? `<p><b>🔓 You have opened ${nextSet.emoji} ${esc(nextSet.title)}!</b></p>` : ''}
+    </div>
+    ${gotBadges.length ? `<div class="card" style="margin-bottom:1rem"><h2 style="font-size:1.2rem">🎉 New badges</h2><div class="badges">${gotBadges.map(b => `<div class="badge on"><span class="bi">${b.icon}</span><b>${esc(b.name)}</b><small>${esc(b.desc)}</small></div>`).join('')}</div></div>` : ''}
+    <div class="card">
+      <h2 style="font-size:1.25rem">How each topic went</h2>
+      <div class="bars">${Object.keys(SECTIONS).filter(k => r.bySec[k] && r.bySec[k].t).map(k => {
+        const b = r.bySec[k], p = Math.round(b.e / b.t * 100);
+        return `<div class="bar-row"><span>${SECTIONS[k].icon} ${SECTIONS[k].name}</span><span>${b.e}/${b.t}</span><span class="bar"><i style="width:${p}%"></i></span></div>`;
+      }).join('')}</div>
+      <p class="tip">This set covered: ${set.aligns.map(a => esc(a)).join(' · ')}</p>
+      ${wrong.length ? `<div class="review"><details><summary>🔎 Look again at ${wrong.length} question${wrong.length === 1 ? '' : 's'}</summary><ol>${wrong.map(i => {
+        const it = f[i].item;
+        return `<li><b>${esc(questionLabel(it))}</b><br>Answer: ${esc(answerText(it))}${it.explain ? `<br><span style="color:var(--ink-soft)">💡 ${esc(it.explain)}</span>` : ''}</li>`;
+      }).join('')}</ol></details></div>` : ''}
+      <div class="stack" style="margin-top:1.2rem">
+        ${wrong.length ? `<button class="btn btn-go btn-wide" id="fixBtn">🔁 Fix my mistakes (${wrong.length})</button>` : ''}
+        ${nextSet ? (nextOpen
+          ? `<button class="btn ${wrong.length ? 'btn-sun' : 'btn-go'} btn-wide" id="upBtn">⬆ Next set: ${nextSet.emoji} ${esc(nextSet.title)}</button>`
+          : `<p class="tip" style="text-align:center">Score ${PASS}% or more on the whole set to open ${nextSet.emoji} ${esc(nextSet.title)}.</p>`)
+          : `<p class="tip" style="text-align:center">You have reached the last set in your lab! 🏁</p>`}
+        <button class="btn btn-wide" id="againBtn">Try the whole set again</button>
+        <button class="btn btn-wide" id="homeBtn2">🏠 Home</button>
+      </div>
+    </div>`;
+  if (wrong.length) $('#fixBtn').onclick = () => startSet(set.id, 'fix', wrong);
+  if (nextSet && nextOpen) $('#upBtn').onclick = () => tryStart(nextSet.id);
+  $('#againBtn').onclick = () => startSet(set.id, 'full');
+  $('#homeBtn2').onclick = () => go('home');
+}
+
+/* ---------- My results ---------- */
+function renderHistory() {
+  const order = setOrder();
+  const any = order.some(id => S.sets[id] && S.sets[id].attempts.length);
+  app.innerHTML = `
+    <div class="page-head"><button class="btn btn-icon" id="backBtn" aria-label="Back to home">⬅</button><h1>🏆 My results</h1></div>
+    <div class="hist">
+      <section class="card">
+        <h2 style="font-size:1.3rem">Badges (${S.badges.length} of ${BADGES.length})</h2>
+        <div class="badges">${BADGES.map(b => {
+          const on = S.badges.includes(b.id);
+          return `<div class="badge ${on ? 'on' : 'off'}"><span class="bi">${b.icon}</span><b>${on ? esc(b.name) : 'Locked'}</b><small>${esc(b.desc)}</small></div>`;
+        }).join('')}</div>
+      </section>
+      ${!any ? `<div class="card"><p style="margin:0;font-size:1.15rem">No results yet. Pick a set on the home page and start investigating!</p></div>` : ''}
+      ${order.map((id, pos) => {
+        const set = getSet(id), rec = S.sets[id];
+        if (!rec || !rec.attempts.length) return '';
+        return `<section class="card"><h2 style="font-size:1.3rem">${set.emoji} Set ${pos + 1}: ${esc(set.title)}</h2>
+          <p style="margin:.3rem 0">${rec.best ? `Best score: <b>${rec.best.e} of ${rec.best.t}</b> (${rec.best.pct}%) ${starRow(starsFor(rec.best.pct))}` : 'Not finished as a whole set yet'}</p>
+          <div class="knows">${set.aligns.map(a => `<span class="know">${esc(a)}</span>`).join('')}</div>
+          <div class="scroll-x"><table><thead><tr><th>When</th><th>Type</th><th>Score</th><th>Time</th></tr></thead><tbody>
+            ${rec.attempts.slice(0, 8).map(a => `<tr><td>${fmtDate(a.date)}</td><td>${a.mode === 'fix' ? 'Fix mistakes' : 'Whole set'}</td><td>${a.e}/${a.t} (${a.pct}%)</td><td>${fmtTime(a.time)}</td></tr>`).join('')}
+          </tbody></table></div></section>`;
+      }).join('')}
+      ${S.gallery.length ? `<section class="card"><h2 style="font-size:1.3rem">📓 My Lab Book</h2>
+        <div class="gallery">${S.gallery.map(g => `<figure><img src="${g.img}" alt="A diagram drawn on ${fmtDate(g.date)}"><figcaption>${fmtDate(g.date)}</figcaption></figure>`).join('')}</div></section>` : ''}
+    </div>`;
+  $('#backBtn').onclick = () => go('home');
+}
+
+/* ---------- Settings ---------- */
+function renderSettings() {
+  const seg = (key, opts) => `<div class="seg" role="group">${opts.map(([v, l]) => `<button data-k="${key}" data-v="${v}" aria-pressed="${String(S.settings[key]) === String(v)}">${l}</button>`).join('')}</div>`;
+  const order = setOrder();
+  app.innerHTML = `
+    <div class="page-head"><button class="btn btn-icon" id="backBtn" aria-label="Back to home">⬅</button><h1>⚙️ Settings</h1></div>
+    <div class="card">
+      <div class="setting"><div><b>Text size</b><small>Bigger text is easier on young eyes.</small></div>${seg('size', [['normal', 'Big'], ['big', 'Bigger']])}</div>
+      <div class="setting"><div><b>Colours</b><small>Dark is gentle at night.</small></div>${seg('theme', [['auto', 'Auto'], ['light', 'Light'], ['dark', 'Dark']])}</div>
+      <div class="setting"><div><b>Sounds</b><small>Little chimes for right and wrong answers.</small></div>${seg('sound', [[true, 'On'], [false, 'Off']])}</div>
+      <div class="setting"><div><b>Open all sets</b><small>Normally a set opens after ${PASS}% on the one before it.</small></div>${seg('unlockAll', [[false, 'No'], [true, 'Yes']])}</div>
+      <div class="setting"><div><b>Backup progress</b><small>Saves a file with stars, badges and lab book drawings.</small></div><button class="btn btn-small" id="exportBtn">Save backup</button></div>
+      <div class="setting"><div><b>Restore progress</b><small>Load a backup from another device or an earlier day.</small></div><button class="btn btn-small" id="importBtn">Load backup</button><input type="file" id="importFile" accept="application/json,.json" style="display:none"></div>
+      <div class="setting"><div><b>Clear all progress</b><small>Removes scores, badges, lab book and any paused set.</small></div><button class="btn btn-small" id="resetBtn">Clear progress</button></div>
+    </div>
+    <div class="card" style="margin-top:1rem">
+      <h2 style="font-size:1.2rem">This learner's set order</h2>
+      <p style="margin:.5rem 0 0;font-size:1.05rem">Each new learner gets the sets in their own shuffled order, and that order then stays the same for ever, on every visit. Every set covers all six topics, so no order is harder than another. This device is using:</p>
+      <p style="margin:.5rem 0 0;font-size:1.05rem">${order.map((id, i) => `<b>${i + 1}.</b> ${getSet(id).emoji} ${esc(getSet(id).title)}`).join(' &nbsp; ')}</p>
+      <div class="setting" style="border:0"><div><b>Give a new order</b><small>Only for a different child sharing this device. It also clears their progress.</small></div><button class="btn btn-small" id="reshuffleBtn">Shuffle again</button></div>
+    </div>
+    <div class="card" style="margin-top:1rem">
+      <h2 style="font-size:1.2rem">What this covers</h2>
+      <p style="margin:.5rem 0 .5rem;font-size:1.05rem">Year 3 to Year 4 science: states of matter, the particle model, separating mixtures, dissolving, and how to plan a fair test. The reading is kept short and plain on purpose — the thinking should be the hard part, not the English.</p>
+      <div class="knows">${[...new Set(SETS.flatMap(s => s.aligns))].map(a => `<span class="know">${esc(a)}</span>`).join('')}</div>
+    </div>
+    <div class="card" style="margin-top:1rem">
+      <h2 style="font-size:1.2rem">How scoring works</h2>
+      <p style="margin:.5rem 0 0;font-size:1.05rem">Each question counts the first answer. Sorting, matching, ordering, gap-filling, tick-and-cross tables and true-or-false lists all give one star per part, so a nearly-right answer still earns most of the stars. Drawings are saved in My Lab Book rather than marked. "Fix my mistakes" repeats only what was missed; the best score always comes from a whole-set try.</p>
+      <div id="iosNote"></div>
+    </div>`;
+  $('#backBtn').onclick = () => go('home');
+  $$('.seg button').forEach(b => b.onclick = () => {
+    const k = b.dataset.k; let v = b.dataset.v;
+    if (v === 'true') v = true; else if (v === 'false') v = false;
+    S.settings[k] = v; save(); applySettings(); renderSettings();
+    const again = $(`.seg button[data-k="${k}"][data-v="${b.dataset.v}"]`); if (again) again.focus();
+  });
+  $('#reshuffleBtn').onclick = () => confirmBox({
+    title:'Give a new set order?',
+    text:'This is for a different child using the same device. It picks a fresh order and clears the stars, badges and lab book on this device.',
+    yes:'Yes, new learner', no:'Cancel',
+    onYes(){ const keep = S.settings; S = fresh(); S.settings = keep; S.seed = (Math.random() * 4294967296) >>> 0; setOrder(); save(); go('home'); }
+  });
+  const installed = window.navigator.standalone === true || window.matchMedia('(display-mode: standalone)').matches;
+  const onIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  const note = $('#iosNote');
+  if (note) {
+    if (onIOS && !installed) {
+      note.innerHTML = '<p style="margin:.6rem 0 0;font-size:1.05rem;background:var(--sun-soft);border-left:8px solid var(--sun);border-radius:14px;padding:.7rem .9rem">' +
+        '<b>Worth doing:</b> add this page to the Home Screen (Share → Add to Home Screen) and open it from that icon. ' +
+        'Safari erases saved progress after about a week of not visiting. Home Screen apps keep theirs.</p>';
+    } else if (installed) {
+      note.innerHTML = '<p style="margin:.6rem 0 0;font-size:1.05rem;color:var(--ink-soft)">Running from the Home Screen — progress is kept safely.</p>';
+    }
+  }
+  $('#exportBtn').onclick = () => {
+    try {
+      const stamp = new Date().toISOString().slice(0, 10);
+      const blob = new Blob([JSON.stringify(S, null, 2)], {type: 'application/json'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'science-detectives-' + stamp + '.json';
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 2000);
+    } catch (e) {
+      confirmBox({title:'Could not save', text:'This browser would not let the file be saved.', yes:'OK', no:null, onYes(){}});
+    }
+  };
+  $('#importBtn').onclick = () => $('#importFile').click();
+  $('#importFile').onchange = ev => {
+    const f = ev.target.files && ev.target.files[0];
+    ev.target.value = '';
+    if (!f) return;
+    const r = new FileReader();
+    r.onload = () => {
+      let d = null;
+      try { d = JSON.parse(String(r.result)); } catch (e) {}
+      if (!d || typeof d !== 'object' || typeof d.sets !== 'object' || d.sets === null) {
+        confirmBox({title:'That file did not fit', text:'It is not a Science Detectives backup. Look for a file named science-detectives-....json', yes:'OK', no:null, onYes(){}});
+        return;
+      }
+      const done = Object.keys(d.sets).length, pics = Array.isArray(d.gallery) ? d.gallery.length : 0;
+      const bits = [done + ' set' + (done === 1 ? '' : 's') + ' started', pics + ' drawing' + (pics === 1 ? '' : 's')];
+      if (d.current) bits.push('a paused set');
+      confirmBox({
+        title:'Load this backup?',
+        text:'It has ' + bits.join(', ') + '. This replaces what is on this device now.',
+        yes:'Yes, load it', no:'Cancel',
+        onYes(){
+          S = Object.assign(fresh(), d);
+          S.settings = Object.assign(fresh().settings, d.settings || {});
+          S.stats = Object.assign(freshStats(), d.stats || {});
+          if (S.seed === null || S.seed === undefined) S.seed = (Math.random() * 4294967296) >>> 0;
+          setOrder(); save(); applySettings(); go('home');
+        }
+      });
+    };
+    r.readAsText(f);
+  };
+  $('#resetBtn').onclick = () => confirmBox({
+    title:'Clear all progress?',
+    text:'Scores, badges, lab book and paused sets will be removed. The set order and the settings stay the same.',
+    yes:'Yes, clear everything', no:'Cancel',
+    onYes(){ const keep = S.settings, seed = S.seed, order = S.order; S = fresh(); S.settings = keep; S.seed = seed; S.order = order; save(); go('home'); }
+  });
+}
+
+/* ---------- Global events ---------- */
+document.addEventListener('keydown', e => {
+  if (layer.innerHTML) { if (e.key === 'Escape') { if (paused) resumeQuiz(); else hideLayer(); } return; }
+  if (screen !== 'quiz' || !Q) return;
+  const tag = e.target.tagName;
+  if (e.key === 'Enter' && (tag === 'INPUT' || e.target === document.body)) {
+    e.preventDefault();
+    if (Q.checked) next(); else doCheck();
+  }
+});
+document.addEventListener('visibilitychange', () => { if (!document.hidden) return; if (screen === 'quiz') pause(); else save(); });
+window.addEventListener('resize', syncDockSpace);
+window.addEventListener('pagehide', save);
+
+load(); applySettings(); save(); go('home');
+
+/* ---------- Offline support ---------- */
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(() => {}));
+}
+</script>
+</body>
+</html>
