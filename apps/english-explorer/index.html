@@ -1,0 +1,1607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>English Explorer</title>
+<meta name="description" content="Pronouns, reading, shapes, riddles and rhymes for young readers.">
+<meta name="theme-color" content="#2D7C4D">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Learning">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<link rel="icon" href="/icons/favicon-64.png" sizes="64x64">
+<link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#E6EFE2; --paper:#FAFCF6; --paper-2:#EFF6EC; --ink:#1F3427; --ink-soft:#4C6356; --line:#C2D5C0;
+  --leaf:#2D7C4D; --leaf-deep:#1F5E39; --leaf-soft:#D3E9D4; --on-leaf:#FFFFFF;
+  --sun:#D9941C; --sun-soft:#FBE8BF; --sun-deep:#A96F0A;
+  --sky:#2F76A8; --sky-soft:#D8E9F4;
+  --berry:#B23F4B; --berry-soft:#F6DCDE;
+  --bark:#8B6B4C;
+  --cham:#5FAE72; --cham-dark:#2F6F43;
+  --overlay:rgba(20,36,27,.55);
+  --read:'Andika','Trebuchet MS',Verdana,system-ui,sans-serif;
+  --round:'Fredoka','Andika','Trebuchet MS',system-ui,sans-serif;
+  font-size:20px;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#14211A; --paper:#1D2F25; --paper-2:#243A2E; --ink:#E4EEE5; --ink-soft:#A6BDAC; --line:#36503F;
+    --leaf:#62C189; --leaf-deep:#3E9463; --leaf-soft:#244A33; --on-leaf:#0F2418;
+    --sun:#EDBB55; --sun-soft:#4A3A1A; --sun-deep:#B98A2C;
+    --sky:#72B6E2; --sky-soft:#1E3A4B;
+    --berry:#EC8490; --berry-soft:#4C2A30;
+    --bark:#A88667; --cham:#6CC283; --cham-dark:#3C8A55; --overlay:rgba(0,0,0,.6);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#14211A; --paper:#1D2F25; --paper-2:#243A2E; --ink:#E4EEE5; --ink-soft:#A6BDAC; --line:#36503F;
+  --leaf:#62C189; --leaf-deep:#3E9463; --leaf-soft:#244A33; --on-leaf:#0F2418;
+  --sun:#EDBB55; --sun-soft:#4A3A1A; --sun-deep:#B98A2C;
+  --sky:#72B6E2; --sky-soft:#1E3A4B;
+  --berry:#EC8490; --berry-soft:#4C2A30;
+  --bark:#A88667; --cham:#6CC283; --cham-dark:#3C8A55; --overlay:rgba(0,0,0,.6);
+  color-scheme:dark;
+}
+:root[data-size="big"]{font-size:23px}
+
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--read);line-height:1.5;min-height:100vh;-webkit-tap-highlight-color:transparent}
+img,svg{max-width:100%}
+button{font:inherit;color:inherit}
+h1,h2,h3{font-family:var(--round);line-height:1.15;margin:0}
+.wrap{max-width:820px;margin:0 auto;padding:1rem 1rem 2rem}
+.hidden{display:none!important}
+:focus-visible{outline:4px solid var(--sun);outline-offset:3px;border-radius:10px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:3.1rem;padding:.4rem 1.4rem;border-radius:999px;border:3px solid var(--line);background:var(--paper);font-family:var(--round);font-weight:600;font-size:1.05rem;cursor:pointer;box-shadow:0 4px 0 var(--line);transition:transform .08s,box-shadow .08s;text-decoration:none;user-select:none}
+.btn:active:not(:disabled){transform:translateY(3px);box-shadow:0 1px 0 var(--line)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn-go{background:var(--leaf);border-color:var(--leaf);color:var(--on-leaf);box-shadow:0 5px 0 var(--leaf-deep)}
+.btn-go:active:not(:disabled){box-shadow:0 2px 0 var(--leaf-deep)}
+.btn-sun{background:var(--sun-soft);border-color:var(--sun);box-shadow:0 4px 0 var(--sun)}
+.btn-wide{width:100%}
+.btn-icon{width:3.1rem;padding:0;flex:none;font-size:1.3rem}
+.btn-small{min-height:2.5rem;font-size:.9rem;padding:.2rem 1rem;box-shadow:0 3px 0 var(--line)}
+.row{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center}
+.stack{display:grid;gap:.75rem}
+
+/* Chameleon */
+.cham-tail{fill:none;stroke:var(--cham);stroke-width:8;stroke-linecap:round}
+.cham-body{fill:var(--cham)}
+.cham-spot{fill:var(--cham-dark);opacity:.35}
+.cham-eye{fill:var(--paper);stroke:var(--cham-dark);stroke-width:3}
+.cham-pupil{fill:#1F3427}
+.cham-mouth{fill:none;stroke:var(--cham-dark);stroke-width:2.5;stroke-linecap:round}
+.cham-leg{fill:none;stroke:var(--cham-dark);stroke-width:6;stroke-linecap:round}
+.cham-branch{stroke:var(--bark);stroke-width:7;stroke-linecap:round}
+.cham-leaf{fill:var(--leaf)}
+.cham{transition:filter .4s}
+.cham.happy{animation:hop .6s ease}
+.cham.sleepy .cham-pupil{display:none}
+.cham.sleepy .cham-eye{fill:var(--cham-dark)}
+@keyframes hop{0%,100%{transform:translateY(0)}35%{transform:translateY(-14px) rotate(-4deg)}65%{transform:translateY(0)}80%{transform:translateY(-4px)}}
+
+/* Home */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:1rem;padding:1.25rem 0 .5rem}
+.hero h1{font-size:2.6rem;font-weight:700;letter-spacing:-.5px}
+.hero p{margin:.4rem 0 0;color:var(--ink-soft);font-size:1.1rem;max-width:30ch}
+.hero .cham{width:clamp(130px,30vw,220px);height:auto;display:block}
+.notice{background:var(--sun-soft);border:3px solid var(--sun);border-radius:20px;padding:.9rem 1.1rem;margin:1rem 0}
+.resume{background:var(--sky-soft);border:3px solid var(--sky);border-radius:24px;padding:1.1rem 1.2rem;margin:1rem 0;display:grid;gap:.75rem}
+.resume h2{font-size:1.35rem}
+.resume p{margin:0;color:var(--ink-soft)}
+.sets{display:grid;gap:1rem;margin-top:1.25rem}
+.sets h2.label{font-size:1.4rem}
+.setcard{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:1rem;align-items:center;text-align:left;width:100%;padding:1rem 1.1rem;border-radius:26px;border:3px solid var(--line);background:var(--paper);cursor:pointer;box-shadow:0 5px 0 var(--line)}
+.setcard:active:not(:disabled){transform:translateY(3px);box-shadow:0 2px 0 var(--line)}
+.setcard .emoji{font-size:2.4rem;width:3.6rem;height:3.6rem;display:grid;place-items:center;border-radius:18px;background:var(--paper-2)}
+.setcard .sc-title{font-family:var(--round);font-weight:600;font-size:1.3rem;line-height:1.2}
+.result-head .cham{width:150px;height:auto;display:block;margin:0 auto .5rem}
+.setcard .meta{color:var(--ink-soft);font-size:.95rem}
+.setcard .go{font-family:var(--round);font-weight:600;color:var(--leaf);font-size:1rem;white-space:nowrap}
+.setcard.locked{opacity:.7;cursor:not-allowed}
+.setcard.locked .go{color:var(--ink-soft)}
+.stars{display:inline-flex;gap:2px;font-size:1.1rem;letter-spacing:1px}
+.star-on{color:var(--sun)}
+.star-off{color:var(--line)}
+.homefoot{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.5rem}
+
+/* Quiz top */
+.topbar{display:flex;align-items:center;gap:.75rem;position:sticky;top:0;z-index:20;background:var(--bg);padding:.6rem 0 .4rem}
+.topbar .where{flex:1;min-width:0}
+.topbar .where b{font-family:var(--round);font-size:1.05rem;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topbar .where span{color:var(--ink-soft);font-size:.9rem}
+.pill{font-family:var(--round);font-weight:600;background:var(--sun-soft);border:3px solid var(--sun);border-radius:999px;padding:.25rem .85rem;white-space:nowrap}
+.branch{position:relative;height:3.4rem;margin:.2rem 0 .6rem}
+.branch .track{position:absolute;left:0;right:0;bottom:.55rem;height:12px;border-radius:99px;background:var(--bark);opacity:.35}
+.branch .fill{position:absolute;left:0;bottom:.55rem;height:12px;border-radius:99px;background:var(--leaf);transition:width .5s ease}
+.branch .walker{position:absolute;bottom:.35rem;width:4.4rem;transform:translateX(-50%);transition:left .5s ease}
+.branch .walker .cham-branch{display:none}
+.branch .goal{position:absolute;right:-.2rem;bottom:.6rem;font-size:1.4rem}
+
+/* Question card */
+.card{background:var(--paper);border:3px solid var(--line);border-radius:30px;padding:1.2rem 1.2rem 1.5rem;box-shadow:0 6px 0 var(--line)}
+.sec-tag{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--round);font-weight:600;font-size:.95rem;padding:.2rem .8rem;border-radius:999px;background:var(--paper-2);border:2px solid var(--line);color:var(--ink-soft)}
+.prompt{display:flex;gap:.75rem;align-items:flex-start;margin:.9rem 0 1rem}
+.prompt h2{font-size:1.35rem;font-weight:600;flex:1}
+.speak{flex:none;width:2.8rem;height:2.8rem;border-radius:50%;border:3px solid var(--sky);background:var(--sky-soft);cursor:pointer;font-size:1.15rem;display:grid;place-items:center}
+.qtext{font-size:1.5rem;line-height:1.6;margin:0 0 1.1rem}
+.blank{display:inline-block;min-width:4.6em;border-bottom:4px dashed var(--sky);text-align:center;color:var(--sky);font-weight:700;padding:0 .2em}
+.blank.filled{border-bottom-style:solid}
+
+/* Passage */
+details.story{background:var(--paper-2);border:3px solid var(--line);border-radius:22px;margin:.3rem 0 1rem;overflow:hidden}
+details.story summary{cursor:pointer;list-style:none;padding:.8rem 1rem;font-family:var(--round);font-weight:600;font-size:1.05rem;display:flex;gap:.6rem;align-items:center}
+details.story summary::-webkit-details-marker{display:none}
+details.story summary::after{content:'Show';margin-left:auto;font-size:.9rem;color:var(--sky)}
+details.story[open] summary::after{content:'Hide'}
+.story-body{padding:0 1.1rem 1rem;font-size:1.2rem;line-height:1.75;max-width:60ch}
+.story-body p{margin:0 0 .7rem}
+
+/* Choice */
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(6.5rem,1fr));gap:.8rem}
+.opts.pics{grid-template-columns:repeat(2,minmax(0,1fr))}
+.opts.long{grid-template-columns:1fr}
+.opt{min-height:4rem;border-radius:20px;border:3px solid var(--line);background:var(--paper-2);font-size:1.35rem;font-weight:700;cursor:pointer;padding:.5rem 1rem;box-shadow:0 4px 0 var(--line);text-align:center;display:flex;align-items:center;justify-content:center;gap:.5rem;flex-direction:column}
+.opts.long .opt{font-size:1.2rem;text-align:left;align-items:flex-start;font-weight:400}
+.opt:active:not(:disabled){transform:translateY(3px);box-shadow:0 1px 0 var(--line)}
+.opt.sel{border-color:var(--sky);background:var(--sky-soft);box-shadow:0 4px 0 var(--sky)}
+.opt.ok{border-color:var(--leaf);background:var(--leaf-soft);box-shadow:0 4px 0 var(--leaf)}
+.opt.no{border-color:var(--berry);background:var(--berry-soft);box-shadow:0 4px 0 var(--berry)}
+.opt small{font-size:.85rem;font-weight:400;color:var(--ink-soft)}
+.shape{width:4.6rem;height:4.6rem}
+.shape *{fill:var(--sky-soft);stroke:var(--sky);stroke-width:5;stroke-linejoin:round}
+.opt.ok .shape *{fill:var(--leaf-soft);stroke:var(--leaf)}
+
+/* Chips, bins, blanks */
+.bank{display:flex;flex-wrap:wrap;gap:.65rem;justify-content:center;min-height:4rem;padding:.8rem;border-radius:22px;background:var(--paper-2);border:3px dashed var(--line);margin-bottom:1rem}
+.bank-label{width:100%;text-align:center;color:var(--ink-soft);font-size:.9rem}
+.chip{display:inline-flex;align-items:center;justify-content:center;min-height:3.2rem;min-width:3.2rem;padding:.2rem 1.05rem;border-radius:16px;background:var(--sun-soft);border:3px solid var(--sun);font-size:1.3rem;font-weight:700;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;box-shadow:0 4px 0 var(--sun)}
+.chip.sel{background:var(--sky-soft);border-color:var(--sky);box-shadow:0 0 0 4px var(--sky)}
+.chip.dragging{opacity:.3}
+.chip.ok{background:var(--leaf-soft);border-color:var(--leaf);box-shadow:0 4px 0 var(--leaf)}
+.chip.no{background:var(--berry-soft);border-color:var(--berry);box-shadow:0 4px 0 var(--berry)}
+.ghost{position:fixed;left:0;top:0;z-index:1000;pointer-events:none;transform:translate(-50%,-60%) scale(1.1);opacity:.95}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:.9rem}
+.bin{min-height:9rem;border:3px dashed var(--line);border-radius:22px;padding:.7rem;display:flex;flex-direction:column;gap:.6rem;cursor:pointer}
+.bin h3{font-size:1.1rem;text-align:center}
+.bin .hint{font-size:.85rem;color:var(--ink-soft);text-align:center;margin-top:-.4rem}
+.bin .inside{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center}
+.over{border-color:var(--sky)!important;background:var(--sky-soft)!important}
+.poemtext{font-size:1.3rem;line-height:1.5;margin:0}
+.poemtext .line{display:block;margin:0 0 .9rem}
+.nowrap{white-space:nowrap}
+.slot{display:inline-flex;vertical-align:middle;align-items:center;justify-content:center;min-width:5.5rem;min-height:3.2rem;margin:0 .15rem;border-bottom:4px dashed var(--sky);border-radius:12px 12px 4px 4px;background:var(--sky-soft);cursor:pointer;line-height:1.2}
+.slot .chip{box-shadow:none}
+
+/* Build */
+.buildline{min-height:4.4rem;display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;padding:.6rem;border-bottom:4px solid var(--sky);margin-bottom:1rem}
+.buildline:empty::before{content:'Tap the words below';color:var(--ink-soft);font-size:1.05rem}
+.chip.used{visibility:hidden}
+
+/* Match lines */
+.match{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);column-gap:clamp(2.6rem,11vw,6rem)}
+.match-col{display:grid;grid-template-columns:minmax(0,1fr);gap:.7rem;align-content:stretch;position:relative;z-index:2}
+.match svg.lines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;overflow:visible}
+.m-item{position:relative;min-width:0;overflow-wrap:anywhere;display:flex;align-items:center;gap:.5rem;min-height:4rem;padding:.45rem .8rem;border-radius:18px;border:3px solid var(--line);background:var(--paper-2);cursor:pointer;touch-action:none;user-select:none;-webkit-user-select:none;text-align:left;font-size:1.1rem;line-height:1.3}
+.m-item.left{font-weight:700;font-size:1.2rem}
+.m-item.right{padding-left:1.15rem}
+.m-item .shape{width:2.4rem;height:2.4rem;flex:none}
+.m-item .dot{position:absolute;top:50%;width:18px;height:18px;border-radius:50%;background:var(--paper);border:4px solid var(--ink-soft);transform:translateY(-50%)}
+.m-item.left .dot{right:-11px}
+.m-item.right .dot{left:-11px}
+.m-item.sel{border-color:var(--sky);background:var(--sky-soft)}
+.m-item.linked .dot{background:var(--sky);border-color:var(--sky)}
+.m-item.ok{border-color:var(--leaf);background:var(--leaf-soft)}
+.m-item.no{border-color:var(--berry);background:var(--berry-soft)}
+.m-item.ok .dot{background:var(--leaf);border-color:var(--leaf)}
+.m-item.no .dot{background:var(--berry);border-color:var(--berry)}
+.lines path{fill:none;stroke-width:5;stroke-linecap:round}
+
+/* Spell */
+.boxes{display:grid;gap:.35rem;justify-content:center;margin:.5rem 0 1.2rem}
+.box{width:100%;aspect-ratio:.8;padding:0;border-radius:12px;border:3px solid var(--line);background:var(--paper-2);display:grid;place-items:center;font-size:1.7em;font-weight:700;cursor:pointer;color:var(--ink)}
+.box.next{border-color:var(--sky);box-shadow:0 0 0 3px var(--sky-soft)}
+.box.ok{border-color:var(--leaf);background:var(--leaf-soft)}
+.box.no{border-color:var(--berry);background:var(--berry-soft)}
+.tiles{display:flex;flex-wrap:wrap;gap:.55rem;justify-content:center}
+.tile{width:3.2rem;height:3.2rem;border-radius:14px;border:3px solid var(--sun);background:var(--sun-soft);font-size:1.6rem;font-weight:700;cursor:pointer;box-shadow:0 4px 0 var(--sun)}
+.tile:disabled{opacity:.25;cursor:default;box-shadow:none}
+.tile:active:not(:disabled){transform:translateY(3px);box-shadow:0 1px 0 var(--sun)}
+.clue{font-size:1.4rem;line-height:1.6;background:var(--paper-2);border-radius:20px;padding:.9rem 1.1rem;margin:0 0 1rem;border-left:8px solid var(--sun)}
+
+/* Write */
+.write{width:100%;font-family:var(--read);font-size:1.4rem;padding:.8rem 1rem;border-radius:18px;border:3px solid var(--line);background:var(--paper-2);color:var(--ink);line-height:1.5;resize:vertical}
+.write:focus{outline:none;border-color:var(--sky);box-shadow:0 0 0 4px var(--sky-soft)}
+textarea.write{min-height:9rem}
+.tip{color:var(--ink-soft);font-size:1rem;margin:.6rem 0 0}
+.wordcount{color:var(--ink-soft);font-size:.95rem;text-align:right;margin-top:.3rem}
+
+/* Bottom sheet */
+.dock-space{height:9rem}
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--bg);border-top:3px solid var(--line);padding:.8rem 1rem calc(.8rem + env(safe-area-inset-bottom))}
+.dock .inner{max-width:820px;margin:0 auto}
+.dock.good{background:var(--leaf-soft);border-color:var(--leaf)}
+.dock.bad{background:var(--berry-soft);border-color:var(--berry)}
+.dock.part{background:var(--sun-soft);border-color:var(--sun)}
+.fb{max-height:48vh;overflow:auto;margin-bottom:.8rem}
+.fb h3{font-size:1.5rem;display:flex;gap:.5rem;align-items:center}
+.fb .gain{font-family:var(--round);font-size:1rem;font-weight:600;margin-left:auto;white-space:nowrap}
+.fb p{margin:.45rem 0 0;font-size:1.15rem;line-height:1.55}
+.fb .ans{font-weight:700}
+
+/* Overlay & modal */
+.overlay{position:fixed;inset:0;z-index:100;background:var(--overlay);display:grid;place-items:center;padding:1rem}
+.modal{background:var(--paper);border-radius:30px;border:3px solid var(--line);padding:1.5rem;max-width:30rem;width:100%;text-align:center;display:grid;gap:1rem}
+.modal h2{font-size:1.7rem}
+.modal p{margin:0;font-size:1.15rem;color:var(--ink-soft)}
+.modal .cham{width:170px;margin:0 auto;display:block}
+
+/* Results */
+.result-head{text-align:center;padding:1rem 0}
+.big-stars{font-size:3.4rem;letter-spacing:.3rem;line-height:1}
+.big-stars span{display:inline-block}
+.big-stars .star-on{animation:pop .5s both}
+.big-stars span:nth-child(2){animation-delay:.2s}
+.big-stars span:nth-child(3){animation-delay:.4s}
+@keyframes pop{0%{transform:scale(0)}70%{transform:scale(1.25)}100%{transform:scale(1)}}
+.result-head .score-big{font-family:var(--round);font-size:2.6rem;font-weight:700;margin:.4rem 0 0}
+.result-head p{margin:.3rem 0;font-size:1.2rem;color:var(--ink-soft)}
+.bars{display:grid;gap:.9rem;margin:1rem 0}
+.bar-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.3rem .8rem;align-items:center;font-size:1.05rem}
+.bar{grid-column:1/-1;height:16px;border-radius:99px;background:var(--paper-2);border:2px solid var(--line);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--leaf);border-radius:99px}
+.review{margin-top:1rem}
+.review details{border:3px solid var(--line);border-radius:20px;background:var(--paper-2);padding:.4rem 1rem}
+.review summary{cursor:pointer;font-family:var(--round);font-weight:600;padding:.4rem 0}
+.review li{margin:.6rem 0;font-size:1.05rem}
+.review ol{padding-left:1.3rem}
+
+/* History & settings */
+.page-head{display:flex;align-items:center;gap:.75rem;padding:.8rem 0}
+.page-head h1{font-size:1.9rem;flex:1}
+.hist{display:grid;gap:1rem}
+.hist .card{padding:1rem 1.1rem}
+.hist table{width:100%;border-collapse:collapse;font-size:1rem;margin-top:.5rem}
+.hist td,.hist th{text-align:left;padding:.35rem .3rem;border-bottom:2px solid var(--paper-2)}
+.hist th{color:var(--ink-soft);font-weight:400;font-size:.9rem}
+.scroll-x{overflow-x:auto}
+.poem-card{white-space:pre-wrap;font-size:1.15rem;line-height:1.7;background:var(--paper-2);border-radius:18px;padding:.8rem 1rem;margin:.6rem 0 0}
+.setting{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.8rem 0;border-bottom:2px solid var(--paper-2);flex-wrap:wrap}
+.setting b{font-family:var(--round);font-weight:600;font-size:1.1rem}
+.setting small{display:block;color:var(--ink-soft);font-size:.9rem}
+.seg{display:inline-flex;border:3px solid var(--line);border-radius:999px;overflow:hidden}
+.seg button{border:0;background:transparent;padding:.45rem .95rem;cursor:pointer;font-family:var(--round);font-weight:600;min-height:2.6rem}
+.seg button[aria-pressed="true"]{background:var(--leaf);color:var(--on-leaf)}
+
+@media (max-width:520px){
+  :root{font-size:18px}
+  :root[data-size="big"]{font-size:21px}
+  .hero h1{font-size:2.1rem}
+  .card{padding:1rem .85rem 1.2rem;border-radius:24px}
+  .setcard{grid-template-columns:auto minmax(0,1fr)}
+  .setcard .go{grid-column:1/-1;text-align:right}
+  .m-item{font-size:.98rem;padding:.4rem .55rem}
+  .m-item.left{font-size:1.02rem;flex-direction:column;justify-content:center;gap:.2rem;text-align:center}
+  .match{column-gap:2.4rem}
+  .qtext{font-size:1.35rem}
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<main id="app" class="wrap" aria-live="polite"></main>
+<div id="dock" class="dock hidden"><div class="inner" id="dockInner"></div></div>
+<div id="layer"></div>
+<script>
+/* ============ CONTENT: 5 sets, same level as the worksheet ============ */
+const SUBJ = 'Subject pronouns do the action: I, you, he, she, it, we, they.';
+const OBJ = 'Object pronouns get the action: me, you, him, her, it, us, them.';
+
+const SETS = [
+/* ---------------- SET 1 ---------------- */
+{
+  id:1, title:'Hide and Seek', emoji:'🦎', about:'Chameleons, foxes and tigers',
+  story:{title:'Animal Camouflage', text:[
+    "Many animals use camouflage to survive in the wild. Camouflage is a way an animal's body blends in with its surroundings so predators cannot see it easily.",
+    "For example, a stick insect looks just like a twig, and a chameleon can change the color of its skin to match the leaves or branches around it.",
+    "Some animals, like the arctic fox, change color with the seasons: white in winter to match the snow, and brown in summer to match the ground.",
+    "Camouflage does not just help animals hide from danger. It also helps hunters like tigers sneak up on their prey without being noticed. Without camouflage, many animals would find it much harder to survive."
+  ]},
+  sections:[
+    {key:'pronouns', items:[
+      {t:'choice', prompt:'Pick the right word.', text:'___ is reading a book about animals.', opts:['She','Her'], ans:0,
+        explain:'"She" is the one doing the action. She is reading! ' + SUBJ},
+      {t:'choice', prompt:'Pick the right word.', text:'Mom gave the toy to ___.', opts:['they','them'], ans:1,
+        explain:'The toy goes to them. They get the toy, so we use "them". ' + OBJ},
+      {t:'choice', prompt:'Pick the right word.', text:'___ are going to the zoo on Friday.', opts:['We','Us'], ans:0,
+        explain:'"We" are the ones going. The doer at the start of a sentence uses a subject pronoun.'},
+      {t:'choice', prompt:'Pick the right word.', text:'Please give the pencil to ___.', opts:['I','me'], ans:1,
+        explain:'The pencil comes to me. After "to", we say "me", not "I".'},
+      {t:'sort', prompt:'Drag each pronoun into the right basket.', bins:[['Doer','does the action'],['Getter','gets the action']],
+        chips:[['I',0],['him',1],['they',0],['us',1],['she',0],['me',1]],
+        explain:'I, they and she do actions (I run). Him, us and me get actions (Tom sees me).'},
+      {t:'build', prompt:'Tap the words to make a sentence.', words:['The teacher','asked','him','to sit down.'],
+        explain:'The teacher does the asking. "Him" gets asked, so "him" comes after "asked".'}
+    ]},
+    {key:'reading', items:[
+      {t:'choice', prompt:'Read the story. Then answer.', text:'What is camouflage?', long:true,
+        opts:["A way an animal's body blends in with what is around it",'A kind of food that animals eat','A loud sound that animals make'], ans:0,
+        explain:'The story says camouflage helps an animal blend in, so predators cannot see it easily.'},
+      {t:'choice', prompt:'True or false?', text:'A stick insect looks just like a twig.', opts:['True','False'], ans:0,
+        explain:'True! The story says a stick insect looks just like a twig, so hungry birds do not notice it.'},
+      {t:'choice', prompt:'Read the story. Then answer.', text:'Why is the arctic fox white in winter?', long:true,
+        opts:['To match the snow','To stay warm near a fire','To look like a twig'], ans:0,
+        explain:'In winter the ground is covered in snow. A white coat helps the fox match the snow and hide.'},
+      {t:'write', prompt:'Write your answer.', text:'How does camouflage help a hunter like a tiger?',
+        keys:[['sneak','creep','hunt','catch','prey','without being','not see','not be seen','notice','hide','hiding','quiet']],
+        model:'It helps the tiger sneak up on its prey without being noticed.',
+        explain:'A tiger\'s stripes look like tall grass, so it can sneak close to its prey.'},
+      {t:'write', prompt:'Write your answer.', text:'Name one animal from the story that uses camouflage.',
+        keys:[['stick insect','insect','chameleon','fox','tiger']],
+        model:'A chameleon (or a stick insect, arctic fox, or tiger).',
+        explain:'The story talks about four animals: the stick insect, the chameleon, the arctic fox and the tiger.'}
+    ]},
+    {key:'shapes', items:[
+      {t:'match', prompt:'Draw a line from each shape to what it is like.',
+        left:[{label:'Circle',shape:'circle'},{label:'Square',shape:'square'},{label:'Triangle',shape:'triangle'},{label:'Rectangle',shape:'rectangle'},{label:'Pentagon',shape:'pentagon'},{label:'Hexagon',shape:'hexagon'}],
+        right:['Round with no corners','4 equal sides and 4 right angles','3 straight sides','4 sides, opposite sides are equal','5 straight sides','6 straight sides'],
+        explain:'Count the sides! Tri means 3, penta means 5 and hexa means 6. A circle has no sides at all.'},
+      {t:'choice', prompt:'Tap the hexagon.', opts:[{shape:'pentagon',label:'pentagon'},{shape:'hexagon',label:'hexagon'},{shape:'square',label:'square'},{shape:'triangle',label:'triangle'}], ans:1,
+        explain:'A hexagon has 6 sides. Count them on the shape: 1, 2, 3, 4, 5, 6!'},
+      {t:'spell', prompt:'Spell the shape.', clue:'I have 4 sides. My opposite sides are equal, just like a door.', ans:'rectangle',
+        explain:'A door is a rectangle: two long sides and two short sides, with 4 right angles.'}
+    ]},
+    {key:'riddles', items:[
+      {t:'spell', prompt:'Guess and spell the answer.', clue:'I have three sides. I look like a slice of pizza. What am I?', ans:'triangle',
+        explain:'A slice of pizza has 3 sides, so it is a triangle.'},
+      {t:'spell', prompt:'Guess and spell the answer.', clue:'I can change my skin color to hide from enemies. I am a small reptile. What am I?', ans:'chameleon',
+        explain:'A chameleon changes color to match leaves and branches. It is our explorer friend!'},
+      {t:'spell', prompt:'Guess and spell the answer.', clue:'I am white in winter and brown in summer. I live in the Arctic. What am I?', ans:'fox',
+        explain:'The arctic fox changes color with the seasons so it can always hide.'},
+      {t:'spell', prompt:'Guess and spell the answer.', clue:'You use me when you talk about yourself doing an action: "___ am happy."', ans:'I',
+        explain:'"I" is the subject pronoun for yourself. It is always a capital letter in a sentence!'}
+    ]},
+    {key:'rhymes', items:[
+      {t:'match', prompt:'Draw a line between words that rhyme.', left:[{label:'cat'},{label:'tree'},{label:'fox'},{label:'snake'},{label:'square'}],
+        right:['hat','bee','box','cake','bear'],
+        explain:'Rhyming words end with the same sound: c-at, h-at. Say them out loud to hear it!'},
+      {t:'rhyme', prompt:'Write a word that rhymes.', word:'sun', ends:['un'], extra:['one','won','done','ton','none'], examples:'fun, run, bun',
+        explain:'Words that end in "-un" rhyme with sun, like fun, run and bun.'},
+      {t:'fill', prompt:'Drag the words into the poem.', lines:['A chameleon sat in a {tree},','as green as green could {be}.','The fox was white in the {snow},','so where he hid, nobody could {know}.'], decoys:['cat','sun'],
+        explain:'Tree rhymes with be. Snow rhymes with know. Rhyming words make a poem sing!'},
+      {t:'poem', prompt:'Write your own poem.', tip:'Write 2 to 4 lines. Try to make the last words rhyme, like "I saw a cat / sitting on a mat."'}
+    ]}
+  ]
+},
+/* ---------------- SET 2 ---------------- */
+{
+  id:2, title:'Busy Bees', emoji:'🐝', about:'Hives, flowers and honey',
+  story:{title:'Honeybees', text:[
+    "Honeybees live together in a home called a hive. One hive can have thousands of bees!",
+    "The queen bee is the biggest bee, and her job is to lay eggs. Worker bees fly from flower to flower to collect a sweet juice called nectar.",
+    "They carry tiny grains of pollen on their fuzzy legs. Pollen helps new flowers and fruit grow. Back at the hive, the bees turn the nectar into honey.",
+    "Bees also do a special waggle dance. The dance tells other bees where to find the best flowers."
+  ]},
+  sections:[
+    {key:'pronouns', items:[
+      {t:'choice', prompt:'Pick the right word.', text:'___ likes to eat honey.', opts:['He','Him'], ans:0,
+        explain:'"He" is the one who likes honey. He does the action, so we use "he".'},
+      {t:'choice', prompt:'Pick the right word.', text:'The bee flew next to ___.', opts:['we','us'], ans:1,
+        explain:'The bee does the flying. We are the ones it flies next to, so we say "us".'},
+      {t:'choice', prompt:'Pick the right word.', text:'My sister and ___ planted flowers.', opts:['I','me'], ans:0,
+        explain:'Trick: cover "my sister and". You would say "I planted flowers", not "me planted". So it is "I".'},
+      {t:'choice', prompt:'Pick the right word.', text:'Dad took ___ to the park.', opts:['they','them'], ans:1,
+        explain:'Dad does the taking. The children get taken, so we use "them".'},
+      {t:'sort', prompt:'Drag each pronoun into the right basket.', bins:[['Doer','does the action'],['Getter','gets the action']],
+        chips:[['we',0],['her',1],['he',0],['them',1],['I',0],['us',1]],
+        explain:'We, he and I do actions (We sing). Her, them and us get actions (I hug her).'},
+      {t:'build', prompt:'Tap the words to make a sentence.', words:['She','gave','me','a flower.'],
+        explain:'"She" does the giving, so she comes first. "Me" gets the flower.'}
+    ]},
+    {key:'reading', items:[
+      {t:'choice', prompt:'Read the story. Then answer.', text:'What is a bee\'s home called?', opts:['a hive','a cave','a shell'], ans:0,
+        explain:'The story says honeybees live together in a home called a hive.'},
+      {t:'choice', prompt:'True or false?', text:'The queen bee is the smallest bee.', opts:['True','False'], ans:1,
+        explain:'False! The queen bee is the biggest bee. Her job is to lay eggs.'},
+      {t:'choice', prompt:'Read the story. Then answer.', text:'What do worker bees collect from flowers?', opts:['nectar','snow','sand'], ans:0,
+        explain:'Worker bees collect a sweet juice called nectar. They turn it into honey.'},
+      {t:'write', prompt:'Write your answer.', text:'Why do bees do the waggle dance?',
+        keys:[['tell','show','share','where','find','best flower','flowers']],
+        model:'To tell other bees where to find the best flowers.',
+        explain:'The waggle dance is like a map. It shows other bees where the best flowers are.'},
+      {t:'write', prompt:'Write your answer.', text:'What do bees carry on their fuzzy legs?',
+        keys:[['pollen']],
+        model:'Tiny grains of pollen.',
+        explain:'Bees carry pollen on their legs. Pollen helps new flowers and fruit grow.'}
+    ]},
+    {key:'shapes', items:[
+      {t:'match', prompt:'Draw a line from each shape to how many corners it has.',
+        left:[{label:'Circle',shape:'circle'},{label:'Triangle',shape:'triangle'},{label:'Square',shape:'square'},{label:'Pentagon',shape:'pentagon'},{label:'Hexagon',shape:'hexagon'}],
+        right:['0 corners','3 corners','4 corners','5 corners','6 corners'],
+        explain:'A corner is where two sides meet. A circle is round, so it has no corners.'},
+      {t:'choice', prompt:'Each little room in a honeycomb has this shape. Tap it!', opts:[{shape:'circle',label:'circle'},{shape:'square',label:'square'},{shape:'hexagon',label:'hexagon'},{shape:'pentagon',label:'pentagon'}], ans:2,
+        explain:'Bees build honeycomb rooms as hexagons, with 6 sides. They fit together with no gaps!'},
+      {t:'spell', prompt:'Spell the shape.', clue:'I have 5 sides and 5 corners.', ans:'pentagon',
+        explain:'Penta means 5. A pentagon has 5 sides and 5 corners.'}
+    ]},
+    {key:'riddles', items:[
+      {t:'spell', prompt:'Guess and spell the answer.', clue:'I buzz, I fly, and I help make honey. What am I?', ans:'bee',
+        explain:'A bee buzzes from flower to flower and helps make honey.'},
+      {t:'spell', prompt:'Guess and spell the answer.', clue:'I am round with no corners, like a coin. What shape am I?', ans:'circle',
+        explain:'A coin is round with no corners, so it is a circle.'},
+      {t:'spell', prompt:'Guess and spell the answer.', clue:'Use me for a group that includes you: "___ are best friends."', ans:'we',
+        explain:'"We" is a subject pronoun for a group that includes you.'},
+      {t:'spell', prompt:'Guess and spell the answer.', clue:'I am sweet and sticky. Bees make me from nectar. What am I?', ans:'honey',
+        explain:'Bees turn nectar into honey inside the hive.'}
+    ]},
+    {key:'rhymes', items:[
+      {t:'match', prompt:'Draw a line between words that rhyme.', left:[{label:'bee'},{label:'hive'},{label:'honey'},{label:'flower'},{label:'sting'}],
+        right:['sea','five','money','tower','ring'],
+        explain:'Listen to the ending sound: h-ive, f-ive. Fl-ower, t-ower. They match!'},
+      {t:'rhyme', prompt:'Write a word that rhymes.', word:'bee', ends:['ee','ea'], extra:['me','he','she','we','key','ski'], examples:'see, tree, tea',
+        explain:'Words ending with the "ee" sound rhyme with bee, like see, tree and me.'},
+      {t:'fill', prompt:'Drag the words into the poem.', lines:['A busy bee flew by a {flower},','and buzzed around for one whole {hour}.','She took some nectar, sweet as {honey},','on a day so bright and {sunny}.'], decoys:['hive','tree'],
+        explain:'Flower rhymes with hour. Honey rhymes with sunny.'},
+      {t:'poem', prompt:'Write your own poem.', tip:'Write 2 to 4 lines about bees or flowers. Try rhyming words like bee / tree or buzz / fuzz.'}
+    ]}
+  ]
+},
+/* ---------------- SET 3 ---------------- */
+{
+  id:3, title:'Frog Pond', emoji:'🐸', about:'Eggs, tadpoles and frogs',
+  story:{title:'From Egg to Frog', text:[
+    "A frog starts its life as a tiny egg in a pond. Soon, the egg hatches into a tadpole.",
+    "A tadpole has a long tail and lives in the water like a fish. As the tadpole grows, it gets back legs first, then front legs.",
+    "Little by little, its tail gets shorter and shorter. When the tail is gone, the tadpole has become a young frog! Now it can hop onto land and breathe air.",
+    "Frogs use their long, sticky tongues to catch flies and bugs to eat."
+  ]},
+  sections:[
+    {key:'pronouns', items:[
+      {t:'choice', prompt:'Pick the right word.', text:'The frogs are green. ___ can jump very high.', opts:['They','Them'], ans:0,
+        explain:'The frogs do the jumping, so we use the subject pronoun "they".'},
+      {t:'choice', prompt:'Pick the right word.', text:'Grandma read a story to ___.', opts:['he','him'], ans:1,
+        explain:'Grandma does the reading. The boy gets the story, so we say "him".'},
+      {t:'choice', prompt:'Pick the right word.', text:'___ saw a tadpole in the pond.', opts:['Me','I'], ans:1,
+        explain:'"I" am the one who saw it. The doer is "I", never "me".'},
+      {t:'choice', prompt:'Pick the right word.', text:'The frog looked at ___ and jumped away.', opts:['she','her'], ans:1,
+        explain:'The frog does the looking. The girl gets looked at, so we use "her".'},
+      {t:'sort', prompt:'Drag each pronoun into the right basket.', bins:[['Doer','does the action'],['Getter','gets the action']],
+        chips:[['they',0],['him',1],['we',0],['me',1],['she',0],['them',1]],
+        explain:'They, we and she do actions (She jumps). Him, me and them get actions (Mom calls me).'},
+      {t:'build', prompt:'Tap the words to make a sentence.', words:['We','saw','them','at the pond.'],
+        explain:'"We" did the seeing, so it goes first. "Them" were seen.'}
+    ]},
+    {key:'reading', items:[
+      {t:'choice', prompt:'Read the story. Then answer.', text:'What does a frog egg hatch into?', opts:['a tadpole','a fish','a bird'], ans:0,
+        explain:'The egg hatches into a tadpole. Later, the tadpole becomes a frog.'},
+      {t:'choice', prompt:'True or false?', text:'A tadpole has a long tail.', opts:['True','False'], ans:0,
+        explain:'True! A tadpole has a long tail and swims like a fish.'},
+      {t:'choice', prompt:'Read the story. Then answer.', text:'Which legs does a tadpole grow first?', opts:['back legs','front legs','no legs'], ans:0,
+        explain:'The story says the tadpole gets back legs first, then front legs.'},
+      {t:'write', prompt:'Write your answer.', text:'What do frogs use to catch bugs?',
+        keys:[['tongue']],
+        model:'Their long, sticky tongues.',
+        explain:'Frogs shoot out their sticky tongues to catch flies and bugs.'},
+      {t:'write', prompt:'Write your answer.', text:'What happens to a tadpole\'s tail as it grows?',
+        keys:[['short','small','gone','disappear','away','shrink','less','little']],
+        model:'It gets shorter and shorter until it is gone.',
+        explain:'Little by little the tail gets shorter. When it is gone, the tadpole is a young frog.'}
+    ]},
+    {key:'shapes', items:[
+      {t:'match', prompt:'Draw a line from each shape to a thing with that shape.',
+        left:[{label:'Circle',shape:'circle'},{label:'Triangle',shape:'triangle'},{label:'Square',shape:'square'},{label:'Rectangle',shape:'rectangle'},{label:'Hexagon',shape:'hexagon'}],
+        right:['a wheel','a slice of pizza','one face of a dice','a door','a honeycomb room'],
+        explain:'Look for shapes around you! Wheels are round circles and doors are tall rectangles.'},
+      {t:'choice', prompt:'Pick the right answer.', text:'How many sides does a hexagon have?', opts:['4','5','6','8'], ans:2,
+        explain:'Hexa means 6. A hexagon has 6 sides.'},
+      {t:'spell', prompt:'Spell the shape.', clue:'I have 4 equal sides and 4 right angles.', ans:'square',
+        explain:'All 4 sides of a square are the same length.'}
+    ]},
+    {key:'riddles', items:[
+      {t:'spell', prompt:'Guess and spell the answer.', clue:'I start as a tadpole and grow up to hop and croak. What am I?', ans:'frog',
+        explain:'A tadpole grows legs, loses its tail, and becomes a frog.'},
+      {t:'spell', prompt:'Guess and spell the answer.', clue:'I have a long tail and live in the water, but one day I will be a frog. What am I?', ans:'tadpole',
+        explain:'A baby frog is called a tadpole.'},
+      {t:'spell', prompt:'Guess and spell the answer.', clue:'Use me for a boy who gets the action: "I waved at ___."', ans:'him',
+        explain:'"Him" is the object pronoun for a boy.'},
+      {t:'spell', prompt:'Guess and spell the answer.', clue:'I am a shape with 6 sides, like a honeycomb room. What am I?', ans:'hexagon',
+        explain:'A hexagon has 6 sides.'}
+    ]},
+    {key:'rhymes', items:[
+      {t:'match', prompt:'Draw a line between words that rhyme.', left:[{label:'frog'},{label:'jump'},{label:'tail'},{label:'fly'},{label:'green'}],
+        right:['log','bump','snail','sky','queen'],
+        explain:'Fr-og and l-og end the same. Fl-y and sk-y end with the same sound too.'},
+      {t:'rhyme', prompt:'Write a word that rhymes.', word:'frog', ends:['og'], extra:[], examples:'dog, log, jog',
+        explain:'Words that end in "-og" rhyme with frog, like dog, log and fog.'},
+      {t:'fill', prompt:'Drag the words into the poem.', lines:['A little green {frog}','sat on a brown {log}.','He saw a {fly}','up in the {sky}.'], decoys:['pond','cat'],
+        explain:'Frog rhymes with log. Fly rhymes with sky.'},
+      {t:'poem', prompt:'Write your own poem.', tip:'Write 2 to 4 lines about a pond. Try rhyming words like frog / log or hop / stop.'}
+    ]}
+  ]
+},
+/* ---------------- SET 4 ---------------- */
+{
+  id:4, title:'Snow Friends', emoji:'🐧', about:'Penguins in the cold',
+  story:{title:'Penguins', text:[
+    "Penguins are birds, but they cannot fly. Instead, they are amazing swimmers! Their wings work like flippers to help them zoom through the water.",
+    "Many penguins live in cold places like Antarctica. They have a thick layer of fat and tight, waterproof feathers to keep warm.",
+    "When it is very windy, penguins stand close together in a big group called a huddle. This helps them share their heat.",
+    "Penguins eat fish. Their black-and-white bodies help them hide in the sea. From above, their black backs look like dark water. From below, their white bellies look like the bright sky."
+  ]},
+  sections:[
+    {key:'pronouns', items:[
+      {t:'choice', prompt:'Pick the right word.', text:'___ want to see the penguins.', opts:['We','Us'], ans:0,
+        explain:'"We" are the ones who want to see them. Doers use subject pronouns.'},
+      {t:'choice', prompt:'Pick the right word.', text:'The penguin waddled toward ___.', opts:['I','me'], ans:1,
+        explain:'The penguin does the waddling. It comes toward me, so we use "me".'},
+      {t:'choice', prompt:'Pick the right word.', text:'___ has a big red coat.', opts:['Him','He'], ans:1,
+        explain:'"He" is the one who has the coat. At the start, the doer is "he".'},
+      {t:'choice', prompt:'Pick the right word.', text:'Can you help ___ carry the box?', opts:['she','her'], ans:1,
+        explain:'You do the helping. The girl gets the help, so we use "her".'},
+      {t:'sort', prompt:'Drag each pronoun into the right basket.', bins:[['Doer','does the action'],['Getter','gets the action']],
+        chips:[['I',0],['us',1],['he',0],['her',1],['they',0],['him',1]],
+        explain:'I, he and they do actions (They swim). Us, her and him get actions (Dad helps us).'},
+      {t:'build', prompt:'Tap the words to make a sentence.', words:['He','threw','the ball','to me.'],
+        explain:'"He" did the throwing, so he is first. The ball came "to me".'}
+    ]},
+    {key:'reading', items:[
+      {t:'choice', prompt:'Read the story. Then answer.', text:'What can penguins NOT do?', opts:['fly','swim','eat fish'], ans:0,
+        explain:'Penguins are birds, but they cannot fly. They are great swimmers instead.'},
+      {t:'choice', prompt:'True or false?', text:'Penguins use their wings like flippers.', opts:['True','False'], ans:0,
+        explain:'True! Their wings work like flippers to zoom through the water.'},
+      {t:'choice', prompt:'Read the story. Then answer.', text:'What is a huddle?', long:true,
+        opts:['A big group of penguins standing close together','A kind of fish','A snowy hill'], ans:0,
+        explain:'In a huddle, penguins stand close together to share their heat.'},
+      {t:'write', prompt:'Write your answer.', text:'Name one thing that keeps penguins warm.',
+        keys:[['fat','feather','huddle','together','close','group']],
+        model:'A thick layer of fat (or waterproof feathers, or a huddle).',
+        explain:'Fat, tight waterproof feathers, and huddling together all keep penguins warm.'},
+      {t:'write', prompt:'Write your answer.', text:'How does a penguin\'s white belly help it hide?',
+        keys:[['sky','bright','light','hide','blend','match','below','under','camouflage']],
+        model:'From below, the white belly looks like the bright sky.',
+        explain:'A fish looking up sees a white belly that blends in with the bright sky. That is camouflage!'}
+    ]},
+    {key:'shapes', items:[
+      {t:'match', prompt:'Draw a line from each picture to its name.',
+        left:[{label:'',shape:'hexagon'},{label:'',shape:'circle'},{label:'',shape:'pentagon'},{label:'',shape:'rectangle'},{label:'',shape:'triangle'},{label:'',shape:'square'}],
+        right:['hexagon','circle','pentagon','rectangle','triangle','square'],
+        explain:'Count the sides to find the name: 3 is a triangle, 5 is a pentagon, 6 is a hexagon.'},
+      {t:'choice', prompt:'Tap the rectangle.', opts:[{shape:'square',label:'square'},{shape:'rectangle',label:'rectangle'},{shape:'pentagon',label:'pentagon'},{shape:'circle',label:'circle'}], ans:1,
+        explain:'A rectangle has 2 long sides and 2 short sides. A square has 4 equal sides.'},
+      {t:'spell', prompt:'Spell the shape.', clue:'I have 6 sides and 6 corners.', ans:'hexagon',
+        explain:'Hexa means 6, so a shape with 6 sides is a hexagon.'}
+    ]},
+    {key:'riddles', items:[
+      {t:'spell', prompt:'Guess and spell the answer.', clue:'I am a bird in a black-and-white suit. I swim, but I cannot fly. What am I?', ans:'penguin',
+        explain:'Penguins are birds that swim instead of fly.'},
+      {t:'spell', prompt:'Guess and spell the answer.', clue:'I am cold and white, and I fall from the sky in winter. What am I?', ans:'snow',
+        explain:'Snow falls from the sky when it is very cold.'},
+      {t:'spell', prompt:'Guess and spell the answer.', clue:'Use me for a group that gets the action: "Come and play with ___!"', ans:'us',
+        explain:'"Us" is the object pronoun for a group that includes you.'},
+      {t:'spell', prompt:'Guess and spell the answer.', clue:'I have 3 straight sides and 3 corners. What shape am I?', ans:'triangle',
+        explain:'Tri means 3. A triangle has 3 sides.'}
+    ]},
+    {key:'rhymes', items:[
+      {t:'match', prompt:'Draw a line between words that rhyme.', left:[{label:'snow'},{label:'cold'},{label:'ice'},{label:'fish'},{label:'coat'}],
+        right:['go','gold','mice','dish','boat'],
+        explain:'C-old and g-old end with the same sound. So do c-oat and b-oat.'},
+      {t:'rhyme', prompt:'Write a word that rhymes.', word:'cold', ends:['old'], extra:['rolled','bowled','strolled'], examples:'gold, old, hold',
+        explain:'Words that end in "-old" rhyme with cold, like gold, old and hold.'},
+      {t:'fill', prompt:'Drag the words into the poem.', lines:['The wind is {cold},','the sun is {gold}.','The penguins {go}','across the {snow}.'], decoys:['fish','hat'],
+        explain:'Cold rhymes with gold. Go rhymes with snow.'},
+      {t:'poem', prompt:'Write your own poem.', tip:'Write 2 to 4 lines about snow or penguins. Try rhyming words like snow / go or ice / nice.'}
+    ]}
+  ]
+},
+/* ---------------- SET 5 ---------------- */
+{
+  id:5, title:'Night Owls', emoji:'🦉', about:'Owls, the moon and the night',
+  story:{title:'Owls at Night', text:[
+    "Owls are birds that are awake at night. Animals that are busy at night are called nocturnal.",
+    "Owls have big eyes that help them see in the dark. They cannot move their eyes, so they turn their heads instead. Some owls can turn their heads almost all the way around!",
+    "Owls have soft feathers, so they can fly without making a sound. This helps them catch mice and other small animals.",
+    "During the day, owls rest in trees. Their brown and gray feathers look like tree bark, so it is hard to spot them."
+  ]},
+  sections:[
+    {key:'pronouns', items:[
+      {t:'choice', prompt:'Pick the right word.', text:'___ are sleeping in the tree.', opts:['They','Them'], ans:0,
+        explain:'"They" are the ones sleeping. Doers use subject pronouns.'},
+      {t:'choice', prompt:'Pick the right word.', text:'The owl hooted at ___.', opts:['we','us'], ans:1,
+        explain:'The owl does the hooting. We get hooted at, so we say "us".'},
+      {t:'choice', prompt:'Pick the right word.', text:'My brother and ___ went camping.', opts:['me','I'], ans:1,
+        explain:'Trick: cover "my brother and". You would say "I went camping". So it is "I".'},
+      {t:'choice', prompt:'Pick the right word.', text:'Please tell ___ the story again.', opts:['he','him'], ans:1,
+        explain:'You do the telling. The boy hears the story, so we use "him".'},
+      {t:'sort', prompt:'Drag each pronoun into the right basket.', bins:[['Doer','does the action'],['Getter','gets the action']],
+        chips:[['she',0],['them',1],['we',0],['me',1],['they',0],['her',1]],
+        explain:'She, we and they do actions (We read). Them, me and her get actions (Owls watch them).'},
+      {t:'build', prompt:'Tap the words to make a sentence.', words:['They','gave','us','a map.'],
+        explain:'"They" did the giving. "Us" got the map.'}
+    ]},
+    {key:'reading', items:[
+      {t:'choice', prompt:'Read the story. Then answer.', text:'What does nocturnal mean?', opts:['busy at night','busy in the snow','living in water'], ans:0,
+        explain:'Nocturnal animals are busy at night and rest during the day.'},
+      {t:'choice', prompt:'True or false?', text:'Owls make a loud noise when they fly.', opts:['True','False'], ans:1,
+        explain:'False! Soft feathers let owls fly without making a sound.'},
+      {t:'choice', prompt:'Read the story. Then answer.', text:'Why do owls turn their heads?', long:true,
+        opts:['They cannot move their eyes','They feel dizzy','They want to sleep'], ans:0,
+        explain:'Owls cannot move their eyes, so they turn their whole head to look around.'},
+      {t:'write', prompt:'Write your answer.', text:'What do owls catch to eat?',
+        keys:[['mice','mouse','small animal','animals']],
+        model:'Mice and other small animals.',
+        explain:'Owls fly silently to catch mice and other small animals.'},
+      {t:'write', prompt:'Write your answer.', text:'Why is it hard to see an owl in a tree during the day?',
+        keys:[['bark','blend','match','hide','camouflage','look like','same color','brown','gray','grey']],
+        model:'Its brown and gray feathers look like tree bark.',
+        explain:'The owl\'s feathers look like bark, so it blends in with the tree. More camouflage!'}
+    ]},
+    {key:'shapes', items:[
+      {t:'sort', prompt:'Drag each shape into the right basket.', bins:[['4 sides','has exactly 4 sides'],['Not 4 sides','has more, fewer, or none']],
+        chips:[['square',0],['triangle',1],['rectangle',0],['hexagon',1],['circle',1],['pentagon',1]],
+        explain:'Squares and rectangles both have 4 sides. Triangles have 3, pentagons 5, hexagons 6, and circles have none.'},
+      {t:'choice', prompt:'A full moon looks like which shape? Tap it.', opts:[{shape:'hexagon',label:'hexagon'},{shape:'triangle',label:'triangle'},{shape:'circle',label:'circle'},{shape:'square',label:'square'}], ans:2,
+        explain:'A full moon is round with no corners, just like a circle.'},
+      {t:'spell', prompt:'Spell the shape.', clue:'I have 5 straight sides and 5 angles.', ans:'pentagon',
+        explain:'Penta means 5. A pentagon has 5 sides.'}
+    ]},
+    {key:'riddles', items:[
+      {t:'spell', prompt:'Guess and spell the answer.', clue:'I am a bird. I hoot, and I stay awake at night. What am I?', ans:'owl',
+        explain:'Owls hoot and are awake at night.'},
+      {t:'spell', prompt:'Guess and spell the answer.', clue:'I shine in the night sky. When I am full, I look like a circle. What am I?', ans:'moon',
+        explain:'The full moon is a bright circle in the night sky.'},
+      {t:'spell', prompt:'Guess and spell the answer.', clue:'Use me for a girl who does an action: "___ is my friend."', ans:'she',
+        explain:'"She" is the subject pronoun for a girl.'},
+      {t:'spell', prompt:'Guess and spell the answer.', clue:'I help animals hide by looking like what is around them. I start with c. What am I?', ans:'camouflage',
+        explain:'Camouflage helps animals blend in, like owls in trees and chameleons on leaves.'}
+    ]},
+    {key:'rhymes', items:[
+      {t:'match', prompt:'Draw a line between words that rhyme.', left:[{label:'owl'},{label:'night'},{label:'moon'},{label:'tree'},{label:'star'}],
+        right:['towel','light','spoon','three','car'],
+        explain:'N-ight and l-ight end with the same sound. So do st-ar and c-ar.'},
+      {t:'rhyme', prompt:'Write a word that rhymes.', word:'night', ends:['ight','ite','yte'], extra:[], examples:'light, kite, bright',
+        explain:'Words that end with the "-ight" or "-ite" sound rhyme with night, like light and kite.'},
+      {t:'fill', prompt:'Drag the words into the poem.', lines:['The owl flies at {night},','when the moon is {bright}.','She sits in a {tree}','and counts to {three}.'], decoys:['owl','star'],
+        explain:'Night rhymes with bright. Tree rhymes with three.'},
+      {t:'poem', prompt:'Write your own poem.', tip:'Write 2 to 4 lines about the night sky. Try rhyming words like moon / soon or star / far.'}
+    ]}
+  ]
+}
+];
+
+const SECTIONS = {
+  pronouns:{name:'Pronouns', icon:'💬'},
+  reading:{name:'Reading', icon:'📖'},
+  shapes:{name:'Shapes', icon:'🔷'},
+  riddles:{name:'Guess the Answer', icon:'❓'},
+  rhymes:{name:'Rhymes and Poems', icon:'🎵'}
+};
+
+const SHAPES = {
+  circle:'<circle cx="50" cy="50" r="40"/>',
+  square:'<rect x="13" y="13" width="74" height="74" rx="3"/>',
+  rectangle:'<rect x="5" y="27" width="90" height="46" rx="3"/>',
+  triangle:'<polygon points="50,9 92,87 8,87"/>',
+  pentagon:'<polygon points="50,7 93,39 77,90 23,90 7,39"/>',
+  hexagon:'<polygon points="27,11 73,11 96,50 73,89 27,89 4,50"/>'
+};
+/* ============ UTILITIES ============ */
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const shuffle = a => { a = [...a]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const shuffleNotSame = a => { if (a.length < 2) return [...a]; let s; do { s = shuffle(a); } while (s.every((v, i) => v === a[i])); return s; };
+const shapeSvg = (n, style = '') => `<svg class="shape" viewBox="0 0 100 100" aria-hidden="true" ${style ? `style="${style}"` : ''}>${SHAPES[n]}</svg>`;
+const norm = s => String(s).toLowerCase().replace(/[^a-z\s]/g, ' ').replace(/\s+/g, ' ').trim();
+const fmtTime = ms => { const s = Math.max(0, Math.round(ms / 1000)); const m = Math.floor(s / 60); return m ? `${m} min ${s % 60} sec` : `${s} sec`; };
+const fmtDate = t => { const d = new Date(t); return d.toLocaleDateString(undefined, {day:'numeric', month:'short'}) + ', ' + d.toLocaleTimeString(undefined, {hour:'2-digit', minute:'2-digit'}); };
+const pick = a => a[Math.floor(Math.random() * a.length)];
+const PASS = 60;
+
+function lev(a, b) { // optimal string alignment distance (handles swapped letters)
+  const d = Array.from({length: a.length + 1}, (_, i) => [i, ...Array(b.length).fill(0)]);
+  for (let j = 1; j <= b.length; j++) d[0][j] = j;
+  for (let i = 1; i <= a.length; i++) for (let j = 1; j <= b.length; j++) {
+    const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+    d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + cost);
+    if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) d[i][j] = Math.min(d[i][j], d[i - 2][j - 2] + 1);
+  }
+  return d[a.length][b.length];
+}
+function hasKey(text, key) {
+  const t = norm(text);
+  if (t.includes(key)) return true;
+  if (key.includes(' ')) return false;
+  const tol = key.length >= 6 ? 2 : key.length >= 4 ? 1 : 0;
+  return tol > 0 && t.split(' ').some(w => Math.abs(w.length - key.length) <= tol && lev(w, key) <= tol);
+}
+
+function chameleon(cls = '') {
+  return `<svg class="cham ${cls}" viewBox="0 0 130 80" aria-hidden="true">
+    <path class="cham-branch" d="M4 66 H126"/>
+    <path class="cham-leaf" d="M112 66 q10 -14 20 -8 q-8 12 -20 8z"/>
+    <path class="cham-tail" d="M31 47 C12 50 5 33 15 25 C24 18 36 27 28 33 C23 37 19 32 22 29"/>
+    <path class="cham-leg" d="M47 52 L42 64 M80 50 L85 64"/>
+    <path class="cham-body" d="M28 47 C30 27 58 17 82 24 C92 27 98 33 102 41 C93 52 63 58 43 55 C35 53 29 51 28 47 Z"/>
+    <path class="cham-body" d="M86 24 C101 18 117 28 119 41 C111 49 99 49 91 46 Z"/>
+    <circle class="cham-spot" cx="52" cy="36" r="4"/><circle class="cham-spot" cx="66" cy="31" r="3.5"/><circle class="cham-spot" cx="64" cy="45" r="4"/><circle class="cham-spot" cx="79" cy="38" r="3"/>
+    <circle class="cham-eye" cx="104" cy="34" r="7.5"/><circle class="cham-pupil" cx="106" cy="34" r="3"/>
+    <path class="cham-mouth" d="M109 43 Q114 45 118 41"/>
+  </svg>`;
+}
+
+/* ============ STORAGE (saved in this browser) ============ */
+const KEY = 'englishExplorer.v1';
+const fresh = () => ({v:1, sets:{}, poems:[], current:null, lastRun:null, settings:{size:'normal', theme:'auto', sound:true, unlockAll:false}});
+let S = fresh();
+let storageOK = true;
+function load() {
+  try {
+    const raw = localStorage.getItem(KEY);
+    if (raw) { const d = JSON.parse(raw); S = Object.assign(fresh(), d); S.settings = Object.assign(fresh().settings, d.settings || {}); }
+  } catch (e) { storageOK = false; }
+}
+function save() {
+  S.updatedAt = Date.now();
+  try { localStorage.setItem(KEY, JSON.stringify(S)); storageOK = true; } catch (e) { storageOK = false; }
+}
+function applySettings() {
+  const r = document.documentElement;
+  if (S.settings.size === 'big') r.dataset.size = 'big'; else delete r.dataset.size;
+  if (S.settings.theme === 'auto') delete r.dataset.theme; else r.dataset.theme = S.settings.theme;
+}
+
+/* ============ SOUND + READ ALOUD ============ */
+let actx = null;
+function beep(kind) {
+  if (!S.settings.sound) return;
+  try {
+    actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+    const notes = kind === 'good' ? [523.25, 659.25, 783.99] : kind === 'part' ? [523.25, 587.33] : [329.63, 261.63];
+    notes.forEach((f, i) => {
+      const o = actx.createOscillator(), g = actx.createGain(), t = actx.currentTime + i * 0.12;
+      o.type = kind === 'bad' ? 'triangle' : 'sine'; o.frequency.value = f;
+      g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.16, t + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.24);
+      o.connect(g).connect(actx.destination); o.start(t); o.stop(t + 0.26);
+    });
+  } catch (e) {}
+}
+const canSpeak = 'speechSynthesis' in window;
+function speak(text) {
+  if (!canSpeak || !text) return;
+  try {
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text.replace(/_{2,}/g, ' blank '));
+    u.lang = 'en-US'; u.rate = 0.85;
+    const v = speechSynthesis.getVoices().find(v => /^en[-_]/i.test(v.lang));
+    if (v) u.voice = v;
+    speechSynthesis.speak(u);
+  } catch (e) {}
+}
+
+/* ============ CONTENT HELPERS ============ */
+const getSet = id => SETS.find(s => s.id === id);
+const blanksOf = item => { const out = []; item.lines.forEach(l => l.replace(/\{([^}]+)\}/g, (m, w) => { out.push(w); return m; })); return out; };
+function itemTotal(item) {
+  switch (item.t) { case 'sort': return item.chips.length; case 'match': return item.left.length; case 'fill': return blanksOf(item).length; case 'poem': return 0; default: return 1; }
+}
+function flat(set) { if (!set._flat) { set._flat = []; set.sections.forEach(sec => sec.items.forEach(item => set._flat.push({sec:sec.key, item}))); } return set._flat; }
+const setTotal = set => flat(set).reduce((a, q) => a + itemTotal(q.item), 0);
+const starsFor = pct => pct >= 90 ? 3 : pct >= 70 ? 2 : pct >= 50 ? 1 : 0;
+const starRow = n => `<span class="stars" aria-label="${n} of 3 stars">${[0,1,2].map(i => `<span class="${i < n ? 'star-on' : 'star-off'}">★</span>`).join('')}</span>`;
+function isUnlocked(id) {
+  if (id === 1 || S.settings.unlockAll) return true;
+  const prev = S.sets[id - 1];
+  return !!(prev && prev.best && prev.best.pct >= PASS);
+}
+function questionLabel(item) { return item.text || item.clue || (item.t === 'rhyme' ? `A word that rhymes with "${item.word}"` : item.prompt); }
+function answerText(item) {
+  switch (item.t) {
+    case 'choice': { const o = item.opts[item.ans]; return typeof o === 'object' ? o.label : o; }
+    case 'sort': return item.bins.map((b, bi) => `${b[0]}: ${item.chips.filter(c => c[1] === bi).map(c => c[0]).join(', ')}`).join('. ');
+    case 'build': return item.words.join(' ');
+    case 'write': return item.model;
+    case 'rhyme': return item.examples;
+    case 'spell': return item.ans;
+    case 'match': return item.left.map((l, i) => l.label ? `${l.label} goes with ${item.right[i]}` : item.right[i]).join('. ');
+    case 'fill': return item.lines.map(l => l.replace(/\{([^}]+)\}/g, '$1')).join(' ');
+    default: return '';
+  }
+}
+function speakText(item) {
+  const bits = [item.prompt];
+  if (item.clue) bits.push(item.clue);
+  if (item.text) bits.push(item.text);
+  if (item.t === 'choice' && typeof item.opts[0] === 'string') bits.push(item.opts.join(', or '));
+  if (item.t === 'rhyme') bits.push(`What rhymes with ${item.word}?`);
+  if (item.t === 'fill') bits.push(item.lines.map(l => l.replace(/\{[^}]+\}/g, 'blank')).join(' '));
+  if (item.t === 'poem') bits.push(item.tip);
+  return bits.join('. ');
+}
+
+/* ============ AUTO-SCROLL WHILE DRAGGING ============ */
+function autoScroller(onScroll) {
+  let y = null, raf = null;
+  const step = () => {
+    if (y === null) { raf = null; return; }
+    const dockH = dock.classList.contains('hidden') ? 0 : dock.offsetHeight;
+    const bottom = window.innerHeight - dockH;
+    let d = 0;
+    if (y > bottom - 70) d = Math.min(20, (y - (bottom - 70)) / 3 + 2);
+    else if (y < 120) d = -Math.min(20, (120 - y) / 3 + 2);
+    if (d) { const before = window.scrollY; window.scrollBy(0, d); if (window.scrollY !== before && onScroll) onScroll(); }
+    raf = requestAnimationFrame(step);
+  };
+  return {update(ny) { y = ny; if (!raf) raf = requestAnimationFrame(step); }, stop() { y = null; }};
+}
+
+/* ============ DRAG + TAP HELPER (chips into zones) ============ */
+function dnd(root, o) {
+  let suppress = false;
+  root.addEventListener('pointerdown', e => {
+    const chip = e.target.closest('.chip[data-id]');
+    if (!chip || o.locked() || e.button > 0) return;
+    e.preventDefault();
+    const id = chip.dataset.id, sx = e.clientX, sy = e.clientY;
+    let ghost = null, over = null, lx = sx, ly = sy;
+    const findZone = () => {
+      const hit = document.elementFromPoint(lx, ly);
+      const z = hit && hit.closest('[data-drop]');
+      const zone = z && root.contains(z) ? z : null;
+      if (zone !== over) { if (over) over.classList.remove('over'); if (zone) zone.classList.add('over'); over = zone; }
+    };
+    const scroller = autoScroller(findZone);
+    const move = ev => {
+      lx = ev.clientX; ly = ev.clientY;
+      if (!ghost) {
+        if (Math.hypot(ev.clientX - sx, ev.clientY - sy) < 8) return;
+        ghost = chip.cloneNode(true); ghost.classList.add('ghost'); ghost.classList.remove('sel');
+        document.body.appendChild(ghost); chip.classList.add('dragging');
+      }
+      ghost.style.left = ev.clientX + 'px'; ghost.style.top = ev.clientY + 'px';
+      scroller.update(ev.clientY);
+      findZone();
+    };
+    const end = ev => {
+      scroller.stop();
+      window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', end); window.removeEventListener('pointercancel', end);
+      if (over) over.classList.remove('over');
+      if (ghost) { suppress = true; setTimeout(() => { suppress = false; }, 0); ghost.remove(); chip.classList.remove('dragging'); if (ev.type === 'pointerup' && over) o.drop(id, over.dataset.drop); }
+      else if (ev.type === 'pointerup') setTimeout(() => o.tap(id), 0);
+    };
+    window.addEventListener('pointermove', move); window.addEventListener('pointerup', end); window.addEventListener('pointercancel', end);
+  });
+  root.addEventListener('click', e => {
+    if (o.locked() || suppress || e.target.closest('.chip')) return;
+    const z = e.target.closest('[data-drop]');
+    if (z) o.zoneTap(z.dataset.drop);
+  });
+  root.addEventListener('keydown', e => {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    if (o.locked()) return;
+    const chip = e.target.closest('.chip[data-id]');
+    const z = e.target.closest('[data-drop]');
+    if (chip) { e.preventDefault(); e.stopPropagation(); o.tap(chip.dataset.id); }
+    else if (z) { e.preventDefault(); e.stopPropagation(); o.zoneTap(z.dataset.drop); }
+  });
+}
+
+/* ============ QUESTION TYPES ============ */
+const TYPES = {};
+
+TYPES.choice = (item, root, changed) => {
+  let sel = -1, locked = false;
+  const pics = typeof item.opts[0] === 'object';
+  const blankText = w => { const [a, b] = item.text.split('___'); return b === undefined ? esc(item.text) : esc(a) + (w ? `<span class="blank filled">${esc(w)}</span>` : '<span class="blank"><span class="sr">blank</span>&nbsp;</span>') + esc(b); };
+  root.innerHTML = `${item.text ? `<p class="qtext" id="qt">${blankText(null)}</p>` : ''}
+    <div class="opts ${item.long ? 'long' : ''} ${pics ? 'pics' : ''}" role="group" aria-label="Answers">${item.opts.map((o, i) =>
+      `<button class="opt" data-i="${i}" ${pics ? `aria-label="Shape ${i + 1}"` : ''}>${pics ? shapeSvg(o.shape) + `<small class="lbl hidden">${esc(o.label)}</small>` : esc(o)}</button>`).join('')}</div>`;
+  const btns = $$('.opt', root);
+  btns.forEach(b => b.addEventListener('click', () => {
+    if (locked) return;
+    sel = +b.dataset.i;
+    btns.forEach(x => { x.classList.toggle('sel', x === b); x.setAttribute('aria-pressed', x === b); });
+    if (item.text && item.text.includes('___')) $('#qt', root).innerHTML = blankText(item.opts[sel]);
+    changed();
+  }));
+  return {
+    ready: () => sel >= 0,
+    check() {
+      locked = true;
+      btns.forEach((b, i) => { b.disabled = true; b.classList.remove('sel'); if (i === item.ans) b.classList.add('ok'); else if (i === sel) b.classList.add('no'); });
+      if (pics) $$('.lbl', root).forEach(l => l.classList.remove('hidden'));
+      return {e: sel === item.ans ? 1 : 0, t: 1, answer: esc(answerText(item))};
+    }
+  };
+};
+
+TYPES.sort = (item, root, changed) => {
+  const chips = shuffle(item.chips.map((c, i) => ({id:i, w:c[0], b:c[1], state:''})));
+  const place = {};
+  let sel = null, locked = false;
+  const chipHtml = c => `<span class="chip ${sel === c.id ? 'sel' : ''} ${c.state}" data-id="${c.id}" role="button" tabindex="0">${esc(c.w)}</span>`;
+  function draw() {
+    const inBank = chips.filter(c => place[c.id] === undefined);
+    root.innerHTML = `<div class="bank" data-drop="bank"><span class="bank-label">${inBank.length ? 'Drag a word to a basket, or tap a word and then tap a basket.' : 'All sorted! Tap Check when you are ready.'}</span>${inBank.map(chipHtml).join('')}</div>
+      <div class="bins">${item.bins.map((b, bi) => `<div class="bin" data-drop="${bi}" tabindex="0" role="button" aria-label="Basket: ${esc(b[0])}"><h3>${esc(b[0])}</h3><div class="hint">${esc(b[1])}</div><div class="inside">${chips.filter(c => place[c.id] === bi).map(chipHtml).join('')}</div></div>`).join('')}</div>`;
+  }
+  function drop(id, zone) { id = +id; if (zone === 'bank') delete place[id]; else place[id] = +zone; sel = null; draw(); changed(); }
+  draw();
+  dnd(root, {
+    locked: () => locked,
+    tap(id) { id = +id; if (place[id] !== undefined) { delete place[id]; sel = null; } else sel = sel === id ? null : id; draw(); changed(); },
+    drop,
+    zoneTap(zone) { if (sel !== null) drop(sel, zone); }
+  });
+  return {
+    ready: () => Object.keys(place).length === chips.length,
+    check() {
+      locked = true; let e = 0;
+      chips.forEach(c => { const ok = place[c.id] === c.b; c.state = ok ? 'ok' : 'no'; if (ok) e++; });
+      sel = null; draw();
+      return {e, t: chips.length, answer: item.bins.map((b, bi) => `<b>${esc(b[0])}:</b> ${item.chips.filter(c => c[1] === bi).map(c => esc(c[0])).join(', ')}`).join('<br>')};
+    }
+  };
+};
+
+TYPES.fill = (item, root, changed) => {
+  const answers = blanksOf(item);
+  const words = shuffle([...answers, ...item.decoys]).map((w, i) => ({id:i, w}));
+  const slots = answers.map(() => null);
+  let sel = null, locked = false, marks = null;
+  function draw() {
+    let k = 0;
+    const lines = item.lines.map(l => {
+      const parts = l.split(/(\{[^}]+\})/);
+      let out = '';
+      for (let pi = 0; pi < parts.length; pi++) {
+        const part = parts[pi];
+        if (!/^\{[^}]+\}$/.test(part)) { out += esc(part); continue; }
+        const si = k++, cid = slots[si], w = cid === null ? null : words[cid];
+        let punct = '';
+        if (parts[pi + 1]) { const m = parts[pi + 1].match(/^[,.!?;:]+/); if (m) { punct = m[0]; parts[pi + 1] = parts[pi + 1].slice(punct.length); } }
+        out += `<span class="nowrap"><span class="slot" data-drop="${si}" role="button" tabindex="0" aria-label="Blank ${si + 1}${w ? ': ' + esc(w.w) : ''}">${w ? `<span class="chip ${marks ? (marks[si] ? 'ok' : 'no') : ''}" data-id="${w.id}">${esc(w.w)}</span>` : ''}</span>${esc(punct)}</span>`;
+      }
+      return `<span class="line">${out}</span>`;
+    }).join('');
+    const bank = words.filter(w => !slots.includes(w.id));
+    root.innerHTML = `<div class="bank" data-drop="bank"><span class="bank-label">Drag a word into a blank, or tap a word and then tap a blank. Two words are extra!</span>${bank.map(w => `<span class="chip ${sel === w.id ? 'sel' : ''}" data-id="${w.id}" role="button" tabindex="0">${esc(w.w)}</span>`).join('')}</div><p class="poemtext">${lines}</p>`;
+  }
+  function drop(id, zone) {
+    id = +id; const from = slots.indexOf(id);
+    if (zone === 'bank') { if (from >= 0) slots[from] = null; }
+    else { const si = +zone; const prev = slots[si]; if (from >= 0) slots[from] = prev; slots[si] = id; }
+    sel = null; draw(); changed();
+  }
+  draw();
+  dnd(root, {
+    locked: () => locked,
+    tap(id) { id = +id; if (slots.includes(id)) drop(id, 'bank'); else { sel = sel === id ? null : id; draw(); } },
+    drop,
+    zoneTap(zone) { if (sel !== null) drop(sel, zone); else if (zone !== 'bank' && slots[+zone] !== null) drop(slots[+zone], 'bank'); }
+  });
+  return {
+    ready: () => slots.every(s => s !== null),
+    check() {
+      locked = true;
+      marks = slots.map((cid, si) => cid !== null && words[cid].w === answers[si]);
+      draw();
+      return {e: marks.filter(Boolean).length, t: answers.length, answer: item.lines.map(l => esc(l).replace(/\{([^}]+)\}/g, '<b>$1</b>')).join('<br>')};
+    }
+  };
+};
+
+TYPES.build = (item, root, changed) => {
+  const order = shuffleNotSame(item.words.map((_, i) => i));
+  const picked = [];
+  let locked = false, mark = '';
+  function draw() {
+    root.innerHTML = `<div class="buildline" aria-label="Your sentence">${picked.map((wi, pi) => `<span class="chip ${mark}" data-p="${pi}" role="button" tabindex="0">${esc(item.words[wi])}</span>`).join('')}</div>
+      <div class="bank"><span class="bank-label">Tap a word to add it. Tap it in the line to take it back.</span>${order.map(wi => `<span class="chip ${picked.includes(wi) ? 'used' : ''}" data-w="${wi}" role="button" tabindex="0">${esc(item.words[wi])}</span>`).join('')}</div>`;
+  }
+  function act(c) {
+    if (locked || !c) return;
+    if (c.dataset.w !== undefined) { const wi = +c.dataset.w; if (!picked.includes(wi)) picked.push(wi); }
+    else if (c.dataset.p !== undefined) picked.splice(+c.dataset.p, 1);
+    draw(); changed();
+  }
+  root.addEventListener('click', e => act(e.target.closest('.chip')));
+  root.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === ' ') && e.target.closest('.chip')) { e.preventDefault(); e.stopPropagation(); act(e.target.closest('.chip')); } });
+  draw();
+  return {
+    ready: () => picked.length === item.words.length,
+    check() {
+      locked = true;
+      const ok = picked.every((wi, i) => wi === i);
+      mark = ok ? 'ok' : 'no'; draw();
+      return {e: ok ? 1 : 0, t: 1, answer: esc(item.words.join(' '))};
+    }
+  };
+};
+
+TYPES.write = (item, root, changed) => {
+  root.innerHTML = `<p class="qtext">${esc(item.text)}</p>
+    <label class="sr" for="wr">Your answer</label>
+    <textarea id="wr" class="write" rows="3" placeholder="Write your answer here" autocomplete="off"></textarea>
+    <p class="tip">Use words from the story. Small spelling mistakes are okay.</p>`;
+  const ta = $('#wr', root);
+  ta.addEventListener('input', changed);
+  return {
+    ready: () => norm(ta.value).length >= 2,
+    check() {
+      ta.readOnly = true;
+      const ok = item.keys.every(g => g.some(k => hasKey(ta.value, k)));
+      return {e: ok ? 1 : 0, t: 1, answer: esc(item.model), model: esc(item.model), response: ta.value.trim()};
+    },
+    focus: () => ta.focus()
+  };
+};
+
+TYPES.rhyme = (item, root, changed) => {
+  root.innerHTML = `<p class="qtext">What rhymes with <span class="blank filled">${esc(item.word)}</span>?</p>
+    <input id="wr" class="write" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" maxlength="14" placeholder="Type one word" aria-label="A word that rhymes with ${esc(item.word)}">
+    <p class="tip">Say "${esc(item.word)}" out loud. Change the first sound to make a new word.</p>`;
+  const inp = $('#wr', root);
+  inp.addEventListener('input', changed);
+  return {
+    ready: () => inp.value.replace(/[^a-z]/gi, '').length >= 2,
+    check() {
+      inp.readOnly = true;
+      const w = inp.value.toLowerCase().replace(/[^a-z]/g, '');
+      const ok = w !== item.word && (item.extra.includes(w) || item.ends.some(en => w.endsWith(en) && w.length > en.length));
+      return {e: ok ? 1 : 0, t: 1, answer: `Words like ${esc(item.examples)}`, response: w, rhymeOk: ok, same: w === item.word};
+    },
+    focus: () => inp.focus()
+  };
+};
+
+TYPES.spell = (item, root, changed) => {
+  const ans = item.ans;
+  const upper = /[A-Z]/.test(ans);
+  const pool = 'abcdefghklmnoprstuwy';
+  const extras = [];
+  while (extras.length < (ans.length <= 3 ? 2 : 3)) { const ch = pick(pool); if (!ans.toLowerCase().includes(ch) && !extras.includes(ch)) extras.push(ch); }
+  const tiles = shuffle([...ans.split(''), ...extras.map(x => upper ? x.toUpperCase() : x)]).map((ch, i) => ({i, ch, used:false}));
+  const boxes = Array(ans.length).fill(null);
+  let locked = false, marks = null;
+  function draw() {
+    const next = boxes.indexOf(null);
+    root.innerHTML = `<p class="clue">${esc(item.clue)}</p>
+      <div class="boxes" style="grid-template-columns:repeat(${ans.length},minmax(0,2.6rem));font-size:${ans.length > 8 ? '.85em' : '1em'}" role="group" aria-label="Your answer has ${ans.length} letters">${boxes.map((ti, bi) =>
+        `<button class="box ${!marks && bi === next ? 'next' : ''} ${marks ? (marks[bi] ? 'ok' : 'no') : ''}" data-b="${bi}" aria-label="Letter ${bi + 1}${ti !== null ? ': ' + esc(tiles[ti].ch) : ', empty'}" ${locked ? 'disabled' : ''}>${ti !== null ? esc(tiles[ti].ch) : ''}</button>`).join('')}</div>
+      <div class="tiles">${tiles.map(t => `<button class="tile" data-t="${t.i}" ${t.used || locked ? 'disabled' : ''}>${esc(t.ch)}</button>`).join('')}<button class="tile" data-back="1" aria-label="Delete the last letter" ${locked ? 'disabled' : ''}>⌫</button></div>
+      <p class="tip">Tap the letters in order. You can also type on a keyboard.</p>`;
+  }
+  function put(ti) { const n = boxes.indexOf(null); if (n < 0 || tiles[ti].used) return; boxes[n] = ti; tiles[ti].used = true; draw(); changed(); }
+  function clearBox(bi) { if (boxes[bi] === null) return; tiles[boxes[bi]].used = false; boxes[bi] = null; draw(); changed(); }
+  function back() { for (let i = boxes.length - 1; i >= 0; i--) if (boxes[i] !== null) return clearBox(i); }
+  root.addEventListener('click', e => {
+    if (locked) return;
+    const t = e.target.closest('.tile'), b = e.target.closest('.box');
+    if (t) { if (t.dataset.back) back(); else put(+t.dataset.t); }
+    else if (b) clearBox(+b.dataset.b);
+  });
+  draw();
+  return {
+    ready: () => boxes.every(b => b !== null),
+    check() {
+      locked = true;
+      marks = boxes.map((ti, bi) => ti !== null && tiles[ti].ch.toLowerCase() === ans[bi].toLowerCase());
+      draw();
+      return {e: marks.every(Boolean) ? 1 : 0, t: 1, answer: `<span style="letter-spacing:.08em">${esc(ans)}</span>`};
+    },
+    onKey(e) {
+      if (locked) return false;
+      if (e.key === 'Backspace') { back(); return true; }
+      if (/^[a-z]$/i.test(e.key)) {
+        const t = tiles.find(t => !t.used && t.ch.toLowerCase() === e.key.toLowerCase());
+        if (t) put(t.i);
+        return true;
+      }
+      return false;
+    }
+  };
+};
+
+const LINE_COLORS = ['var(--sky)', 'var(--sun)', '#8E6AC8', '#D0668E', '#2E9C96', '#C07A34'];
+TYPES.match = (item, root, changed, cleanups) => {
+  const n = item.left.length;
+  const rightOrder = shuffleNotSame(item.right.map((_, i) => i));
+  const conn = {};
+  let sel = null, temp = null, locked = false, result = false;
+  root.innerHTML = `<p class="tip" style="margin:0 0 .9rem">Drag from one box to a box on the other side, or tap one on each side.</p>
+    <div class="match">
+      <svg class="lines" aria-hidden="true"></svg>
+      <div class="match-col">${item.left.map((l, i) => `<button class="m-item left" data-side="L" data-i="${i}" aria-label="${l.label ? esc(l.label) : 'Shape ' + (i + 1)}">${l.shape ? shapeSvg(l.shape) : ''}${l.label ? `<span>${esc(l.label)}</span>` : ''}<span class="dot"></span></button>`).join('')}</div>
+      <div class="match-col">${rightOrder.map(ri => `<button class="m-item right" data-side="R" data-i="${ri}">${esc(item.right[ri])}<span class="dot"></span></button>`).join('')}</div>
+    </div>
+    <div class="row" style="justify-content:flex-end;margin-top:.9rem"><button class="btn btn-small" id="clearLines">Clear lines</button></div>`;
+  const box = $('.match', root), svg = $('svg.lines', root);
+  const itemEl = (side, i) => box.querySelector(`.m-item[data-side="${side}"][data-i="${i}"]`);
+  const dotPt = el => { const b = box.getBoundingClientRect(), r = el.getBoundingClientRect(); return {x: (el.dataset.side === 'L' ? r.right : r.left) - b.left, y: r.top + r.height / 2 - b.top}; };
+  const curve = (a, b) => { const dx = (b.x - a.x) * 0.45; return `M${a.x} ${a.y} C${a.x + dx} ${a.y} ${b.x - dx} ${b.y} ${b.x} ${b.y}`; };
+  function redraw() {
+    let html = '';
+    Object.entries(conn).forEach(([li, ri]) => {
+      const a = dotPt(itemEl('L', li)), b = dotPt(itemEl('R', ri));
+      let color = LINE_COLORS[li % LINE_COLORS.length], extra = '';
+      if (result) { const ok = +li === +ri; color = ok ? 'var(--leaf)' : 'var(--berry)'; if (!ok) extra = 'stroke-dasharray="10 8"'; }
+      html += `<path d="${curve(a, b)}" stroke="${color}" ${extra}/>`;
+    });
+    if (temp) { const bb = box.getBoundingClientRect(); html += `<path d="${curve(dotPt(temp.el), {x: temp.cx - bb.left, y: temp.cy - bb.top})}" stroke="var(--ink-soft)" stroke-dasharray="6 7"/>`; }
+    svg.innerHTML = html;
+    $$('.m-item', box).forEach(el => {
+      const side = el.dataset.side, i = +el.dataset.i;
+      el.classList.toggle('linked', side === 'L' ? conn[i] !== undefined : Object.values(conn).includes(i));
+      el.classList.toggle('sel', !!sel && sel.side === side && sel.i === i);
+    });
+  }
+  function link(li, ri) { for (const k in conn) if (conn[k] === ri) delete conn[k]; conn[li] = ri; sel = null; redraw(); changed(); }
+  function unlink(side, i) { if (side === 'L') delete conn[i]; else for (const k in conn) if (conn[k] === i) delete conn[k]; }
+  function tapItem(side, i) {
+    if (sel && sel.side !== side) { side === 'L' ? link(i, sel.i) : link(sel.i, i); return; }
+    if (sel && sel.side === side && sel.i === i) { unlink(side, i); sel = null; redraw(); changed(); return; }
+    sel = {side, i}; redraw();
+  }
+  box.addEventListener('pointerdown', e => {
+    const el = e.target.closest('.m-item');
+    if (!el || locked || e.button > 0) return;
+    e.preventDefault();
+    const side = el.dataset.side, i = +el.dataset.i, sx = e.clientX, sy = e.clientY;
+    let dragging = false;
+    const scroller = autoScroller(() => { if (temp) redraw(); });
+    const move = ev => {
+      if (!dragging && Math.hypot(ev.clientX - sx, ev.clientY - sy) > 10) dragging = true;
+      if (dragging) { temp = {el, cx: ev.clientX, cy: ev.clientY}; sel = {side, i}; scroller.update(ev.clientY); redraw(); }
+    };
+    const end = ev => {
+      scroller.stop();
+      window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', end); window.removeEventListener('pointercancel', end);
+      if (dragging) {
+        temp = null;
+        const hit = document.elementFromPoint(ev.clientX, ev.clientY);
+        const t = hit && hit.closest('.m-item');
+        if (ev.type === 'pointerup' && t && box.contains(t) && t.dataset.side !== side) { const j = +t.dataset.i; side === 'L' ? link(i, j) : link(j, i); }
+        else { sel = null; redraw(); }
+      } else if (ev.type === 'pointerup') tapItem(side, i);
+    };
+    window.addEventListener('pointermove', move); window.addEventListener('pointerup', end); window.addEventListener('pointercancel', end);
+  });
+  box.addEventListener('click', e => { const el = e.target.closest('.m-item'); if (el && e.detail === 0 && !locked) tapItem(el.dataset.side, +el.dataset.i); });
+  $('#clearLines', root).addEventListener('click', () => { if (locked) return; for (const k in conn) delete conn[k]; sel = null; redraw(); changed(); });
+  const ro = new ResizeObserver(() => redraw()); ro.observe(box);
+  cleanups.push(() => ro.disconnect());
+  requestAnimationFrame(redraw);
+  return {
+    ready: () => Object.keys(conn).length === n,
+    check() {
+      locked = true; result = true; let e = 0;
+      for (let i = 0; i < n; i++) {
+        const ok = conn[i] === i; if (ok) e++;
+        itemEl('L', i).classList.add(ok ? 'ok' : 'no');
+        const r = itemEl('R', i), rOk = Object.entries(conn).some(([li, ri]) => ri === i && +li === i);
+        r.classList.add(rOk ? 'ok' : 'no');
+      }
+      $$('.m-item', box).forEach(b => b.disabled = true);
+      $('#clearLines', root).disabled = true;
+      redraw();
+      return {e, t: n, answer: item.left.map((l, i) => `${l.shape && !l.label ? shapeSvg(l.shape, 'width:1.6rem;height:1.6rem;vertical-align:middle') : `<b>${esc(l.label)}</b>`} ➜ ${esc(item.right[i])}`).join('<br>')};
+    }
+  };
+};
+
+TYPES.poem = (item, root, changed) => {
+  root.innerHTML = `<p class="clue">${esc(item.tip)}</p>
+    <label class="sr" for="wr">My poem</label>
+    <textarea id="wr" class="write" rows="5" placeholder="Line 1&#10;Line 2"></textarea>
+    <div class="wordcount" id="wc">0 words</div>`;
+  const ta = $('#wr', root), wc = $('#wc', root);
+  const count = () => norm(ta.value).split(' ').filter(Boolean).length;
+  ta.addEventListener('input', () => { const c = count(); wc.textContent = `${c} word${c === 1 ? '' : 's'}${c < 4 ? ' (write at least 4)' : ''}`; changed(); });
+  return {
+    ready: () => count() >= 4,
+    check() {
+      ta.readOnly = true;
+      const ends = ta.value.split('\n').map(l => norm(l).split(' ').pop()).filter(Boolean);
+      let pair = null;
+      for (let i = 0; i < ends.length && !pair; i++) for (let j = i + 1; j < ends.length; j++) {
+        const a = ends[i], b = ends[j];
+        if (a !== b && a.length > 1 && b.length > 1 && a.slice(-2) === b.slice(-2)) { pair = [a, b]; break; }
+      }
+      return {e: 0, t: 0, response: ta.value.trim(), pair};
+    },
+    focus: () => ta.focus()
+  };
+};
+
+/* ============ APP ============ */
+const app = $('#app'), dock = $('#dock'), dockInner = $('#dockInner'), layer = $('#layer');
+let screen = 'home', Q = null, timer = null, paused = false, cleanups = [];
+
+function runCleanups() { cleanups.forEach(f => { try { f(); } catch (e) {} }); cleanups = []; }
+function showLayer(html) { layer.innerHTML = html; const b = $('button', layer); if (b) b.focus(); }
+function hideLayer() { layer.innerHTML = ''; }
+function confirmBox({title, text, yes, no = 'Cancel', onYes, cham = false}) {
+  showLayer(`<div class="overlay" role="dialog" aria-modal="true" aria-labelledby="cbT"><div class="modal">${cham ? chameleon() : ''}<h2 id="cbT">${esc(title)}</h2><p>${esc(text)}</p><button class="btn btn-go btn-wide" id="cbYes">${esc(yes)}</button>${no === null ? '' : `<button class="btn btn-wide" id="cbNo">${esc(no)}</button>`}</div></div>`);
+  $('#cbYes').onclick = () => { hideLayer(); onYes(); };
+  const cbNo = $('#cbNo'); if (cbNo) cbNo.onclick = hideLayer;
+}
+
+function go(name) {
+  runCleanups(); stopTimer(); hideLayer();
+  if (canSpeak) try { speechSynthesis.cancel(); } catch (e) {}
+  screen = name; Q = null;
+  dock.classList.add('hidden');
+  ({home: renderHome, quiz: openQuiz, results: renderResults, history: renderHistory, settings: renderSettings})[name]();
+  window.scrollTo(0, 0);
+}
+
+/* ---------- Home ---------- */
+function renderHome() {
+  const c = S.current;
+  let resume = '';
+  if (c) {
+    const set = getSet(c.setId), done = Object.keys(c.answers).length;
+    resume = `<section class="resume" aria-labelledby="rsT">
+      <h2 id="rsT">⏸ Paused: ${set.emoji} Set ${set.id}, ${esc(set.title)}</h2>
+      <p>${done} of ${c.queue.length} questions done${c.mode === 'fix' ? ' while fixing mistakes' : ''}. Time so far: ${fmtTime(c.elapsed)}.</p>
+      <div class="row"><button class="btn btn-go" id="contBtn">▶ Continue</button><button class="btn" id="discardBtn">Start over</button></div>
+    </section>`;
+  }
+  app.innerHTML = `
+    <header class="hero">
+      <div><h1>English Explorer</h1><p>Practice pronouns, reading, shapes, riddles and rhymes.</p></div>
+      ${chameleon()}
+    </header>
+    ${storageOK ? '' : '<div class="notice">This browser is not saving progress right now. You can still play, but results may be lost when you close the page.</div>'}
+    ${resume}
+    <section class="sets" aria-labelledby="setsT">
+      <h2 class="label" id="setsT">Choose a set</h2>
+      ${SETS.map(set => {
+        const rec = S.sets[set.id], open = isUnlocked(set.id), best = rec && rec.best;
+        const meta = !open ? `🔒 Get ${PASS}% or more on Set ${set.id - 1} to open` : best ? `Best: ${best.e} of ${best.t} (${best.pct}%)` : `${flat(set).length} questions, ${setTotal(set)} stars to win`;
+        return `<button class="setcard ${open ? '' : 'locked'}" data-set="${set.id}" ${open ? '' : 'aria-disabled="true"'}>
+          <span class="emoji" aria-hidden="true">${set.emoji}</span>
+          <span><span class="sc-title">Set ${set.id}: ${esc(set.title)}</span><br><span class="meta">${esc(set.about)}</span><br><span class="meta">${meta}</span></span>
+          <span class="go">${open ? (best ? starRow(starsFor(best.pct)) : 'Start ▶') : 'Locked'}</span>
+        </button>`;
+      }).join('')}
+    </section>
+    <nav class="homefoot" aria-label="More">
+      <button class="btn btn-sun" id="histBtn">🏆 My results</button>
+      <button class="btn" id="setBtn">⚙️ Settings for grown-ups</button>
+      <a class="btn" href="/">🏠 All activities</a>
+    </nav>`;
+  if (c) {
+    $('#contBtn').onclick = () => go('quiz');
+    $('#discardBtn').onclick = () => confirmBox({title:'Start over?', text:'The answers in your paused set will be cleared.', yes:'Yes, clear it', no:'Keep it', onYes(){ S.current = null; save(); go('home'); }});
+  }
+  $$('.setcard').forEach(b => b.onclick = () => {
+    const id = +b.dataset.set;
+    if (!isUnlocked(id)) { let target = id - 1; while (target > 1 && !isUnlocked(target)) target--; confirmBox({title:'This set is locked', text:`Finish Set ${id - 1} with ${PASS}% or more to open it. You can do it!`, yes:`Go to Set ${target}`, no:'Close', cham:true, onYes(){ tryStart(target); }}); return; }
+    tryStart(id);
+  });
+  $('#histBtn').onclick = () => go('history');
+  $('#setBtn').onclick = () => go('settings');
+}
+
+function tryStart(id, mode = 'full', queue = null) {
+  const c = S.current;
+  if (c && c.setId === id && mode === 'full') {
+    confirmBox({title:`Set ${id} is paused`, text:'Do you want to keep going from where you stopped?', yes:'▶ Continue', no:'Start again', onYes(){ go('quiz'); }});
+    $('#cbNo').onclick = () => { hideLayer(); startSet(id, mode, queue); };
+    return;
+  }
+  if (c) { confirmBox({title:'You have a paused set', text:`Starting now will clear your paused Set ${c.setId}.`, yes:'Start new set', no:'Cancel', onYes(){ startSet(id, mode, queue); }}); return; }
+  startSet(id, mode, queue);
+}
+function startSet(id, mode = 'full', queue = null) {
+  const f = flat(getSet(id));
+  S.current = {setId:id, mode, queue: queue || f.map((_, i) => i), answers:{}, elapsed:0, started:Date.now()};
+  save(); go('quiz');
+}
+
+/* ---------- Quiz ---------- */
+function startTimer() {
+  stopTimer();
+  let last = Date.now(), ticks = 0;
+  timer = setInterval(() => { const now = Date.now(); if (S.current && !paused) { S.current.elapsed += now - last; if (++ticks % 5 === 0) save(); } last = now; }, 1000);
+}
+function stopTimer() { if (timer) clearInterval(timer); timer = null; }
+function openQuiz() { if (!S.current) return go('home'); paused = false; renderQuestion(); if (screen === 'quiz' && S.current) startTimer(); }
+function tally(c) { let e = 0, t = 0; Object.values(c.answers).forEach(a => { e += a.e; t += a.t; }); return {e, t}; }
+
+function renderQuestion() {
+  runCleanups();
+  const c = S.current, set = getSet(c.setId), f = flat(set);
+  const pos = c.queue.findIndex(i => !c.answers[i]);
+  if (pos < 0) return finishRun();
+  const idx = c.queue[pos], {sec, item} = f[idx];
+  const done = c.queue.length - c.queue.filter(i => !c.answers[i]).length;
+  const pct = done / c.queue.length;
+  const {e, t} = tally(c);
+  const firstRead = c.queue.find(i => f[i].sec === 'reading');
+  app.innerHTML = `
+    <div class="topbar">
+      <button class="btn btn-icon" id="pauseBtn" aria-label="Pause">⏸</button>
+      <div class="where"><b>${set.emoji} Set ${set.id}: ${esc(set.title)}${c.mode === 'fix' ? ' (fixing)' : ''}</b><span>Question ${pos + 1} of ${c.queue.length}</span></div>
+      <span class="pill" id="scorePill" aria-label="${e} stars out of ${t}">⭐ ${e}/${t}</span>
+    </div>
+    <div class="branch" aria-hidden="true"><div class="track"></div><div class="fill" style="width:${pct * 100}%"></div><div class="walker" style="left:calc(${pct} * (100% - 4.4rem) + 2.2rem)">${chameleon()}</div></div>
+    <article class="card" id="qcard">
+      <span class="sec-tag">${SECTIONS[sec].icon} ${SECTIONS[sec].name}</span>
+      <div class="prompt"><h2>${esc(item.prompt)}</h2>${canSpeak ? '<button class="speak" id="speakBtn" aria-label="Read the question out loud">🔊</button>' : ''}</div>
+      ${sec === 'reading' ? `<details class="story" ${idx === firstRead ? 'open' : ''}><summary>📖 Story: ${esc(set.story.title)}</summary><div class="story-body">${canSpeak ? '<button class="btn btn-small" id="storyBtn" style="margin-bottom:.7rem">🔊 Read the story to me</button>' : ''}${set.story.text.map(p => `<p>${esc(p)}</p>`).join('')}</div></details>` : ''}
+      <div id="qbody"></div>
+    </article>
+    <div class="dock-space" id="dockSpace"></div>`;
+  const changed = () => { const b = $('#checkBtn'); if (b && Q) b.disabled = !Q.h.ready(); };
+  Q = {idx, item, sec, checked:false, h:null};
+  Q.h = TYPES[item.t](item, $('#qbody'), changed, cleanups);
+  $('#pauseBtn').onclick = pause;
+  if (canSpeak) {
+    $('#speakBtn').onclick = () => speak(speakText(item));
+    const sb = $('#storyBtn'); if (sb) sb.onclick = () => speak(set.story.title + '. ' + set.story.text.join(' '));
+  }
+  dock.className = 'dock';
+  dockInner.innerHTML = `<button class="btn btn-go btn-wide" id="checkBtn" disabled>Check my answer</button>`;
+  $('#checkBtn').onclick = doCheck;
+  syncDockSpace();
+}
+function syncDockSpace() { const sp = $('#dockSpace'); if (sp) sp.style.height = (dock.offsetHeight + 24) + 'px'; }
+
+function doCheck() {
+  if (!Q || Q.checked || !Q.h.ready()) return;
+  const c = S.current, set = getSet(c.setId);
+  const res = Q.h.check();
+  Q.checked = true;
+  c.answers[Q.idx] = {e: res.e, t: res.t};
+  if (Q.item.t === 'poem' && res.response) { S.poems.unshift({setId:set.id, text:res.response, date:Date.now()}); S.poems = S.poems.slice(0, 40); }
+  save();
+  const {e, t} = tally(c);
+  const pill = $('#scorePill'); pill.textContent = `⭐ ${e}/${t}`; pill.setAttribute('aria-label', `${e} stars out of ${t}`);
+
+  const kind = res.t === 0 || res.e === res.t ? 'good' : res.e === 0 ? 'bad' : 'part';
+  let title, body = '';
+  if (Q.item.t === 'poem') {
+    title = '🎉 What a poem!';
+    body = `<p>Your poem is saved in My results.${res.pair ? ` I can hear a rhyme: <b>${esc(res.pair[0])}</b> and <b>${esc(res.pair[1])}</b>!` : ' Next time, try ending two lines with rhyming words.'}</p>`;
+  } else {
+    title = kind === 'good' ? '✅ ' + pick(['Great job!', 'You got it!', 'Super!', 'Well done!', 'Brilliant!']) : kind === 'part' ? '🌟 ' + pick(['Almost!', 'So close!', 'Good work, nearly all!']) : '💪 ' + pick(['Nice try!', 'Good try!', 'Not quite yet.']);
+    if (Q.item.t === 'rhyme' && res.same) body += `<p>That is the same word! A rhyme has to be a different word.</p>`;
+    if (kind !== 'good') body += `<p><span class="ans">The answer:</span><br>${res.answer}</p>`;
+    else if (res.model) body += `<p><span class="ans">Another good answer:</span> ${res.model}</p>`;
+    if (Q.item.explain) body += `<p>💡 ${esc(Q.item.explain)}</p>`;
+  }
+  const gain = res.t ? `+${res.e} of ${res.t}` : 'Saved';
+  const last = c.queue.every(i => c.answers[i]);
+  dock.className = 'dock ' + kind;
+  dockInner.innerHTML = `<div class="fb" role="status"><h3>${title}<span class="gain">${gain}</span></h3>${body}</div>
+    <button class="btn btn-go btn-wide" id="nextBtn">${last ? '🏁 See my results' : 'Next question ▶'}</button>`;
+  $('#nextBtn').onclick = next;
+  $('#nextBtn').focus({preventScroll:true});
+  syncDockSpace();
+  beep(res.t === 0 ? 'good' : kind);
+  if (kind === 'good') { const ch = $('.walker .cham'); if (ch) { ch.classList.remove('happy'); void ch.offsetWidth; ch.classList.add('happy'); } }
+}
+function next() { if (!Q || !Q.checked) return; renderQuestion(); window.scrollTo(0, 0); const f = Q && Q.h && Q.h.focus; if (f && matchMedia('(pointer: fine)').matches) f(); }
+
+function pause() {
+  if (screen !== 'quiz' || paused || !S.current) return;
+  paused = true; save();
+  if (canSpeak) try { speechSynthesis.cancel(); } catch (e) {}
+  showLayer(`<div class="overlay" role="dialog" aria-modal="true" aria-labelledby="pT"><div class="modal">${chameleon('sleepy')}<h2 id="pT">Paused</h2>
+    <p>Your answers are saved. Time so far: ${fmtTime(S.current.elapsed)}.</p>
+    <button class="btn btn-go btn-wide" id="resumeBtn">▶ Keep going</button>
+    <button class="btn btn-wide" id="homeBtn">Save and go home</button></div></div>`);
+  $('#resumeBtn').onclick = resumeQuiz;
+  $('#homeBtn').onclick = () => { paused = false; save(); go('home'); };
+}
+function resumeQuiz() { paused = false; hideLayer(); }
+
+function finishRun() {
+  stopTimer();
+  const c = S.current, set = getSet(c.setId), f = flat(set);
+  let e = 0, t = 0; const bySec = {};
+  c.queue.forEach(i => { const a = c.answers[i], s = f[i].sec; bySec[s] = bySec[s] || {e:0, t:0}; if (a) { e += a.e; t += a.t; bySec[s].e += a.e; bySec[s].t += a.t; } });
+  const pct = t ? Math.round(e / t * 100) : 0;
+  const nextId = set.id + 1, wasOpen = nextId <= SETS.length && isUnlocked(nextId);
+  const rec = S.sets[set.id] = S.sets[set.id] || {attempts:[], best:null};
+  rec.attempts.unshift({mode:c.mode, e, t, pct, time:c.elapsed, date:Date.now()});
+  rec.attempts = rec.attempts.slice(0, 20);
+  if (c.mode === 'full' && (!rec.best || pct > rec.best.pct || (pct === rec.best.pct && c.elapsed < rec.best.time))) rec.best = {e, t, pct, time:c.elapsed, date:Date.now()};
+  S.lastRun = {setId:set.id, mode:c.mode, e, t, pct, time:c.elapsed, bySec, answers:c.answers, queue:c.queue,
+    newlyOpen: nextId <= SETS.length && !wasOpen && isUnlocked(nextId)};
+  S.current = null; save();
+  go('results');
+}
+
+/* ---------- Results ---------- */
+function renderResults() {
+  const r = S.lastRun; if (!r) return go('home');
+  const set = getSet(r.setId), f = flat(set), stars = starsFor(r.pct);
+  const wrong = r.queue.filter(i => r.answers[i] && r.answers[i].t > 0 && r.answers[i].e < r.answers[i].t);
+  const msg = r.mode === 'fix'
+    ? (r.e === r.t ? 'You fixed every mistake. Amazing!' : `You fixed ${r.e} of ${r.t}. Keep going, you are getting better!`)
+    : r.pct >= 90 ? 'Amazing! You are an English Explorer star!' : r.pct >= 70 ? 'Great work! You know so much!' : r.pct >= 50 ? 'Good job! A little more practice will help.' : 'Nice effort! Practice makes progress. Try again!';
+  const nextSet = getSet(set.id + 1);
+  const nextOpen = nextSet && isUnlocked(nextSet.id);
+  app.innerHTML = `
+    <section class="result-head" aria-labelledby="rT">
+      ${chameleon('happy')}
+      <h1 id="rT" class="sr">Results</h1>
+      <div class="big-stars" aria-label="${stars} of 3 stars">${[0,1,2].map(i => `<span class="${i < stars ? 'star-on' : 'star-off'}">★</span>`).join('')}</div>
+      <p class="score-big">${r.e} out of ${r.t}</p>
+      <p>${r.pct}% correct in ${fmtTime(r.time)}</p>
+      <p style="color:var(--ink);font-size:1.3rem;font-family:var(--round);font-weight:600">${msg}</p>
+    </section>
+    ${r.newlyOpen ? `<div class="notice">🎉 You opened <b>Set ${nextSet.id}: ${esc(nextSet.title)}</b>!</div>` : ''}
+    <div class="card">
+      <h2 style="font-size:1.3rem">${r.mode === 'fix' ? 'Mistakes you fixed' : 'How you did in each part'}</h2>
+      <div class="bars">${Object.entries(r.bySec).filter(([, v]) => v.t > 0).map(([k, v]) => `<div class="bar-row"><span>${SECTIONS[k].icon} ${SECTIONS[k].name}</span><b>${v.e}/${v.t}</b><div class="bar" aria-hidden="true"><i style="width:${Math.round(v.e / v.t * 100)}%"></i></div></div>`).join('')}</div>
+      <div class="stack">
+        ${wrong.length ? `<button class="btn btn-go btn-wide" id="fixBtn">🔁 Fix my mistakes (${wrong.length})</button>` : ''}
+        ${nextSet ? (nextOpen ? `<button class="btn ${wrong.length ? 'btn-sun' : 'btn-go'} btn-wide" id="upBtn">⬆ Next set: ${nextSet.emoji} ${esc(nextSet.title)}</button>` : `<p class="tip" style="text-align:center">Get ${PASS}% or more on the whole set to open Set ${nextSet.id}.</p>`) : `<p class="tip" style="text-align:center">You reached the last set! 🏁</p>`}
+        <button class="btn btn-wide" id="againBtn">Try the whole set again</button>
+        <button class="btn btn-wide" id="homeBtn2">🏠 Home</button>
+      </div>
+      ${wrong.length ? `<div class="review"><details><summary>👀 Look at the right answers (${wrong.length})</summary><ol>${wrong.map(i => `<li>${SECTIONS[f[i].sec].icon} ${esc(questionLabel(f[i].item))}<br><b>Answer:</b> ${esc(answerText(f[i].item))}</li>`).join('')}</ol></details></div>` : ''}
+    </div>`;
+  if (wrong.length) $('#fixBtn').onclick = () => tryStart(set.id, 'fix', wrong);
+  if (nextSet && nextOpen) $('#upBtn').onclick = () => tryStart(nextSet.id);
+  $('#againBtn').onclick = () => tryStart(set.id);
+  $('#homeBtn2').onclick = () => go('home');
+  if (r.pct >= 70) beep('good');
+}
+
+/* ---------- History ---------- */
+function renderHistory() {
+  const any = SETS.some(s => S.sets[s.id] && S.sets[s.id].attempts.length);
+  app.innerHTML = `
+    <div class="page-head"><button class="btn btn-icon" id="backBtn" aria-label="Back to home">⬅</button><h1>🏆 My results</h1></div>
+    <div class="hist">
+      ${!any ? `<div class="card"><p style="margin:0;font-size:1.15rem">No results yet. Pick a set on the home page to start exploring!</p></div>` : ''}
+      ${SETS.map(set => {
+        const rec = S.sets[set.id];
+        if (!rec || !rec.attempts.length) return '';
+        return `<section class="card"><h2 style="font-size:1.3rem">${set.emoji} Set ${set.id}: ${esc(set.title)}</h2>
+          <p style="margin:.3rem 0">${rec.best ? `Best score: <b>${rec.best.e} of ${rec.best.t}</b> (${rec.best.pct}%) ${starRow(starsFor(rec.best.pct))}` : 'Not finished as a whole set yet'}</p>
+          <div class="scroll-x"><table><thead><tr><th>When</th><th>Type</th><th>Score</th><th>Time</th></tr></thead><tbody>
+            ${rec.attempts.slice(0, 8).map(a => `<tr><td>${fmtDate(a.date)}</td><td>${a.mode === 'fix' ? 'Fix mistakes' : 'Whole set'}</td><td>${a.e}/${a.t} (${a.pct}%)</td><td>${fmtTime(a.time)}</td></tr>`).join('')}
+          </tbody></table></div></section>`;
+      }).join('')}
+      ${S.poems.length ? `<section class="card"><h2 style="font-size:1.3rem">🎵 My poems</h2>${S.poems.map(p => `<div class="poem-card">${esc(p.text)}</div><p class="tip" style="margin:.3rem 0 0">Set ${p.setId}, ${fmtDate(p.date)}</p>`).join('')}</section>` : ''}
+    </div>`;
+  $('#backBtn').onclick = () => go('home');
+}
+
+/* ---------- Settings ---------- */
+function renderSettings() {
+  const seg = (key, opts) => `<div class="seg" role="group">${opts.map(([v, l]) => `<button data-k="${key}" data-v="${v}" aria-pressed="${String(S.settings[key]) === String(v)}">${l}</button>`).join('')}</div>`;
+  app.innerHTML = `
+    <div class="page-head"><button class="btn btn-icon" id="backBtn" aria-label="Back to home">⬅</button><h1>⚙️ Settings</h1></div>
+    <div class="card">
+      <div class="setting"><div><b>Text size</b><small>Bigger text is easier on young eyes.</small></div>${seg('size', [['normal', 'Big'], ['big', 'Bigger']])}</div>
+      <div class="setting"><div><b>Colors</b><small>Dark is gentle at night.</small></div>${seg('theme', [['auto', 'Auto'], ['light', 'Light'], ['dark', 'Dark']])}</div>
+      <div class="setting"><div><b>Sounds</b><small>Little chimes for right and wrong answers.</small></div>${seg('sound', [[true, 'On'], [false, 'Off']])}</div>
+      <div class="setting"><div><b>Open all sets</b><small>Normally a set opens after ${PASS}% on the set before.</small></div>${seg('unlockAll', [[false, 'No'], [true, 'Yes']])}</div>
+      <div class="setting"><div><b>Backup progress</b><small>Saves a file with stars, poems and settings.</small></div><button class="btn btn-small" id="exportBtn">Save backup</button></div>
+      <div class="setting"><div><b>Restore progress</b><small>Load a backup from another device or an earlier day.</small></div><button class="btn btn-small" id="importBtn">Load backup</button><input type="file" id="importFile" accept="application/json,.json" style="display:none"></div>
+      <div class="setting"><div><b>Clear all progress</b><small>Removes scores, poems and any paused set.</small></div><button class="btn btn-small" id="resetBtn">Clear progress</button></div>
+    </div>
+    <div class="card" style="margin-top:1rem">
+      <h2 style="font-size:1.2rem">How scoring works</h2>
+      <p style="margin:.5rem 0 0;font-size:1.05rem">Each question counts the first answer. Matching, sorting and poem blanks give one star for each part. "Fix my mistakes" repeats only what was missed; the best score comes from whole-set tries. Progress saves automatically in this browser on this device, including paused sets.</p>
+    </div>
+    <div class="card" style="margin-top:1rem" id="storeCard">
+      <h2 style="font-size:1.2rem">Where the stars are kept</h2>
+      <p style="margin:.5rem 0 0;font-size:1.05rem">Progress lives in this device's browser. It is not sent anywhere and no account is needed.</p>
+      <div id="iosNote"></div>
+    </div>`;
+  $('#backBtn').onclick = () => go('home');
+  $$('.seg button').forEach(b => b.onclick = () => {
+    const k = b.dataset.k; let v = b.dataset.v;
+    if (v === 'true') v = true; else if (v === 'false') v = false;
+    S.settings[k] = v; save(); applySettings(); renderSettings();
+    const again = $(`.seg button[data-k="${k}"][data-v="${b.dataset.v}"]`); if (again) again.focus();
+  });
+  const installed = window.navigator.standalone === true || window.matchMedia('(display-mode: standalone)').matches;
+  const onIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  const note = $('#iosNote');
+  if (note) {
+    if (onIOS && !installed) {
+      note.innerHTML = '<p style="margin:.6rem 0 0;font-size:1.05rem;background:var(--sun-soft);border-left:8px solid var(--sun);border-radius:14px;padding:.7rem .9rem">' +
+        '<b>Worth doing:</b> add this page to the Home Screen (Share \u2192 Add to Home Screen) and open it from that icon. ' +
+        'Safari erases saved progress after about a week of not visiting. Home Screen apps keep theirs.</p>';
+    } else if (installed) {
+      note.innerHTML = '<p style="margin:.6rem 0 0;font-size:1.05rem;color:var(--ink-soft)">Running from the Home Screen \u2014 progress is kept safely.</p>';
+    }
+  }
+
+  $('#exportBtn').onclick = () => {
+    try {
+      const stamp = new Date().toISOString().slice(0, 10);
+      const blob = new Blob([JSON.stringify(S, null, 2)], {type: 'application/json'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'english-explorer-' + stamp + '.json';
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 2000);
+    } catch (e) {
+      confirmBox({title:'Could not save', text:'This browser would not let the file be saved.', yes:'OK', no:null, onYes(){}});
+    }
+  };
+
+  $('#importBtn').onclick = () => $('#importFile').click();
+  $('#importFile').onchange = ev => {
+    const f = ev.target.files && ev.target.files[0];
+    ev.target.value = '';
+    if (!f) return;
+    const r = new FileReader();
+    r.onload = () => {
+      let d = null;
+      try { d = JSON.parse(String(r.result)); } catch (e) {}
+      if (!d || typeof d !== 'object' || typeof d.sets !== 'object' || d.sets === null) {
+        confirmBox({title:'That file did not fit', text:'It is not an English Explorer backup. Look for a file named english-explorer-....json', yes:'OK', no:null, onYes(){}});
+        return;
+      }
+      const done = Object.keys(d.sets).length, poems = Array.isArray(d.poems) ? d.poems.length : 0;
+      const bits = [done + ' set' + (done === 1 ? '' : 's') + ' finished', poems + ' poem' + (poems === 1 ? '' : 's')];
+      if (d.current) bits.push('a paused set');
+      confirmBox({
+        title:'Load this backup?',
+        text:'It has ' + bits.join(', ') + '. This replaces what is on this device now.',
+        yes:'Yes, load it', no:'Cancel',
+        onYes(){
+          S = Object.assign(fresh(), d);
+          S.settings = Object.assign(fresh().settings, d.settings || {});
+          save(); applySettings(); go('home');
+        }
+      });
+    };
+    r.readAsText(f);
+  };
+
+  $('#resetBtn').onclick = () => confirmBox({title:'Clear all progress?', text:'Scores, poems and paused sets will be removed. Settings stay the same.', yes:'Yes, clear everything', no:'Cancel', onYes(){ const keep = S.settings; S = fresh(); S.settings = keep; save(); go('home'); }});
+}
+
+/* ---------- Global events ---------- */
+document.addEventListener('keydown', e => {
+  if (layer.innerHTML) { if (e.key === 'Escape') { if (paused) resumeQuiz(); else hideLayer(); } return; }
+  if (screen !== 'quiz' || !Q) return;
+  const tag = e.target.tagName;
+  if (!Q.checked && Q.h.onKey && tag !== 'TEXTAREA' && tag !== 'INPUT' && !e.ctrlKey && !e.metaKey && !e.altKey) { if (Q.h.onKey(e)) { e.preventDefault(); return; } }
+  if (e.key === 'Enter' && (tag === 'INPUT' || e.target === document.body)) {
+    e.preventDefault();
+    if (Q.checked) next(); else doCheck();
+  }
+});
+document.addEventListener('visibilitychange', () => { if (!document.hidden) return; if (screen === 'quiz') pause(); else save(); });
+window.addEventListener('resize', syncDockSpace);
+window.addEventListener('pagehide', save);
+
+load(); applySettings(); go('home');
+
+
+/* ---------- Offline support ---------- */
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(() => {}));
+}
+</script>
+</body>
+</html>
