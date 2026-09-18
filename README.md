@@ -14,10 +14,14 @@ Static, zero-build collection of practice apps. Every push to `main` deploys aut
 └── apps/
     ├── english-explorer/
     │   └── index.html          Pronouns, reading, shapes, riddles, rhymes (5 sets)
-    └── inventors-lab/
-        └── index.html          Year 3–4 review: pronouns, job words, word
-                                families, to + verb, reading, 2D/3D shapes,
-                                optical illusions (6 sets)
+    ├── inventors-lab/
+    │   └── index.html          Year 3–4 English: pronouns, job words, word
+    │                           families, to + verb, reading, 2D/3D shapes,
+    │                           optical illusions (6 sets)
+    └── science-detectives/
+        └── index.html          Year 3–4 science: states of matter, particles,
+                                separating mixtures, dissolving, fair tests
+                                (6 sets)
 ```
 
 Each app is one self-contained HTML file: no build step, no dependencies, no
@@ -74,6 +78,42 @@ the seed and the order, so restoring on a new device keeps the same journey.
 A grown-up can deliberately draw a new order in Settings (for a second child
 sharing a device); nothing else changes it.
 
+## Science Detectives
+
+Built from the Y3 final science review packet. 6 sets × 24 questions (144
+questions, 371 stars). The sets are **parallel, not a progression** — every set
+covers all six topics, which is what makes the shuffled set order safe.
+
+Six sections per set: **Solid, Liquid, Gas** · **Tiny Particles** (the particle
+model) · **Separating** (sieving, filtering, magnets, hand picking) ·
+**Dissolving** (soluble and insoluble, what speeds it up) · **Think It Out**
+(clue tables, odd-one-out, sequencing) · **Test It** (fair tests, predictions,
+reading charts).
+
+The English is deliberately plainer than the other apps: short sentences,
+common words, and no long written answers. The thinking is meant to be the
+hard part, not the reading. Two question types come straight off the
+worksheet:
+
+- **`grid`** — the tick-and-cross property table. Tap a cell to cycle it
+  empty → ✓ → ✗ → empty. One star per cell, so a 3×4 table is worth 12.
+- **`tfgrid`** — a list of statements, each marked True or False, one star per
+  row.
+
+Alongside them: `choice`, `sort` (two or three boxes), `fill`, `type`, `match`,
+`order` and `draw`. There is no spelling-from-tiles, no sentence building and
+no paragraph writing anywhere in this app.
+
+Diagrams, clue tables and bar charts are all generated inline as SVG from two
+small builders (`tableFig` and `barFig`), so the numbers a question asks about
+and the numbers drawn in the chart cannot drift apart.
+
+### Clue tables must have one answer
+
+Each "which is A, B and C?" puzzle is backed by a property table. The content
+audit checks that **every row of every clue table is unique** — if two rows had
+the same pattern of ticks, the puzzle would have no single answer.
+
 ## Adding a new quiz
 
 1. Create `apps/<folder-name>/index.html` — one self-contained HTML file.
@@ -91,11 +131,11 @@ sharing a device); nothing else changes it.
 ### Storage rule for new apps
 
 All apps share one browser origin, so **`localStorage` keys must be namespaced per app**.
-English Explorer uses `englishExplorer.v1` and Inventors Lab uses
-`inventorsLab.v1`. Use `<appName>.v1` for anything new — never a bare key
-like `progress`.
+English Explorer uses `englishExplorer.v1`, Inventors Lab uses
+`inventorsLab.v1` and Science Detectives uses `scienceDetectives.v1`. Use
+`<appName>.v1` for anything new — never a bare key like `progress`.
 
-Inventors Lab also stores drawings as PNG data URLs. Its `save()` drops the
+Both newer apps store drawings as PNG data URLs. Their `save()` drops the
 oldest drawings rather than failing if the browser's storage quota is reached,
 so a full gallery can never cost a child their stars.
 
