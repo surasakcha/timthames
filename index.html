@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Learning Hub</title>
+<meta name="description" content="Quizzes and practice games.">
+<meta name="theme-color" content="#2D7C4D">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Learning">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<link rel="icon" href="/icons/favicon-64.png" sizes="64x64">
+<link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#E6EFE2; --paper:#FAFCF6; --paper-2:#EFF6EC; --ink:#1F3427; --ink-soft:#4C6356; --line:#C2D5C0;
+  --leaf:#2D7C4D; --leaf-deep:#1F5E39; --on-leaf:#FFFFFF;
+  --sun:#D9941C; --sun-soft:#FBE8BF;
+  --sky:#2F76A8; --sky-soft:#D8E9F4;
+  --read:'Andika','Trebuchet MS',Verdana,system-ui,sans-serif;
+  --round:'Fredoka','Andika','Trebuchet MS',system-ui,sans-serif;
+  font-size:20px; color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#14211A; --paper:#1D2F25; --paper-2:#243A2E; --ink:#E4EEE5; --ink-soft:#A6BDAC; --line:#36503F;
+    --leaf:#62C189; --leaf-deep:#3E9463; --on-leaf:#0F2418;
+    --sun:#EDBB55; --sun-soft:#4A3A1A;
+    --sky:#72B6E2; --sky-soft:#1E3A4B;
+    color-scheme:dark;
+  }
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--read);line-height:1.5;min-height:100vh;-webkit-tap-highlight-color:transparent}
+.wrap{max-width:820px;margin:0 auto;padding:1rem 1rem 3rem}
+h1,h2,h3{font-family:var(--round);line-height:1.15;margin:0}
+:focus-visible{outline:4px solid var(--sun);outline-offset:3px;border-radius:12px}
+.hero{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:1rem;padding:1.5rem 0 .5rem}
+.hero h1{font-size:2.6rem;font-weight:700;letter-spacing:-.5px}
+.hero p{margin:.4rem 0 0;color:var(--ink-soft);font-size:1.1rem;max-width:32ch}
+.hero img{width:clamp(96px,24vw,150px);height:auto;display:block;border-radius:28px}
+.grid{display:grid;gap:1rem;margin-top:1.5rem}
+.card{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:1rem;align-items:center;text-align:left;
+  padding:1.1rem;border-radius:26px;border:3px solid var(--line);background:var(--paper);
+  box-shadow:0 5px 0 var(--line);text-decoration:none;color:inherit}
+.card:active{transform:translateY(3px);box-shadow:0 2px 0 var(--line)}
+.card .emoji{font-size:2.6rem;width:4rem;height:4rem;display:grid;place-items:center;border-radius:20px;background:var(--paper-2);flex:none}
+.card .t{display:block;font-family:var(--round);font-weight:600;font-size:1.35rem;line-height:1.2}
+.card .d{display:block;color:var(--ink-soft);font-size:1rem;margin-top:.15rem}
+.card .go{font-family:var(--round);font-weight:600;color:var(--leaf);white-space:nowrap}
+.card.soon{opacity:.6;box-shadow:none;border-style:dashed;cursor:default}
+.card.soon .go{color:var(--ink-soft)}
+.tip{background:var(--sky-soft);border:3px solid var(--sky);border-radius:24px;padding:1rem 1.15rem;margin-top:1.5rem}
+.tip h2{font-size:1.2rem;margin-bottom:.35rem}
+.tip p{margin:.35rem 0 0;font-size:1.05rem}
+.tip ol{margin:.5rem 0 0;padding-left:1.3rem}
+.tip li{margin:.3rem 0}
+footer{margin-top:2rem;color:var(--ink-soft);font-size:.95rem;text-align:center}
+.hidden{display:none!important}
+@media (max-width:520px){
+  :root{font-size:18px}
+  .hero h1{font-size:2.1rem}
+  .card{grid-template-columns:auto minmax(0,1fr)}
+  .card .go{grid-column:1/-1;text-align:right}
+}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="hero">
+    <div>
+      <h1>Learning Hub</h1>
+      <p>Pick something to practise. Your stars are saved on this device.</p>
+    </div>
+    <img src="/icons/icon-192.png" alt="" width="192" height="192">
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <div class="tip hidden" id="a2hs">
+    <h2>📲 Put this on the Home Screen</h2>
+    <p>On iPad and iPhone, adding this to the Home Screen keeps your stars safe. Safari clears saved progress after about a week if you only open it as a normal web page.</p>
+    <ol>
+      <li>Tap the <b>Share</b> button (the square with an arrow).</li>
+      <li>Scroll down and tap <b>Add to Home Screen</b>.</li>
+      <li>Tap <b>Add</b>, then open it from the new icon from now on.</li>
+    </ol>
+  </div>
+
+  <footer id="foot"></footer>
+</main>
+
+<script>
+/* ============================================================
+   ADD A NEW QUIZ:
+   1. Put it in  apps/<folder-name>/index.html
+   2. Add one entry to this list.
+   That is the whole process.
+   ============================================================ */
+const APPS = [
+  {
+    slug: 'english-explorer',
+    emoji: '🦎',
+    title: 'English Explorer',
+    desc: 'Pronouns, reading, shapes, riddles and rhymes — 5 sets',
+    ready: true
+  }
+  // {
+  //   slug: 'math-explorer', emoji: '🔢', title: 'Math Explorer',
+  //   desc: 'Coming soon', ready: false
+  // },
+];
+
+const grid = document.getElementById('grid');
+grid.innerHTML = APPS.map(a => a.ready
+  ? `<a class="card" href="/apps/${a.slug}/">
+       <span class="emoji" aria-hidden="true">${a.emoji}</span>
+       <span><span class="t">${a.title}</span><span class="d">${a.desc}</span></span>
+       <span class="go">Play →</span>
+     </a>`
+  : `<div class="card soon">
+       <span class="emoji" aria-hidden="true">${a.emoji}</span>
+       <span><span class="t">${a.title}</span><span class="d">${a.desc}</span></span>
+       <span class="go">Soon</span>
+     </div>`
+).join('');
+
+document.getElementById('foot').textContent =
+  APPS.filter(a => a.ready).length + ' activity' + (APPS.filter(a => a.ready).length === 1 ? '' : 'ies') + ' ready';
+
+/* iOS home-screen prompt: only when on iOS Safari and not already installed */
+const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent)
+  || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+const standalone = window.navigator.standalone === true
+  || window.matchMedia('(display-mode: standalone)').matches;
+if (isIOS && !standalone) document.getElementById('a2hs').classList.remove('hidden');
+
+/* Offline support */
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(() => {}));
+}
+</script>
+</body>
+</html>
