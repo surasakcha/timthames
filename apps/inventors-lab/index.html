@@ -1,0 +1,2360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Inventors Lab</title>
+<meta name="description" content="Pronouns, job words, word families, to + verb grammar, reading, shapes and eye tricks for Year 3 and Year 4.">
+<meta name="theme-color" content="#2B5CA8">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Learning">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<link rel="icon" href="/icons/favicon-64.png" sizes="64x64">
+<link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#E7EDF6; --paper:#FBFCFE; --paper-2:#EDF2F9; --ink:#182636; --ink-soft:#4D5F74; --line:#BFCEE0;
+  --leaf:#2B5CA8; --leaf-deep:#1B3F77; --leaf-soft:#D6E4F6; --on-leaf:#FFFFFF;
+  --sun:#D9841C; --sun-soft:#FBE6C7; --sun-deep:#A56209;
+  --sky:#2F76A8; --sky-soft:#D8E9F4;
+  --berry:#B23F4B; --berry-soft:#F6DCDE;
+  --bark:#8494A8;
+  --bot:#5C7FC4; --bot-dark:#2B4C86; --bolt:#E9B949;
+  --overlay:rgba(16,28,44,.58);
+  --read:'Andika','Trebuchet MS',Verdana,system-ui,sans-serif;
+  --round:'Fredoka','Andika','Trebuchet MS',system-ui,sans-serif;
+  font-size:20px;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#131C28; --paper:#1C2836; --paper-2:#233244; --ink:#E5ECF5; --ink-soft:#A5B6CA; --line:#36485E;
+    --leaf:#6FA8E8; --leaf-deep:#3F7CC0; --leaf-soft:#22374F; --on-leaf:#0D1A28;
+    --sun:#EDBB55; --sun-soft:#463619; --sun-deep:#B98A2C;
+    --sky:#72B6E2; --sky-soft:#1E3A4B;
+    --berry:#EC8490; --berry-soft:#4C2A30;
+    --bark:#6A7C92; --bot:#7098DA; --bot-dark:#3C6099; --bolt:#F2CD6B;
+    --overlay:rgba(0,0,0,.62);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#131C28; --paper:#1C2836; --paper-2:#233244; --ink:#E5ECF5; --ink-soft:#A5B6CA; --line:#36485E;
+  --leaf:#6FA8E8; --leaf-deep:#3F7CC0; --leaf-soft:#22374F; --on-leaf:#0D1A28;
+  --sun:#EDBB55; --sun-soft:#463619; --sun-deep:#B98A2C;
+  --sky:#72B6E2; --sky-soft:#1E3A4B;
+  --berry:#EC8490; --berry-soft:#4C2A30;
+  --bark:#6A7C92; --bot:#7098DA; --bot-dark:#3C6099; --bolt:#F2CD6B;
+  --overlay:rgba(0,0,0,.62);
+  color-scheme:dark;
+}
+:root[data-size="big"]{font-size:23px}
+
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--read);line-height:1.5;min-height:100vh;-webkit-tap-highlight-color:transparent}
+img,svg{max-width:100%}
+button{font:inherit;color:inherit}
+h1,h2,h3{font-family:var(--round);line-height:1.15;margin:0}
+.wrap{max-width:820px;margin:0 auto;padding:1rem 1rem 2rem}
+.hidden{display:none!important}
+:focus-visible{outline:4px solid var(--sun);outline-offset:3px;border-radius:10px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:3.1rem;padding:.4rem 1.4rem;border-radius:999px;border:3px solid var(--line);background:var(--paper);font-family:var(--round);font-weight:600;font-size:1.05rem;cursor:pointer;box-shadow:0 4px 0 var(--line);transition:transform .08s,box-shadow .08s;text-decoration:none;user-select:none}
+.btn:active:not(:disabled){transform:translateY(3px);box-shadow:0 1px 0 var(--line)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn-go{background:var(--leaf);border-color:var(--leaf);color:var(--on-leaf);box-shadow:0 5px 0 var(--leaf-deep)}
+.btn-go:active:not(:disabled){box-shadow:0 2px 0 var(--leaf-deep)}
+.btn-sun{background:var(--sun-soft);border-color:var(--sun);box-shadow:0 4px 0 var(--sun)}
+.btn-wide{width:100%}
+.btn-icon{width:3.1rem;padding:0;flex:none;font-size:1.3rem}
+.btn-small{min-height:2.5rem;font-size:.9rem;padding:.2rem 1rem;box-shadow:0 3px 0 var(--line)}
+.row{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center}
+.stack{display:grid;gap:.75rem}
+
+/* Sparky the lab robot */
+.bot-bench{stroke:var(--bark);stroke-width:7;stroke-linecap:round;fill:none}
+.bot-body,.bot-head{fill:var(--bot);stroke:var(--bot-dark);stroke-width:3}
+.bot-panel{fill:var(--bot-dark);opacity:.35}
+.bot-eye{fill:var(--paper);stroke:var(--bot-dark);stroke-width:3}
+.bot-pupil{fill:#16232F}
+.bot-mouth{fill:none;stroke:var(--bot-dark);stroke-width:3;stroke-linecap:round}
+.bot-arm{fill:none;stroke:var(--bot-dark);stroke-width:6;stroke-linecap:round}
+.bot-wire{fill:none;stroke:var(--bot-dark);stroke-width:4;stroke-linecap:round}
+.bot-bulb{fill:var(--bolt);stroke:var(--sun-deep);stroke-width:2.5}
+.bot{transition:filter .4s}
+.bot.happy{animation:hop .6s ease}
+.bot.happy .bot-bulb{animation:glow .6s ease}
+.bot.sleepy .bot-pupil{display:none}
+.bot.sleepy .bot-bulb{fill:var(--line)}
+@keyframes hop{0%,100%{transform:translateY(0)}35%{transform:translateY(-14px) rotate(-4deg)}65%{transform:translateY(0)}80%{transform:translateY(-4px)}}
+@keyframes glow{0%,100%{opacity:1}50%{opacity:.35}}
+
+/* Home */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:1rem;padding:1.25rem 0 .5rem}
+.hero h1{font-size:2.6rem;font-weight:700;letter-spacing:-.5px}
+.hero p{margin:.4rem 0 0;color:var(--ink-soft);font-size:1.1rem;max-width:30ch}
+.hero .bot{width:clamp(130px,30vw,210px);height:auto;display:block}
+.notice{background:var(--sun-soft);border:3px solid var(--sun);border-radius:20px;padding:.9rem 1.1rem;margin:1rem 0}
+.resume{background:var(--sky-soft);border:3px solid var(--sky);border-radius:24px;padding:1.1rem 1.2rem;margin:1rem 0;display:grid;gap:.75rem}
+.resume h2{font-size:1.35rem}
+.resume p{margin:0;color:var(--ink-soft)}
+.sets{display:grid;gap:1rem;margin-top:1.25rem}
+.sets h2.label{font-size:1.4rem}
+.setcard{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:1rem;align-items:center;text-align:left;width:100%;padding:1rem 1.1rem;border-radius:26px;border:3px solid var(--line);background:var(--paper);cursor:pointer;box-shadow:0 5px 0 var(--line)}
+.setcard:active:not(:disabled){transform:translateY(3px);box-shadow:0 2px 0 var(--line)}
+.setcard .emoji{font-size:2.4rem;width:3.6rem;height:3.6rem;display:grid;place-items:center;border-radius:18px;background:var(--paper-2)}
+.setcard .sc-title{font-family:var(--round);font-weight:600;font-size:1.3rem;line-height:1.2}
+.setcard .meta{color:var(--ink-soft);font-size:.95rem}
+.setcard .go{font-family:var(--round);font-weight:600;color:var(--leaf);font-size:1rem;white-space:nowrap}
+.setcard.locked{opacity:.7;cursor:not-allowed}
+.setcard.locked .go{color:var(--ink-soft)}
+.stars{display:inline-flex;gap:2px;font-size:1.1rem;letter-spacing:1px}
+.star-on{color:var(--sun)}
+.star-off{color:var(--line)}
+.homefoot{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.5rem}
+.result-head .bot{width:160px;height:auto;display:block;margin:0 auto .5rem}
+
+/* Quiz top */
+.topbar{display:flex;align-items:center;gap:.75rem;position:sticky;top:0;z-index:20;background:var(--bg);padding:.6rem 0 .4rem}
+.topbar .where{flex:1;min-width:0}
+.topbar .where b{font-family:var(--round);font-size:1.05rem;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topbar .where span{color:var(--ink-soft);font-size:.9rem}
+.pill{font-family:var(--round);font-weight:600;background:var(--sun-soft);border:3px solid var(--sun);border-radius:999px;padding:.25rem .85rem;white-space:nowrap}
+.pill.fire{background:var(--berry-soft);border-color:var(--berry);animation:pulse 1s ease infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
+.track-wrap{position:relative;height:3.4rem;margin:.2rem 0 .6rem}
+.track-wrap .track{position:absolute;left:0;right:0;bottom:.55rem;height:12px;border-radius:99px;background:var(--bark);opacity:.35}
+.track-wrap .fill{position:absolute;left:0;bottom:.55rem;height:12px;border-radius:99px;background:var(--leaf);transition:width .5s ease}
+.track-wrap .walker{position:absolute;bottom:.3rem;width:4.4rem;transform:translateX(-50%);transition:left .5s ease}
+.track-wrap .walker .bot-bench{display:none}
+.track-wrap .goal{position:absolute;right:-.2rem;bottom:.6rem;font-size:1.4rem}
+
+/* Question card */
+.card{background:var(--paper);border:3px solid var(--line);border-radius:30px;padding:1.2rem 1.2rem 1.5rem;box-shadow:0 6px 0 var(--line)}
+.sec-tag{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--round);font-weight:600;font-size:.95rem;padding:.2rem .8rem;border-radius:999px;background:var(--paper-2);border:2px solid var(--line);color:var(--ink-soft)}
+.prompt{display:flex;gap:.75rem;align-items:flex-start;margin:.9rem 0 1rem}
+.prompt h2{font-size:1.35rem;font-weight:600;flex:1}
+.speak{flex:none;width:2.8rem;height:2.8rem;border-radius:50%;border:3px solid var(--sky);background:var(--sky-soft);cursor:pointer;font-size:1.15rem;display:grid;place-items:center}
+.qtext{font-size:1.5rem;line-height:1.6;margin:0 0 1.1rem}
+.blank{display:inline-block;min-width:4.6em;border-bottom:4px dashed var(--sky);text-align:center;color:var(--sky);font-weight:700;padding:0 .2em}
+.blank.filled{border-bottom-style:solid}
+
+/* Passage */
+details.story{background:var(--paper-2);border:3px solid var(--line);border-radius:22px;margin:.3rem 0 1rem;overflow:hidden}
+details.story summary{cursor:pointer;list-style:none;padding:.8rem 1rem;font-family:var(--round);font-weight:600;font-size:1.05rem;display:flex;gap:.6rem;align-items:center}
+details.story summary::-webkit-details-marker{display:none}
+details.story summary::after{content:'Show';margin-left:auto;font-size:.9rem;color:var(--sky)}
+details.story[open] summary::after{content:'Hide'}
+.story-body{padding:0 1.1rem 1rem;font-size:1.2rem;line-height:1.75;max-width:60ch}
+.story-body p{margin:0 0 .7rem}
+
+/* Choice */
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(6.5rem,1fr));gap:.8rem}
+.opts.pics{grid-template-columns:repeat(2,minmax(0,1fr))}
+.opts.long{grid-template-columns:1fr}
+.opt{min-height:4rem;border-radius:20px;border:3px solid var(--line);background:var(--paper-2);font-size:1.35rem;font-weight:700;cursor:pointer;padding:.5rem 1rem;box-shadow:0 4px 0 var(--line);text-align:center;display:flex;align-items:center;justify-content:center;gap:.5rem;flex-direction:column}
+.opts.long .opt{font-size:1.2rem;text-align:left;align-items:flex-start;font-weight:400}
+.opt:active:not(:disabled){transform:translateY(3px);box-shadow:0 1px 0 var(--line)}
+.opt.sel{border-color:var(--sky);background:var(--sky-soft);box-shadow:0 4px 0 var(--sky)}
+.opt.ok{border-color:var(--leaf);background:var(--leaf-soft);box-shadow:0 4px 0 var(--leaf)}
+.opt.no{border-color:var(--berry);background:var(--berry-soft);box-shadow:0 4px 0 var(--berry)}
+.opt small{font-size:.85rem;font-weight:400;color:var(--ink-soft)}
+
+/* Shapes (2D faces, 3D edges) */
+.shape{width:4.6rem;height:4.6rem}
+.shape .face{fill:var(--sky-soft);stroke:var(--sky);stroke-width:5;stroke-linejoin:round}
+.shape .edge{fill:none;stroke:var(--sky);stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+.shape .hid{fill:none;stroke:var(--sky);stroke-width:4;stroke-dasharray:7 7;opacity:.5}
+.opt.ok .shape .face{fill:var(--leaf-soft);stroke:var(--leaf)}
+.opt.ok .shape .edge,.opt.ok .shape .hid{stroke:var(--leaf)}
+.opt.no .shape .face{fill:var(--berry-soft);stroke:var(--berry)}
+.opt.no .shape .edge,.opt.no .shape .hid{stroke:var(--berry)}
+
+/* Chips, bins, blanks */
+.bank{display:flex;flex-wrap:wrap;gap:.65rem;justify-content:center;min-height:4rem;padding:.8rem;border-radius:22px;background:var(--paper-2);border:3px dashed var(--line);margin-bottom:1rem}
+.bank-label{width:100%;text-align:center;color:var(--ink-soft);font-size:.9rem}
+.chip{display:inline-flex;align-items:center;justify-content:center;min-height:3.2rem;min-width:3.2rem;padding:.2rem 1.05rem;border-radius:16px;background:var(--sun-soft);border:3px solid var(--sun);font-size:1.3rem;font-weight:700;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;box-shadow:0 4px 0 var(--sun)}
+.chip.sel{background:var(--sky-soft);border-color:var(--sky);box-shadow:0 0 0 4px var(--sky)}
+.chip.dragging{opacity:.3}
+.chip.ok{background:var(--leaf-soft);border-color:var(--leaf);box-shadow:0 4px 0 var(--leaf)}
+.chip.no{background:var(--berry-soft);border-color:var(--berry);box-shadow:0 4px 0 var(--berry)}
+.ghost{position:fixed;left:0;top:0;z-index:1000;pointer-events:none;transform:translate(-50%,-60%) scale(1.1);opacity:.95}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:.9rem}
+.bin{min-height:9rem;border:3px dashed var(--line);border-radius:22px;padding:.7rem;display:flex;flex-direction:column;gap:.6rem;cursor:pointer}
+.bin h3{font-size:1.1rem;text-align:center}
+.bin .hint{font-size:.85rem;color:var(--ink-soft);text-align:center;margin-top:-.4rem}
+.bin .inside{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center}
+.over{border-color:var(--sky)!important;background:var(--sky-soft)!important}
+.poemtext{font-size:1.3rem;line-height:1.5;margin:0}
+.poemtext .line{display:block;margin:0 0 .9rem}
+.nowrap{white-space:nowrap}
+.slot{display:inline-flex;vertical-align:middle;align-items:center;justify-content:center;min-width:5.5rem;min-height:3.2rem;margin:0 .15rem;border-bottom:4px dashed var(--sky);border-radius:12px 12px 4px 4px;background:var(--sky-soft);cursor:pointer;line-height:1.2}
+.slot .chip{box-shadow:none}
+
+/* Build */
+.buildline{min-height:4.4rem;display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;padding:.6rem;border-bottom:4px solid var(--sky);margin-bottom:1rem}
+.buildline:empty::before{content:'Tap the words below';color:var(--ink-soft);font-size:1.05rem}
+.chip.used{visibility:hidden}
+
+/* Order (drag to sequence) */
+.orderlist{display:grid;gap:.6rem;margin-bottom:.8rem}
+.ord{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:.7rem;align-items:center;padding:.6rem .8rem;border-radius:18px;border:3px solid var(--line);background:var(--paper-2);font-size:1.08rem;line-height:1.35;touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab;text-align:left}
+.ord .num{font-family:var(--round);font-weight:700;width:2rem;height:2rem;display:grid;place-items:center;border-radius:50%;background:var(--sun-soft);border:2px solid var(--sun);flex:none;font-size:.95rem}
+.ord .grip{color:var(--ink-soft);font-size:1.3rem;letter-spacing:-2px}
+.ord.dragging{opacity:.35}
+.ord.ok{border-color:var(--leaf);background:var(--leaf-soft)}
+.ord.no{border-color:var(--berry);background:var(--berry-soft)}
+.ord-move{display:flex;flex-direction:column;gap:.2rem}
+.ord-move button{width:2.1rem;height:1.6rem;border-radius:8px;border:2px solid var(--line);background:var(--paper);cursor:pointer;font-size:.8rem;line-height:1;padding:0}
+.ord-move button:disabled{opacity:.3;cursor:default}
+
+/* Match lines */
+.match{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);column-gap:clamp(2.6rem,11vw,6rem)}
+.match-col{display:grid;grid-template-columns:minmax(0,1fr);gap:.7rem;align-content:stretch;position:relative;z-index:2}
+.match svg.lines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;overflow:visible}
+.m-item{position:relative;min-width:0;overflow-wrap:anywhere;display:flex;align-items:center;gap:.5rem;min-height:4rem;padding:.45rem .8rem;border-radius:18px;border:3px solid var(--line);background:var(--paper-2);cursor:pointer;touch-action:none;user-select:none;-webkit-user-select:none;text-align:left;font-size:1.1rem;line-height:1.3}
+.m-item.left{font-weight:700;font-size:1.2rem}
+.m-item.right{padding-left:1.15rem}
+.m-item .shape{width:2.4rem;height:2.4rem;flex:none}
+.m-item .dot{position:absolute;top:50%;width:18px;height:18px;border-radius:50%;background:var(--paper);border:4px solid var(--ink-soft);transform:translateY(-50%)}
+.m-item.left .dot{right:-11px}
+.m-item.right .dot{left:-11px}
+.m-item.sel{border-color:var(--sky);background:var(--sky-soft)}
+.m-item.linked .dot{background:var(--sky);border-color:var(--sky)}
+.m-item.ok{border-color:var(--leaf);background:var(--leaf-soft)}
+.m-item.no{border-color:var(--berry);background:var(--berry-soft)}
+.m-item.ok .dot{background:var(--leaf);border-color:var(--leaf)}
+.m-item.no .dot{background:var(--berry);border-color:var(--berry)}
+.lines path{fill:none;stroke-width:5;stroke-linecap:round}
+
+/* Spell */
+.boxes{display:grid;gap:.35rem;justify-content:center;margin:.5rem 0 1.2rem}
+.box{width:100%;aspect-ratio:.8;padding:0;border-radius:12px;border:3px solid var(--line);background:var(--paper-2);display:grid;place-items:center;font-size:1.7em;font-weight:700;cursor:pointer;color:var(--ink)}
+.box.next{border-color:var(--sky);box-shadow:0 0 0 3px var(--sky-soft)}
+.box.ok{border-color:var(--leaf);background:var(--leaf-soft)}
+.box.no{border-color:var(--berry);background:var(--berry-soft)}
+.box.gap{border:0;background:transparent;box-shadow:none;cursor:default}
+.tiles{display:flex;flex-wrap:wrap;gap:.55rem;justify-content:center}
+.tile{width:3.2rem;height:3.2rem;border-radius:14px;border:3px solid var(--sun);background:var(--sun-soft);font-size:1.6rem;font-weight:700;cursor:pointer;box-shadow:0 4px 0 var(--sun)}
+.tile:disabled{opacity:.25;cursor:default;box-shadow:none}
+.tile:active:not(:disabled){transform:translateY(3px);box-shadow:0 1px 0 var(--sun)}
+.clue{font-size:1.4rem;line-height:1.6;background:var(--paper-2);border-radius:20px;padding:.9rem 1.1rem;margin:0 0 1rem;border-left:8px solid var(--sun)}
+
+/* Write / type */
+.write{width:100%;font-family:var(--read);font-size:1.4rem;padding:.8rem 1rem;border-radius:18px;border:3px solid var(--line);background:var(--paper-2);color:var(--ink);line-height:1.5;resize:vertical}
+.write:focus{outline:none;border-color:var(--sky);box-shadow:0 0 0 4px var(--sky-soft)}
+textarea.write{min-height:9rem}
+.tip{color:var(--ink-soft);font-size:1rem;margin:.6rem 0 0}
+.wordcount{color:var(--ink-soft);font-size:.95rem;text-align:right;margin-top:.3rem}
+.typeline{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap}
+.typeline .write{flex:1;min-width:10rem}
+.hintbtn{flex:none}
+.hintbox{margin:.7rem 0 0;background:var(--sun-soft);border-left:8px solid var(--sun);border-radius:14px;padding:.6rem .9rem;font-size:1.05rem}
+
+/* Figures (eye tricks) */
+.figure{background:var(--paper-2);border:3px solid var(--line);border-radius:22px;padding:1rem;margin:0 0 1rem;text-align:center}
+.figure svg{width:100%;max-width:26rem;height:auto}
+.figure .proof{opacity:0;transition:opacity .45s ease}
+.figure.measured .proof{opacity:1}
+.figure .hatch{transition:opacity .45s ease}
+.figure.measured .hatch{opacity:.12}
+.fig-bg{fill:var(--paper)}
+.fig-ink{fill:none;stroke:var(--ink);stroke-width:4;stroke-linecap:round}
+.fig-grey{fill:var(--bark);opacity:.55}
+.fig-orange{fill:#E07A2F}
+.fig-blue{fill:#3E7BC4}
+.fig-rule{fill:none;stroke:var(--berry);stroke-width:3;stroke-dasharray:8 6}
+.fig-label{fill:var(--ink-soft);font-family:var(--round);font-size:13px}
+.fig-dark{fill:#22303F}
+.fig-light{fill:#F2F4F7}
+.fig-same{fill:#9AA4AF}
+
+/* Drawing pad */
+.padwrap{display:grid;gap:.7rem}
+.pad{width:100%;aspect-ratio:3/2;border-radius:20px;border:3px solid var(--line);background:#FFFFFF;touch-action:none;cursor:crosshair;display:block}
+.padtools{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;justify-content:center}
+.swatch{width:2.5rem;height:2.5rem;border-radius:50%;border:3px solid var(--line);cursor:pointer;padding:0}
+.swatch[aria-pressed="true"]{box-shadow:0 0 0 4px var(--sky);border-color:var(--paper)}
+.padnote{color:var(--ink-soft);font-size:.95rem;text-align:center;margin:0}
+
+/* Badges */
+.badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(8.5rem,1fr));gap:.7rem;margin-top:.7rem}
+.badge{display:grid;gap:.15rem;justify-items:center;text-align:center;padding:.7rem .5rem;border-radius:18px;border:3px solid var(--line);background:var(--paper-2)}
+.badge.on{border-color:var(--sun);background:var(--sun-soft)}
+.badge .bi{font-size:1.9rem;line-height:1}
+.badge.off .bi{filter:grayscale(1);opacity:.35}
+.badge b{font-family:var(--round);font-size:.95rem;font-weight:600}
+.badge small{color:var(--ink-soft);font-size:.8rem;line-height:1.25}
+.badge-pop{display:flex;gap:.6rem;align-items:center;background:var(--sun-soft);border:3px solid var(--sun);border-radius:18px;padding:.5rem .8rem;margin:.6rem 0 0}
+.badge-pop .bi{font-size:1.8rem}
+
+/* Bottom sheet */
+.dock-space{height:9rem}
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--bg);border-top:3px solid var(--line);padding:.8rem 1rem calc(.8rem + env(safe-area-inset-bottom))}
+.dock .inner{max-width:820px;margin:0 auto}
+.dock.good{background:var(--leaf-soft);border-color:var(--leaf)}
+.dock.bad{background:var(--berry-soft);border-color:var(--berry)}
+.dock.part{background:var(--sun-soft);border-color:var(--sun)}
+.fb{max-height:48vh;overflow:auto;margin-bottom:.8rem}
+.fb h3{font-size:1.5rem;display:flex;gap:.5rem;align-items:center}
+.fb .gain{font-family:var(--round);font-size:1rem;font-weight:600;margin-left:auto;white-space:nowrap}
+.fb p{margin:.45rem 0 0;font-size:1.15rem;line-height:1.55}
+.fb .ans{font-weight:700}
+.fb .why{background:var(--paper);border-radius:14px;padding:.5rem .8rem;margin-top:.6rem!important}
+
+/* Overlay & modal */
+.overlay{position:fixed;inset:0;z-index:100;background:var(--overlay);display:grid;place-items:center;padding:1rem}
+.modal{background:var(--paper);border-radius:30px;border:3px solid var(--line);padding:1.5rem;max-width:30rem;width:100%;text-align:center;display:grid;gap:1rem;max-height:92vh;overflow:auto}
+.modal h2{font-size:1.7rem}
+.modal p{margin:0;font-size:1.15rem;color:var(--ink-soft)}
+.modal .bot{width:170px;margin:0 auto;display:block}
+
+/* Results */
+.result-head{text-align:center;padding:1rem 0}
+.big-stars{font-size:3.4rem;letter-spacing:.3rem;line-height:1}
+.big-stars span{display:inline-block}
+.big-stars .star-on{animation:pop .5s both}
+.big-stars span:nth-child(2){animation-delay:.2s}
+.big-stars span:nth-child(3){animation-delay:.4s}
+@keyframes pop{0%{transform:scale(0)}70%{transform:scale(1.25)}100%{transform:scale(1)}}
+.result-head .score-big{font-family:var(--round);font-size:2.6rem;font-weight:700;margin:.4rem 0 0}
+.result-head p{margin:.3rem 0;font-size:1.2rem;color:var(--ink-soft)}
+.bars{display:grid;gap:.9rem;margin:1rem 0}
+.bar-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.3rem .8rem;align-items:center;font-size:1.05rem}
+.bar{grid-column:1/-1;height:16px;border-radius:99px;background:var(--paper-2);border:2px solid var(--line);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--leaf);border-radius:99px}
+.review{margin-top:1rem}
+.review details{border:3px solid var(--line);border-radius:20px;background:var(--paper-2);padding:.4rem 1rem}
+.review summary{cursor:pointer;font-family:var(--round);font-weight:600;padding:.4rem 0}
+.review li{margin:.6rem 0;font-size:1.05rem}
+.review ol{padding-left:1.3rem}
+
+/* History & settings */
+.page-head{display:flex;align-items:center;gap:.75rem;padding:.8rem 0}
+.page-head h1{font-size:1.9rem;flex:1}
+.hist{display:grid;gap:1rem}
+.hist .card{padding:1rem 1.1rem}
+.hist table{width:100%;border-collapse:collapse;font-size:1rem;margin-top:.5rem}
+.hist td,.hist th{text-align:left;padding:.35rem .3rem;border-bottom:2px solid var(--paper-2)}
+.hist th{color:var(--ink-soft);font-weight:400;font-size:.9rem}
+.scroll-x{overflow-x:auto}
+.work-card{white-space:pre-wrap;font-size:1.15rem;line-height:1.7;background:var(--paper-2);border-radius:18px;padding:.8rem 1rem;margin:.6rem 0 0}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(11rem,1fr));gap:.8rem;margin-top:.6rem}
+.gallery figure{margin:0}
+.gallery img{width:100%;border-radius:16px;border:3px solid var(--line);background:#fff;display:block}
+.gallery figcaption{color:var(--ink-soft);font-size:.85rem;margin-top:.25rem;text-align:center}
+.setting{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.8rem 0;border-bottom:2px solid var(--paper-2);flex-wrap:wrap}
+.setting b{font-family:var(--round);font-weight:600;font-size:1.1rem}
+.setting small{display:block;color:var(--ink-soft);font-size:.9rem}
+.seg{display:inline-flex;border:3px solid var(--line);border-radius:999px;overflow:hidden}
+.seg button{border:0;background:transparent;padding:.45rem .95rem;cursor:pointer;font-family:var(--round);font-weight:600;min-height:2.6rem}
+.seg button[aria-pressed="true"]{background:var(--leaf);color:var(--on-leaf)}
+
+@media (max-width:520px){
+  :root{font-size:18px}
+  :root[data-size="big"]{font-size:21px}
+  .hero h1{font-size:2.1rem}
+  .card{padding:1rem .85rem 1.2rem;border-radius:24px}
+  .setcard{grid-template-columns:auto minmax(0,1fr)}
+  .setcard .go{grid-column:1/-1;text-align:right}
+  .m-item{font-size:.98rem;padding:.4rem .55rem}
+  .m-item.left{font-size:1.02rem;flex-direction:column;justify-content:center;gap:.2rem;text-align:center}
+  .match{column-gap:2.4rem}
+  .qtext{font-size:1.35rem}
+  .ord{font-size:.98rem;padding:.5rem .6rem;gap:.5rem}
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<main id="app" class="wrap" aria-live="polite"></main>
+<div id="dock" class="dock hidden"><div class="inner" id="dockInner"></div></div>
+<div id="layer"></div>
+<script>
+/* ==========================================================================
+   CONTENT — 6 sets for Year 3 / Year 4, built from the SG NEXT review sheets:
+   subject & object pronouns, job-title vocabulary, word families,
+   "to + verb" grammar, reading comprehension, 2D/3D shapes, and the
+   optical-illusion "look carefully and explain" work.
+   ========================================================================== */
+const SUBJ = 'Subject pronouns do the action: I, you, he, she, it, we, they.';
+const OBJ  = 'Object pronouns receive the action: me, you, him, her, it, us, them.';
+const TOV  = 'After want, hope, plan, try, need, learn and decide we use "to" plus the plain verb: wanted to go, hoped to win.';
+const EROR = 'Many job words are the verb plus -er or -or: invent → inventor, build → builder, teach → teacher.';
+
+const SETS = [
+/* ---------------------------- SET 1 ---------------------------- */
+{
+  id:1, title:'Sky Riders', emoji:'✈️', about:'Ibn Firnas and the Wright brothers',
+  story:{title:'The Dream of Flying', text:[
+    "For thousands of years people watched birds in the sky and wished they could fly too. More than a thousand years ago, in Spain, a clever man named Abbas Ibn Firnas decided to try.",
+    "Ibn Firnas built a suit with wings. He used feathers and light wood. One day he climbed a hill, jumped, and glided through the air for a short time before he landed. He was one of the first people in history to try human flight.",
+    "Hundreds of years later, in America, two brothers kept the same dream alive. Orville and Wilbur Wright owned a bicycle shop. They watched birds, read everything they could find, and tested kites and wings again and again.",
+    "Many of their tries did not work. A wing would snap, or the machine would tip over in the wind. The brothers did not stop. They wrote down what went wrong and built a better wing the next time.",
+    "In 1903 their aeroplane finally left the ground. The first flight lasted only twelve seconds, but it changed the world for ever. Ibn Firnas and the Wright brothers were not lucky. They were curious, patient and brave."
+  ]},
+  sections:[
+    {key:'pronouns', items:[
+      {t:'choice', prompt:'Pick the right pronoun.', text:'___ built a pair of wings out of feathers and wood.', opts:['He','Him'], ans:0,
+        explain:'"He" is the one doing the building, so we need a subject pronoun. A sentence never starts with "him". ' + SUBJ},
+      {t:'choice', prompt:'Pick the right pronoun.', text:'A big crowd watched ___ jump from the hill.', opts:['he','him'], ans:1,
+        explain:'The crowd does the watching. Ibn Firnas receives the watching, so after the verb we use "him". ' + OBJ},
+      {t:'sort', prompt:'Drag each pronoun into the right box.', bins:[['Doer','does the action'],['Getter','receives the action']],
+        chips:[['I',0],['them',1],['she',0],['us',1],['they',0],['him',1]],
+        explain:'I, she and they can start a sentence and do the action. Them, us and him come after a verb and receive the action.'},
+      {t:'build', prompt:'Tap the words to build the sentence.', words:['Wilbur','handed','me','the map.'],
+        explain:'Wilbur is the doer, so he comes first. "Me" receives the map, so the object pronoun goes after the verb "handed".'}
+    ]},
+    {key:'jobs', items:[
+      {t:'match', prompt:'Draw a line from each job to what that person does.',
+        left:[{label:'inventor'},{label:'pilot'},{label:'engineer'},{label:'scientist'},{label:'architect'}],
+        right:['creates brand new things','flies an aeroplane','designs and makes machines','studies nature and does experiments','designs houses and buildings'],
+        explain:'Hunt for the clue word inside the job: invent → inventor, machine → engineer, building → architect.'},
+      {t:'type', prompt:'Type the job word.', text:'A person who teaches children at school is a ______.',
+        accept:['teacher'], hint:'It is the verb "teach" with -er on the end.',
+        explain:'teach + er = teacher. ' + EROR},
+      {t:'choice', prompt:'Which job word fits best?', long:true,
+        text:'Ibn Firnas made a flying suit that nobody had ever made before. He was an ______.',
+        opts:['inventor','athlete','farmer'], ans:0,
+        explain:'An inventor makes something new that did not exist before. That is exactly what Ibn Firnas did with his wings.'}
+    ]},
+    {key:'wordfam', items:[
+      {t:'type', prompt:'Complete the word family.', text:'to invent → the PERSON who does it is an ______.',
+        accept:['inventor'], hint:'Take off the "to" and add -or.',
+        explain:'invent + or = inventor. ' + EROR},
+      {t:'spell', prompt:'Spell the missing word.', clue:'to invent → the THING that gets made is an ...', ans:'invention',
+        explain:'invent + ion = invention. Lots of verbs make a "thing" word with -ion: act → action, collect → collection.'},
+      {t:'type', prompt:'Complete the word family.', text:'to build → the PERSON who does it is a ______.',
+        accept:['builder'], hint:'Take off the "to" and add -er.',
+        explain:'build + er = builder. The thing they make is a building.'}
+    ]},
+    {key:'grammar', items:[
+      {t:'type', prompt:'Write "to" and the correct verb.', text:'Ibn Firnas wanted ______ (fly) like a bird.',
+        accept:['to fly'], hint:'Two words. The first one is "to".',
+        explain:'After "wanted" we use to + the plain verb: wanted to fly. ' + TOV},
+      {t:'choice', prompt:'Pick the right form.', long:true, text:'The Wright brothers hoped ___ a machine with an engine.',
+        opts:['to build','building','builds'], ans:0,
+        explain:'"Hoped" is followed by to + verb, so it is "hoped to build". ' + TOV},
+      {t:'fill', prompt:'Drag the right "to + verb" into each gap.',
+        lines:['Wilbur wanted {to test} the new wings.','Orville tried {to fix} the broken engine.','They decided {to work} together every single day.'],
+        decoys:['to sleep','to shout'],
+        explain:'You test wings, you fix an engine and you work together. The word after "to" must make sense in the sentence.'},
+      {t:'build', prompt:'Tap the words to build the sentence.', words:['My sister','plans','to become','an engineer.'],
+        explain:'"Plans" is one of the verbs that takes to + verb: plans to become. ' + TOV}
+    ]},
+    {key:'reading', items:[
+      {t:'choice', prompt:'Read the story, then answer.', text:'Where did Abbas Ibn Firnas live?', long:true,
+        opts:['In Spain','In America','In Japan'], ans:0,
+        explain:'The first paragraph says it happened "in Spain", more than a thousand years ago.'},
+      {t:'choice', prompt:'True or false?', text:'The Wright brothers had a bicycle shop before they built aeroplanes.',
+        opts:['True','False'], ans:0,
+        explain:'True. The story says Orville and Wilbur owned a bicycle shop. Mending bicycles taught them a lot about light, strong machines.'},
+      {t:'write', prompt:'Write your answer in a sentence.', text:'What did Ibn Firnas use to make his wings?',
+        keys:[['feather','feathers'],['wood','timber']],
+        model:'He made his wings out of feathers and light wood.',
+        explain:'The story names two materials: feathers and light wood. A full answer mentions both.'},
+      {t:'write', prompt:'Write your answer in a sentence.', text:'What did the Wright brothers do when one of their tries did not work?',
+        keys:[['wrote','write','wrote down','note','learn','looked','worked out','what went wrong'],['again','better','built','build','tried','try','next time','kept']],
+        model:'They wrote down what went wrong and built a better wing the next time.',
+        explain:'They did not give up. They studied the mistake, then built a better wing. That is how inventors work.'},
+      {t:'order', prompt:'Put the events in the order they happened.',
+        items:['Ibn Firnas glides from a hill in Spain','Orville and Wilbur open a bicycle shop','The brothers test kites and wings','The first aeroplane flies in 1903'],
+        explain:'Ibn Firnas came first, over a thousand years ago. Then the brothers had their shop, then they tested, and 1903 was last.'}
+    ]},
+    {key:'shapes', items:[
+      {t:'match', prompt:'Draw a line from each shape to its description.',
+        left:[{shape:'circle',label:'circle'},{shape:'square',label:'square'},{shape:'triangle',label:'triangle'},{shape:'rectangle',label:'rectangle'},{shape:'pentagon',label:'pentagon'},{shape:'hexagon',label:'hexagon'}],
+        right:['round, with no straight sides and no corners','4 equal sides and 4 right angles','3 straight sides and 3 corners','4 sides, with opposite sides equal','5 straight sides','6 straight sides'],
+        explain:'Count the sides. "Tri" means 3, "penta" means 5, "hexa" means 6. A circle has no sides at all.'},
+      {t:'choice', prompt:'Tap the octagon.',
+        opts:[{shape:'hexagon',label:'hexagon'},{shape:'octagon',label:'octagon'},{shape:'pentagon',label:'pentagon'},{shape:'rhombus',label:'rhombus'}], ans:1,
+        explain:'An octagon has 8 straight sides. An octopus has 8 arms — "oct" always means eight.'},
+      {t:'spell', prompt:'Spell the shape.', clue:'I have 4 equal sides, but my corners are NOT right angles. People often call me a diamond.', ans:'rhombus',
+        explain:'A rhombus is a pushed-over square: the sides stay equal but the corners lean.'}
+    ]},
+    {key:'think', items:[
+      {t:'choice', prompt:'Look carefully, then answer.', fig:'ebbinghaus', long:true,
+        text:'Look at the two orange circles. What is true?',
+        opts:['They are exactly the same size','The left orange circle is bigger','The right orange circle is bigger'], ans:0,
+        explain:'They are identical. Tap "Measure it" to see the matching guide lines. Your brain judges each orange circle against its neighbours, so the one beside small circles looks bigger.'},
+      {t:'write', prompt:'Explain your thinking.', text:'Why do you think our eyes get tricked by that picture?',
+        keys:[['brain','eye','eyes','mind'],['around','next to','beside','compare','compares','near','neighbour','other circles','bigger','smaller']],
+        model:'Our brain compares each orange circle with the circles around it, so the one with small circles beside it looks bigger.',
+        explain:'Your eyes send the picture, but your brain decides what it means. Brains judge size by comparing, and comparing can fool them.'},
+      {t:'draw', prompt:'Design time!', tip:'Draw a flying machine you would invent. Give it wings, wheels, a propeller — anything you like.',
+        explain:'Every aeroplane in the world started as somebody’s drawing. Yours is saved in My Workshop.'}
+    ]}
+  ]
+},
+/* ---------------------------- SET 2 ---------------------------- */
+{
+  id:2, title:'Hello, Hello!', emoji:'☎️', about:'Bell, the telephone and the smartphone',
+  story:{title:'A New Way to Talk', text:[
+    "A long time ago people did not have telephones. If they wanted to talk to someone far away, they had to write a letter and then wait many days for an answer.",
+    "In 1876 a man named Alexander Graham Bell invented the telephone. His machine could carry a person's voice along a wire. The very first words he spoke on it were to his helper, Mr Watson, who was sitting in the next room.",
+    "At first only a few rich people owned a telephone. Slowly, wires were strung from town to town, and more and more families could ring each other up.",
+    "Today almost every family has a phone, and many people carry a small one in their pocket called a smartphone. It can send pictures, show maps and answer questions too.",
+    "Bell's invention changed the way people talk to each other for ever. A message that once took days now takes less than a second."
+  ]},
+  sections:[
+    {key:'pronouns', items:[
+      {t:'choice', prompt:'Pick the right pronoun.', text:'___ are learning about inventions this week.', opts:['We','Us'], ans:0,
+        explain:'"We" are the ones doing the learning, and the doer at the start of a sentence is a subject pronoun. ' + SUBJ},
+      {t:'choice', prompt:'Pick the right pronoun.', text:'Mr Watson heard Bell and answered ___ at once.', opts:['he','him'], ans:1,
+        explain:'Mr Watson does the answering. Bell receives it, so we use the object pronoun "him". ' + OBJ},
+      {t:'sort', prompt:'Drag each pronoun into the right box.', bins:[['Doer','does the action'],['Getter','receives the action']],
+        chips:[['he',0],['me',1],['we',0],['her',1],['you',0],['them',1]],
+        explain:'He, we and you can do the action. Me, her and them receive it. "You" is special — it can do both jobs!'},
+      {t:'build', prompt:'Tap the words to build the sentence.', words:['The teacher','showed','us','an old telephone.'],
+        explain:'The teacher is the doer. "Us" receives the showing, so the object pronoun follows the verb "showed".'}
+    ]},
+    {key:'jobs', items:[
+      {t:'sort', prompt:'Sort each job into the right workshop.', bins:[['Works with people','helps or teaches people'],['Works with things','builds, designs or studies']],
+        chips:[['teacher',0],['dentist',0],['engineer',1],['architect',1],['nurse',0],['inventor',1]],
+        explain:'Teachers, dentists and nurses spend their day helping people. Engineers, architects and inventors spend theirs designing and making.'},
+      {t:'type', prompt:'Type the job word.', text:'A person who helps you take care of your teeth is a ______.',
+        accept:['dentist'], hint:'It begins with "dent", which is an old word for tooth.',
+        explain:'"Dent" means tooth, so a dentist is the tooth doctor. The same root hides in "dental".'},
+      {t:'choice', prompt:'Which job word fits best?', long:true,
+        text:'Mr Watson worked beside Bell every day and helped him test the machine. He was Bell’s ______.',
+        opts:['assistant','customer','neighbour'], ans:0,
+        explain:'An assistant is someone who helps another person with their work. The story calls Mr Watson his helper.'}
+    ]},
+    {key:'wordfam', items:[
+      {t:'type', prompt:'Complete the word family.', text:'to teach → the PERSON who does it is a ______.',
+        accept:['teacher'], hint:'Take off the "to" and add -er.',
+        explain:'teach + er = teacher. ' + EROR},
+      {t:'spell', prompt:'Spell the missing word.', clue:'to collect → the GROUP of things you gather is a ...', ans:'collection',
+        explain:'collect + ion = collection. Watch the spelling: collect keeps both of its l’s.'},
+      {t:'type', prompt:'Complete the word family.', text:'to invent → the THING that is made is an ______.',
+        accept:['invention'], hint:'It ends in -ion.',
+        explain:'invent + ion = invention. The person is an inventor and the thing is an invention.'}
+    ]},
+    {key:'grammar', items:[
+      {t:'type', prompt:'Write "to" and the correct verb.', text:'Bell hoped ______ (send) a voice along a wire.',
+        accept:['to send'], hint:'Two words. The first one is "to".',
+        explain:'hoped + to + send. ' + TOV},
+      {t:'choice', prompt:'Pick the right form.', long:true, text:'The students want ___ more about inventions.',
+        opts:['to learn','learning','learns'], ans:0,
+        explain:'"Want" takes to + verb, so it is "want to learn". ' + TOV},
+      {t:'fill', prompt:'Drag the right "to + verb" into each gap.',
+        lines:['Bell needed {to test} his machine in two rooms.','Mr Watson tried {to hear} the very first words.','Families began {to ring} each other every week.'],
+        decoys:['to paint','to swim'],
+        explain:'You test a machine, you hear words and you ring a friend. Check that the verb matches what is really happening.'},
+      {t:'build', prompt:'Tap the words to build the sentence.', words:['We','hope','to make','our school better.'],
+        explain:'"Hope" is followed by to + verb: hope to make. ' + TOV}
+    ]},
+    {key:'reading', items:[
+      {t:'choice', prompt:'Read the story, then answer.', text:'In what year was the telephone invented?',
+        opts:['1876','1903','1976'], ans:0,
+        explain:'The second paragraph gives the year 1876. The Wright brothers flew in 1903, which was much later.'},
+      {t:'choice', prompt:'Read the story, then answer.', long:true, text:'What did people do before telephones if they wanted to talk to someone far away?',
+        opts:['They wrote a letter and waited many days','They sent a text message','They shouted very loudly'], ans:0,
+        explain:'The story says they had to write a letter and then wait many days for an answer.'},
+      {t:'write', prompt:'Write your answer in a sentence.', text:'Who was Alexander Graham Bell’s helper, and where was he when the first words were spoken?',
+        keys:[['watson'],['next room','other room','another room','room next door','next door']],
+        model:'His helper was Mr Watson, and he was in the next room.',
+        explain:'Mr Watson was in the next room — close enough to prove that a voice really could travel down a wire.'},
+      {t:'write', prompt:'Write your answer in a sentence.', text:'What do many people carry in their pocket today instead of writing letters?',
+        keys:[['smartphone','smart phone','phone','mobile']],
+        model:'Many people carry a small telephone called a smartphone.',
+        explain:'The story calls it a smartphone: a telephone small enough for a pocket that also shows maps and pictures.'},
+      {t:'order', prompt:'Put the events in the order they happened.',
+        items:['People write letters and wait many days','Bell invents the telephone in 1876','Wires are strung from town to town','People carry smartphones in their pockets'],
+        explain:'The story moves forward in time: letters first, then Bell’s invention, then the wires spreading, and smartphones today.'}
+    ]},
+    {key:'shapes', items:[
+      {t:'match', prompt:'Draw a line from each shape to its description.',
+        left:[{shape:'octagon',label:'octagon'},{shape:'oval',label:'oval'},{shape:'rhombus',label:'rhombus'},{shape:'semicircle',label:'semicircle'},{shape:'trapezium',label:'trapezium'}],
+        right:['8 straight sides','like a circle that has been stretched','4 equal sides that lean over','exactly half of a circle','4 sides, with just one pair that stay the same distance apart'],
+        explain:'A trapezium has exactly one pair of parallel sides — two sides that never get closer, like railway tracks.'},
+      {t:'choice', prompt:'Tap the oval.',
+        opts:[{shape:'circle',label:'circle'},{shape:'oval',label:'oval'},{shape:'semicircle',label:'semicircle'},{shape:'rhombus',label:'rhombus'}], ans:1,
+        explain:'An oval is longer one way than the other, like an egg. A circle is the same width whichever way you measure it.'},
+      {t:'spell', prompt:'Spell the shape.', clue:'I have 7 straight sides. I am one more than a hexagon.', ans:'heptagon',
+        explain:'"Hepta" means seven, so a heptagon has 7 sides. Six is hexa, seven is hepta, eight is octa.'}
+    ]},
+    {key:'think', items:[
+      {t:'choice', prompt:'Look carefully, then answer.', fig:'mullerlyer', long:true,
+        text:'Look at the two black lines. Which one is longer?',
+        opts:['They are exactly the same length','The top line is longer','The bottom line is longer'], ans:0,
+        explain:'The two lines are the same. Tap "Measure it" to see the guides line up. The arrow heads point outwards on one line and inwards on the other, and your brain reads the outward arrows as "further away, so longer".'},
+      {t:'write', prompt:'Explain your thinking.', text:'The lines are the same length. So why does one look longer than the other?',
+        keys:[['arrow','arrows','point','pointing','end','ends','head','heads'],['brain','trick','tricks','look','looks','seem','seems','longer','shorter']],
+        model:'The arrows at the ends point different ways, and that makes my brain think one line is longer.',
+        explain:'Nothing about the lines changed — only the arrows. That is the clue that the trick is happening inside your brain, not in the picture.'},
+      {t:'free', prompt:'Write about your own invention.', minWords:12,
+        tip:'Invent a new way for people to talk to each other. Write 2 or 3 sentences: What is it called? What does it do? Why is it useful?',
+        explain:'A good invention answers a real problem. Bell’s problem was "letters are too slow". What problem does yours solve?'}
+    ]}
+  ]
+},
+/* ---------------------------- SET 3 ---------------------------- */
+{
+  id:3, title:'Bright Ideas', emoji:'💡', about:'Edison and the electric light',
+  story:{title:'The Man Who Would Not Stop', text:[
+    "Before electric lights, people lit their homes with candles and oil lamps. They were dim and smoky, and it was easy to knock one over and start a fire.",
+    "Thomas Edison wanted to make a lamp that ran on electricity and was safe enough for every home. He opened a large workshop in America and filled it with clever helpers and thousands of tools.",
+    "The hard part was the thin thread inside the bulb, called the filament. It had to glow brightly without burning away in a few seconds. Edison and his team tested material after material: cotton thread, paper, and even bamboo.",
+    "In 1879 they finally found one that glowed steadily for hours. People said Edison had failed a thousand times before that. He answered that he had not failed at all — he had simply found a thousand ways that did not work.",
+    "Edison invented many other things too. One of them was the phonograph, the first machine in the world that could record a sound and then play it back."
+  ]},
+  sections:[
+    {key:'pronouns', items:[
+      {t:'choice', prompt:'Pick the right pronoun.', text:'Edison worked late into the night, and ___ did not give up.', opts:['he','him'], ans:0,
+        explain:'After "and" a new little sentence begins, and the doer of that sentence needs a subject pronoun. ' + SUBJ},
+      {t:'choice', prompt:'Pick the right pronoun.', text:'Mum bought ___ a torch for the camping trip.', opts:['I','me'], ans:1,
+        explain:'Mum does the buying. The torch comes to me, so I receive the action and we use "me". ' + OBJ},
+      {t:'sort', prompt:'Drag each pronoun into the right box.', bins:[['Doer','does the action'],['Getter','receives the action']],
+        chips:[['she',0],['him',1],['we',0],['me',1],['they',0],['her',1]],
+        explain:'Try each word in "___ ran fast". If it sounds right there it is a doer. If it only sounds right in "Tom saw ___", it is a getter.'},
+      {t:'build', prompt:'Tap the words to build the sentence.', words:['Edison','gave','them','a difficult job.'],
+        explain:'Edison is the doer and goes first. "Them" receives the job, so the object pronoun follows the verb "gave".'}
+    ]},
+    {key:'jobs', items:[
+      {t:'match', prompt:'Draw a line from each job to what that person does.',
+        left:[{label:'inventor'},{label:'assistant'},{label:'electrician'},{label:'scientist'},{label:'shopkeeper'}],
+        right:['thinks of new machines and makes them','helps another person with their work','fits the wires that make lights and plugs work','tests ideas carefully to find out what is true','sells things in a shop'],
+        explain:'An electrician works with electricity, an assistant assists, and a scientist does the testing. The job word usually hides its own clue.'},
+      {t:'type', prompt:'Type the job word.', text:'A person who designs and makes machines is an ______.',
+        accept:['engineer'], hint:'It starts with "eng", like "engine".',
+        explain:'Engineer and engine come from the same old word. Engineers design engines, bridges, robots and much more.'},
+      {t:'choice', prompt:'Which word fits best?', long:true,
+        text:'Edison had a big room full of tools and helpers where he tested every idea. That room is called a ______.',
+        opts:['laboratory','library','playground'], ans:0,
+        explain:'A laboratory (or "lab") is a room built for testing and experiments. A library is for books.'}
+    ]},
+    {key:'wordfam', items:[
+      {t:'type', prompt:'Complete the word family.', text:'to design → the PERSON who does it is a ______.',
+        accept:['designer'], hint:'Take off the "to" and add -er.',
+        explain:'design + er = designer. The thing they make is also called a design.'},
+      {t:'spell', prompt:'Spell the missing word.', clue:'to act → the THING that somebody does is an ...', ans:'action',
+        explain:'act + ion = action. The -ion ending turns a doing word into a thing word.'},
+      {t:'type', prompt:'Complete the word family.', text:'to help → the PERSON who does it is a ______.',
+        accept:['helper'], hint:'Take off the "to" and add -er.',
+        explain:'help + er = helper. Edison had a whole workshop full of them.'}
+    ]},
+    {key:'grammar', items:[
+      {t:'type', prompt:'Write "to" and the correct verb.', text:'Thomas Edison wanted ______ (create) a useful invention.',
+        accept:['to create'], hint:'Two words. The first one is "to".',
+        explain:'wanted + to + create. ' + TOV},
+      {t:'choice', prompt:'Pick the right form.', long:true, text:'The young scientist hoped ___ something interesting.',
+        opts:['to discover','discovering','discovers'], ans:0,
+        explain:'"Hoped" is always followed by to + verb: hoped to discover. ' + TOV},
+      {t:'fill', prompt:'Drag the right "to + verb" into each gap.',
+        lines:['Edison needed {to find} the perfect thread.','His team tried {to test} one more material.','They refused {to stop} before the bulb worked.'],
+        decoys:['to dance','to forget'],
+        explain:'You find a thread, you test a material and you stop working. Read the whole sentence before you choose.'},
+      {t:'build', prompt:'Tap the words to build the sentence.', words:['The inventor','tried','to solve','the problem.'],
+        explain:'"Tried" takes to + verb: tried to solve. ' + TOV}
+    ]},
+    {key:'reading', items:[
+      {t:'choice', prompt:'Read the story, then answer.', long:true, text:'What did people use for light before electric lamps?',
+        opts:['Candles and oil lamps','Torches and batteries','Computer screens'], ans:0,
+        explain:'The first paragraph says homes were lit by candles and oil lamps, which were dim and smoky.'},
+      {t:'choice', prompt:'True or false?', text:'Edison worked completely alone.', opts:['True','False'], ans:1,
+        explain:'False. The story says he filled a large workshop with clever helpers. Big inventions are usually team work.'},
+      {t:'write', prompt:'Write your answer in a sentence.', text:'What is the thin thread inside a light bulb called, and what must it do?',
+        keys:[['filament'],['glow','glows','glowed','shine','shines','light','bright','burn']],
+        model:'It is called the filament, and it must glow brightly without burning away.',
+        explain:'Filament is the science word for that thread. Getting one to glow for hours was the whole problem Edison had to solve.'},
+      {t:'write', prompt:'Write your answer in a sentence.', text:'People said Edison had failed a thousand times. What did he say instead?',
+        keys:[['thousand','1000','many','lots'],['not work','did not work','didnt work','would not work','ways','not fail','never failed']],
+        model:'He said he had not failed, but had found a thousand ways that did not work.',
+        explain:'That is a famous way of thinking: a try that goes wrong still teaches you something, so it is not wasted.'},
+      {t:'order', prompt:'Put the events in the order they happened.',
+        items:['Homes are lit by candles and oil lamps','Edison opens a workshop full of helpers','The team tests thousands of materials','A bulb glows steadily for hours in 1879'],
+        explain:'The story runs forwards: the old way first, then the workshop, then all the testing, and success last of all.'}
+    ]},
+    {key:'shapes', items:[
+      {t:'sort', prompt:'Sort each shape by how many sides it has.', bins:[['4 sides','exactly four'],['More than 4 sides','five or more']],
+        chips:[['square',0],['rhombus',0],['trapezium',0],['pentagon',1],['hexagon',1],['octagon',1]],
+        explain:'Squares, rhombuses and trapeziums all have 4 sides — we call them quadrilaterals. Pentagons, hexagons and octagons have more.'},
+      {t:'choice', prompt:'Tap the shape with 6 straight sides.',
+        opts:[{shape:'pentagon',label:'pentagon'},{shape:'hexagon',label:'hexagon'},{shape:'octagon',label:'octagon'},{shape:'heptagon',label:'heptagon'}], ans:1,
+        explain:'A hexagon has 6 sides. Bees build their honeycomb out of hexagons because they fit together with no gaps.'},
+      {t:'spell', prompt:'Spell the shape.', clue:'I have 5 straight sides and 5 corners.', ans:'pentagon',
+        explain:'"Penta" means five, so a pentagon has 5 sides. A football has black pentagons on it.'}
+    ]},
+    {key:'think', items:[
+      {t:'choice', prompt:'Look carefully, then answer.', fig:'ponzo', long:true,
+        text:'Look at the two yellow bars. Which one is longer?',
+        opts:['They are exactly the same length','The top bar is longer','The bottom bar is longer'], ans:0,
+        explain:'Both bars are identical. Tap "Measure it" to check. The slanted lines look like a long road going away from you, so your brain decides the top bar must be further away — and anything far away that still looks big must really be huge.'},
+      {t:'write', prompt:'Explain your thinking.', text:'How do the two slanted lines change what you think you see?',
+        keys:[['line','lines','road','track','rail'],['far','further','distance','away','behind','bigger','longer','depth','deep']],
+        model:'The slanted lines look like a road going far away, so my brain thinks the top bar is further away and must be bigger.',
+        explain:'Your brain uses "lines that come together" as a clue for distance. Artists use the very same trick to make a flat painting look deep.'},
+      {t:'free', prompt:'Write about never giving up.', minWords:12,
+        tip:'Edison found a thousand ways that did not work. Write 2 or 3 sentences about a time you kept trying at something hard. What was it? What made you carry on?',
+        explain:'Every inventor in this app has the same habit: they treat a try that goes wrong as a clue, not as a full stop.'}
+    ]}
+  ]
+},
+/* ---------------------------- SET 4 ---------------------------- */
+{
+  id:4, title:'Tricky Eyes', emoji:'👁️', about:'Optical illusions and how you see',
+  story:{title:'Why Your Eyes Get Tricked', text:[
+    "Your eyes work a little like two small cameras. They catch the light that bounces off everything around you and send a message along a nerve to your brain.",
+    "But your eyes do not decide what you are looking at. Your brain does that. It takes the message and guesses what it means, and it guesses incredibly fast — in less time than a blink.",
+    "Most of the time the guess is right. Now and then it is wrong, and that is an optical illusion: a picture that tricks your eyes and your brain at the same time.",
+    "Scientists study illusions because a wrong guess shows how the guessing works. The brain uses clues like size, colour, shadow and lines to work out what is near and what is far.",
+    "The best way to beat an illusion is to measure it. A ruler has no brain, so it cannot be fooled. Look, then guess, then measure — that is how a scientist thinks."
+  ]},
+  sections:[
+    {key:'pronouns', items:[
+      {t:'choice', prompt:'Pick the right pronoun.', text:'___ is looking at the picture very carefully.', opts:['She','Her'], ans:0,
+        explain:'"She" is doing the looking, and the doer at the front of the sentence is a subject pronoun. ' + SUBJ},
+      {t:'choice', prompt:'Pick the right pronoun.', text:'That clever picture tricked ___ completely!', opts:['we','us'], ans:1,
+        explain:'The picture does the tricking and we receive it, so we need the object pronoun "us". ' + OBJ},
+      {t:'sort', prompt:'Drag each pronoun into the right box.', bins:[['Doer','does the action'],['Getter','receives the action']],
+        chips:[['I',0],['her',1],['they',0],['him',1],['he',0],['us',1]],
+        explain:'Doers go in front of the verb, getters come after it: "She helped him" — she is the doer, him is the getter.'},
+      {t:'build', prompt:'Tap the words to build the sentence.', words:['My teacher','showed','her','the two circles.'],
+        explain:'The teacher is the doer. "Her" receives the showing, so the object pronoun comes straight after "showed".'}
+    ]},
+    {key:'jobs', items:[
+      {t:'match', prompt:'Draw a line from each job to what that person does.',
+        left:[{label:'scientist'},{label:'doctor'},{label:'artist'},{label:'photographer'},{label:'optician'}],
+        right:['does experiments to find out what is true','looks after people who are ill','paints and draws pictures','takes photographs with a camera','tests your eyes and makes your glasses'],
+        explain:'Opticians work with eyes, photographers work with light and cameras, and both need to understand how seeing works.'},
+      {t:'type', prompt:'Type the job word.', text:'A person who studies plants, animals and science is a ______.',
+        accept:['scientist'], hint:'It starts with "sci", like "science".',
+        explain:'science + ist = scientist. The ending -ist also gives us artist, dentist and cyclist.'},
+      {t:'choice', prompt:'Which job word fits best?', long:true,
+        text:'Maya draws the plans for a new library before the builders start work. She is an ______.',
+        opts:['architect','optician','inventor'], ans:0,
+        explain:'An architect designs buildings and draws the plans. The builders then follow those plans.'}
+    ]},
+    {key:'wordfam', items:[
+      {t:'type', prompt:'Complete the word family.', text:'to paint → the PERSON who does it is a ______.',
+        accept:['painter'], hint:'Take off the "to" and add -er.',
+        explain:'paint + er = painter. The thing they make is a painting.'},
+      {t:'type', prompt:'Complete the word family.', text:'to drive → the PERSON who does it is a ______.',
+        accept:['driver'], hint:'Drop the e, then add -er.',
+        explain:'drive loses its e and takes -er: driver. The same happens with write → writer and bake → baker.'},
+      {t:'spell', prompt:'Spell the missing word.', clue:'to decide → the choice that you make is a ...', ans:'decision',
+        explain:'decide changes its ending to make decision. Say it slowly: de-ci-sion.'}
+    ]},
+    {key:'grammar', items:[
+      {t:'type', prompt:'Write "to" and the correct verb.', text:'We hope ______ (make) our school a better place.',
+        accept:['to make'], hint:'Two words. The first one is "to".',
+        explain:'hope + to + make. ' + TOV},
+      {t:'choice', prompt:'Pick the right form.', long:true, text:'My sister plans ___ an engineer one day.',
+        opts:['to become','becoming','becomes'], ans:0,
+        explain:'"Plans" takes to + verb: plans to become. ' + TOV},
+      {t:'fill', prompt:'Drag the right "to + verb" into each gap.',
+        lines:['Scientists want {to understand} how the brain guesses.','We tried {to measure} both circles with a ruler.','I need {to look} at that picture again.'],
+        decoys:['to cook','to sing'],
+        explain:'You understand an idea, you measure with a ruler and you look at a picture. Match the verb to what is really happening.'},
+      {t:'build', prompt:'Tap the words to build the sentence.', words:['The whole class','decided','to test','the illusion.'],
+        explain:'"Decided" takes to + verb: decided to test. ' + TOV}
+    ]},
+    {key:'reading', items:[
+      {t:'choice', prompt:'Read the story, then answer.', text:'In the story, what are your eyes compared to?',
+        opts:['Two small cameras','Two bright torches','Two mirrors'], ans:0,
+        explain:'The story says your eyes work a little like two small cameras that catch light.'},
+      {t:'choice', prompt:'True or false?', text:'Your eyes decide what you are seeing.', opts:['True','False'], ans:1,
+        explain:'False. The eyes only catch the light and pass the message on. It is your BRAIN that decides what the picture means.'},
+      {t:'write', prompt:'Write your answer in a sentence.', text:'What is an optical illusion?',
+        keys:[['picture','image','drawing','thing you see'],['trick','tricks','tricked','fool','fools','wrong','not real','not true']],
+        model:'An optical illusion is a picture that tricks your eyes and your brain.',
+        explain:'The word "optical" means to do with seeing, and an "illusion" is something that is not what it seems.'},
+      {t:'write', prompt:'Write your answer in a sentence.', text:'What is the best way to find out the truth about an illusion?',
+        keys:[['measure','measuring','ruler','check','checking','test']],
+        model:'The best way is to measure it, because a ruler cannot be fooled.',
+        explain:'Guessing is fine, but measuring is proof. Look, guess, then measure — that is how a scientist thinks.'},
+      {t:'order', prompt:'Put the steps of seeing in the right order.',
+        items:['Light bounces off an object into your eyes','Your eyes send a message along a nerve','Your brain guesses what the message means','Sometimes the guess is wrong and you see an illusion'],
+        explain:'Seeing is a chain: light, then eyes, then brain, then the guess. The illusion happens at the very last step.'}
+    ]},
+    {key:'shapes', items:[
+      {t:'match', prompt:'These are solid (3D) shapes. Draw a line from each one to its description.',
+        left:[{shape:'cube',label:'cube'},{shape:'cylinder',label:'cylinder'},{shape:'cone',label:'cone'},{shape:'sphere',label:'sphere'},{shape:'pyramid',label:'pyramid'}],
+        right:['6 square faces, 12 edges and 8 corners','2 flat circle faces and 1 curved face','1 flat circle face and a point at the top','perfectly round, with 1 curved surface and no corners','a square base and 4 triangle faces'],
+        explain:'Flat shapes have sides; solid shapes have faces, edges and vertices (corners). A tin of beans is a cylinder and a party hat is a cone.'},
+      {t:'choice', prompt:'Tap the cylinder.',
+        opts:[{shape:'cube',label:'cube'},{shape:'cylinder',label:'cylinder'},{shape:'cone',label:'cone'},{shape:'sphere',label:'sphere'}], ans:1,
+        explain:'A cylinder has a circle at the top, a circle at the bottom and a curved side — exactly like a tin can.'},
+      {t:'spell', prompt:'Spell the solid shape.', clue:'I am a solid shape with 6 square faces. A dice has my shape.', ans:'cube',
+        explain:'A cube has 6 square faces, 12 edges and 8 vertices. Every face is exactly the same size.'}
+    ]},
+    {key:'think', items:[
+      {t:'choice', prompt:'Look carefully, then answer.', fig:'contrast', long:true,
+        text:'Look at the two small grey squares. What is true about their colour?',
+        opts:['They are exactly the same grey','The left one is a lighter grey','The right one is a lighter grey'], ans:0,
+        explain:'They are printed in exactly the same grey. Tap "Measure it" to slide a matching bar between them. Your brain judges brightness by comparing with the background, so grey on black looks lighter than grey on white.'},
+      {t:'write', prompt:'Explain your thinking.', text:'The two squares are the same grey. Why does one look lighter than the other?',
+        keys:[['background','behind','around','dark','black','light','white','next to'],['brain','compare','compares','comparing','look','looks','seem','seems','trick']],
+        model:'The backgrounds behind them are different, and my brain compares each square with the colour around it.',
+        explain:'Your brain almost never judges a colour on its own. It always asks "compared with what?" — which is useful in real life, and fooled by this picture.'},
+      {t:'draw', prompt:'Design time!', tip:'Draw your own eye trick. Try two shapes that are really the same size but look different, or a pattern that seems to move.',
+        explain:'Artists have used illusions for hundreds of years to make flat walls look like deep rooms. Yours is saved in My Workshop.'}
+    ]}
+  ]
+},
+/* ---------------------------- SET 5 ---------------------------- */
+{
+  id:5, title:'Wheels and Builders', emoji:'⚙️', about:'The wheel, bicycles and the people who build',
+  story:{title:'The Shape That Changed Everything', text:[
+    "The wheel is one of the oldest inventions in the world. It was made more than five thousand years ago in a land called Mesopotamia.",
+    "Here is the surprise: the first wheels were not used for travelling at all. They lay flat and spun round, and potters used them to shape wet clay into smooth round pots.",
+    "Hundreds of years later somebody stood a wheel on its edge, pushed a bar called an axle through the middle, and joined two wheels together. Now a heavy load could roll along instead of being dragged.",
+    "In 1817 a German inventor named Karl von Drais built a wooden machine with two wheels, one behind the other. It had no pedals at all — you pushed yourself along the ground with your feet. People called it the running machine, and it was the great-grandparent of the bicycle.",
+    "Today wheels are everywhere: under cars and buses, inside clocks and computers, and in the gears of a bicycle. Every single one is the same simple shape — a circle."
+  ]},
+  sections:[
+    {key:'pronouns', items:[
+      {t:'choice', prompt:'Pick the right pronoun.', text:'The engineers finished the bridge, and ___ were very proud.', opts:['they','them'], ans:0,
+        explain:'After "and" a new little sentence starts, and the doer of it needs a subject pronoun. ' + SUBJ},
+      {t:'choice', prompt:'Pick the right pronoun.', text:'Grandpa taught ___ how to ride a bicycle.', opts:['I','me'], ans:1,
+        explain:'Grandpa does the teaching and I receive it, so "me" is right. A good check: you would never say "taught I".'},
+      {t:'sort', prompt:'Drag each pronoun into the right box.', bins:[['Doer','does the action'],['Getter','receives the action']],
+        chips:[['you',0],['them',1],['I',0],['her',1],['we',0],['him',1]],
+        explain:'Say each word in "___ pushed the cart" and then in "The cart hit ___". The first slot needs a doer, the second needs a getter.'},
+      {t:'build', prompt:'Tap the words to build the sentence.', words:['Karl','pushed','it','along the road.'],
+        explain:'Karl is the doer. "It" stands for the running machine and receives the push, so it comes after the verb.'}
+    ]},
+    {key:'jobs', items:[
+      {t:'sort', prompt:'Sort each job into the right part of the work.', bins:[['Plans it first','designs and draws'],['Makes or mends it','works with tools']],
+        chips:[['architect',0],['engineer',0],['designer',0],['builder',1],['mechanic',1],['plumber',1]],
+        explain:'Architects, engineers and designers put the idea on paper first. Builders, mechanics and plumbers turn that paper into something real.'},
+      {t:'type', prompt:'Type the job word.', text:'A person who mends cars and machines is a ______.',
+        accept:['mechanic'], hint:'It starts with "mech", like "machine".',
+        explain:'Machine and mechanic share the same beginning. A mechanic is the machine expert.'},
+      {t:'choice', prompt:'Which job would you ask?', long:true,
+        text:'Your town needs a safe new bridge over the river. Who should design it?',
+        opts:['an engineer','a dentist','a photographer'], ans:0,
+        explain:'Engineers work out how to make things strong and safe. Building a bridge needs someone who understands weight and materials.'}
+    ]},
+    {key:'wordfam', items:[
+      {t:'type', prompt:'Complete the word family.', text:'to ride → the PERSON who does it is a ______.',
+        accept:['rider'], hint:'Drop the e, then add -er.',
+        explain:'ride loses its e and takes -er: rider. Same pattern as drive → driver and bake → baker.'},
+      {t:'spell', prompt:'Spell the missing word.', clue:'to build → the THING that gets built is a ...', ans:'building',
+        explain:'build + ing = building. The person is a builder and the thing is a building.'},
+      {t:'type', prompt:'Complete the word family.', text:'to travel → the PERSON who does it is a ______.',
+        accept:['traveller','traveler'], hint:'Take off the "to" and add -er. In British English the l doubles.',
+        explain:'British English writes traveller with two l’s and American English writes traveler with one. Both are correct here.'}
+    ]},
+    {key:'grammar', items:[
+      {t:'type', prompt:'Write "to" and the correct verb.', text:'Karl wanted ______ (move) faster than walking.',
+        accept:['to move'], hint:'Two words. The first one is "to".',
+        explain:'wanted + to + move. ' + TOV},
+      {t:'choice', prompt:'Pick the right form.', long:true, text:'The builders need ___ the wall before the rain comes.',
+        opts:['to finish','finishing','finishes'], ans:0,
+        explain:'"Need" takes to + verb: need to finish. ' + TOV},
+      {t:'fill', prompt:'Drag the right "to + verb" into each gap.',
+        lines:['The potter wanted {to shape} a round clay pot.','Traders learned {to roll} heavy loads on carts.','Karl decided {to add} a second wheel.'],
+        decoys:['to swim','to sleep'],
+        explain:'You shape clay, you roll a load and you add a wheel. Each verb has to match the job in that sentence.'},
+      {t:'build', prompt:'Tap the words to build the sentence.', words:['They','hope','to build','a faster bicycle.'],
+        explain:'"Hope" takes to + verb: hope to build. ' + TOV}
+    ]},
+    {key:'reading', items:[
+      {t:'choice', prompt:'Read the story, then answer.', text:'What were the very first wheels used for?',
+        opts:['Shaping clay pots','Racing chariots','Riding bicycles'], ans:0,
+        explain:'The second paragraph says potters laid wheels flat and spun them to shape wet clay.'},
+      {t:'choice', prompt:'True or false?', text:'The running machine had pedals.', opts:['True','False'], ans:1,
+        explain:'False. The story says it had no pedals at all — you pushed yourself along with your feet.'},
+      {t:'write', prompt:'Write your answer in a sentence.', text:'What difference did joining two wheels with an axle make to moving a heavy load?',
+        keys:[['roll','rolled','rolling','rolls'],['drag','dragged','dragging','pull','pulled','easier','heavy','carry']],
+        model:'A heavy load could roll along instead of being dragged.',
+        explain:'Rolling beats dragging because far less of the load rubs against the ground. That rubbing is called friction.'},
+      {t:'write', prompt:'Write your answer in a sentence.', text:'Who built the running machine, and in what year?',
+        keys:[['drais','karl'],['1817']],
+        model:'Karl von Drais built the running machine in 1817.',
+        explain:'Karl von Drais, 1817. His wooden two-wheeler came before pedals were ever added.'},
+      {t:'order', prompt:'Put the events in the order they happened.',
+        items:['Potters spin flat wheels to shape clay','Someone joins two wheels with an axle','Karl von Drais builds the running machine','Bicycles and cars fill the roads'],
+        explain:'Pots came first, then carts, then the running machine in 1817, and modern roads last of all.'}
+    ]},
+    {key:'shapes', items:[
+      {t:'match', prompt:'Draw a line from each shape to the fact that fits it.',
+        left:[{shape:'square',label:'square'},{shape:'rectangle',label:'rectangle'},{shape:'circle',label:'circle'},{shape:'triangle',label:'triangle'},{shape:'trapezium',label:'trapezium'}],
+        right:['4 right angles AND 4 equal sides','4 right angles, with opposite sides equal','no straight sides and no corners','3 straight sides and 3 corners','4 sides, with exactly one pair that are parallel'],
+        explain:'A square is a special rectangle: it has the 4 right angles AND all four sides the same length.'},
+      {t:'choice', prompt:'A wheel is a circle. How many corners does a circle have?',
+        opts:['0','1','4'], ans:0,
+        explain:'A circle has no corners and no straight sides at all, which is exactly why it rolls so smoothly.'},
+      {t:'spell', prompt:'Spell the shape.', clue:'I have 4 sides and just one pair of parallel sides. I look like a plant pot from the front.', ans:'trapezium',
+        explain:'Parallel sides stay exactly the same distance apart for ever, like railway tracks. A trapezium has one such pair.'}
+    ]},
+    {key:'think', items:[
+      {t:'choice', prompt:'Look carefully, then answer.', fig:'zollner', long:true,
+        text:'Look at the four long lines. Are they parallel?',
+        opts:['Yes, they are perfectly parallel','No, they lean towards each other','No, they bend in the middle'], ans:0,
+        explain:'They really are parallel. Tap "Measure it" to lay straight guides over them. The short crossing strokes lean one way on one line and the other way on the next, and your brain pulls the long line along with them.'},
+      {t:'write', prompt:'Explain your thinking.', text:'What is it about the picture that makes the long lines look crooked?',
+        keys:[['short','small','little','crossing','cross','stroke','strokes','marks','lines on top','slant','slanted','angle','angles'],['lean','leaning','tilt','tilted','crooked','bent','slope','sloping','look','looks','seem','trick']],
+        model:'The short strokes crossing each line slant different ways, and that makes the long lines look as if they tilt.',
+        explain:'Take the short strokes away and the illusion vanishes completely. Whenever something looks odd, ask what is sitting NEXT to it.'},
+      {t:'free', prompt:'Write about your own invention.', minWords:12,
+        tip:'Invent a machine with wheels that would help somebody in your school or your street. Write 2 or 3 sentences: What is it called? What does it do? Why is it useful?',
+        explain:'The best inventions start with a real problem. Look around your school — what is heavy, slow or awkward to move?'}
+    ]}
+  ]
+},
+/* ---------------------------- SET 6 ---------------------------- */
+{
+  id:6, title:'The Tiny World', emoji:'🔬', about:'Microscopes, germs and great scientists',
+  story:{title:'The World Too Small To See', text:[
+    "For most of history nobody knew that tiny living things existed. They were far too small for human eyes to spot, so people simply had no idea they were there.",
+    "In the 1670s a Dutch cloth merchant named Antonie van Leeuwenhoek ground tiny glass lenses and built his own microscope. When he looked at a single drop of pond water he could hardly believe what he saw: the water was crowded with tiny creatures swimming about.",
+    "Two hundred years later a French scientist named Louis Pasteur showed that some of those tiny living things — we call them germs — can make people ill. He also found that heating milk gently kills the germs, which is why the milk we drink today is safe.",
+    "Marie Curie, a scientist born in Poland, spent years studying a strange glowing material called radium. In 1903 she became the first woman ever to win a Nobel Prize.",
+    "None of them could have done it alone. Leeuwenhoek needed clear glass, Pasteur needed the microscope, and Curie needed Pasteur's careful way of testing an idea. Every invention stands on the shoulders of the one before it."
+  ]},
+  sections:[
+    {key:'pronouns', items:[
+      {t:'choice', prompt:'Pick the right pronoun.', text:'Marie Curie worked for years, and ___ never gave up.', opts:['she','her'], ans:0,
+        explain:'"She" is the doer of "never gave up", so it must be a subject pronoun. ' + SUBJ},
+      {t:'choice', prompt:'Pick the right pronoun.', text:'The scientist showed ___ the tiny creatures.', opts:['they','them'], ans:1,
+        explain:'The scientist does the showing. The other people receive it, so we use the object pronoun "them". ' + OBJ},
+      {t:'sort', prompt:'Drag each pronoun into the right box.', bins:[['Doer','does the action'],['Getter','receives the action']],
+        chips:[['they',0],['her',1],['it',0],['me',1],['he',0],['us',1]],
+        explain:'"It" is a tricky one — it can do both jobs. Here it is sitting with the doers: "It swims in the water".'},
+      {t:'build', prompt:'Tap the words to build the sentence.', words:['Pasteur','told','her','about the germs.'],
+        explain:'Pasteur is the doer, so he goes first. "Her" receives the telling, so the object pronoun follows "told".'}
+    ]},
+    {key:'jobs', items:[
+      {t:'match', prompt:'Draw a line from each job to what that person does.',
+        left:[{label:'nurse'},{label:'chemist'},{label:'vet'},{label:'farmer'},{label:'baker'}],
+        right:['looks after people who are ill in hospital','studies what things are made of','looks after animals that are ill','grows crops and keeps animals','makes bread and cakes'],
+        explain:'"Vet" is short for veterinary surgeon — an animal doctor. A chemist studies the stuff that everything is made of.'},
+      {t:'type', prompt:'Type the job word.', text:'A person who creates new things is an ______.',
+        accept:['inventor'], hint:'It is the verb "invent" with -or on the end.',
+        explain:'invent + or = inventor. ' + EROR},
+      {t:'choice', prompt:'Which job word fits best?', long:true,
+        text:'Louis Pasteur tested his ideas again and again to find out what was really true. He was a ______.',
+        opts:['scientist','shopkeeper','driver'], ans:0,
+        explain:'Testing an idea carefully to find out whether it is true is exactly what a scientist does.'}
+    ]},
+    {key:'wordfam', items:[
+      {t:'type', prompt:'Complete the word family.', text:'to collect → the PERSON who does it is a ______.',
+        accept:['collector'], hint:'Take off the "to" and add -or.',
+        explain:'collect + or = collector, and the group of things is a collection.'},
+      {t:'spell', prompt:'Spell the missing word.', clue:'to protect → keeping something safe is called ...', ans:'protection',
+        explain:'protect + ion = protection. Same pattern as invent → invention and collect → collection.'},
+      {t:'type', prompt:'Complete the word family.', text:'to write → the PERSON who does it is a ______.',
+        accept:['writer'], hint:'Drop the e, then add -er.',
+        explain:'write loses its e and takes -er: writer. The thing they make is writing.'}
+    ]},
+    {key:'grammar', items:[
+      {t:'type', prompt:'Write "to" and the correct verb.', text:'Leeuwenhoek wanted ______ (see) things nobody had ever seen.',
+        accept:['to see'], hint:'Two words. The first one is "to".',
+        explain:'wanted + to + see. ' + TOV},
+      {t:'choice', prompt:'Pick the right form.', long:true, text:'Pasteur tried ___ why the milk kept going bad.',
+        opts:['to find out','finding out','finds out'], ans:0,
+        explain:'"Tried" takes to + verb, even when the verb is two words like "find out". ' + TOV},
+      {t:'fill', prompt:'Drag the right "to + verb" into each gap.',
+        lines:['Marie Curie needed {to study} the glowing rock.','Doctors learned {to wash} their hands every single time.','Scientists still hope {to cure} more illnesses.'],
+        decoys:['to drive','to jump'],
+        explain:'You study a rock, you wash your hands and you cure an illness. Always read to the end of the sentence first.'},
+      {t:'build', prompt:'Tap the words to build the sentence.', words:['We','want','to learn','more about science.'],
+        explain:'"Want" takes to + verb: want to learn. ' + TOV}
+    ]},
+    {key:'reading', items:[
+      {t:'choice', prompt:'Read the story, then answer.', long:true, text:'What was Antonie van Leeuwenhoek’s job before he made microscopes?',
+        opts:['He sold cloth','He was a doctor','He was a farmer'], ans:0,
+        explain:'The story calls him a Dutch cloth merchant. You do not have to be a scientist to make a great discovery.'},
+      {t:'choice', prompt:'True or false?', text:'Marie Curie was the first woman ever to win a Nobel Prize.', opts:['True','False'], ans:0,
+        explain:'True — she won it in 1903 for her work on radium, and she later won a second Nobel Prize as well.'},
+      {t:'write', prompt:'Write your answer in a sentence.', text:'What did Leeuwenhoek see when he looked at a drop of pond water?',
+        keys:[['tiny','small','little','micro'],['creature','creatures','animal','animals','living','things','swimming','life']],
+        model:'He saw tiny creatures swimming about in the water.',
+        explain:'A single drop of pond water holds thousands of living things. Nobody had ever seen them before he built his lenses.'},
+      {t:'write', prompt:'Write your answer in a sentence.', text:'Why is the milk we drink today safe?',
+        keys:[['heat','heated','heating','warm','warmed','boil','boiled'],['germ','germs','kill','kills','killed','bacteria','ill','sick']],
+        model:'The milk is heated gently, and the heat kills the germs.',
+        explain:'That gentle heating is named after Pasteur himself — it is called pasteurising the milk.'},
+      {t:'order', prompt:'Put the events in the order they happened.',
+        items:['Nobody knows that tiny living things exist','Leeuwenhoek builds a microscope and sees them','Pasteur shows that germs can make people ill','Marie Curie wins a Nobel Prize in 1903'],
+        explain:'Each discovery made the next one possible: first the lens, then the germs, then Curie’s careful experiments.'}
+    ]},
+    {key:'shapes', items:[
+      {t:'sort', prompt:'Sort each shape into flat or solid.', bins:[['Flat shape (2D)','you can draw it on paper'],['Solid shape (3D)','you can hold it in your hand']],
+        chips:[['circle',0],['hexagon',0],['triangle',0],['cube',1],['sphere',1],['cone',1]],
+        explain:'Flat shapes have sides and corners. Solid shapes have faces, edges and vertices — and you can pick them up.'},
+      {t:'choice', prompt:'Tap the pyramid.',
+        opts:[{shape:'cube',label:'cube'},{shape:'cone',label:'cone'},{shape:'pyramid',label:'pyramid'},{shape:'cylinder',label:'cylinder'}], ans:2,
+        explain:'A square-based pyramid has a square underneath and 4 triangle faces that meet at a point on top.'},
+      {t:'spell', prompt:'Spell the solid shape.', clue:'I am a solid shape with 2 flat circle faces and 1 curved face. A tin of beans has my shape.', ans:'cylinder',
+        explain:'A cylinder has a circle at each end joined by one curved face. Watch the y in the middle: c-y-l-i-n-d-e-r.'}
+    ]},
+    {key:'think', items:[
+      {t:'choice', prompt:'Look carefully, then answer.', fig:'vertline', long:true,
+        text:'Look at the two black lines. Which one is longer?',
+        opts:['They are exactly the same length','The up-and-down line is longer','The side-to-side line is longer'], ans:0,
+        explain:'They are the same. Tap "Measure it" to swing one line onto the other. Brains nearly always judge an up-and-down line as longer — nobody is completely sure why, and scientists still argue about it.'},
+      {t:'write', prompt:'Explain your thinking.', text:'Your eyes said one line was longer, but a ruler says they match. Which one should you believe, and why?',
+        keys:[['ruler','measure','measuring','measurement','tape'],['brain','eye','eyes','guess','guesses','trick','tricked','wrong','fool','fooled','believe']],
+        model:'I should believe the ruler, because my brain only guesses but a ruler really measures.',
+        explain:'This is the heart of science. Your first look is a guess, and a guess is worth having — but a measurement is what settles it.'},
+      {t:'draw', prompt:'Design time!', tip:'Draw a tool or machine that would help a doctor or a scientist. What would it look at, lift, listen to or measure?',
+        explain:'Leeuwenhoek’s microscope was just glass, brass and patience. Yours is saved in My Workshop.'}
+    ]}
+  ]
+}
+];
+
+const SECTIONS = {
+  pronouns:{name:'Pronouns', icon:'💬'},
+  jobs:{name:'Job Words', icon:'👷'},
+  wordfam:{name:'Word Families', icon:'🔤'},
+  grammar:{name:'To + Verb', icon:'✏️'},
+  reading:{name:'Reading', icon:'📖'},
+  shapes:{name:'Shapes', icon:'🔷'},
+  think:{name:'Look and Think', icon:'🔍'}
+};
+
+/* Flat shapes use .face; solid shapes add .edge and dashed .hid lines. */
+const SHAPES = {
+  circle:'<circle class="face" cx="50" cy="50" r="40"/>',
+  oval:'<ellipse class="face" cx="50" cy="50" rx="44" ry="28"/>',
+  square:'<rect class="face" x="13" y="13" width="74" height="74" rx="3"/>',
+  rectangle:'<rect class="face" x="5" y="27" width="90" height="46" rx="3"/>',
+  triangle:'<polygon class="face" points="50,9 92,87 8,87"/>',
+  rhombus:'<polygon class="face" points="50,6 90,50 50,94 10,50"/>',
+  trapezium:'<polygon class="face" points="24,20 76,20 94,80 6,80"/>',
+  pentagon:'<polygon class="face" points="50,7 93,39 77,90 23,90 7,39"/>',
+  hexagon:'<polygon class="face" points="27,11 73,11 96,50 73,89 27,89 4,50"/>',
+  heptagon:'<polygon class="face" points="50,6 84,23 93,60 69,90 31,90 7,60 16,23"/>',
+  octagon:'<polygon class="face" points="67,8 92,33 92,67 67,92 33,92 8,67 8,33 33,8"/>',
+  semicircle:'<path class="face" d="M8 68 A42 42 0 0 1 92 68 Z"/>',
+  cube:'<polygon class="face" points="16,34 38,14 90,14 68,34"/><polygon class="face" points="68,34 90,14 90,66 68,86"/><rect class="face" x="16" y="34" width="52" height="52"/>',
+  cylinder:'<path class="face" d="M16 26 V74 a34 14 0 0 0 68 0 V26 Z"/><ellipse class="face" cx="50" cy="26" rx="34" ry="14"/>',
+  cone:'<path class="face" d="M50 12 L84 74 a34 14 0 0 1 -68 0 Z"/><path class="hid" d="M16 74 a34 14 0 0 1 68 0"/>',
+  sphere:'<circle class="face" cx="50" cy="50" r="40"/><ellipse class="hid" cx="50" cy="50" rx="40" ry="14"/>',
+  pyramid:'<polygon class="face" points="50,10 12,74 50,90 88,74"/><path class="edge" d="M50 10 L50 90"/><path class="hid" d="M12 74 L50 58 L88 74 M50 58 L50 10"/>'
+};
+
+/* ============ EYE-TRICK FIGURES ============
+   Every figure is honest: the two things really are identical. The .proof
+   group is invisible until the child taps "Measure it", so they predict
+   first and check second. */
+const FIGURES = {
+  ebbinghaus:{
+    box:'0 0 340 200', cap:'Two orange circles',
+    svg:(() => {
+      const ring = (cx, cy, r, n, rr) => Array.from({length:n}, (_, i) => {
+        const a = i * 2 * Math.PI / n;
+        return `<circle class="fig-grey" cx="${(cx + r * Math.cos(a)).toFixed(1)}" cy="${(cy + r * Math.sin(a)).toFixed(1)}" r="${rr}"/>`;
+      }).join('');
+      return ring(90, 90, 66, 6, 30) + ring(250, 90, 48, 8, 12) +
+        '<circle class="fig-orange" cx="90" cy="90" r="26"/><circle class="fig-orange" cx="250" cy="90" r="26"/>' +
+        '<g class="proof"><path class="fig-rule" d="M40 64 H300 M40 116 H300"/>' +
+        '<text class="fig-label" x="170" y="194" text-anchor="middle">both circles fit exactly between the lines</text></g>';
+    })()
+  },
+  mullerlyer:{
+    box:'0 0 340 192', cap:'Two black lines',
+    svg:'<path class="fig-ink" d="M80 60 H260"/><path class="fig-ink" d="M104 40 L80 60 L104 80"/><path class="fig-ink" d="M236 40 L260 60 L236 80"/>' +
+        '<path class="fig-ink" d="M80 130 H260"/><path class="fig-ink" d="M56 110 L80 130 L56 150"/><path class="fig-ink" d="M284 110 L260 130 L284 150"/>' +
+        '<g class="proof"><path class="fig-rule" d="M80 40 V150 M260 40 V150"/>' +
+        '<text class="fig-label" x="170" y="182" text-anchor="middle">both lines start and stop in the same place</text></g>'
+  },
+  ponzo:{
+    box:'0 0 340 212', cap:'Two yellow bars on a long road',
+    svg:'<path class="fig-ink" d="M70 190 L145 30"/><path class="fig-ink" d="M270 190 L195 30"/>' +
+        '<rect class="fig-orange" x="131" y="56" width="78" height="13" rx="3"/>' +
+        '<rect class="fig-orange" x="131" y="146" width="78" height="13" rx="3"/>' +
+        '<g class="proof"><path class="fig-rule" d="M131 44 V172 M209 44 V172"/>' +
+        '<text class="fig-label" x="170" y="206" text-anchor="middle">both bars are exactly as wide as each other</text></g>'
+  },
+  contrast:{
+    box:'0 0 340 175', cap:'Two small grey squares',
+    svg:'<rect class="fig-light" x="20" y="22" width="140" height="120" rx="8"/><rect class="fig-dark" x="180" y="22" width="140" height="120" rx="8"/>' +
+        '<rect class="fig-same" x="60" y="52" width="60" height="60" rx="4"/><rect class="fig-same" x="220" y="52" width="60" height="60" rx="4"/>' +
+        '<g class="proof"><rect class="fig-same" x="120" y="72" width="100" height="20"/>' +
+        '<text class="fig-label" x="170" y="162" text-anchor="middle">the joining bar is the same grey as both squares</text></g>'
+  },
+  zollner:{
+    box:'0 0 340 180', cap:'Four long lines',
+    svg:(() => {
+      const ys = [35, 70, 105, 140];
+      let out = ys.map(y => `<path class="fig-ink" d="M25 ${y} H315"/>`).join('');
+      out += '<g class="hatch">' + ys.map((y, li) => {
+        const up = li % 2 === 0;
+        let s = '';
+        for (let x = 38; x <= 312; x += 26) s += `<path class="fig-ink" d="M${x - 9} ${y + (up ? 11 : -11)} L${x + 9} ${y + (up ? -11 : 11)}"/>`;
+        return s;
+      }).join('') + '</g>';
+      out += '<g class="proof">' + ys.map(y => `<path class="fig-rule" d="M18 ${y} H322"/>`).join('') +
+        '<text class="fig-label" x="170" y="170" text-anchor="middle">with the little strokes faded, the lines are straight</text></g>';
+      return out;
+    })()
+  },
+  vertline:{
+    box:'0 0 340 212', cap:'An up-and-down line and a side-to-side line',
+    svg:'<path class="fig-ink" d="M165 5 V165"/><path class="fig-ink" d="M85 165 H245"/>' +
+        '<g class="proof"><path class="fig-rule" d="M205 5 V165 M201 5 H209 M201 165 H209"/>' +
+        '<path class="fig-rule" d="M85 190 H245 M85 186 V194 M245 186 V194"/>' +
+        '<text class="fig-label" x="262" y="90">same</text>' +
+        '<text class="fig-label" x="165" y="204" text-anchor="middle">same</text></g>'
+  }
+};
+
+/* ============ BADGES ============ */
+const BADGES = [
+  {id:'first',   icon:'🚀', name:'Lift Off',        desc:'Finish your first whole set',       got:s => setsFinished(s) >= 1},
+  {id:'three',   icon:'⭐',        name:'Star Collector',  desc:'Win 3 stars on three sets',         got:s => threeStarSets(s) >= 3},
+  {id:'perfect', icon:'💯', name:'Perfect Run',     desc:'Score 100% on a whole set',         got:s => Object.values(s.sets).some(r => r.best && r.best.pct === 100)},
+  {id:'speller', icon:'🔤', name:'Word Wizard',     desc:'Spell 15 words correctly',          got:s => s.stats.spell >= 15},
+  {id:'eyes',    icon:'👁️', name:'Sharp Eyes', desc:'Crack 4 eye-trick puzzles',        got:s => s.stats.illusion >= 4},
+  {id:'writer',  icon:'✍️',  name:'Idea Writer',     desc:'Write 8 good long answers',         got:s => s.stats.write >= 8},
+  {id:'artist',  icon:'🎨', name:'Workshop Artist', desc:'Draw 3 inventions',                 got:s => s.stats.draw >= 3},
+  {id:'grit',    icon:'💪', name:'Never Give Up',   desc:'Finish "Fix my mistakes" 3 times',  got:s => s.stats.fix >= 3},
+  {id:'streak',  icon:'🔥', name:'On Fire',         desc:'Get 6 questions right in a row',    got:s => s.stats.streak >= 6},
+  {id:'master',  icon:'🏆', name:'Master Inventor', desc:'Finish every set in the lab',       got:s => setsFinished(s) >= SETS.length}
+];
+
+/* ============ UTILITIES ============ */
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const shuffle = a => { a = [...a]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const shuffleNotSame = a => { if (a.length < 2) return [...a]; let s; do { s = shuffle(a); } while (s.every((v, i) => v === a[i])); return s; };
+const shapeSvg = (n, style = '') => `<svg class="shape" viewBox="0 0 100 100" aria-hidden="true" ${style ? `style="${style}"` : ''}>${SHAPES[n]}</svg>`;
+const norm = s => String(s).toLowerCase().replace(/[’']/g, '').replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim();
+const fmtTime = ms => { const s = Math.max(0, Math.round(ms / 1000)); const m = Math.floor(s / 60); return m ? `${m} min ${s % 60} sec` : `${s} sec`; };
+const fmtDate = t => { const d = new Date(t); return d.toLocaleDateString(undefined, {day:'numeric', month:'short'}) + ', ' + d.toLocaleTimeString(undefined, {hour:'2-digit', minute:'2-digit'}); };
+const pick = a => a[Math.floor(Math.random() * a.length)];
+const PASS = 60;
+
+/* Seeded shuffle: every learner gets their own set order, and that order
+   never changes again once it is saved. */
+function mulberry32(a) {
+  return function () {
+    a = a + 0x6D2B79F5 | 0;
+    let t = Math.imul(a ^ a >>> 15, 1 | a);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+function seededShuffle(arr, seed) {
+  const rnd = mulberry32(seed >>> 0), a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+  return a;
+}
+
+function lev(a, b) { // optimal string alignment distance (forgives swapped letters)
+  const d = Array.from({length: a.length + 1}, (_, i) => [i, ...Array(b.length).fill(0)]);
+  for (let j = 1; j <= b.length; j++) d[0][j] = j;
+  for (let i = 1; i <= a.length; i++) for (let j = 1; j <= b.length; j++) {
+    const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+    d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + cost);
+    if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) d[i][j] = Math.min(d[i][j], d[i - 2][j - 2] + 1);
+  }
+  return d[a.length][b.length];
+}
+const tolFor = w => w.length >= 8 ? 2 : w.length >= 5 ? 1 : w.length >= 4 ? 1 : 0;
+/* Does the child's sentence contain this idea? Tolerant of small misspellings. */
+function hasKey(text, key) {
+  const t = norm(text), k = norm(key);
+  if (!k) return false;
+  if (t.includes(k)) return true;
+  if (k.includes(' ')) return false;
+  const tol = tolFor(k);
+  return tol > 0 && t.split(' ').some(w => Math.abs(w.length - k.length) <= tol && lev(w, k) <= tol);
+}
+/* Short typed answers: ignore case, punctuation, a leading a/an/the, and
+   forgive one or two slips of the pen. */
+function answerMatches(input, accept) {
+  const t = norm(input).replace(/^(a|an|the)\s+/, '');
+  if (!t) return false;
+  return accept.some(a => {
+    const k = norm(a);
+    if (t === k) return true;
+    const kw = k.split(' '), tw = t.split(' ');
+    if (kw.length !== tw.length) return false;
+    return kw.every((w, i) => w === tw[i] || (tolFor(w) > 0 && lev(tw[i], w) <= tolFor(w)));
+  });
+}
+
+function sparky(cls = '') {
+  return `<svg class="bot ${cls}" viewBox="0 0 130 96" aria-hidden="true">
+    <path class="bot-bench" d="M6 88 H124"/>
+    <path class="bot-wire" d="M65 30 V18"/>
+    <circle class="bot-bulb" cx="65" cy="11" r="7"/>
+    <rect class="bot-head" x="38" y="28" width="54" height="36" rx="13"/>
+    <circle class="bot-eye" cx="53" cy="44" r="7"/><circle class="bot-eye" cx="77" cy="44" r="7"/>
+    <circle class="bot-pupil" cx="54.5" cy="45" r="3"/><circle class="bot-pupil" cx="78.5" cy="45" r="3"/>
+    <path class="bot-mouth" d="M55 55 q10 7 20 0"/>
+    <rect class="bot-body" x="45" y="64" width="40" height="24" rx="9"/>
+    <rect class="bot-panel" x="52" y="70" width="26" height="11" rx="4"/>
+    <path class="bot-arm" d="M45 72 H30 M85 72 H100"/>
+  </svg>`;
+}
+
+/* ============ STORAGE (kept in this browser) ============ */
+const KEY = 'inventorsLab.v1';
+const freshStats = () => ({spell:0, illusion:0, write:0, draw:0, fix:0, streak:0});
+const fresh = () => ({v:1, seed:null, order:null, sets:{}, works:[], gallery:[], badges:[], stats:freshStats(),
+  current:null, lastRun:null, settings:{size:'normal', theme:'auto', sound:true, unlockAll:false}});
+let S = fresh();
+let storageOK = true;
+function load() {
+  try {
+    const raw = localStorage.getItem(KEY);
+    if (raw) {
+      const d = JSON.parse(raw);
+      S = Object.assign(fresh(), d);
+      S.settings = Object.assign(fresh().settings, d.settings || {});
+      S.stats = Object.assign(freshStats(), d.stats || {});
+    }
+  } catch (e) { storageOK = false; }
+  if (S.seed === null || S.seed === undefined) S.seed = (Math.random() * 4294967296) >>> 0;
+  setOrder();
+}
+/* Writes progress. If the browser is full, drop the oldest drawings rather
+   than losing every star the child has earned. */
+function save() {
+  S.updatedAt = Date.now();
+  for (let attempt = 0; attempt < 6; attempt++) {
+    try { localStorage.setItem(KEY, JSON.stringify(S)); storageOK = true; return true; }
+    catch (e) {
+      if (S.gallery.length) { S.gallery.pop(); continue; }
+      if (S.works.length > 5) { S.works.pop(); continue; }
+      storageOK = false; return false;
+    }
+  }
+  storageOK = false;
+  return false;
+}
+function applySettings() {
+  const r = document.documentElement;
+  r.dataset.size = S.settings.size;
+  if (S.settings.theme === 'auto') r.removeAttribute('data-theme'); else r.dataset.theme = S.settings.theme;
+}
+/* The learner's personal set order. Built once, then only ever added to. */
+function setOrder() {
+  const ids = SETS.map(s => s.id);
+  const kept = (S.order || []).filter(id => ids.includes(id));
+  const missing = ids.filter(id => !kept.includes(id));
+  if (missing.length || kept.length !== (S.order || []).length) {
+    S.order = [...kept, ...(missing.length > 1 ? seededShuffle(missing, S.seed + kept.length) : missing)];
+  }
+  return S.order;
+}
+const orderPos = id => setOrder().indexOf(id);
+const setAtPos = p => getSet(setOrder()[p]);
+
+/* ============ SOUND + READ ALOUD ============ */
+let actx = null;
+function beep(kind) {
+  if (!S.settings.sound) return;
+  try {
+    actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+    const notes = kind === 'good' ? [523, 659, 784] : kind === 'part' ? [523, 587] : [330, 262];
+    notes.forEach((f, i) => {
+      const o = actx.createOscillator(), g = actx.createGain();
+      o.type = 'sine'; o.frequency.value = f;
+      g.gain.setValueAtTime(0.0001, actx.currentTime + i * 0.1);
+      g.gain.exponentialRampToValueAtTime(0.16, actx.currentTime + i * 0.1 + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, actx.currentTime + i * 0.1 + 0.22);
+      o.connect(g); g.connect(actx.destination);
+      o.start(actx.currentTime + i * 0.1); o.stop(actx.currentTime + i * 0.1 + 0.25);
+    });
+  } catch (e) {}
+}
+const canSpeak = 'speechSynthesis' in window;
+function speak(text) {
+  if (!canSpeak) return;
+  try {
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(String(text).replace(/_+/g, ' blank '));
+    u.lang = 'en-GB'; u.rate = 0.9; u.pitch = 1.05;
+    speechSynthesis.speak(u);
+  } catch (e) {}
+}
+
+/* ============ CONTENT HELPERS ============ */
+const getSet = id => SETS.find(s => s.id === id);
+const blanksOf = item => { const out = []; item.lines.forEach(l => l.replace(/\{([^}]+)\}/g, (m, w) => { out.push(w); return m; })); return out; };
+function itemTotal(item) {
+  switch (item.t) {
+    case 'sort':  return item.chips.length;
+    case 'match': return item.left.length;
+    case 'fill':  return blanksOf(item).length;
+    case 'order': return item.items.length;
+    case 'write': return item.keys.length;
+    case 'draw': case 'free': return 0;
+    default: return 1;
+  }
+}
+function flat(set) { if (!set._flat) { set._flat = []; set.sections.forEach(sec => sec.items.forEach(item => set._flat.push({sec:sec.key, item}))); } return set._flat; }
+const setTotal = set => flat(set).reduce((a, q) => a + itemTotal(q.item), 0);
+const starsFor = pct => pct >= 90 ? 3 : pct >= 70 ? 2 : pct >= 50 ? 1 : 0;
+const starRow = n => `<span class="stars" aria-label="${n} of 3 stars">${[0,1,2].map(i => `<span class="${i < n ? 'star-on' : 'star-off'}">★</span>`).join('')}</span>`;
+const setsFinished = s => Object.values(s.sets).filter(r => r && r.best).length;
+const threeStarSets = s => Object.values(s.sets).filter(r => r && r.best && starsFor(r.best.pct) === 3).length;
+/* Unlocking follows the learner's own order, not the set numbers. */
+function isUnlocked(id) {
+  if (S.settings.unlockAll) return true;
+  const pos = orderPos(id);
+  if (pos <= 0) return true;
+  const prev = S.sets[setOrder()[pos - 1]];
+  return !!(prev && prev.best && prev.best.pct >= PASS);
+}
+function questionLabel(item) { return item.text || item.clue || item.tip || item.prompt; }
+function answerText(item) {
+  switch (item.t) {
+    case 'choice': { const o = item.opts[item.ans]; return typeof o === 'object' ? o.label : o; }
+    case 'sort':   return item.bins.map((b, bi) => `${b[0]}: ${item.chips.filter(c => c[1] === bi).map(c => c[0]).join(', ')}`).join('. ');
+    case 'build':  return item.words.join(' ');
+    case 'write':  return item.model;
+    case 'type':   return item.accept[0];
+    case 'spell':  return item.ans;
+    case 'match':  return item.left.map((l, i) => `${l.label || 'shape ' + (i + 1)} goes with ${item.right[i]}`).join('. ');
+    case 'fill':   return item.lines.map(l => l.replace(/\{([^}]+)\}/g, '$1')).join(' ');
+    case 'order':  return item.items.map((t, i) => `${i + 1}. ${t}`).join('. ');
+    default: return '';
+  }
+}
+function speakText(item) {
+  const bits = [item.prompt];
+  if (item.clue) bits.push(item.clue);
+  if (item.text) bits.push(item.text.replace(/_{2,}/g, ' blank '));
+  if (item.tip) bits.push(item.tip);
+  if (item.t === 'choice' && typeof item.opts[0] === 'string') bits.push(item.opts.join(', or '));
+  if (item.t === 'fill') bits.push(item.lines.map(l => l.replace(/\{[^}]+\}/g, 'blank')).join(' '));
+  if (item.t === 'order') bits.push(item.items.join('. '));
+  return bits.join('. ');
+}
+/* "Grandpa taught ___ how to ride." -> styled blank, filled in as they answer */
+function blankify(text, word) {
+  const parts = String(text).split(/_{2,}|___/);
+  if (parts.length < 2) return esc(text);
+  return esc(parts[0]) + (word
+    ? `<span class="blank filled">${esc(word)}</span>`
+    : '<span class="blank"><span class="sr">blank</span>&nbsp;</span>') + esc(parts.slice(1).join(' '));
+}
+
+/* ============ AUTO-SCROLL WHILE DRAGGING ============ */
+function autoScroller(onScroll) {
+  let y = null, raf = null;
+  const step = () => {
+    if (y === null) { raf = null; return; }
+    const dockH = dock.classList.contains('hidden') ? 0 : dock.offsetHeight;
+    const bottom = window.innerHeight - dockH;
+    let d = 0;
+    if (y > bottom - 70) d = Math.min(20, (y - (bottom - 70)) / 3 + 2);
+    else if (y < 120) d = -Math.min(20, (120 - y) / 3 + 2);
+    if (d) { const before = window.scrollY; window.scrollBy(0, d); if (window.scrollY !== before && onScroll) onScroll(); }
+    raf = requestAnimationFrame(step);
+  };
+  return {update(ny) { y = ny; if (!raf) raf = requestAnimationFrame(step); }, stop() { y = null; }};
+}
+
+/* ============ DRAG + TAP HELPER (chips into zones) ============ */
+function dnd(root, o) {
+  let suppress = false;
+  root.addEventListener('pointerdown', e => {
+    const chip = e.target.closest('.chip[data-id]');
+    if (!chip || o.locked() || e.button > 0) return;
+    e.preventDefault();
+    const id = chip.dataset.id, sx = e.clientX, sy = e.clientY;
+    let ghost = null, over = null, lx = sx, ly = sy;
+    const findZone = () => {
+      const hit = document.elementFromPoint(lx, ly);
+      const z = hit && hit.closest('[data-drop]');
+      const zone = z && root.contains(z) ? z : null;
+      if (zone !== over) { if (over) over.classList.remove('over'); if (zone) zone.classList.add('over'); over = zone; }
+    };
+    const scroller = autoScroller(findZone);
+    const move = ev => {
+      lx = ev.clientX; ly = ev.clientY;
+      if (!ghost) {
+        if (Math.hypot(ev.clientX - sx, ev.clientY - sy) < 8) return;
+        ghost = chip.cloneNode(true); ghost.classList.add('ghost'); ghost.classList.remove('sel');
+        document.body.appendChild(ghost); chip.classList.add('dragging');
+      }
+      ghost.style.left = ev.clientX + 'px'; ghost.style.top = ev.clientY + 'px';
+      scroller.update(ev.clientY);
+      findZone();
+    };
+    const end = ev => {
+      scroller.stop();
+      window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', end); window.removeEventListener('pointercancel', end);
+      if (over) over.classList.remove('over');
+      if (ghost) { suppress = true; setTimeout(() => { suppress = false; }, 0); ghost.remove(); chip.classList.remove('dragging'); if (ev.type === 'pointerup' && over) o.drop(id, over.dataset.drop); }
+      else if (ev.type === 'pointerup') setTimeout(() => o.tap(id), 0);
+    };
+    window.addEventListener('pointermove', move); window.addEventListener('pointerup', end); window.addEventListener('pointercancel', end);
+  });
+  root.addEventListener('click', e => {
+    if (o.locked() || suppress || e.target.closest('.chip')) return;
+    const z = e.target.closest('[data-drop]');
+    if (z) o.zoneTap(z.dataset.drop);
+  });
+  root.addEventListener('keydown', e => {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    if (o.locked()) return;
+    const chip = e.target.closest('.chip[data-id]');
+    const z = e.target.closest('[data-drop]');
+    if (chip) { e.preventDefault(); e.stopPropagation(); o.tap(chip.dataset.id); }
+    else if (z) { e.preventDefault(); e.stopPropagation(); o.zoneTap(z.dataset.drop); }
+  });
+}
+
+/* ============ QUESTION TYPES ============ */
+const TYPES = {};
+
+TYPES.choice = (item, root, changed) => {
+  let sel = -1, locked = false;
+  const pics = typeof item.opts[0] === 'object';
+  root.innerHTML = `${item.text ? `<p class="qtext" id="qt">${blankify(item.text, null)}</p>` : ''}
+    <div class="opts ${item.long ? 'long' : ''} ${pics ? 'pics' : ''}" role="group" aria-label="Answers">${item.opts.map((o, i) =>
+      `<button class="opt" data-i="${i}" ${pics ? `aria-label="Shape ${i + 1}"` : ''}>${pics ? shapeSvg(o.shape) + `<small class="lbl hidden">${esc(o.label)}</small>` : esc(o)}</button>`).join('')}</div>`;
+  const btns = $$('.opt', root);
+  btns.forEach(b => b.addEventListener('click', () => {
+    if (locked) return;
+    sel = +b.dataset.i;
+    btns.forEach(x => { x.classList.toggle('sel', x === b); x.setAttribute('aria-pressed', x === b); });
+    if (item.text && /_{2,}/.test(item.text)) $('#qt', root).innerHTML = blankify(item.text, item.opts[sel]);
+    changed();
+  }));
+  return {
+    ready: () => sel >= 0,
+    check() {
+      locked = true;
+      btns.forEach((b, i) => { b.disabled = true; b.classList.remove('sel'); if (i === item.ans) b.classList.add('ok'); else if (i === sel) b.classList.add('no'); });
+      if (pics) $$('.lbl', root).forEach(l => l.classList.remove('hidden'));
+      return {e: sel === item.ans ? 1 : 0, t: 1, answer: esc(answerText(item))};
+    }
+  };
+};
+
+TYPES.sort = (item, root, changed) => {
+  const chips = shuffle(item.chips.map((c, i) => ({id:i, w:c[0], b:c[1], state:''})));
+  const place = {};
+  let sel = null, locked = false;
+  const chipHtml = c => `<span class="chip ${sel === c.id ? 'sel' : ''} ${c.state}" data-id="${c.id}" role="button" tabindex="0">${esc(c.w)}</span>`;
+  function draw() {
+    const inBank = chips.filter(c => place[c.id] === undefined);
+    root.innerHTML = `<div class="bank" data-drop="bank"><span class="bank-label">${inBank.length ? 'Drag a word to a box, or tap a word and then tap a box.' : 'All sorted! Tap Check when you are ready.'}</span>${inBank.map(chipHtml).join('')}</div>
+      <div class="bins">${item.bins.map((b, bi) => `<div class="bin" data-drop="${bi}" tabindex="0" role="button" aria-label="Box: ${esc(b[0])}"><h3>${esc(b[0])}</h3><div class="hint">${esc(b[1])}</div><div class="inside">${chips.filter(c => place[c.id] === bi).map(chipHtml).join('')}</div></div>`).join('')}</div>`;
+  }
+  function drop(id, zone) { id = +id; if (zone === 'bank') delete place[id]; else place[id] = +zone; sel = null; draw(); changed(); }
+  draw();
+  dnd(root, {
+    locked: () => locked,
+    tap(id) { id = +id; if (place[id] !== undefined) { delete place[id]; sel = null; } else sel = sel === id ? null : id; draw(); changed(); },
+    drop,
+    zoneTap(zone) { if (sel !== null) drop(sel, zone); }
+  });
+  return {
+    ready: () => Object.keys(place).length === chips.length,
+    check() {
+      locked = true; let e = 0;
+      chips.forEach(c => { const ok = place[c.id] === c.b; c.state = ok ? 'ok' : 'no'; if (ok) e++; });
+      sel = null; draw();
+      return {e, t: chips.length, answer: item.bins.map((b, bi) => `<b>${esc(b[0])}:</b> ${item.chips.filter(c => c[1] === bi).map(c => esc(c[0])).join(', ')}`).join('<br>')};
+    }
+  };
+};
+
+TYPES.fill = (item, root, changed) => {
+  const answers = blanksOf(item);
+  const words = shuffle([...answers, ...item.decoys]).map((w, i) => ({id:i, w}));
+  const slots = answers.map(() => null);
+  const spare = item.decoys.length;
+  let sel = null, locked = false, marks = null;
+  function draw() {
+    let k = 0;
+    const lines = item.lines.map(l => {
+      const parts = l.split(/(\{[^}]+\})/);
+      let out = '';
+      for (let pi = 0; pi < parts.length; pi++) {
+        const part = parts[pi];
+        if (!/^\{[^}]+\}$/.test(part)) { out += esc(part); continue; }
+        const si = k++, cid = slots[si], w = cid === null ? null : words[cid];
+        let punct = '';
+        if (parts[pi + 1]) { const m = parts[pi + 1].match(/^[,.!?;:]+/); if (m) { punct = m[0]; parts[pi + 1] = parts[pi + 1].slice(punct.length); } }
+        out += `<span class="nowrap"><span class="slot" data-drop="${si}" role="button" tabindex="0" aria-label="Gap ${si + 1}${w ? ': ' + esc(w.w) : ''}">${w ? `<span class="chip ${marks ? (marks[si] ? 'ok' : 'no') : ''}" data-id="${w.id}">${esc(w.w)}</span>` : ''}</span>${esc(punct)}</span>`;
+      }
+      return `<span class="line">${out}</span>`;
+    }).join('');
+    const bank = words.filter(w => !slots.includes(w.id));
+    root.innerHTML = `<div class="bank" data-drop="bank"><span class="bank-label">Drag a card into a gap, or tap a card and then tap a gap. ${spare} card${spare === 1 ? ' is' : 's are'} left over!</span>${bank.map(w => `<span class="chip ${sel === w.id ? 'sel' : ''}" data-id="${w.id}" role="button" tabindex="0">${esc(w.w)}</span>`).join('')}</div><p class="poemtext">${lines}</p>`;
+  }
+  function drop(id, zone) {
+    id = +id; const from = slots.indexOf(id);
+    if (zone === 'bank') { if (from >= 0) slots[from] = null; }
+    else { const si = +zone; const prev = slots[si]; if (from >= 0) slots[from] = prev; slots[si] = id; }
+    sel = null; draw(); changed();
+  }
+  draw();
+  dnd(root, {
+    locked: () => locked,
+    tap(id) { id = +id; if (slots.includes(id)) drop(id, 'bank'); else { sel = sel === id ? null : id; draw(); } },
+    drop,
+    zoneTap(zone) { if (sel !== null) drop(sel, zone); else if (zone !== 'bank' && slots[+zone] !== null) drop(slots[+zone], 'bank'); }
+  });
+  return {
+    ready: () => slots.every(s => s !== null),
+    check() {
+      locked = true;
+      marks = slots.map((cid, si) => cid !== null && words[cid].w === answers[si]);
+      draw();
+      return {e: marks.filter(Boolean).length, t: answers.length, answer: item.lines.map(l => esc(l).replace(/\{([^}]+)\}/g, '<b>$1</b>')).join('<br>')};
+    }
+  };
+};
+
+TYPES.build = (item, root, changed) => {
+  const order = shuffleNotSame(item.words.map((_, i) => i));
+  const picked = [];
+  let locked = false, mark = '';
+  function draw() {
+    root.innerHTML = `<div class="buildline" aria-label="Your sentence">${picked.map((wi, pi) => `<span class="chip ${mark}" data-p="${pi}" role="button" tabindex="0">${esc(item.words[wi])}</span>`).join('')}</div>
+      <div class="bank"><span class="bank-label">Tap a word to add it. Tap it again in the line to take it back.</span>${order.map(wi => `<span class="chip ${picked.includes(wi) ? 'used' : ''}" data-w="${wi}" role="button" tabindex="0">${esc(item.words[wi])}</span>`).join('')}</div>`;
+  }
+  function act(c) {
+    if (locked || !c) return;
+    if (c.dataset.w !== undefined) { const wi = +c.dataset.w; if (!picked.includes(wi)) picked.push(wi); }
+    else if (c.dataset.p !== undefined) picked.splice(+c.dataset.p, 1);
+    draw(); changed();
+  }
+  root.addEventListener('click', e => act(e.target.closest('.chip')));
+  root.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === ' ') && e.target.closest('.chip')) { e.preventDefault(); e.stopPropagation(); act(e.target.closest('.chip')); } });
+  draw();
+  return {
+    ready: () => picked.length === item.words.length,
+    check() {
+      locked = true;
+      const ok = picked.every((wi, i) => wi === i);
+      mark = ok ? 'ok' : 'no'; draw();
+      return {e: ok ? 1 : 0, t: 1, answer: esc(item.words.join(' '))};
+    }
+  };
+};
+
+TYPES.write = (item, root, changed) => {
+  const n = item.keys.length;
+  root.innerHTML = `<p class="qtext">${esc(item.text)}</p>
+    <label class="sr" for="wr">Your answer</label>
+    <textarea id="wr" class="write" rows="3" placeholder="Write your answer here" autocomplete="off"></textarea>
+    <p class="tip">Use words from the story. Small spelling mistakes are fine.${n > 1 ? ` There are <b>${n} things</b> to mention, and each one wins a star.` : ''}</p>`;
+  const ta = $('#wr', root);
+  ta.addEventListener('input', changed);
+  return {
+    ready: () => norm(ta.value).length >= 2,
+    check() {
+      ta.readOnly = true;
+      const hits = item.keys.map(g => g.some(k => hasKey(ta.value, k)));
+      return {e: hits.filter(Boolean).length, t: n, answer: esc(item.model), model: esc(item.model), response: ta.value.trim()};
+    },
+    focus: () => ta.focus()
+  };
+};
+
+TYPES.type = (item, root, changed) => {
+  root.innerHTML = `<p class="qtext" id="qt">${blankify(item.text, null)}</p>
+    <div class="typeline">
+      <label class="sr" for="wr">Your answer</label>
+      <input id="wr" class="write" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" maxlength="30" placeholder="Type your answer">
+      ${item.hint ? '<button class="btn btn-small hintbtn" id="hintBtn" type="button">💡 Hint</button>' : ''}
+    </div>
+    <div id="hintOut"></div>`;
+  const inp = $('#wr', root), qt = $('#qt', root);
+  inp.addEventListener('input', () => { qt.innerHTML = blankify(item.text, inp.value.trim()); changed(); });
+  const hb = $('#hintBtn', root);
+  if (hb) hb.onclick = () => { $('#hintOut', root).innerHTML = `<p class="hintbox">💡 ${esc(item.hint)}</p>`; hb.disabled = true; inp.focus(); };
+  return {
+    ready: () => norm(inp.value).length >= 1,
+    check() {
+      inp.readOnly = true;
+      const ok = answerMatches(inp.value, item.accept);
+      qt.innerHTML = blankify(item.text, inp.value.trim());
+      inp.style.borderColor = ok ? 'var(--leaf)' : 'var(--berry)';
+      const exact = item.accept.some(a => norm(a) === norm(inp.value).replace(/^(a|an|the)\s+/, ''));
+      return {e: ok ? 1 : 0, t: 1, answer: esc(item.accept[0]), response: inp.value.trim(), nearly: ok && !exact};
+    },
+    focus: () => inp.focus()
+  };
+};
+
+TYPES.spell = (item, root, changed) => {
+  const ans = item.ans;
+  const upper = /^[A-Z]/.test(ans);
+  const pool = 'abcdefghklmnoprstuwy';
+  const extras = [];
+  while (extras.length < (ans.length <= 3 ? 2 : 3)) { const ch = pick(pool); if (!ans.toLowerCase().includes(ch) && !extras.includes(ch)) extras.push(ch); }
+  const tiles = shuffle([...ans.split(''), ...extras.map(x => upper ? x.toUpperCase() : x)]).map((ch, i) => ({i, ch, used:false}));
+  const boxes = Array(ans.length).fill(null);
+  let locked = false, marks = null;
+  function draw() {
+    const next = boxes.indexOf(null);
+    root.innerHTML = `<p class="clue">${esc(item.clue)}</p>
+      <div class="boxes" style="grid-template-columns:repeat(${ans.length},minmax(0,2.6rem));font-size:${ans.length > 8 ? '.8em' : '1em'}" role="group" aria-label="Your answer has ${ans.length} letters">${boxes.map((ti, bi) =>
+        `<button class="box ${!marks && bi === next ? 'next' : ''} ${marks ? (marks[bi] ? 'ok' : 'no') : ''}" data-b="${bi}" aria-label="Letter ${bi + 1}${ti !== null ? ': ' + esc(tiles[ti].ch) : ', empty'}" ${locked ? 'disabled' : ''}>${ti !== null ? esc(tiles[ti].ch) : ''}</button>`).join('')}</div>
+      <div class="tiles">${tiles.map(t => `<button class="tile" data-t="${t.i}" ${t.used || locked ? 'disabled' : ''}>${esc(t.ch)}</button>`).join('')}<button class="tile" data-back="1" aria-label="Delete the last letter" ${locked ? 'disabled' : ''}>⌫</button></div>
+      <p class="tip">Tap the letters in order. You can type on a keyboard too.</p>`;
+  }
+  function put(ti) { const n = boxes.indexOf(null); if (n < 0 || tiles[ti].used) return; boxes[n] = ti; tiles[ti].used = true; draw(); changed(); }
+  function clearBox(bi) { if (boxes[bi] === null) return; tiles[boxes[bi]].used = false; boxes[bi] = null; draw(); changed(); }
+  function back() { for (let i = boxes.length - 1; i >= 0; i--) if (boxes[i] !== null) return clearBox(i); }
+  root.addEventListener('click', e => {
+    if (locked) return;
+    const t = e.target.closest('.tile'), b = e.target.closest('.box');
+    if (t) { if (t.dataset.back) back(); else put(+t.dataset.t); }
+    else if (b) clearBox(+b.dataset.b);
+  });
+  draw();
+  return {
+    ready: () => boxes.every(b => b !== null),
+    check() {
+      locked = true;
+      marks = boxes.map((ti, bi) => ti !== null && tiles[ti].ch.toLowerCase() === ans[bi].toLowerCase());
+      draw();
+      return {e: marks.every(Boolean) ? 1 : 0, t: 1, answer: `<span style="letter-spacing:.08em">${esc(ans)}</span>`};
+    },
+    onKey(e) {
+      if (locked) return false;
+      if (e.key === 'Backspace') { back(); return true; }
+      if (/^[a-z]$/i.test(e.key)) {
+        const t = tiles.find(t => !t.used && t.ch.toLowerCase() === e.key.toLowerCase());
+        if (t) put(t.i);
+        return true;
+      }
+      return false;
+    }
+  };
+};
+
+const LINE_COLORS = ['var(--sky)', 'var(--sun)', '#8E6AC8', '#D0668E', '#2E9C96', '#C07A34'];
+TYPES.match = (item, root, changed, cleanups) => {
+  const n = item.left.length;
+  const rightOrder = shuffleNotSame(item.right.map((_, i) => i));
+  const conn = {};
+  let sel = null, temp = null, locked = false, result = false;
+  root.innerHTML = `<p class="tip" style="margin:0 0 .9rem">Drag from a box on one side to a box on the other, or tap one on each side.</p>
+    <div class="match">
+      <svg class="lines" aria-hidden="true"></svg>
+      <div class="match-col">${item.left.map((l, i) => `<button class="m-item left" data-side="L" data-i="${i}" aria-label="${l.label ? esc(l.label) : 'Shape ' + (i + 1)}">${l.shape ? shapeSvg(l.shape) : ''}${l.label ? `<span>${esc(l.label)}</span>` : ''}<span class="dot"></span></button>`).join('')}</div>
+      <div class="match-col">${rightOrder.map(ri => `<button class="m-item right" data-side="R" data-i="${ri}">${esc(item.right[ri])}<span class="dot"></span></button>`).join('')}</div>
+    </div>
+    <div class="row" style="justify-content:flex-end;margin-top:.9rem"><button class="btn btn-small" id="clearLines" type="button">Clear lines</button></div>`;
+  const box = $('.match', root), svg = $('svg.lines', root);
+  const itemEl = (side, i) => box.querySelector(`.m-item[data-side="${side}"][data-i="${i}"]`);
+  const dotPt = el => { const b = box.getBoundingClientRect(), r = el.getBoundingClientRect(); return {x: (el.dataset.side === 'L' ? r.right : r.left) - b.left, y: r.top + r.height / 2 - b.top}; };
+  const curve = (a, b) => { const dx = (b.x - a.x) * 0.45; return `M${a.x} ${a.y} C${a.x + dx} ${a.y} ${b.x - dx} ${b.y} ${b.x} ${b.y}`; };
+  function redraw() {
+    let html = '';
+    Object.entries(conn).forEach(([li, ri]) => {
+      const a = dotPt(itemEl('L', li)), b = dotPt(itemEl('R', ri));
+      let color = LINE_COLORS[li % LINE_COLORS.length], extra = '';
+      if (result) { const ok = +li === +ri; color = ok ? 'var(--leaf)' : 'var(--berry)'; if (!ok) extra = 'stroke-dasharray="10 8"'; }
+      html += `<path d="${curve(a, b)}" stroke="${color}" ${extra}/>`;
+    });
+    if (temp) { const bb = box.getBoundingClientRect(); html += `<path d="${curve(dotPt(temp.el), {x: temp.cx - bb.left, y: temp.cy - bb.top})}" stroke="var(--ink-soft)" stroke-dasharray="6 7"/>`; }
+    svg.innerHTML = html;
+    $$('.m-item', box).forEach(el => {
+      const side = el.dataset.side, i = +el.dataset.i;
+      el.classList.toggle('linked', side === 'L' ? conn[i] !== undefined : Object.values(conn).includes(i));
+      el.classList.toggle('sel', !!sel && sel.side === side && sel.i === i);
+    });
+  }
+  function link(li, ri) { for (const k in conn) if (conn[k] === ri) delete conn[k]; conn[li] = ri; sel = null; redraw(); changed(); }
+  function unlink(side, i) { if (side === 'L') delete conn[i]; else for (const k in conn) if (conn[k] === i) delete conn[k]; }
+  function tapItem(side, i) {
+    if (sel && sel.side !== side) { side === 'L' ? link(i, sel.i) : link(sel.i, i); return; }
+    if (sel && sel.side === side && sel.i === i) { unlink(side, i); sel = null; redraw(); changed(); return; }
+    sel = {side, i}; redraw();
+  }
+  box.addEventListener('pointerdown', e => {
+    const el = e.target.closest('.m-item');
+    if (!el || locked || e.button > 0) return;
+    e.preventDefault();
+    const side = el.dataset.side, i = +el.dataset.i, sx = e.clientX, sy = e.clientY;
+    let dragging = false;
+    const scroller = autoScroller(() => { if (temp) redraw(); });
+    const move = ev => {
+      if (!dragging && Math.hypot(ev.clientX - sx, ev.clientY - sy) > 10) dragging = true;
+      if (dragging) { temp = {el, cx: ev.clientX, cy: ev.clientY}; sel = {side, i}; scroller.update(ev.clientY); redraw(); }
+    };
+    const end = ev => {
+      scroller.stop();
+      window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', end); window.removeEventListener('pointercancel', end);
+      if (dragging) {
+        temp = null;
+        const hit = document.elementFromPoint(ev.clientX, ev.clientY);
+        const t = hit && hit.closest('.m-item');
+        if (ev.type === 'pointerup' && t && box.contains(t) && t.dataset.side !== side) { const j = +t.dataset.i; side === 'L' ? link(i, j) : link(j, i); }
+        else { sel = null; redraw(); }
+      } else if (ev.type === 'pointerup') tapItem(side, i);
+    };
+    window.addEventListener('pointermove', move); window.addEventListener('pointerup', end); window.addEventListener('pointercancel', end);
+  });
+  box.addEventListener('click', e => { const el = e.target.closest('.m-item'); if (el && e.detail === 0 && !locked) tapItem(el.dataset.side, +el.dataset.i); });
+  $('#clearLines', root).addEventListener('click', () => { if (locked) return; for (const k in conn) delete conn[k]; sel = null; redraw(); changed(); });
+  const ro = new ResizeObserver(() => redraw()); ro.observe(box);
+  cleanups.push(() => ro.disconnect());
+  requestAnimationFrame(redraw);
+  return {
+    ready: () => Object.keys(conn).length === n,
+    check() {
+      locked = true; result = true; let e = 0;
+      for (let i = 0; i < n; i++) {
+        const ok = conn[i] === i; if (ok) e++;
+        itemEl('L', i).classList.add(ok ? 'ok' : 'no');
+        const r = itemEl('R', i), rOk = Object.entries(conn).some(([li, ri]) => ri === i && +li === i);
+        r.classList.add(rOk ? 'ok' : 'no');
+      }
+      $$('.m-item', box).forEach(b => b.disabled = true);
+      $('#clearLines', root).disabled = true;
+      redraw();
+      return {e, t: n, answer: item.left.map((l, i) => `${l.shape && !l.label ? shapeSvg(l.shape, 'width:1.6rem;height:1.6rem;vertical-align:middle') : `<b>${esc(l.label)}</b>`} ➜ ${esc(item.right[i])}`).join('<br>')};
+    }
+  };
+};
+
+/* Put the cards in the right order: drag them, or use the little arrows. */
+TYPES.order = (item, root, changed) => {
+  const n = item.items.length;
+  let seq = shuffleNotSame(item.items.map((_, i) => i));
+  let locked = false, marks = null, dragPos = -1;
+  function draw() {
+    root.innerHTML = `<p class="tip" style="margin:0 0 .9rem">Drag a card up or down, or use the ▲ ▼ arrows, until the order is right.</p>
+      <div class="orderlist">${seq.map((si, p) => `
+        <div class="ord ${dragPos === p ? 'dragging' : ''} ${marks ? (marks[p] ? 'ok' : 'no') : ''}" data-p="${p}" role="listitem" aria-label="Position ${p + 1}: ${esc(item.items[si])}">
+          <span class="num">${p + 1}</span>
+          <span>${esc(item.items[si])}</span>
+          <span class="ord-move">
+            <button type="button" data-up="${p}" aria-label="Move up" ${p === 0 || locked ? 'disabled' : ''}>▲</button>
+            <button type="button" data-down="${p}" aria-label="Move down" ${p === n - 1 || locked ? 'disabled' : ''}>▼</button>
+          </span>
+        </div>`).join('')}</div>`;
+  }
+  function move(from, to) {
+    if (to < 0 || to >= n || from === to) return;
+    const [x] = seq.splice(from, 1); seq.splice(to, 0, x);
+  }
+  draw();
+  root.addEventListener('click', e => {
+    if (locked) return;
+    const up = e.target.closest('[data-up]'), dn = e.target.closest('[data-down]');
+    if (up) { const p = +up.dataset.up; move(p, p - 1); draw(); changed(); $$(`[data-up="${p - 1}"]`, root)[0].focus(); }
+    else if (dn) { const p = +dn.dataset.down; move(p, p + 1); draw(); changed(); $$(`[data-down="${p + 1}"]`, root)[0].focus(); }
+  });
+  root.addEventListener('pointerdown', e => {
+    const el = e.target.closest('.ord');
+    if (!el || locked || e.button > 0 || e.target.closest('.ord-move')) return;
+    e.preventDefault();
+    const sy = e.clientY;
+    dragPos = +el.dataset.p;
+    let ghost = null;
+    const scroller = autoScroller(() => {});
+    const place = y => {
+      const rows = $$('.ord', root);
+      let target = dragPos;
+      for (let i = 0; i < rows.length; i++) {
+        const r = rows[i].getBoundingClientRect();
+        if (y > r.top && y < r.bottom) { target = i; break; }
+        if (i === 0 && y <= r.top) target = 0;
+        if (i === rows.length - 1 && y >= r.bottom) target = rows.length - 1;
+      }
+      if (target !== dragPos) { move(dragPos, target); dragPos = target; draw(); }
+    };
+    const onMove = ev => {
+      if (!ghost) {
+        if (Math.abs(ev.clientY - sy) < 8) return;
+        ghost = el.cloneNode(true);
+        ghost.classList.add('ghost'); ghost.classList.remove('dragging');
+        ghost.style.width = el.getBoundingClientRect().width + 'px';
+        document.body.appendChild(ghost);
+        draw();
+      }
+      ghost.style.left = ev.clientX + 'px'; ghost.style.top = ev.clientY + 'px';
+      scroller.update(ev.clientY);
+      place(ev.clientY);
+    };
+    const end = () => {
+      scroller.stop();
+      window.removeEventListener('pointermove', onMove); window.removeEventListener('pointerup', end); window.removeEventListener('pointercancel', end);
+      if (ghost) { ghost.remove(); changed(); }
+      dragPos = -1; draw();
+    };
+    window.addEventListener('pointermove', onMove); window.addEventListener('pointerup', end); window.addEventListener('pointercancel', end);
+  });
+  return {
+    ready: () => true,
+    check() {
+      locked = true;
+      marks = seq.map((si, p) => si === p);
+      draw();
+      return {e: marks.filter(Boolean).length, t: n, answer: item.items.map((t, i) => `<b>${i + 1}.</b> ${esc(t)}`).join('<br>')};
+    }
+  };
+};
+
+/* Draw your invention. Saved as a small picture in My Workshop. */
+const PEN_COLORS = ['#1F2A37', '#C0392B', '#2F76A8', '#2E8B57', '#D9841C', '#8E6AC8'];
+TYPES.draw = (item, root, changed) => {
+  root.innerHTML = `<p class="clue">${esc(item.tip)}</p>
+    <div class="padwrap">
+      <canvas id="pad" class="pad" width="600" height="400" aria-label="Drawing area. Use a finger, a pen or a mouse."></canvas>
+      <div class="padtools" role="group" aria-label="Drawing tools">
+        ${PEN_COLORS.map((c, i) => `<button type="button" class="swatch" data-c="${i}" style="background:${c}" aria-label="Colour ${i + 1}" aria-pressed="${i === 0}"></button>`).join('')}
+        <button type="button" class="btn btn-small" id="undoBtn">↶ Undo</button>
+        <button type="button" class="btn btn-small" id="clearPad">Start again</button>
+      </div>
+      <p class="padnote">Draw something, then tap Check to keep it. There are no wrong answers here.</p>
+    </div>`;
+  const cv = $('#pad', root), ctx = cv.getContext('2d');
+  let strokes = [], cur = null, color = PEN_COLORS[0], locked = false;
+  function repaint() {
+    ctx.fillStyle = '#FFFFFF'; ctx.fillRect(0, 0, cv.width, cv.height);
+    ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    for (const s of strokes.concat(cur ? [cur] : [])) {
+      if (s.pts.length < 2) {
+        ctx.fillStyle = s.c; ctx.beginPath(); ctx.arc(s.pts[0].x, s.pts[0].y, s.w / 2, 0, 7); ctx.fill();
+        continue;
+      }
+      ctx.strokeStyle = s.c; ctx.lineWidth = s.w;
+      ctx.beginPath(); ctx.moveTo(s.pts[0].x, s.pts[0].y);
+      for (let i = 1; i < s.pts.length; i++) ctx.lineTo(s.pts[i].x, s.pts[i].y);
+      ctx.stroke();
+    }
+  }
+  const pos = e => { const r = cv.getBoundingClientRect(); return {x: (e.clientX - r.left) * cv.width / r.width, y: (e.clientY - r.top) * cv.height / r.height}; };
+  cv.addEventListener('pointerdown', e => {
+    if (locked) return;
+    e.preventDefault(); cv.setPointerCapture(e.pointerId);
+    cur = {c: color, w: 6, pts: [pos(e)]}; repaint();
+  });
+  cv.addEventListener('pointermove', e => { if (!cur) return; cur.pts.push(pos(e)); repaint(); });
+  const stop = () => { if (!cur) return; strokes.push(cur); cur = null; repaint(); changed(); };
+  cv.addEventListener('pointerup', stop);
+  cv.addEventListener('pointercancel', stop);
+  cv.addEventListener('pointerleave', stop);
+  $$('.swatch', root).forEach(b => b.onclick = () => {
+    color = PEN_COLORS[+b.dataset.c];
+    $$('.swatch', root).forEach(x => x.setAttribute('aria-pressed', x === b));
+  });
+  $('#undoBtn', root).onclick = () => { if (locked) return; strokes.pop(); repaint(); changed(); };
+  $('#clearPad', root).onclick = () => { if (locked) return; strokes = []; repaint(); changed(); };
+  repaint();
+  return {
+    ready: () => strokes.length > 0,
+    check() {
+      locked = true;
+      let url = '';
+      try {
+        const small = document.createElement('canvas');
+        small.width = 420; small.height = 280;
+        const sc = small.getContext('2d');
+        sc.fillStyle = '#FFFFFF'; sc.fillRect(0, 0, 420, 280);
+        sc.drawImage(cv, 0, 0, 420, 280);
+        url = small.toDataURL('image/png');
+      } catch (e) {}
+      return {e: 0, t: 0, picture: url, strokes: strokes.length};
+    }
+  };
+};
+
+/* Free writing: a short paragraph about an invention or an idea. */
+TYPES.free = (item, root, changed) => {
+  const need = item.minWords || 12;
+  root.innerHTML = `<p class="clue">${esc(item.tip)}</p>
+    <label class="sr" for="wr">Your writing</label>
+    <textarea id="wr" class="write" rows="6" placeholder="Start writing here..."></textarea>
+    <div class="wordcount" id="wc">0 words</div>`;
+  const ta = $('#wr', root), wc = $('#wc', root);
+  const count = () => norm(ta.value).split(' ').filter(Boolean).length;
+  ta.addEventListener('input', () => {
+    const c = count();
+    wc.textContent = `${c} word${c === 1 ? '' : 's'}${c < need ? ` (write at least ${need})` : ' — nice work!'}`;
+    changed();
+  });
+  return {
+    ready: () => count() >= need,
+    check() {
+      ta.readOnly = true;
+      const text = ta.value.trim();
+      const sentences = text.split(/[.!?]+/).map(s => s.trim()).filter(Boolean).length;
+      return {e: 0, t: 0, response: text, words: count(), sentences};
+    },
+    focus: () => ta.focus()
+  };
+};
+
+/* ============ APP ============ */
+const app = $('#app'), dock = $('#dock'), dockInner = $('#dockInner'), layer = $('#layer');
+let screen = 'home', Q = null, timer = null, paused = false, cleanups = [], streak = 0;
+
+function runCleanups() { cleanups.forEach(f => { try { f(); } catch (e) {} }); cleanups = []; }
+function showLayer(html) { layer.innerHTML = html; const b = $('button', layer); if (b) b.focus(); }
+function hideLayer() { layer.innerHTML = ''; }
+function confirmBox({title, text, yes, no = 'Cancel', onYes, bot = false}) {
+  showLayer(`<div class="overlay" role="dialog" aria-modal="true" aria-labelledby="cbT"><div class="modal">${bot ? sparky() : ''}<h2 id="cbT">${esc(title)}</h2><p>${esc(text)}</p><button class="btn btn-go btn-wide" id="cbYes">${esc(yes)}</button>${no === null ? '' : `<button class="btn btn-wide" id="cbNo">${esc(no)}</button>`}</div></div>`);
+  $('#cbYes').onclick = () => { hideLayer(); onYes(); };
+  const nb = $('#cbNo'); if (nb) nb.onclick = hideLayer;
+}
+
+function go(name) {
+  screen = name; runCleanups(); hideLayer(); stopTimer();
+  dock.className = 'dock hidden'; dockInner.innerHTML = ''; Q = null;
+  ({home:renderHome, quiz:openQuiz, results:renderResults, history:renderHistory, settings:renderSettings}[name] || renderHome)();
+  if (name !== 'quiz') window.scrollTo(0, 0);
+}
+
+/* ---------- Home ---------- */
+function renderHome() {
+  const c = S.current;
+  let resume = '';
+  if (c) {
+    const set = getSet(c.setId), done = Object.keys(c.answers).length;
+    resume = `<section class="resume" aria-labelledby="rsT">
+      <h2 id="rsT">⏸ Paused: ${set.emoji} ${esc(set.title)}</h2>
+      <p>${done} of ${c.queue.length} questions done${c.mode === 'fix' ? ' while fixing mistakes' : ''}. Time so far: ${fmtTime(c.elapsed)}.</p>
+      <div class="row"><button class="btn btn-go" id="contBtn">▶ Continue</button><button class="btn" id="discardBtn">Start over</button></div>
+    </section>`;
+  }
+  const order = setOrder();
+  app.innerHTML = `
+    <header class="hero">
+      <div><h1>Inventors Lab</h1><p>Pronouns, job words, grammar, reading, shapes and eye tricks.</p></div>
+      ${sparky()}
+    </header>
+    ${storageOK ? '' : '<div class="notice">This browser is not saving progress right now. You can still play, but results may be lost when you close the page.</div>'}
+    ${resume}
+    <section class="sets" aria-labelledby="setsT">
+      <h2 class="label" id="setsT">Choose a set</h2>
+      ${order.map((id, pos) => {
+        const set = getSet(id), rec = S.sets[id], open = isUnlocked(id), best = rec && rec.best;
+        const meta = !open ? `🔒 Score ${PASS}% or more on set ${pos} to open this one`
+          : best ? `Best: ${best.e} of ${best.t} (${best.pct}%)`
+          : `${flat(set).length} questions, ${setTotal(set)} stars to win`;
+        return `<button class="setcard ${open ? '' : 'locked'}" data-set="${id}" ${open ? '' : 'aria-disabled="true"'}>
+          <span class="emoji" aria-hidden="true">${set.emoji}</span>
+          <span><span class="sc-title">Set ${pos + 1}: ${esc(set.title)}</span><br><span class="meta">${esc(set.about)}</span><br><span class="meta">${meta}</span></span>
+          <span class="go">${open ? (best ? starRow(starsFor(best.pct)) : 'Start ▶') : 'Locked'}</span>
+        </button>`;
+      }).join('')}
+    </section>
+    <nav class="homefoot" aria-label="More">
+      <button class="btn btn-sun" id="histBtn">🏆 My results</button>
+      <button class="btn" id="setBtn">⚙️ Settings for grown-ups</button>
+      <a class="btn" href="/">🏠 All activities</a>
+    </nav>`;
+  if (c) {
+    $('#contBtn').onclick = () => go('quiz');
+    $('#discardBtn').onclick = () => confirmBox({title:'Start over?', text:'The answers in your paused set will be cleared.', yes:'Yes, clear it', no:'Keep it', onYes(){ S.current = null; save(); go('home'); }});
+  }
+  $$('.setcard').forEach(b => b.onclick = () => {
+    const id = +b.dataset.set;
+    if (!isUnlocked(id)) {
+      const pos = orderPos(id);
+      let t = pos - 1; while (t > 0 && !isUnlocked(order[t])) t--;
+      confirmBox({title:'This set is locked', text:`Score ${PASS}% or more on set ${pos} to open this one. You can do it!`, yes:`Go to set ${t + 1}`, no:'Close', bot:true, onYes(){ tryStart(order[t]); }});
+      return;
+    }
+    tryStart(id);
+  });
+  $('#histBtn').onclick = () => go('history');
+  $('#setBtn').onclick = () => go('settings');
+}
+
+function tryStart(id, mode = 'full', queue = null) {
+  const c = S.current;
+  if (c && c.setId === id && mode === 'full') {
+    confirmBox({title:'That set is paused', text:'Do you want to keep going from where you stopped?', yes:'▶ Continue', no:'Start again', onYes(){ go('quiz'); }});
+    $('#cbNo').onclick = () => { hideLayer(); startSet(id, mode, queue); };
+    return;
+  }
+  if (c) { confirmBox({title:'You have a paused set', text:`Starting now will clear your paused set: ${getSet(c.setId).title}.`, yes:'Start the new set', no:'Cancel', onYes(){ startSet(id, mode, queue); }}); return; }
+  startSet(id, mode, queue);
+}
+function startSet(id, mode = 'full', queue = null) {
+  const f = flat(getSet(id));
+  S.current = {setId:id, mode, queue: queue || f.map((_, i) => i), answers:{}, elapsed:0, started:Date.now()};
+  streak = 0;
+  save(); go('quiz');
+}
+
+/* ---------- Quiz ---------- */
+function startTimer() {
+  stopTimer();
+  let last = Date.now(), ticks = 0;
+  timer = setInterval(() => { const now = Date.now(); if (S.current && !paused) { S.current.elapsed += now - last; if (++ticks % 5 === 0) save(); } last = now; }, 1000);
+}
+function stopTimer() { if (timer) clearInterval(timer); timer = null; }
+function openQuiz() { if (!S.current) return go('home'); paused = false; renderQuestion(); if (screen === 'quiz' && S.current) startTimer(); }
+function tally(c) { let e = 0, t = 0; Object.values(c.answers).forEach(a => { e += a.e; t += a.t; }); return {e, t}; }
+
+function renderQuestion() {
+  runCleanups();
+  const c = S.current, set = getSet(c.setId), f = flat(set);
+  const pos = c.queue.findIndex(i => !c.answers[i]);
+  if (pos < 0) return finishRun();
+  const idx = c.queue[pos], {sec, item} = f[idx];
+  const done = c.queue.length - c.queue.filter(i => !c.answers[i]).length;
+  const pct = done / c.queue.length;
+  const {e, t} = tally(c);
+  const firstRead = c.queue.find(i => f[i].sec === 'reading');
+  const fig = item.fig ? FIGURES[item.fig] : null;
+  app.innerHTML = `
+    <div class="topbar">
+      <button class="btn btn-icon" id="pauseBtn" aria-label="Pause">⏸</button>
+      <span class="where"><b>${set.emoji} ${esc(set.title)}</b><span>Question ${done + 1} of ${c.queue.length}</span></span>
+      ${streak >= 3 ? `<span class="pill fire" aria-label="${streak} right in a row">🔥 ${streak}</span>` : ''}
+      <span class="pill" id="scorePill" aria-label="${e} stars out of ${t}">⭐ ${e}/${t}</span>
+    </div>
+    <div class="track-wrap" aria-hidden="true">
+      <div class="track"></div><div class="fill" style="width:${pct * 100}%"></div>
+      <div class="walker" style="left:${pct * 100}%">${sparky()}</div><div class="goal">🏁</div>
+    </div>
+    <article class="card" id="qcard">
+      <span class="sec-tag">${SECTIONS[sec].icon} ${SECTIONS[sec].name}</span>
+      <div class="prompt"><h2>${esc(item.prompt)}</h2>${canSpeak ? '<button class="speak" id="speakBtn" aria-label="Read the question out loud">🔊</button>' : ''}</div>
+      ${sec === 'reading' ? `<details class="story" ${idx === firstRead ? 'open' : ''}><summary>📖 Story: ${esc(set.story.title)}</summary><div class="story-body">${canSpeak ? '<button class="btn btn-small" id="storyBtn" style="margin-bottom:.7rem">🔊 Read the story to me</button>' : ''}${set.story.text.map(p => `<p>${esc(p)}</p>`).join('')}</div></details>` : ''}
+      ${fig ? `<div class="figure" id="figBox">
+        <svg viewBox="${fig.box}" role="img" aria-label="${esc(fig.cap)}">${fig.svg}</svg>
+        <button class="btn btn-small" id="measureBtn" type="button" style="margin-top:.6rem">📏 Measure it</button>
+      </div>` : ''}
+      <div id="qbody"></div>
+    </article>
+    <div class="dock-space" id="dockSpace"></div>`;
+  const body = $('#qbody');
+  const h = TYPES[item.t](item, body, () => { const b = $('#checkBtn'); if (b) b.disabled = !h.ready(); }, cleanups);
+  Q = {idx, item, sec, h, checked:false};
+  const sb = $('#speakBtn'); if (sb) sb.onclick = () => speak(speakText(item));
+  const stb = $('#storyBtn'); if (stb) stb.onclick = () => speak(set.story.text.join(' '));
+  const mb = $('#measureBtn');
+  if (mb) mb.onclick = () => { $('#figBox').classList.toggle('measured'); mb.textContent = $('#figBox').classList.contains('measured') ? '👁️ Hide the guides' : '📏 Measure it'; };
+  $('#pauseBtn').onclick = pause;
+  dock.className = 'dock';
+  dockInner.innerHTML = `<button class="btn btn-go btn-wide" id="checkBtn" disabled>${item.t === 'draw' || item.t === 'free' ? 'Save my work' : 'Check my answer'}</button>`;
+  $('#checkBtn').onclick = doCheck;
+  $('#checkBtn').disabled = !h.ready();
+  syncDockSpace();
+}
+function syncDockSpace() { const sp = $('#dockSpace'); if (sp) sp.style.height = (dock.offsetHeight + 24) + 'px'; }
+
+function doCheck() {
+  if (!Q || Q.checked || !Q.h.ready()) return;
+  const c = S.current, set = getSet(c.setId), item = Q.item;
+  const res = Q.h.check();
+  Q.checked = true;
+  c.answers[Q.idx] = {e: res.e, t: res.t};
+
+  /* keep the child's own work */
+  if (item.t === 'free' && res.response) { S.works.unshift({setId:set.id, text:res.response, date:Date.now()}); S.works = S.works.slice(0, 30); }
+  if (item.t === 'draw' && res.picture) { S.gallery.unshift({setId:set.id, img:res.picture, tip:item.tip, date:Date.now()}); S.gallery = S.gallery.slice(0, 12); }
+
+  /* counters that feed the badges */
+  if (item.t === 'spell' && res.e) S.stats.spell++;
+  if (item.t === 'write' && res.e === res.t) S.stats.write++;
+  if (item.fig && res.e) S.stats.illusion++;
+  if (item.t === 'draw') S.stats.draw++;
+  if (res.t > 0) { streak = res.e === res.t ? streak + 1 : 0; if (streak > S.stats.streak) S.stats.streak = streak; }
+
+  const earned = newBadges();
+  save();
+
+  const {e, t} = tally(c);
+  const pill = $('#scorePill'); pill.textContent = `⭐ ${e}/${t}`; pill.setAttribute('aria-label', `${e} stars out of ${t}`);
+  const figBox = $('#figBox'); if (figBox) figBox.classList.add('measured');
+
+  const kind = res.t === 0 || res.e === res.t ? 'good' : res.e === 0 ? 'bad' : 'part';
+  let title, body = '';
+  if (item.t === 'draw') {
+    title = '🎨 Brilliant design!';
+    body = `<p>Your drawing is saved in My Workshop. ${res.strokes > 12 ? 'You put a lot of detail into that one!' : 'Come back any time and draw another.'}</p>`;
+  } else if (item.t === 'free') {
+    title = '✍️ Great writing!';
+    body = `<p>${res.words} words in ${res.sentences} sentence${res.sentences === 1 ? '' : 's'}. ${res.sentences >= 2 ? 'Splitting your idea into sentences makes it easy to read.' : 'Next time try splitting your idea into two or three sentences.'} It is saved in My Workshop.</p>`;
+  } else {
+    title = kind === 'good' ? '✅ ' + pick(['Great job!', 'You got it!', 'Spot on!', 'Well done!', 'Brilliant!'])
+      : kind === 'part' ? '🌟 ' + pick(['Almost!', 'So close!', 'Good work, nearly all of it!'])
+      : '💪 ' + pick(['Nice try!', 'Good try!', 'Not quite yet.']);
+    if (item.t === 'type' && res.nearly) body += `<p>You had the right word — just watch the spelling: <b>${esc(item.accept[0])}</b>.</p>`;
+    if (kind !== 'good') body += `<p><span class="ans">The answer:</span><br>${res.answer}</p>`;
+    else if (res.model) body += `<p><span class="ans">Another good way to say it:</span> ${res.model}</p>`;
+    if (kind === 'part' && item.t === 'write') body += `<p>You found ${res.e} of the ${res.t} things. Read the question again and see what is missing.</p>`;
+  }
+  if (item.explain) body += `<p class="why">💡 ${esc(item.explain)}</p>`;
+  if (streak === 3) body += `<p>🔥 Three right in a row!</p>`;
+  else if (streak >= 6) body += `<p>🔥 ${streak} in a row — you are on fire!</p>`;
+  earned.forEach(b => { body += `<div class="badge-pop"><span class="bi">${b.icon}</span><span><b>New badge: ${esc(b.name)}</b><br><small>${esc(b.desc)}</small></span></div>`; });
+
+  const gain = res.t ? `+${res.e} of ${res.t}` : 'Saved';
+  const last = c.queue.every(i => c.answers[i]);
+  dock.className = 'dock ' + kind;
+  dockInner.innerHTML = `<div class="fb" role="status"><h3>${title}<span class="gain">${gain}</span></h3>${body}</div>
+    <button class="btn btn-go btn-wide" id="nextBtn">${last ? '🏁 See my results' : 'Next question ▶'}</button>`;
+  $('#nextBtn').onclick = next;
+  $('#nextBtn').focus({preventScroll:true});
+  syncDockSpace();
+  beep(res.t === 0 ? 'good' : kind);
+  if (kind === 'good') { const b = $('.walker .bot'); if (b) { b.classList.remove('happy'); void b.offsetWidth; b.classList.add('happy'); } }
+}
+function next() { if (!Q || !Q.checked) return; renderQuestion(); window.scrollTo(0, 0); const f = Q && Q.h && Q.h.focus; if (f && matchMedia('(pointer: fine)').matches) f(); }
+
+function newBadges() {
+  const out = [];
+  BADGES.forEach(b => { if (!S.badges.includes(b.id) && b.got(S)) { S.badges.push(b.id); out.push(b); } });
+  return out;
+}
+
+function pause() {
+  if (!S.current) return;
+  paused = true; save();
+  const {e, t} = tally(S.current);
+  showLayer(`<div class="overlay" role="dialog" aria-modal="true" aria-labelledby="pT"><div class="modal">${sparky('sleepy')}<h2 id="pT">Paused</h2>
+    <p>You have ${e} of ${t} stars so far. Your place is saved, so you can come back any time.</p>
+    <button class="btn btn-go btn-wide" id="resumeBtn">▶ Keep going</button>
+    <button class="btn btn-wide" id="homeBtn">Save and go home</button></div></div>`);
+  $('#resumeBtn').onclick = resumeQuiz;
+  $('#homeBtn').onclick = () => go('home');
+}
+function resumeQuiz() { paused = false; hideLayer(); }
+
+function finishRun() {
+  stopTimer();
+  const c = S.current, set = getSet(c.setId), f = flat(set);
+  let e = 0, t = 0; const bySec = {};
+  c.queue.forEach(i => { const a = c.answers[i], s = f[i].sec; bySec[s] = bySec[s] || {e:0, t:0}; if (a) { e += a.e; t += a.t; bySec[s].e += a.e; bySec[s].t += a.t; } });
+  const pct = t ? Math.round(e / t * 100) : 0;
+  const order = setOrder(), pos = orderPos(set.id), nextId = pos >= 0 && pos + 1 < order.length ? order[pos + 1] : null;
+  const wasOpen = nextId !== null && isUnlocked(nextId);
+  const rec = S.sets[set.id] = S.sets[set.id] || {attempts:[], best:null};
+  rec.attempts.unshift({mode:c.mode, e, t, pct, time:c.elapsed, date:Date.now()});
+  rec.attempts = rec.attempts.slice(0, 20);
+  if (c.mode === 'full' && (!rec.best || pct > rec.best.pct || (pct === rec.best.pct && c.elapsed < rec.best.time))) rec.best = {e, t, pct, time:c.elapsed, date:Date.now()};
+  if (c.mode === 'fix') S.stats.fix++;
+  S.lastRun = {setId:set.id, mode:c.mode, e, t, pct, time:c.elapsed, bySec, answers:c.answers, queue:c.queue,
+    newlyOpen: nextId !== null && !wasOpen && isUnlocked(nextId)};
+  S.current = null;
+  const earned = newBadges();
+  S.lastRun.badges = earned.map(b => b.id);
+  save();
+  go('results');
+}
+
+/* ---------- Results ---------- */
+function renderResults() {
+  const r = S.lastRun; if (!r) return go('home');
+  const set = getSet(r.setId), f = flat(set), stars = starsFor(r.pct);
+  const order = setOrder(), pos = orderPos(set.id);
+  const nextSet = pos + 1 < order.length ? getSet(order[pos + 1]) : null;
+  const nextOpen = nextSet && isUnlocked(nextSet.id);
+  const wrong = r.queue.filter(i => r.answers[i] && r.answers[i].t > 0 && r.answers[i].e < r.answers[i].t);
+  const msg = r.mode === 'fix'
+    ? (r.e === r.t ? 'You fixed every single mistake. Amazing!' : `You fixed ${r.e} of ${r.t}. Keep going — you are getting better!`)
+    : stars === 3 ? 'Outstanding work, inventor!' : stars === 2 ? 'Really good work!' : stars === 1 ? 'Good effort — keep practising!' : 'Every inventor starts somewhere. Try again!';
+  const gotBadges = (r.badges || []).map(id => BADGES.find(b => b.id === id)).filter(Boolean);
+  app.innerHTML = `
+    <div class="result-head">
+      ${sparky(stars >= 2 ? 'happy' : '')}
+      <h1 id="rT" class="sr">Results</h1>
+      <div class="big-stars" aria-label="${stars} of 3 stars">${[0,1,2].map(i => `<span class="${i < stars ? 'star-on' : 'star-off'}">★</span>`).join('')}</div>
+      <p class="score-big">${r.e} / ${r.t}</p>
+      <p>${r.pct}% — ${esc(msg)}</p>
+      <p>Time: ${fmtTime(r.time)}</p>
+      ${r.newlyOpen && nextSet ? `<p><b>🔓 You have opened ${nextSet.emoji} ${esc(nextSet.title)}!</b></p>` : ''}
+    </div>
+    ${gotBadges.length ? `<div class="card" style="margin-bottom:1rem"><h2 style="font-size:1.2rem">🎉 New badges</h2><div class="badges">${gotBadges.map(b => `<div class="badge on"><span class="bi">${b.icon}</span><b>${esc(b.name)}</b><small>${esc(b.desc)}</small></div>`).join('')}</div></div>` : ''}
+    <div class="card">
+      <h2 style="font-size:1.25rem">How each part went</h2>
+      <div class="bars">${Object.keys(SECTIONS).filter(k => r.bySec[k] && r.bySec[k].t).map(k => {
+        const b = r.bySec[k], p = Math.round(b.e / b.t * 100);
+        return `<div class="bar-row"><span>${SECTIONS[k].icon} ${SECTIONS[k].name}</span><span>${b.e}/${b.t}</span><span class="bar"><i style="width:${p}%"></i></span></div>`;
+      }).join('')}</div>
+      ${wrong.length ? `<div class="review"><details><summary>🔎 Look again at ${wrong.length} question${wrong.length === 1 ? '' : 's'}</summary><ol>${wrong.map(i => {
+        const it = f[i].item;
+        return `<li><b>${esc(questionLabel(it))}</b><br>Answer: ${esc(answerText(it))}${it.explain ? `<br><span style="color:var(--ink-soft)">💡 ${esc(it.explain)}</span>` : ''}</li>`;
+      }).join('')}</ol></details></div>` : ''}
+      <div class="stack" style="margin-top:1.2rem">
+        ${wrong.length ? `<button class="btn btn-go btn-wide" id="fixBtn">🔁 Fix my mistakes (${wrong.length})</button>` : ''}
+        ${nextSet ? (nextOpen
+          ? `<button class="btn ${wrong.length ? 'btn-sun' : 'btn-go'} btn-wide" id="upBtn">⬆ Next set: ${nextSet.emoji} ${esc(nextSet.title)}</button>`
+          : `<p class="tip" style="text-align:center">Score ${PASS}% or more on the whole set to open ${nextSet.emoji} ${esc(nextSet.title)}.</p>`)
+          : `<p class="tip" style="text-align:center">You have reached the last set in your lab! 🏁</p>`}
+        <button class="btn btn-wide" id="againBtn">Try the whole set again</button>
+        <button class="btn btn-wide" id="homeBtn2">🏠 Home</button>
+      </div>
+    </div>`;
+  if (wrong.length) $('#fixBtn').onclick = () => startSet(set.id, 'fix', wrong);
+  if (nextSet && nextOpen) $('#upBtn').onclick = () => tryStart(nextSet.id);
+  $('#againBtn').onclick = () => startSet(set.id, 'full');
+  $('#homeBtn2').onclick = () => go('home');
+}
+
+/* ---------- My results ---------- */
+function renderHistory() {
+  const order = setOrder();
+  const any = order.some(id => S.sets[id] && S.sets[id].attempts.length);
+  app.innerHTML = `
+    <div class="page-head"><button class="btn btn-icon" id="backBtn" aria-label="Back to home">⬅</button><h1>🏆 My results</h1></div>
+    <div class="hist">
+      <section class="card">
+        <h2 style="font-size:1.3rem">Badges (${S.badges.length} of ${BADGES.length})</h2>
+        <div class="badges">${BADGES.map(b => {
+          const on = S.badges.includes(b.id);
+          return `<div class="badge ${on ? 'on' : 'off'}"><span class="bi">${b.icon}</span><b>${on ? esc(b.name) : 'Locked'}</b><small>${esc(b.desc)}</small></div>`;
+        }).join('')}</div>
+      </section>
+      ${!any ? `<div class="card"><p style="margin:0;font-size:1.15rem">No results yet. Pick a set on the home page and start inventing!</p></div>` : ''}
+      ${order.map((id, pos) => {
+        const set = getSet(id), rec = S.sets[id];
+        if (!rec || !rec.attempts.length) return '';
+        return `<section class="card"><h2 style="font-size:1.3rem">${set.emoji} Set ${pos + 1}: ${esc(set.title)}</h2>
+          <p style="margin:.3rem 0">${rec.best ? `Best score: <b>${rec.best.e} of ${rec.best.t}</b> (${rec.best.pct}%) ${starRow(starsFor(rec.best.pct))}` : 'Not finished as a whole set yet'}</p>
+          <div class="scroll-x"><table><thead><tr><th>When</th><th>Type</th><th>Score</th><th>Time</th></tr></thead><tbody>
+            ${rec.attempts.slice(0, 8).map(a => `<tr><td>${fmtDate(a.date)}</td><td>${a.mode === 'fix' ? 'Fix mistakes' : 'Whole set'}</td><td>${a.e}/${a.t} (${a.pct}%)</td><td>${fmtTime(a.time)}</td></tr>`).join('')}
+          </tbody></table></div></section>`;
+      }).join('')}
+      ${S.gallery.length ? `<section class="card"><h2 style="font-size:1.3rem">🎨 My Workshop — drawings</h2>
+        <div class="gallery">${S.gallery.map(g => `<figure><img src="${g.img}" alt="A drawing made on ${fmtDate(g.date)}"><figcaption>${fmtDate(g.date)}</figcaption></figure>`).join('')}</div></section>` : ''}
+      ${S.works.length ? `<section class="card"><h2 style="font-size:1.3rem">✍️ My Workshop — writing</h2>${S.works.map(p => `<div class="work-card">${esc(p.text)}</div><p class="tip" style="margin:.3rem 0 0">${esc(getSet(p.setId) ? getSet(p.setId).title : 'Set ' + p.setId)}, ${fmtDate(p.date)}</p>`).join('')}</section>` : ''}
+    </div>`;
+  $('#backBtn').onclick = () => go('home');
+}
+
+/* ---------- Settings ---------- */
+function renderSettings() {
+  const seg = (key, opts) => `<div class="seg" role="group">${opts.map(([v, l]) => `<button data-k="${key}" data-v="${v}" aria-pressed="${String(S.settings[key]) === String(v)}">${l}</button>`).join('')}</div>`;
+  const order = setOrder();
+  app.innerHTML = `
+    <div class="page-head"><button class="btn btn-icon" id="backBtn" aria-label="Back to home">⬅</button><h1>⚙️ Settings</h1></div>
+    <div class="card">
+      <div class="setting"><div><b>Text size</b><small>Bigger text is easier on young eyes.</small></div>${seg('size', [['normal', 'Big'], ['big', 'Bigger']])}</div>
+      <div class="setting"><div><b>Colours</b><small>Dark is gentle at night.</small></div>${seg('theme', [['auto', 'Auto'], ['light', 'Light'], ['dark', 'Dark']])}</div>
+      <div class="setting"><div><b>Sounds</b><small>Little chimes for right and wrong answers.</small></div>${seg('sound', [[true, 'On'], [false, 'Off']])}</div>
+      <div class="setting"><div><b>Open all sets</b><small>Normally a set opens after ${PASS}% on the one before it.</small></div>${seg('unlockAll', [[false, 'No'], [true, 'Yes']])}</div>
+      <div class="setting"><div><b>Backup progress</b><small>Saves a file with stars, badges, writing and drawings.</small></div><button class="btn btn-small" id="exportBtn">Save backup</button></div>
+      <div class="setting"><div><b>Restore progress</b><small>Load a backup from another device or an earlier day.</small></div><button class="btn btn-small" id="importBtn">Load backup</button><input type="file" id="importFile" accept="application/json,.json" style="display:none"></div>
+      <div class="setting"><div><b>Clear all progress</b><small>Removes scores, badges, workshop and any paused set.</small></div><button class="btn btn-small" id="resetBtn">Clear progress</button></div>
+    </div>
+    <div class="card" style="margin-top:1rem">
+      <h2 style="font-size:1.2rem">This learner's set order</h2>
+      <p style="margin:.5rem 0 0;font-size:1.05rem">Each new learner gets the sets in their own shuffled order, and that order then stays the same for ever, on every visit. This device is using:</p>
+      <p style="margin:.5rem 0 0;font-size:1.05rem">${order.map((id, i) => `<b>${i + 1}.</b> ${getSet(id).emoji} ${esc(getSet(id).title)}`).join(' &nbsp; ')}</p>
+      <div class="setting" style="border:0"><div><b>Give a new order</b><small>Only for a different child sharing this device. It also clears their progress.</small></div><button class="btn btn-small" id="reshuffleBtn">Shuffle again</button></div>
+    </div>
+    <div class="card" style="margin-top:1rem">
+      <h2 style="font-size:1.2rem">How scoring works</h2>
+      <p style="margin:.5rem 0 0;font-size:1.05rem">Each question counts the first answer. Sorting, matching, ordering and gap-filling give one star per part, and a written answer gives one star for each thing it needed to mention. Drawings and free writing always count as finished — they are saved in My Workshop rather than marked. "Fix my mistakes" repeats only what was missed; the best score always comes from a whole-set try.</p>
+    </div>
+    <div class="card" style="margin-top:1rem" id="storeCard">
+      <h2 style="font-size:1.2rem">Where the stars are kept</h2>
+      <p style="margin:.5rem 0 0;font-size:1.05rem">Progress lives in this device's browser. It is not sent anywhere and no account is needed.</p>
+      <div id="iosNote"></div>
+    </div>`;
+  $('#backBtn').onclick = () => go('home');
+  $$('.seg button').forEach(b => b.onclick = () => {
+    const k = b.dataset.k; let v = b.dataset.v;
+    if (v === 'true') v = true; else if (v === 'false') v = false;
+    S.settings[k] = v; save(); applySettings(); renderSettings();
+    const again = $(`.seg button[data-k="${k}"][data-v="${b.dataset.v}"]`); if (again) again.focus();
+  });
+  $('#reshuffleBtn').onclick = () => confirmBox({
+    title:'Give a new set order?',
+    text:'This is for a different child using the same device. It picks a fresh order and clears the stars, badges and workshop on this device.',
+    yes:'Yes, new learner', no:'Cancel',
+    onYes(){ const keep = S.settings; S = fresh(); S.settings = keep; S.seed = (Math.random() * 4294967296) >>> 0; setOrder(); save(); go('home'); }
+  });
+  const installed = window.navigator.standalone === true || window.matchMedia('(display-mode: standalone)').matches;
+  const onIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  const note = $('#iosNote');
+  if (note) {
+    if (onIOS && !installed) {
+      note.innerHTML = '<p style="margin:.6rem 0 0;font-size:1.05rem;background:var(--sun-soft);border-left:8px solid var(--sun);border-radius:14px;padding:.7rem .9rem">' +
+        '<b>Worth doing:</b> add this page to the Home Screen (Share → Add to Home Screen) and open it from that icon. ' +
+        'Safari erases saved progress after about a week of not visiting. Home Screen apps keep theirs.</p>';
+    } else if (installed) {
+      note.innerHTML = '<p style="margin:.6rem 0 0;font-size:1.05rem;color:var(--ink-soft)">Running from the Home Screen — progress is kept safely.</p>';
+    }
+  }
+
+  $('#exportBtn').onclick = () => {
+    try {
+      const stamp = new Date().toISOString().slice(0, 10);
+      const blob = new Blob([JSON.stringify(S, null, 2)], {type: 'application/json'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'inventors-lab-' + stamp + '.json';
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 2000);
+    } catch (e) {
+      confirmBox({title:'Could not save', text:'This browser would not let the file be saved.', yes:'OK', no:null, onYes(){}});
+    }
+  };
+  $('#importBtn').onclick = () => $('#importFile').click();
+  $('#importFile').onchange = ev => {
+    const f = ev.target.files && ev.target.files[0];
+    ev.target.value = '';
+    if (!f) return;
+    const r = new FileReader();
+    r.onload = () => {
+      let d = null;
+      try { d = JSON.parse(String(r.result)); } catch (e) {}
+      if (!d || typeof d !== 'object' || typeof d.sets !== 'object' || d.sets === null) {
+        confirmBox({title:'That file did not fit', text:'It is not an Inventors Lab backup. Look for a file named inventors-lab-....json', yes:'OK', no:null, onYes(){}});
+        return;
+      }
+      const done = Object.keys(d.sets).length, works = Array.isArray(d.works) ? d.works.length : 0, pics = Array.isArray(d.gallery) ? d.gallery.length : 0;
+      const bits = [done + ' set' + (done === 1 ? '' : 's') + ' started', works + ' piece' + (works === 1 ? '' : 's') + ' of writing', pics + ' drawing' + (pics === 1 ? '' : 's')];
+      if (d.current) bits.push('a paused set');
+      confirmBox({
+        title:'Load this backup?',
+        text:'It has ' + bits.join(', ') + '. This replaces what is on this device now.',
+        yes:'Yes, load it', no:'Cancel',
+        onYes(){
+          S = Object.assign(fresh(), d);
+          S.settings = Object.assign(fresh().settings, d.settings || {});
+          S.stats = Object.assign(freshStats(), d.stats || {});
+          if (S.seed === null || S.seed === undefined) S.seed = (Math.random() * 4294967296) >>> 0;
+          setOrder(); save(); applySettings(); go('home');
+        }
+      });
+    };
+    r.readAsText(f);
+  };
+  $('#resetBtn').onclick = () => confirmBox({
+    title:'Clear all progress?',
+    text:'Scores, badges, workshop and paused sets will be removed. The set order and the settings stay the same.',
+    yes:'Yes, clear everything', no:'Cancel',
+    onYes(){ const keep = S.settings, seed = S.seed, order = S.order; S = fresh(); S.settings = keep; S.seed = seed; S.order = order; save(); go('home'); }
+  });
+}
+
+/* ---------- Global events ---------- */
+document.addEventListener('keydown', e => {
+  if (layer.innerHTML) { if (e.key === 'Escape') { if (paused) resumeQuiz(); else hideLayer(); } return; }
+  if (screen !== 'quiz' || !Q) return;
+  const tag = e.target.tagName;
+  if (!Q.checked && Q.h.onKey && tag !== 'TEXTAREA' && tag !== 'INPUT' && !e.ctrlKey && !e.metaKey && !e.altKey) { if (Q.h.onKey(e)) { e.preventDefault(); return; } }
+  if (e.key === 'Enter' && (tag === 'INPUT' || e.target === document.body)) {
+    e.preventDefault();
+    if (Q.checked) next(); else doCheck();
+  }
+});
+document.addEventListener('visibilitychange', () => { if (!document.hidden) return; if (screen === 'quiz') pause(); else save(); });
+window.addEventListener('resize', syncDockSpace);
+window.addEventListener('pagehide', save);
+
+load(); applySettings(); save(); go('home');
+
+/* ---------- Offline support ---------- */
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(() => {}));
+}
+</script>
+</body>
+</html>

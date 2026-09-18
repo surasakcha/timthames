@@ -12,9 +12,67 @@ Static, zero-build collection of practice apps. Every push to `main` deploys aut
 ├── vercel.json                 cache + security headers
 ├── icons/                      home-screen and favicon art
 └── apps/
-    └── english-explorer/
-        └── index.html          one self-contained app per folder
+    ├── english-explorer/
+    │   └── index.html          Pronouns, reading, shapes, riddles, rhymes (5 sets)
+    └── inventors-lab/
+        └── index.html          Year 3–4 review: pronouns, job words, word
+                                families, to + verb, reading, 2D/3D shapes,
+                                optical illusions (6 sets)
 ```
+
+Each app is one self-contained HTML file: no build step, no dependencies, no
+shared runtime. Copying an app folder is a perfectly good way to start a new one.
+
+## Inventors Lab
+
+Built from the SG NEXT Year 3 review worksheets. 6 sets × 25 questions (150
+questions, 273 stars), each set with its own reading passage about a real
+inventor or discovery.
+
+Seven sections per set: **Pronouns** (subject/object) · **Job Words** ·
+**Word Families** (invent → inventor → invention) · **To + Verb** (want/hope/
+plan/try + to) · **Reading** · **Shapes** (17 flat and solid shapes) ·
+**Look and Think** (optical illusions and design).
+
+Eleven ways to answer, so no single skill gates a child's score:
+
+| type | what the child does | stars |
+| --- | --- | --- |
+| `choice` | tap an option (text or shape picture) | 1 |
+| `type` | type a short answer, with an optional hint button | 1 |
+| `write` | write a sentence, graded on the ideas it contains | 1 per idea |
+| `spell` | build a word from letter tiles, or type it | 1 |
+| `build` | tap words into sentence order | 1 |
+| `sort` | drag words into two boxes | 1 per word |
+| `fill` | drag cards into gaps (with decoys) | 1 per gap |
+| `match` | draw joining lines between two columns | 1 per pair |
+| `order` | drag or arrow cards into a sequence | 1 per position |
+| `draw` | draw an invention on a canvas | saved, not marked |
+| `free` | write a short paragraph | saved, not marked |
+
+Drawings and writing are kept in **My Workshop** inside My Results. Ten badges
+reward breadth (spelling, illusions, writing, drawing, persistence, streaks)
+rather than speed.
+
+### Marking is deliberately forgiving
+
+Typed answers ignore case, punctuation and a leading *a/an/the*, and an
+edit-distance check forgives one or two slips of the pen — so `inventer`
+passes for `inventor`, and the feedback still shows the correct spelling. The
+tolerance scales with word length, so very short answers (`to fly`, `to see`)
+still need exact spelling — those verbs are printed in the question itself.
+Written answers look for any word in each idea-group, so several phrasings
+earn the same stars.
+
+### Each learner gets their own set order
+
+A brand-new learner is given a random seed on first visit, and the six sets are
+shuffled with it. That order is saved immediately and is **never reshuffled** —
+a returning learner always sees the same journey, on every visit, and sets
+unlock along their own order rather than by set number. A backup file carries
+the seed and the order, so restoring on a new device keeps the same journey.
+A grown-up can deliberately draw a new order in Settings (for a second child
+sharing a device); nothing else changes it.
 
 ## Adding a new quiz
 
@@ -33,8 +91,13 @@ Static, zero-build collection of practice apps. Every push to `main` deploys aut
 ### Storage rule for new apps
 
 All apps share one browser origin, so **`localStorage` keys must be namespaced per app**.
-English Explorer uses `englishExplorer.v1`. Use `<appName>.v1` for anything new —
-never a bare key like `progress`.
+English Explorer uses `englishExplorer.v1` and Inventors Lab uses
+`inventorsLab.v1`. Use `<appName>.v1` for anything new — never a bare key
+like `progress`.
+
+Inventors Lab also stores drawings as PNG data URLs. Its `save()` drops the
+oldest drawings rather than failing if the browser's storage quota is reached,
+so a full gallery can never cost a child their stars.
 
 ## Why the Home Screen matters on iPad / iPhone
 
