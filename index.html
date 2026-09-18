@@ -112,6 +112,13 @@ const APPS = [
     title: 'English Explorer',
     desc: 'Pronouns, reading, shapes, riddles and rhymes — 5 sets',
     ready: true
+  },
+  {
+    slug: 'inventors-lab',
+    emoji: '💡',
+    title: 'Inventors Lab',
+    desc: 'Year 3–4: pronouns, job words, word families, to + verb, reading, 2D and 3D shapes, eye tricks — 6 sets',
+    ready: true
   }
   // {
   //   slug: 'math-explorer', emoji: '🔢', title: 'Math Explorer',
@@ -133,8 +140,9 @@ grid.innerHTML = APPS.map(a => a.ready
      </div>`
 ).join('');
 
+const readyCount = APPS.filter(a => a.ready).length;
 document.getElementById('foot').textContent =
-  APPS.filter(a => a.ready).length + ' activity' + (APPS.filter(a => a.ready).length === 1 ? '' : 'ies') + ' ready';
+  readyCount + (readyCount === 1 ? ' activity' : ' activities') + ' ready';
 
 /* iOS home-screen prompt: only when on iOS Safari and not already installed */
 const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent)
