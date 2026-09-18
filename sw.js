@@ -5,7 +5,7 @@
      - same-origin  : stale-while-revalidate
      - Google Fonts : cache first, refreshed in the background
    Bump CACHE when you want every client to drop its old copies. */
-const CACHE = 'learning-hub-v3';
+const CACHE = 'learning-hub-v4';
 const CORE = [
   '/',
   '/manifest.webmanifest',

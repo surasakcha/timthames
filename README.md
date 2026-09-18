@@ -21,7 +21,7 @@ Static, zero-build collection of practice apps. Every push to `main` deploys aut
     └── science-detectives/
         └── index.html          Year 3–4 science: states of matter, particles,
                                 separating mixtures, dissolving, fair tests
-                                (6 sets)
+                                (6 core sets + 2 challenge sets)
 ```
 
 Each app is one self-contained HTML file: no build step, no dependencies, no
@@ -80,9 +80,13 @@ sharing a device); nothing else changes it.
 
 ## Science Detectives
 
-Built from the Y3 final science review packet. 6 sets × 24 questions (144
-questions, 371 stars). The sets are **parallel, not a progression** — every set
-covers all six topics, which is what makes the shuffled set order safe.
+Built from the Y3 final science review packet. 8 sets × 24 questions (192
+questions, 504 stars), in two tiers.
+
+The **six core sets** are parallel, not a progression — every one covers all six
+topics, which is what makes the shuffled set order safe. The **two challenge
+sets** use exactly the same plain English but push the reasoning a layer
+deeper, and they always come last (see below).
 
 Six sections per set: **Solid, Liquid, Gas** · **Tiny Particles** (the particle
 model) · **Separating** (sieving, filtering, magnets, hand picking) ·
@@ -100,9 +104,39 @@ worksheet:
 - **`tfgrid`** — a list of statements, each marked True or False, one star per
   row.
 
+A third type carries most of the extra difficulty in the challenge sets:
+
+- **`multi`** — "tick every one that is true", scored **one star per option**.
+  Because every line is marked separately, a child cannot pick the single best
+  answer and move on; each statement has to be judged on its own, and leaving a
+  false one unticked earns just as much as ticking a true one.
+
 Alongside them: `choice`, `sort` (two or three boxes), `fill`, `type`, `match`,
 `order` and `draw`. There is no spelling-from-tiles, no sentence building and
 no paragraph writing anywhere in this app.
+
+### The two challenge sets
+
+`🧾 The Evidence Room` and `⚗️ The Method Lab` keep the reading level identical
+and raise only the thinking. They add:
+
+- **Conservation of mass** — a sealed jar of ice that melts, and salt water that
+  weighs exactly the salt more.
+- **Working backwards** — nothing came through the sieve, so what do you know?
+- **Counter-examples** — one case that breaks a rule is enough to sink it.
+- **Explaining an odd result** — same water, same sugar, three times longer.
+- **Method order** — *why* the filtering has to come after the dissolving.
+- **Judging evidence** — which tests would actually tell you something new, and
+  why "it vanished, so it must be salt" is not safe.
+- **Elimination across methods** — a sieve cannot help, a magnet cannot help,
+  so what is left?
+- **Clue tables where no single column identifies anything**, so two clues must
+  be combined for every row.
+
+They are marked `challenge: true`, and `setOrder()` shuffles core sets among
+themselves and challenge sets among themselves, never letting a challenge set
+land before a core one. A learner who already has a saved six-set order keeps
+it untouched; the new sets are simply appended.
 
 Diagrams, clue tables and bar charts are all generated inline as SVG from two
 small builders (`tableFig` and `barFig`), so the numbers a question asks about
@@ -113,6 +147,12 @@ and the numbers drawn in the chart cannot drift apart.
 Each "which is A, B and C?" puzzle is backed by a property table. The content
 audit checks that **every row of every clue table is unique** — if two rows had
 the same pattern of ticks, the puzzle would have no single answer.
+
+The same check runs over the tick-and-cross `grid` questions, where repeated
+rows usually mean a careless column. One grid breaks that rule deliberately:
+in set 8, water and a pile of dry sand score identically on all three tests,
+which is the whole point of the question. That item carries `sameRowsOk: true`
+so the intent is recorded in the content rather than argued about later.
 
 ## Adding a new quiz
 

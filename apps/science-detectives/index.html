@@ -114,6 +114,7 @@ h1,h2,h3{font-family:var(--round);line-height:1.15;margin:0}
 .setcard .sc-title{font-family:var(--round);font-weight:600;font-size:1.3rem;line-height:1.2}
 .setcard .meta{color:var(--ink-soft);font-size:.95rem}
 .setcard .go{font-family:var(--round);font-weight:600;color:var(--leaf);font-size:1rem;white-space:nowrap}
+.chal{display:inline-block;font-family:var(--round);font-weight:600;font-size:.78rem;padding:.05rem .5rem;border-radius:999px;background:var(--sun-soft);border:2px solid var(--sun);color:var(--sun-deep);margin-left:.4rem;vertical-align:middle}
 .setcard.locked{opacity:.7;cursor:not-allowed}
 .setcard.locked .go{color:var(--ink-soft)}
 .stars{display:inline-flex;gap:2px;font-size:1.1rem;letter-spacing:1px}
@@ -160,6 +161,13 @@ h1,h2,h3{font-family:var(--round);line-height:1.15;margin:0}
 .opt.sel{border-color:var(--sky);background:var(--sky-soft);box-shadow:0 4px 0 var(--sky)}
 .opt.ok{border-color:var(--leaf);background:var(--leaf-soft);box-shadow:0 4px 0 var(--leaf)}
 .opt.no{border-color:var(--berry);background:var(--berry-soft);box-shadow:0 4px 0 var(--berry)}
+.opts.multi{grid-template-columns:1fr}
+.opts.multi .opt{flex-direction:row;justify-content:flex-start;gap:.7rem;text-align:left;font-weight:400;font-size:1.12rem}
+.tickbox{flex:none;width:2rem;height:2rem;border-radius:8px;border:3px solid var(--line);background:var(--paper);display:grid;place-items:center;font-size:1.15rem;font-weight:700;color:var(--leaf-deep);line-height:1}
+.opt.sel .tickbox{border-color:var(--sky);background:var(--sky-soft)}
+.opt.ok .tickbox{border-color:var(--leaf);background:var(--leaf-soft)}
+.opt.no .tickbox{border-color:var(--berry);background:var(--berry-soft)}
+.opt .should{margin-left:auto;font-size:.85rem;color:var(--ink-soft);white-space:nowrap;font-family:var(--round)}
 
 /* Chips, bins, blanks */
 .bank{display:flex;flex-wrap:wrap;gap:.65rem;justify-content:center;min-height:4rem;padding:.8rem;border-radius:22px;background:var(--paper-2);border:3px dashed var(--line);margin-bottom:1rem}
@@ -1027,6 +1035,250 @@ const SETS = [
     ]}
   ]
 }
+,
+/* ------------------- SET 7 (challenge) ------------------- */
+{
+  id:7, title:'The Evidence Room', emoji:'🧾', about:'Working the answer out from clues and results',
+  challenge:true,
+  aligns:['Conservation of mass','Reading a surprising result','Working backwards from evidence','Counter-examples','Multi-step deduction','Judging evidence'],
+  sections:[
+    {key:'states', items:[
+      {t:'choice', prompt:'Think it right through.', long:true,
+        text:'A sealed jar of ice is weighed. The ice melts into water. The jar is weighed again. What happens to the weight?',
+        opts:['It stays exactly the same','It gets lighter','It gets heavier'], ans:0,
+        explain:'Melting changes how the particles are ARRANGED, not how many there are. The jar is sealed, so nothing got in or out. Same particles means the same weight.'},
+      {t:'multi', prompt:'Tick EVERY one that is true about a gas.',
+        opts:[['It spreads out to fill its container', true], ['It can be squashed into a smaller space', true],
+              ['It always keeps the same shape', false], ['Its particles have big gaps between them', true],
+              ['It always takes up the same amount of space', false]],
+        explain:'A gas spreads, squashes, and has big gaps — those three go together, because the gaps are what let it spread and squash. It has no shape and no fixed size of its own.'},
+      {t:'choice', prompt:'Work backwards from the clue.', long:true,
+        text:'A substance is poured into three jars of different shapes. Each time it fills the whole jar, right to the top. What must it be?',
+        opts:['A gas','A liquid','A solid'], ans:0,
+        explain:'A liquid would sit in the bottom of each jar. A solid would keep its own shape. Only a gas fills all of every container it is put in.'},
+      {t:'choice', prompt:'Find the example that breaks the rule.', long:true,
+        text:'Ben says, "Anything you can pour must be a liquid." Which one shows Ben is wrong?',
+        opts:['Dry sand, which pours but is a solid','Water, which pours and is a liquid','A brick, which you cannot pour'], ans:0,
+        explain:'One example that breaks a rule is enough to show the rule is wrong. Sand pours because the grains slide, but every single grain keeps its own shape, so sand is a solid.'}
+    ]},
+    {key:'particles', items:[
+      {t:'choice', prompt:'Use the particle model.', long:true,
+        text:'A gas is squashed into half the space it had before. What has happened to its particles?',
+        opts:['The same particles are now closer together','Half of the particles have gone','The particles have got smaller'], ans:0,
+        explain:'Squashing closes the gaps. It never destroys particles and it never shrinks them. Exactly the same particles are packed into less room.'},
+      {t:'grid', prompt:'Tick ✓ or cross ✗ in every box.',
+        cols:['Can be squashed a lot','Takes the shape of its container','Keeps the same amount when you move it'],
+        rows:[['Solid',[0,0,1]],['Liquid',[0,1,1]],['Gas',[1,1,0]]],
+        explain:'The last column is the tricky one. Move a litre of water to a bigger jug and it is still a litre. Move a gas to a bigger jar and it spreads out to fill it, so the amount of space it takes up changes.'},
+      {t:'choice', prompt:'What stays the same?', long:true,
+        text:'Water is poured from a tall thin glass into a wide flat dish. What has NOT changed?',
+        opts:['The amount of water','The shape of the water','The height of the water'], ans:0,
+        explain:'Pouring changes the shape and the height, but not one drop is lost. A liquid keeps its amount wherever you put it.'},
+      {t:'fill', prompt:'Drag the right words into the gaps.',
+        lines:['Squashing a gas pushes its particles {closer together}.','Heating a liquid makes its particles move {faster}.','Cooling a gas makes its particles move {slower}.'],
+        decoys:['further apart','heavier'],
+        explain:'Heat is really just particle movement. More heat means faster particles; less heat means slower ones. Squashing changes the spacing, not the speed.'}
+    ]},
+    {key:'mixtures', items:[
+      {t:'choice', prompt:'Work backwards from the result.', long:true,
+        text:'A mixture was poured into a sieve. Nothing at all came through the holes. What does that tell you?',
+        opts:['Every piece was bigger than the holes','Everything in it dissolved','The mixture was a liquid'], ans:0,
+        explain:'A sieve lets through whatever is smaller than its holes. Nothing came through, so nothing was small enough. The result tells you about the sizes even though you never measured one.'},
+      {t:'multi', prompt:'Tick EVERY mixture a magnet could separate.',
+        opts:[['iron nails and rice', true], ['steel pins and sand', true], ['salt and sugar', false],
+              ['copper coins and steel paper clips', true], ['sand and gravel', false]],
+        explain:'A magnet works whenever ONE thing in the mixture is magnetic and the other is not. Copper is not magnetic but steel paper clips are, so that pair works too.'},
+      {t:'order', prompt:'Put the whole plan in order.',
+        items:['Use a magnet to lift out the iron filings','Stir what is left into water so the salt dissolves','Pour it through a filter to catch the sand','Keep the clear water that drips through','Leave that water in a warm dish until only salt is left'],
+        explain:'Five steps, and each one removes exactly one thing. Take the magnetic part out while everything is dry, then use water to split the two that are left.'},
+      {t:'choice', prompt:'Why is the order important?', long:true,
+        text:'In that plan, why must the filtering happen AFTER the salt has dissolved?',
+        opts:['While the salt is still solid, the filter would catch it along with the sand','Filters only work on wet sand','Salt tears filter paper'], ans:0,
+        explain:'A filter cannot tell salt from sand while both are solid grains. Dissolving the salt first turns it into something the paper lets straight through, so only the sand is caught.'}
+    ]},
+    {key:'dissolving', items:[
+      {t:'choice', prompt:'Think about the weight.', long:true,
+        text:'A glass of water weighs 200 g. You stir in 10 g of salt until you cannot see it. What does the glass weigh now?',
+        opts:['210 g','200 g','Less than 200 g'], ans:0,
+        explain:'The salt is still in the glass, just in bits too small to see. Nothing left the glass, so the weight goes up by exactly the 10 g you put in. Vanishing from sight is not vanishing.'},
+      {t:'multi', prompt:'A solid dissolves in water. Tick EVERY true statement.',
+        opts:[['The solid is still in the water', true], ['You cannot see the solid any more', true],
+              ['The solid has been destroyed', false], ['You could get the solid back by evaporating the water', true],
+              ['The water weighs less than before', false]],
+        explain:'Dissolving hides a solid and spreads it out. It never destroys it — which is exactly why evaporating brings it back.'},
+      {t:'choice', prompt:'Explain the odd result.', long:true,
+        text:'Three children each stir one spoon of sugar into the same warm water. Two see it vanish in 30 seconds. The third waits 3 minutes and lumps are still there. What is the most likely reason?',
+        opts:['The third child used one big lump instead of loose grains','Sugar only dissolves in cold water','The third child stirred it too much'], ans:0,
+        explain:'Same sugar, same water, different result — so something else must have been different. A big lump has far less surface touching the water, so it takes much longer to disappear.'},
+      {t:'tfgrid', prompt:'True or false?',
+        rows:[['A solution looks clear, so there is nothing dissolved in it.', false],
+              ['Evaporating gets back a solid that dissolved.', true],
+              ['Filtering gets back a solid that dissolved.', false],
+              ['Separating a mixture changes what the materials are made of.', false],
+              ['A filter can catch a solid that did not dissolve.', true]],
+        explain:'Clear does not mean empty — salt water is completely clear. And the two methods are not interchangeable: filters catch whole solids, evaporating recovers dissolved ones.'}
+    ]},
+    {key:'think', items:[
+      {t:'match', prompt:'Read the table. No single clue is enough — combine two.', fig:'logic7',
+        left:[{label:'A'},{label:'B'},{label:'C'},{label:'D'}],
+        right:['salt','instant coffee','chalk powder','gravel'],
+        explain:'A and B both dissolve, and only A is white, so A is the salt and B is the coffee. C and D do not dissolve; C is white and in small pieces so C is the chalk powder, and D is the gravel. Every answer needs two clues, never just one.'},
+      {t:'choice', prompt:'Use the same table again.', long:true,
+        text:'Look at the table. Which TWO could you separate from each other using only a sieve?',
+        opts:['C and D','A and B','A and C'], ans:0,
+        explain:'A sieve sorts by size and nothing else. A, B and C are all in small pieces, so a sieve cannot tell them apart. Only D is in big pieces, so D against any small one works — C and D is the pair offered.'},
+      {t:'choice', prompt:'Is that good evidence?', long:true,
+        text:'Ana says, "The powder vanished in the water, so it must be salt." Why is that not a safe thing to say?',
+        opts:['Lots of powders dissolve, not just salt','Salt never dissolves','Powders cannot vanish'], ans:0,
+        explain:'Dissolving only tells you the powder is soluble. Sugar, coffee and bath salts all vanish too. One clue narrows the answer down; it rarely proves it.'},
+      {t:'multi', prompt:'You have an unknown white powder. Tick EVERY test that would tell you something NEW about it.',
+        opts:[['Stir some into water to see if it dissolves', true], ['Hold a magnet close to it', true],
+              ['Look at it through a magnifying glass to see the grain size', true],
+              ['Ask a friend to guess what it is', false], ['Weigh the empty pot it came in', false]],
+        explain:'A test only counts as evidence if its result could come out more than one way and tells you about the powder itself. A guess and an empty pot tell you nothing about the powder.'}
+    ]},
+    {key:'investigate', items:[
+      {t:'choice', prompt:'Find the mistake.', long:true,
+        text:'Sam tests whether hot water dissolves sugar faster. He puts 1 spoon of sugar in the hot water and 3 spoons in the cold water. What is wrong?',
+        opts:['He changed two things, so he cannot tell which one mattered','Nothing is wrong with his test','He should have used more water'], ans:0,
+        explain:'He changed the temperature AND the amount of sugar. If the cold cup is slower, was it the cold, or the extra two spoons? The test cannot answer that.'},
+      {t:'choice', prompt:'Now fix it.', long:true, text:'How should Sam change his test so it is fair?',
+        opts:['Use the same amount of sugar in both cups','Use hot water in both cups','Give up and try something else'], ans:0,
+        explain:'Leave the temperature as the ONE difference and match everything else. Then any difference in the time must be down to the temperature.'},
+      {t:'tfgrid', prompt:'True or false?',
+        rows:[['A test with two things changed still gives a clear answer.', false],
+              ['If your result is different from your friend’s, it is worth checking what you each did.', true],
+              ['A result you did not expect is worth looking at closely.', true],
+              ['One clue is usually enough to be sure what something is.', false]],
+        explain:'Two changes at once muddle the answer, and one clue rarely proves anything. But a result that surprises you is a gift — it usually means there is something you had not thought of.'},
+      {t:'draw', prompt:'Draw the plan.',
+        tip:'Draw the three steps for getting salt out of a mixture of salt and sand. Show the water, the filter, and the warm dish at the end.',
+        explain:'Dissolve, filter, evaporate. Being able to draw a plan before you start is how you spot a missing step while it is still cheap to fix.'}
+    ]}
+  ]
+}
+,
+/* ------------------- SET 8 (challenge) ------------------- */
+{
+  id:8, title:'The Method Lab', emoji:'⚗️', about:'Designing tests and predicting what will happen',
+  challenge:true,
+  aligns:['Designing a fair test','Predicting from the particle model','Spotting a flaw in a method','Choosing equipment by property','Physical change','Reading between the numbers'],
+  sections:[
+    {key:'states', items:[
+      {t:'choice', prompt:'Predict using the particle model.', long:true,
+        text:'A balloon is blown up and left in a warm room. The air inside warms up. What happens to the balloon?',
+        opts:['It gets a little bigger','It gets smaller','Nothing at all changes'], ans:0,
+        explain:'Warming makes the gas particles move faster, so they hit the inside of the balloon harder and more often. That extra push stretches the balloon a little. The model predicted something you can go and check.'},
+      {t:'multi', prompt:'Tick EVERY one that is a liquid in a warm kitchen.',
+        opts:[['cooking oil', true], ['vinegar', true], ['butter straight from the fridge', false],
+              ['runny honey', true], ['sugar', false]],
+        explain:'Honey is slow but it still flows and takes the shape of its jar. Cold butter and sugar both keep their own shape, so they are solids.'},
+      {t:'choice', prompt:'Work backwards from the clue.', long:true,
+        text:'A material is put into a wide dish. It spreads out to cover the bottom, but it does not rise up to fill the dish. What is it?',
+        opts:['A liquid','A gas','A solid'], ans:0,
+        explain:'Spreading over the bottom rules out a solid. Not filling the whole dish rules out a gas. Only a liquid does both of those things at once.'},
+      {t:'grid', prompt:'Tick ✓ or cross ✗. Think about the WHOLE pile or amount, not one tiny grain.',
+        cols:['Keeps its own shape','Can be poured','Fills all of its container'],
+        /* Water and dry sand score identically here on purpose - that clash IS the question. */
+        sameRowsOk:true,
+        rows:[['A brick',[1,0,0]],['Water',[0,1,0]],['Air',[0,0,1]],['Dry sand',[0,1,0]]],
+        explain:'A whole pile of sand behaves rather like water, because the grains slide over each other. But look at ONE grain and it keeps its own shape perfectly — which is why sand is still a solid. The row and the label disagree, and both are right, at different sizes.'}
+    ]},
+    {key:'particles', items:[
+      {t:'choice', prompt:'Explain it with particles.', long:true,
+        text:'You can smell dinner cooking from a room away. How does the smell get to you?',
+        opts:['Gas particles from the food spread out through the air','The smell slides along the floor','Your nose reaches further when you are hungry'], ans:0,
+        explain:'Gas particles move fast and in every direction, so they spread out until they are everywhere in the house. Scientists call that spreading out diffusion.'},
+      {t:'choice', prompt:'What does this prove?', long:true,
+        text:'A drop of food colouring is put into perfectly still water. Nobody stirs it. Slowly the whole glass turns colour. What does that show?',
+        opts:['The water particles are moving, even though the water looks still','The water is secretly boiling','The colouring is alive'], ans:0,
+        explain:'Nothing pushed the colour around, so the movement must already have been there. Liquid particles are always jostling, far too small and fast for you to see.'},
+      {t:'multi', prompt:'Tick EVERY thing that happens when you heat a liquid.',
+        opts:[['Its particles move faster', true], ['Some particles escape as a gas', true],
+              ['Its particles get bigger', false], ['More particles are made', false],
+              ['It dissolves solids more quickly', true]],
+        explain:'Heating changes how particles MOVE. It never changes their size and it never makes new ones. Faster particles explain both the evaporating and the quicker dissolving.'},
+      {t:'fill', prompt:'Drag the right words into the gaps.',
+        lines:['You can smell food from far away because gas particles {spread out}.','A gas can be squashed because its particles have {big gaps}.','A liquid can hardly be squashed because its particles are {already touching}.'],
+        decoys:['locked in place','get smaller'],
+        explain:'One idea explains all three sentences: how much empty space sits between the particles.'}
+    ]},
+    {key:'mixtures', items:[
+      {t:'choice', prompt:'Choose your equipment.', long:true,
+        text:'You must separate two powders. One dissolves in water and the other does not. Which pair of things do you need?',
+        opts:['Water and a filter funnel','A magnet and a sieve','A ruler and a spoon'], ans:0,
+        explain:'Match the tool to the DIFFERENCE. The difference here is dissolving, so water turns one powder into something a filter lets through while the other is caught.'},
+      {t:'choice', prompt:'Finish the job.', long:true,
+        text:'After filtering you are left with clear water that has a powder dissolved in it. How do you get that powder back?',
+        opts:['Leave it in a warm dish until the water evaporates','Pour it through the filter again','Add more water'], ans:0,
+        explain:'Filtering has already done all it can — anything dissolved goes straight through. Evaporating takes the water away as a gas and leaves the powder behind.'},
+      {t:'multi', prompt:'Tick EVERY method that separates things WITHOUT changing what they are made of.',
+        opts:[['sieving', true], ['filtering', true], ['using a magnet', true],
+              ['evaporating the water from a solution', true], ['burning the mixture', false]],
+        explain:'Separating just moves things apart, so the materials come out the same as they went in. Burning is different — it turns things into new substances, and you cannot get the old ones back.'},
+      {t:'match', prompt:'Match each method to WHY it works.',
+        left:[{label:'Sieving'},{label:'Filtering'},{label:'Using a magnet'},{label:'Evaporating'}],
+        right:['works because the pieces are different sizes','works because one solid will not dissolve','works because only some metals are pulled','works because a liquid can turn into a gas'],
+        explain:'Every method uses one property that the two things do NOT share. Naming that property is how you choose the method in the first place.'}
+    ]},
+    {key:'dissolving', items:[
+      {t:'choice', prompt:'Read between the bars.', fig:'dissolvebars', long:true,
+        text:'A fourth cup of water was tested. Its temperature was between warm and cold. Which time is most likely?',
+        opts:['60 seconds','15 seconds','95 seconds'], ans:0,
+        explain:'Warm took 45 seconds and cold took 80, so a temperature between them should give a time between them. 60 fits. 15 would be faster than the hot cup and 95 slower than the cold one, and neither makes sense.'},
+      {t:'multi', prompt:'Tick EVERY thing that makes a solid dissolve faster.',
+        opts:[['warmer water', true], ['stirring', true], ['breaking the solid into smaller pieces', true],
+              ['using colder water', false], ['using one big lump instead of grains', false]],
+        explain:'All three that work do the same job: they get more water touching more of the solid, more often.'},
+      {t:'choice', prompt:'Design the test.', long:true,
+        text:'Mia wants to find out whether stirring speeds up dissolving. Which pair of cups should she set up?',
+        opts:['Two cups with the same warm water and the same sugar, and she stirs only one','One warm stirred cup and one cold unstirred cup','Two cups with different amounts of sugar in each'], ans:0,
+        explain:'Stirring has to be the ONLY difference. The middle option changes two things at once, so whatever happens she could not say which one caused it.'},
+      {t:'tfgrid', prompt:'True or false?',
+        rows:[['Stirring makes sugar dissolve faster.', true],
+              ['Stirring speeds dissolving up, but it does not let you dissolve MORE in the end.', true],
+              ['Hot water can usually dissolve more sugar than cold water.', true],
+              ['One big lump dissolves faster than the same amount of loose grains.', false],
+              ['Dissolving turns sugar into water.', false]],
+        explain:'Stirring and heating both speed things up, but only heating lets the water hold more sugar in the end. And the sugar is always still sugar — taste it and you will find it.'}
+    ]},
+    {key:'think', items:[
+      {t:'match', prompt:'Read the table. You will need two clues for each one.', fig:'logic8',
+        left:[{label:'A'},{label:'B'},{label:'C'},{label:'D'}],
+        right:['salt','instant coffee','flour','a lump of chalk'],
+        explain:'Only A and B dissolve, and of those only A is white, so A is the salt and B is the coffee. C and D are both white and do not dissolve; C is in small pieces so it is the flour, and D is the lump of chalk.'},
+      {t:'choice', prompt:'Rule the methods out one by one.', long:true,
+        text:'You have B and C from the table mixed together. Both are in small pieces. How would you separate them?',
+        opts:['Add water, then filter out the one that does not dissolve','Use a sieve','Use a magnet'], ans:0,
+        explain:'A sieve is no use because both are small. A magnet is no use because neither is magnetic. The only difference left in the table is that B dissolves and C does not — so water plus a filter is the answer.'},
+      {t:'choice', prompt:'Is that good evidence?', long:true,
+        text:'Tom says, "This powder must be magnetic, because it is grey like iron." Why is that weak evidence?',
+        opts:['Colour does not tell you whether something is magnetic','Iron is never grey','Only white things can be magnetic'], ans:0,
+        explain:'Plenty of grey things are not magnetic at all — aluminium foil and pencil lead, for two. The only way to know is to hold a magnet near it and look.'},
+      {t:'order', prompt:'Put the steps of a good investigation in order.',
+        items:['Ask a question you can actually test','Predict what you think will happen','Plan a fair test and get the equipment ready','Do the test and write down what really happens','Say whether your prediction was right, and why'],
+        explain:'Predicting BEFORE you test is what makes the result mean something. If you only decide what you expected afterwards, you can never be surprised — and being surprised is how you learn.'}
+    ]},
+    {key:'investigate', items:[
+      {t:'choice', prompt:'Find the mistake.', long:true,
+        text:'Two children test which of three cloths filters muddy water best. They pour a different amount of water through each cloth. Why can they not trust the answer?',
+        opts:['The amount of water was not kept the same','Cloth cannot filter water at all','They needed a third child'], ans:0,
+        explain:'The cloth is meant to be the only difference. Pour more water through one and it may look worse simply because more went through it.'},
+      {t:'multi', prompt:'A test gives a surprising result. Tick EVERY sensible thing to do next.',
+        opts:[['Do the test again, carefully', true], ['Check whether anything else changed by accident', true],
+              ['Write down the result exactly as it happened', true],
+              ['Change the result to the one you expected', false], ['Ignore it and move on', false]],
+        explain:'A surprise means either something went wrong, or you have found something real. Repeating and checking tells you which — and changing the numbers tells you nothing at all.'},
+      {t:'choice', prompt:'What can you conclude?', long:true,
+        text:'Three cloths are tested with the same amount of muddy water. Cloth A lets the most mud through and cloth C lets the least. What can you say?',
+        opts:['Cloth C has the smallest holes','Cloth A has the smallest holes','The three cloths must be the same'], ans:0,
+        explain:'Less mud getting through means more of it was caught, and catching more means smaller holes. You never saw the holes, but the result tells you about them.'},
+      {t:'draw', prompt:'Design your own fair test.',
+        tip:'Draw two cups that are the same in every single way except for the ONE thing you are testing. Label the thing that is different.',
+        explain:'If you can point at exactly one difference in your own drawing, your test is fair. If you find two, it is not — and that is the quickest check there is.'}
+    ]}
+  ]
+}
 ];
 
 const SECTIONS = {
@@ -1250,6 +1502,10 @@ const FIGURES = {
     [['A',[1,0,0]],['B',[0,1,0]],['C',[0,0,1]]], 'A table of clues about A, B and C'),
   logic6:tableFig(['It dissolves in water','A magnet picks it up','It is a liquid'],
     [['A',[0,1,0]],['B',[1,0,0]],['C',[0,0,1]],['D',[0,0,0]]], 'A table of clues about A, B, C and D'),
+  logic7:tableFig(['It dissolves in water','It is white','It is in small pieces'],
+    [['A',[1,1,1]],['B',[1,0,1]],['C',[0,1,1]],['D',[0,0,0]]], 'A table of clues about A, B, C and D'),
+  logic8:tableFig(['It is white','It dissolves in water','It is in small pieces'],
+    [['A',[1,1,1]],['B',[0,1,1]],['C',[1,0,1]],['D',[1,0,0]]], 'A table of clues about A, B, C and D'),
   dissolvebars:barFig([['Hot',20],['Warm',45],['Cold',80]], 'seconds', 'Time for a sugar cube to dissolve'),
   poolbars:barFig([['A',4],['B',6],['C',9],['D',2]], 'grams', 'Salt found in four rock pools'),
   magnetbars:barFig([['A',9],['B',14],['C',5]], 'clips', 'Paper clips each magnet could hold'),
@@ -1315,7 +1571,14 @@ function setOrder() {
   const kept = (S.order || []).filter(id => ids.includes(id));
   const missing = ids.filter(id => !kept.includes(id));
   if (missing.length || kept.length !== (S.order || []).length) {
-    S.order = [...kept, ...(missing.length > 1 ? seededShuffle(missing, S.seed + kept.length) : missing)];
+    /* Core sets are shuffled among themselves and challenge sets among
+       themselves, but a challenge set never lands before a core one. A
+       returning learner keeps the order already saved; new sets are only
+       ever appended to it. */
+    const spread = list => list.length > 1 ? seededShuffle(list, S.seed + kept.length + list.length) : list;
+    const core = missing.filter(id => !getSet(id).challenge);
+    const chal = missing.filter(id => getSet(id).challenge);
+    S.order = [...kept, ...spread(core), ...spread(chal)];
   }
   return S.order;
 }
@@ -1361,6 +1624,7 @@ function itemTotal(item) {
     case 'order':  return item.items.length;
     case 'grid':   return item.rows.length * item.cols.length;
     case 'tfgrid': return item.rows.length;
+    case 'multi':  return item.opts.length;
     case 'draw':   return 0;
     default: return 1;
   }
@@ -1390,6 +1654,7 @@ function answerText(item) {
     case 'order':  return item.items.map((t, i) => `${i + 1}. ${t}`).join('. ');
     case 'grid':   return item.rows.map(([label, want]) => `${label}: ${want.map((m, i) => `${item.cols[i]} ${m ? 'yes' : 'no'}`).join(', ')}`).join('. ');
     case 'tfgrid': return item.rows.map(([text, want]) => `${want ? 'True' : 'False'}: ${text}`).join('. ');
+    case 'multi':  return 'Tick: ' + item.opts.filter(o => o[1]).map(o => o[0]).join(', ');
     default: return '';
   }
 }
@@ -1401,6 +1666,7 @@ function speakText(item) {
   if (item.t === 'fill') bits.push(item.lines.map(l => l.replace(/\{[^}]+\}/g, 'blank')).join(' '));
   if (item.t === 'order') bits.push(item.items.join('. '));
   if (item.t === 'tfgrid') bits.push(item.rows.map(r => r[0]).join('. '));
+  if (item.t === 'multi') bits.push(item.opts.map(o => o[0]).join('. '));
   return bits.join('. ');
 }
 function blankify(text, word) {
@@ -1638,6 +1904,41 @@ TYPES.grid = (item, root, changed) => {
       draw();
       return {e: marks.flat().filter(Boolean).length, t: item.rows.length * item.cols.length,
         answer: item.rows.map(([label, want]) => `<b>${esc(label)}:</b> ${want.map((m, i) => `${esc(item.cols[i])} ${m ? '✓' : '✗'}`).join(' · ')}`).join('<br>')};
+    }
+  };
+};
+
+/* Tick every one that is true. Scored per option, so a child has to judge
+   each line on its own instead of hunting for the single best answer. */
+TYPES.multi = (item, root, changed) => {
+  const sel = item.opts.map(() => false);
+  let locked = false, marks = null;
+  function draw() {
+    root.innerHTML = `${item.text ? `<p class="qtext">${esc(item.text)}</p>` : ''}
+      <div class="opts long multi" role="group" aria-label="Tick every one that is true">${item.opts.map(([txt, want], i) =>
+        `<button type="button" class="opt ${sel[i] ? 'sel' : ''} ${marks ? (marks[i] ? 'ok' : 'no') : ''}" data-i="${i}"
+           aria-pressed="${sel[i]}" ${locked ? 'disabled' : ''}>
+           <span class="tickbox" aria-hidden="true">${sel[i] ? '\u2713' : ''}</span><span>${esc(txt)}</span>
+           ${marks ? `<span class="should">${want ? 'should be ticked' : 'should be left'}</span>` : ''}
+         </button>`).join('')}</div>
+      <p class="tip">Tick as many as you need \u2014 there may be more than one. Every line you get right is a star.</p>`;
+  }
+  root.addEventListener('click', e => {
+    const b = e.target.closest('.opt');
+    if (!b || locked) return;
+    const i = +b.dataset.i;
+    sel[i] = !sel[i];
+    draw(); changed();
+  });
+  draw();
+  return {
+    ready: () => sel.some(Boolean),
+    check() {
+      locked = true;
+      marks = sel.map((v, i) => v === item.opts[i][1]);
+      draw();
+      return {e: marks.filter(Boolean).length, t: item.opts.length,
+        answer: item.opts.filter(o => o[1]).map(o => `\u2713 ${esc(o[0])}`).join('<br>')};
     }
   };
 };
@@ -1952,7 +2253,7 @@ function renderHome() {
           : `${flat(set).length} questions, ${setTotal(set)} stars to win`;
         return `<button class="setcard ${open ? '' : 'locked'}" data-set="${id}" ${open ? '' : 'aria-disabled="true"'}>
           <span class="emoji" aria-hidden="true">${set.emoji}</span>
-          <span><span class="sc-title">Set ${pos + 1}: ${esc(set.title)}</span><br><span class="meta">${esc(set.about)}</span><br><span class="meta">${meta}</span></span>
+          <span><span class="sc-title">Set ${pos + 1}: ${esc(set.title)}${set.challenge ? '<span class="chal">Challenge</span>' : ''}</span><br><span class="meta">${esc(set.about)}</span><br><span class="meta">${meta}</span></span>
           <span class="go">${open ? (best ? starRow(starsFor(best.pct)) : 'Start ▶') : 'Locked'}</span>
         </button>`;
       }).join('')}
@@ -1960,7 +2261,7 @@ function renderHome() {
     <section class="card" style="margin-top:1.25rem">
       <h2 style="font-size:1.15rem">What every set covers</h2>
       <div class="knows">${Object.values(SECTIONS).map(s => `<span class="know">${s.icon} ${esc(s.name)}</span>`).join('')}</div>
-      <p class="tip">Every set covers all six topics, so you can start with any set you like.</p>
+      <p class="tip">Every set covers all six topics, so you can start with any set you like. The two <b>Challenge</b> sets come last: same plain words, but the thinking goes a layer deeper.</p>
     </section>
     <nav class="homefoot" aria-label="More">
       <button class="btn btn-sun" id="histBtn">🏆 My results</button>
@@ -2082,8 +2383,12 @@ function doCheck() {
     title = '🎨 Good diagram!';
     body = `<p>Your drawing is saved in My Lab Book. ${res.strokes > 12 ? 'You put a lot of detail into that one!' : 'Come back any time and draw another.'}</p>`;
   } else {
+    /* With a table worth a dozen stars, "nearly all of it" has to mean it. */
+    const frac = res.t ? res.e / res.t : 1;
     title = kind === 'good' ? '✅ ' + pick(['Great thinking!', 'You got it!', 'Spot on!', 'Well done!', 'Exactly right!'])
-      : kind === 'part' ? '🌟 ' + pick(['Almost!', 'So close!', 'Good work, nearly all of it!'])
+      : kind === 'part' ? '🌟 ' + (frac >= 0.6
+          ? pick(['Almost!', 'So close!', 'Good work, nearly all of it!'])
+          : pick(['A good start!', 'Some of it is right.', 'Part of the way there.']))
       : '💪 ' + pick(['Nice try!', 'Good try!', 'Not quite yet.']);
     if (item.t === 'type' && res.nearly) body += `<p>Right word — just watch the spelling: <b>${esc(item.accept[0])}</b>.</p>`;
     if (kind !== 'good') body += `<p><span class="ans">The answer:</span><br>${res.answer}</p>`;
