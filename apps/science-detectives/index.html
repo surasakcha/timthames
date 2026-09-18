@@ -406,7 +406,7 @@ const SETS = [
 /* ---------------------------- SET 1 ---------------------------- */
 {
   id:1, title:'Ice and Steam', emoji:'🧊', about:'Water as a solid, a liquid and a gas',
-  aligns:['States of matter','Particle model','Sieving and magnets','Soluble and insoluble','Evaporation','Fair tests'],
+  aligns:['States of matter','Particle model','Sieving and magnets','Soluble and insoluble','Evaporation','Fair tests','Where materials come from'],
   sections:[
     {key:'states', items:[
       {t:'choice', prompt:'Pick the right state.', text:'Ice is water that is very cold. What state is ice?',
@@ -471,6 +471,22 @@ const SETS = [
         accept:['insoluble'], hint:'It starts with "in", like "in-visible".',
         explain:'Insoluble. The "in" at the front means "not", so insoluble means "not soluble".'}
     ]},
+    {key:'resources', items:[
+      {t:'match', prompt:'Match each material to where it comes from.',
+        left:[{label:'Paper'},{label:'Plastic'},{label:'Metal'},{label:'Stone'}],
+        right:['made from wood, which comes from trees','made from oil, found deep under the ground','taken out of rocks called ores','dug out of the ground in big pieces'],
+        explain:'Everything we use starts somewhere in nature. Paper starts as a tree, plastic starts as oil, and metal starts as a rock.'},
+      {t:'choice', prompt:'Where does it come from?', text:'Where is natural gas found?',
+        opts:['Deep under the ground','Up in the clouds','Inside trees'], ans:0,
+        explain:'Natural gas sits deep under the ground, often near oil. People drill down to reach it.'},
+      {t:'sort', prompt:'Where does each one come from?',
+        bins:[['From under the ground','we dig or drill for it'],['Grows above the ground','it is alive, or it was']],
+        chips:[['oil',0],['natural gas',0],['metal ore',0],['wood',1],['cotton',1],['rubber',1]],
+        explain:'Oil, gas and ores were made under the ground long ago. Wood, cotton and rubber all grow on plants, so we can grow more of them.'},
+      {t:'type', prompt:'Type one word.', text:'Metal is found inside rocks that are called ______.',
+        accept:['ores','ore'], hint:'It rhymes with "more".',
+        explain:'An ore is a rock with metal locked inside it. The metal has to be got out before we can use it.'}
+    ]},
     {key:'think', items:[
       {t:'match', prompt:'Read the table. Which is A, B and C?', fig:'logic1',
         left:[{label:'A'},{label:'B'},{label:'C'}],
@@ -510,7 +526,7 @@ const SETS = [
 /* ---------------------------- SET 2 ---------------------------- */
 {
   id:2, title:'Kitchen Science', emoji:'🥤', about:'Drinks, sugar and things you find at home',
-  aligns:['States of matter','Particle model','Choosing a method','Dissolving speed','Reading a chart','Fair tests'],
+  aligns:['States of matter','Particle model','Choosing a method','Dissolving speed','Reading a chart','Fair tests','Fuels and electricity'],
   sections:[
     {key:'states', items:[
       {t:'choice', prompt:'Pick the right state.', text:'Orange juice is poured from a bottle into a cup. What state is orange juice?',
@@ -577,6 +593,22 @@ const SETS = [
         opts:['The sugar is still there, in tiny bits','The sugar has gone','The sugar turned into tea'], ans:0,
         explain:'Your tongue can find the sugar even when your eyes cannot. Dissolving hides a solid; it never destroys it.'}
     ]},
+    {key:'resources', items:[
+      {t:'choice', prompt:'What is it for?', long:true, text:'Natural gas is burned in a cooker at home. What is it doing there?',
+        opts:['Giving heat to cook food','Keeping the fridge cold','Cleaning the floor'], ans:0,
+        explain:'Natural gas is a fuel. Burning a fuel gives out heat, and that heat cooks the food.'},
+      {t:'tfgrid', prompt:'True or false?',
+        rows:[['Natural gas is found under the ground.', true], ['Natural gas is a kind of fuel.', true],
+              ['Natural gas is made in factories out of water.', false], ['Natural gas can be used to make electricity.', true]],
+        explain:'Natural gas is dug out of the ground, not made. We burn it for heat at home and in power plants to make electricity.'},
+      {t:'match', prompt:'Match each material to what we use it for.',
+        left:[{label:'Natural gas'},{label:'Petrol'},{label:'Metal'},{label:'Stone'}],
+        right:['burned to cook food and make electricity','put into cars to make them go','made into bridges and jewellery','used to build houses and statues'],
+        explain:'We pick a material for the job it is good at. Petrol burns easily, metal is strong, and stone lasts a very long time.'},
+      {t:'type', prompt:'Type one word.', text:'A power plant burns fuel to make ______ for our homes.',
+        accept:['electricity','power'], hint:'It comes out of the plug in the wall.',
+        explain:'Power plants burn fuel to make electricity, which then travels along wires to every house.'}
+    ]},
     {key:'think', items:[
       {t:'match', prompt:'Read the table. Which is A, B and C?', fig:'logic2',
         left:[{label:'A'},{label:'B'},{label:'C'}],
@@ -614,7 +646,7 @@ const SETS = [
 /* ---------------------------- SET 3 ---------------------------- */
 {
   id:3, title:'Beach Lab', emoji:'🏖️', about:'Sand, salt and sea water',
-  aligns:['States of matter','Particle model','Filtering and sieving','Salt water and evaporation','Logic tables','Fair tests'],
+  aligns:['States of matter','Particle model','Filtering and sieving','Salt water and evaporation','Logic tables','Fair tests','Oil: drilling and processing'],
   sections:[
     {key:'states', items:[
       {t:'choice', prompt:'Pick the right state.', text:'Sea water flows into any rock pool and fills the bottom of it. What state is sea water?',
@@ -681,6 +713,21 @@ const SETS = [
         opts:['Dry white salt','Clear water','Completely nothing'], ans:0,
         explain:'The water evaporated — it turned into a gas and drifted away. Salt cannot do that so easily, so it stayed as white crystals.'}
     ]},
+    {key:'resources', items:[
+      {t:'order', prompt:'Put the journey in order, from the ground to a car.',
+        items:['Crude oil lies deep under the ground','A deep well is drilled to bring the oil up','The oil is heated and separated into different liquids','Petrol is put into a car'],
+        explain:'Oil does not come out of the ground ready to use. It has to be brought up, then heated and separated, before any of it can go in a car.'},
+      {t:'choice', prompt:'How do we get it out?', text:'How is oil taken out of the ground?',
+        opts:['By drilling a deep well','By digging with a spoon','By waiting for it to rain'], ans:0,
+        explain:'Oil can be hundreds of metres down, so a deep well is drilled and the oil is pumped up through it.'},
+      {t:'sort', prompt:'Is it made from oil?',
+        bins:[['Made from oil','oil is where it starts'],['Not made from oil','it starts somewhere else']],
+        chips:[['plastic',0],['petrol',0],['diesel',0],['wood',1],['stone',1],['cotton',1]],
+        explain:'One barrel of crude oil can become petrol, diesel AND plastic. Wood, stone and cotton have nothing to do with oil.'},
+      {t:'type', prompt:'Type one word.', text:'Crude oil is heated and separated to make petrol and ______.',
+        accept:['diesel'], hint:'Buses and lorries usually run on it.',
+        explain:'Petrol and diesel both come out of the same crude oil. Heating separates the lighter liquids from the heavier ones.'}
+    ]},
     {key:'think', items:[
       {t:'match', prompt:'Read the table. Which is A, B and C?', fig:'logic3',
         left:[{label:'A'},{label:'B'},{label:'C'}],
@@ -719,7 +766,7 @@ const SETS = [
 /* ---------------------------- SET 4 ---------------------------- */
 {
   id:4, title:'The Magnet Test', emoji:'🧲', about:'Metals, materials and sorting by property',
-  aligns:['States of matter','Particle model','Magnetic materials','Choosing a method','Logic tables','Fair tests'],
+  aligns:['States of matter','Particle model','Magnetic materials','Choosing a method','Logic tables','Fair tests','Ores and smelting'],
   sections:[
     {key:'states', items:[
       {t:'choice', prompt:'Pick the right state.', text:'A steel paper clip keeps its shape wherever you put it. What state is it?',
@@ -787,6 +834,23 @@ const SETS = [
         accept:['solution'], hint:'It starts with the same letters as "soluble".',
         explain:'A solution. Salt water is a solution: the salt is still in there, spread all the way through.'}
     ]},
+    {key:'resources', items:[
+      {t:'choice', prompt:'Name the process.', long:true,
+        text:'Metal is locked inside a rock called an ore. The rock is heated very strongly until the metal runs out. What is that called?',
+        opts:['Smelting','Sieving','Dissolving'], ans:0,
+        explain:'Smelting means heating an ore until the metal separates from the rest of the rock. It needs a huge amount of heat.'},
+      {t:'tfgrid', prompt:'True or false?',
+        rows:[['An ore is a rock with metal inside it.', true], ['Metal grows on trees.', false],
+              ['Smelting needs a lot of heat.', true], ['Every rock in the world has metal inside it.', false]],
+        explain:'Only some rocks are ores. Miners look for those particular rocks, because smelting a rock with no metal in it would be a waste of heat.'},
+      {t:'match', prompt:'Match each material to where it starts.',
+        left:[{label:'Metal'},{label:'Paper'},{label:'Plastic'},{label:'Stone'}],
+        right:['starts as an ore, dug from the ground','starts as wood from a tree','starts as oil from under the ground','is cut straight out of the ground'],
+        explain:'Three of these need a lot of work before we can use them. Only stone is close to ready as soon as it is dug out.'},
+      {t:'choice', prompt:'Explain why.', long:true, text:'Why do we heat an ore until it is glowing hot?',
+        opts:['To separate the metal from the rest of the rock','To make the rock heavier','To turn the rock into water'], ans:0,
+        explain:'Heating is another way of separating a mixture. The metal comes away from the rock it was mixed with, just like salt coming back from salty water.'}
+    ]},
     {key:'think', items:[
       {t:'match', prompt:'Read the table. Which is A, B, C and D?', fig:'logic4',
         left:[{label:'A'},{label:'B'},{label:'C'},{label:'D'}],
@@ -826,7 +890,7 @@ const SETS = [
 /* ---------------------------- SET 5 ---------------------------- */
 {
   id:5, title:'Rain and Puddles', emoji:'🌧️', about:'Water changing state, and where puddles go',
-  aligns:['States of matter','Changing state','Evaporation and condensation','Dissolving speed','Reading a chart','Fair tests'],
+  aligns:['States of matter','Changing state','Evaporation and condensation','Dissolving speed','Reading a chart','Fair tests','Burning fuels and carbon dioxide'],
   sections:[
     {key:'states', items:[
       {t:'choice', prompt:'Where did it go?', long:true, text:'A puddle dries up on a sunny day. What happened to the water?',
@@ -893,6 +957,21 @@ const SETS = [
         opts:['Things that were dissolved in the water','Water that is somehow still there','Nothing real — it is just a shadow'], ans:0,
         explain:'The water evaporated and left its dissolved solids behind, just like salt left in an evaporating dish. That ring is the proof they were there all along.'}
     ]},
+    {key:'resources', items:[
+      {t:'order', prompt:'Put the chain in order.',
+        items:['A fuel is burned in a car or a power plant','The carbon in the fuel joins with the air','Carbon dioxide gas goes up into the air','Too much carbon dioxide makes the Earth warmer'],
+        explain:'Each step causes the next one. That is why using less fuel is the step that matters \u2014 it is the start of the whole chain.'},
+      {t:'choice', prompt:'What comes out?', long:true, text:'Which gas goes into the air when a fuel is burned?',
+        opts:['Carbon dioxide','Only oxygen','Only water'], ans:0,
+        explain:'Fuels contain carbon. When they burn, that carbon joins with the air to make carbon dioxide. Burning uses oxygen up rather than making it.'},
+      {t:'tfgrid', prompt:'True or false?',
+        rows:[['Fuels contain carbon.', true], ['Burning fuels puts carbon dioxide into the air.', true],
+              ['Too much carbon dioxide can make the Earth warmer.', true], ['Burning fuel cleans the air.', false]],
+        explain:'Burning fuel is useful, but it is not free. It always adds carbon dioxide to the air, and the air has to hold all of it.'},
+      {t:'type', prompt:'Type one word.', text:'Too much carbon dioxide in the air causes global ______.',
+        accept:['warming'], hint:'It means the Earth getting hotter.',
+        explain:'Global warming means the whole Earth slowly getting warmer, which changes weather, ice and sea levels.'}
+    ]},
     {key:'think', items:[
       {t:'match', prompt:'Read the table. Which is A, B and C?', fig:'logic5',
         left:[{label:'A'},{label:'B'},{label:'C'}],
@@ -930,7 +1009,7 @@ const SETS = [
 /* ---------------------------- SET 6 ---------------------------- */
 {
   id:6, title:'The Science Detective', emoji:'🔍', about:'Mystery mixtures and careful thinking',
-  aligns:['States of matter','Particle model','Choosing a method','Solutions','Logic tables','Working out a plan'],
+  aligns:['States of matter','Particle model','Choosing a method','Solutions','Logic tables','Working out a plan','Choosing a material by its properties'],
   sections:[
     {key:'states', items:[
       {t:'choice', prompt:'Solve the clue.', long:true,
@@ -1000,6 +1079,22 @@ const SETS = [
         accept:['soluble'], hint:'The opposite of insoluble.',
         explain:'Soluble. Salt and sugar are soluble in water. Sand and chalk are not.'}
     ]},
+    {key:'resources', items:[
+      {t:'match', prompt:'Match each property to the job it makes the material good for.',
+        left:[{label:'Metal is strong'},{label:'Stone is hard and lasts'},{label:'Plastic is light and easy to shape'},{label:'Oil burns easily'}],
+        right:['so it is used for bridges','so it is used for statues','so it is used for bottles and toys','so it is used as a fuel'],
+        explain:'We never choose a material by accident. We look at what it is LIKE, and then pick the job that suits it.'},
+      {t:'choice', prompt:'Choose and explain.', long:true, text:'Why is metal a good material for a bridge?',
+        opts:['It is very strong, so it can hold a lot of weight','It dissolves in water','It is a gas'], ans:0,
+        explain:'A bridge has to carry cars and lorries without bending or breaking, so strength is the property that matters most.'},
+      {t:'sort', prompt:'Did we find it, or did we make it?',
+        bins:[['Found in nature','dug, drilled or grown'],['Made by people','from a natural material']],
+        chips:[['crude oil',0],['metal ore',0],['wood',0],['plastic',1],['petrol',1],['paper',1]],
+        explain:'The right-hand box all began in the left-hand box. Plastic and petrol both start as crude oil, and paper starts as wood.'},
+      {t:'type', prompt:'Type one word.', text:'Natural gas is used to make fuel, plastics and even some ______.',
+        accept:['medicine','medicines'], hint:'The doctor gives it to you when you are ill.',
+        explain:'The same gas that cooks your dinner can also be turned into plastics and some medicines. One resource, many different uses.'}
+    ]},
     {key:'think', items:[
       {t:'match', prompt:'Read the table. Which is A, B, C and D?', fig:'logic6',
         left:[{label:'A'},{label:'B'},{label:'C'},{label:'D'}],
@@ -1040,7 +1135,7 @@ const SETS = [
 {
   id:7, title:'The Evidence Room', emoji:'🧾', about:'Working the answer out from clues and results',
   challenge:true,
-  aligns:['Conservation of mass','Reading a surprising result','Working backwards from evidence','Counter-examples','Multi-step deduction','Judging evidence'],
+  aligns:['Conservation of mass','Reading a surprising result','Working backwards from evidence','Counter-examples','Multi-step deduction','Judging evidence','Resources that run out'],
   sections:[
     {key:'states', items:[
       {t:'choice', prompt:'Think it right through.', long:true,
@@ -1118,6 +1213,24 @@ const SETS = [
               ['A filter can catch a solid that did not dissolve.', true]],
         explain:'Clear does not mean empty — salt water is completely clear. And the two methods are not interchangeable: filters catch whole solids, evaporating recovers dissolved ones.'}
     ]},
+    {key:'resources', items:[
+      {t:'multi', prompt:'Tick EVERY thing that comes from crude oil.',
+        opts:[['petrol', true], ['diesel', true], ['plastic', true], ['metal', false], ['stone', false]],
+        explain:'One barrel of crude oil becomes petrol, diesel and plastic. Metal comes from ores and stone is simply cut from the ground \u2014 neither has anything to do with oil.'},
+      {t:'choice', prompt:'Follow the chain to the end.', long:true,
+        text:'Paper comes from wood. Wood comes from trees. A forest is cut down and nobody plants new trees. What happens to the paper in the end?',
+        opts:['It runs out, because the trees were never replaced','It carries on for ever','There will be more paper than before'], ans:0,
+        explain:'A resource only keeps going if it is replaced. Trees CAN be replaced \u2014 but only if somebody actually plants them.'},
+      {t:'choice', prompt:'Compare the two.', long:true,
+        text:'A tree can be grown again in a person\u2019s lifetime. Oil took millions of years to form. What does that tell you?',
+        opts:['We must be far more careful with oil than with wood','Oil is easier to replace than wood','The two are exactly the same'], ans:0,
+        explain:'Once oil is burned it is gone for all of human history \u2014 nobody can wait millions of years for more. Wood can be replanted this year.'},
+      {t:'multi', prompt:'Burning fuel is useful but it causes problems too. Tick EVERY true statement.',
+        opts:[['Burning fuel releases carbon dioxide', true], ['Too much carbon dioxide makes the Earth warmer', true],
+              ['Burning fuel gives us heat and electricity', true], ['Burning fuel makes more oil under the ground', false],
+              ['Burning fuel takes carbon dioxide out of the air', false]],
+        explain:'The first three are all true at once, which is exactly why the question is hard: a fuel can be genuinely useful AND cause a real problem.'}
+    ]},
     {key:'think', items:[
       {t:'match', prompt:'Read the table. No single clue is enough — combine two.', fig:'logic7',
         left:[{label:'A'},{label:'B'},{label:'C'},{label:'D'}],
@@ -1162,7 +1275,7 @@ const SETS = [
 {
   id:8, title:'The Method Lab', emoji:'⚗️', about:'Designing tests and predicting what will happen',
   challenge:true,
-  aligns:['Designing a fair test','Predicting from the particle model','Spotting a flaw in a method','Choosing equipment by property','Physical change','Reading between the numbers'],
+  aligns:['Designing a fair test','Predicting from the particle model','Spotting a flaw in a method','Choosing equipment by property','Physical change','Reading between the numbers','Processing a raw material'],
   sections:[
     {key:'states', items:[
       {t:'choice', prompt:'Predict using the particle model.', long:true,
@@ -1242,6 +1355,24 @@ const SETS = [
               ['Dissolving turns sugar into water.', false]],
         explain:'Stirring and heating both speed things up, but only heating lets the water hold more sugar in the end. And the sugar is always still sugar — taste it and you will find it.'}
     ]},
+    {key:'resources', items:[
+      {t:'choice', prompt:'Spot the same idea in a new place.', long:true,
+        text:'Crude oil is heated so that the different liquids inside it separate out. Which idea from separating mixtures is this most like?',
+        opts:['Evaporating, because heat is used to split a mixture','Using a magnet','Picking things out by hand'], ans:0,
+        explain:'Crude oil is a mixture, and heating separates it \u2014 the very same idea as getting salt back from salty water, just done in an enormous tower.'},
+      {t:'multi', prompt:'Tick EVERY good reason to use less fuel.',
+        opts:[['It puts less carbon dioxide into the air', true], ['The oil under the ground will not last for ever', true],
+              ['It helps slow down global warming', true], ['It makes cars go faster', false],
+              ['It turns plastic back into oil', false]],
+        explain:'Two of the reasons are about the air and one is about the supply running out. The last two are simply not true, however much we might like them to be.'},
+      {t:'choice', prompt:'Choose by property, and say why.', long:true,
+        text:'You need a material for a statue that will stand outside for a hundred years. Which is the best choice?',
+        opts:['Stone, because it is hard and lasts a very long time','Paper, because it is easy to cut','Plastic, because it is light'], ans:0,
+        explain:'Match the property to the demand. Outside for a hundred years means rain, frost and sun, so lasting matters far more than being easy to cut or light to carry.'},
+      {t:'order', prompt:'Put the whole journey in order, from rock to ring.',
+        items:['Ore is dug out of the ground','The ore is heated until the metal separates out','The metal is shaped and polished','The ring is sold in a shop'],
+        explain:'Every metal thing you own has been on this journey. The middle step, smelting, is the one that turns a dull rock into something useful.'}
+    ]},
     {key:'think', items:[
       {t:'match', prompt:'Read the table. You will need two clues for each one.', fig:'logic8',
         left:[{label:'A'},{label:'B'},{label:'C'},{label:'D'}],
@@ -1286,6 +1417,7 @@ const SECTIONS = {
   particles:{name:'Tiny Particles', icon:'⚛️'},
   mixtures:{name:'Separating', icon:'🧲'},
   dissolving:{name:'Dissolving', icon:'🥤'},
+  resources:{name:'Materials and Fuels', icon:'⛏️'},
   think:{name:'Think It Out', icon:'🧠'},
   investigate:{name:'Test It', icon:'🔬'}
 };

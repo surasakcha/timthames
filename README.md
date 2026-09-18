@@ -20,7 +20,8 @@ Static, zero-build collection of practice apps. Every push to `main` deploys aut
     │                           optical illusions (6 sets)
     └── science-detectives/
         └── index.html          Year 3–4 science: states of matter, particles,
-                                separating mixtures, dissolving, fair tests
+                                separating mixtures, dissolving, natural
+                                resources, fair tests
                                 (6 core sets + 2 challenge sets)
 ```
 
@@ -80,19 +81,30 @@ sharing a device); nothing else changes it.
 
 ## Science Detectives
 
-Built from the Y3 final science review packet. 8 sets × 24 questions (192
-questions, 504 stars), in two tiers.
+Built from the Y3 final science review packet and the "separating materials
+from natural gas" handout. 8 sets × 28 questions (224 questions, 593 stars),
+in two tiers.
 
 The **six core sets** are parallel, not a progression — every one covers all six
 topics, which is what makes the shuffled set order safe. The **two challenge
 sets** use exactly the same plain English but push the reasoning a layer
 deeper, and they always come last (see below).
 
-Six sections per set: **Solid, Liquid, Gas** · **Tiny Particles** (the particle
-model) · **Separating** (sieving, filtering, magnets, hand picking) ·
-**Dissolving** (soluble and insoluble, what speeds it up) · **Think It Out**
-(clue tables, odd-one-out, sequencing) · **Test It** (fair tests, predictions,
-reading charts).
+Seven sections per set: **Solid, Liquid, Gas** · **Tiny Particles** (the
+particle model) · **Separating** (sieving, filtering, magnets, hand picking) ·
+**Dissolving** (soluble and insoluble, what speeds it up) · **Materials and
+Fuels** (where materials come from, ores and smelting, oil and natural gas,
+burning fuels and carbon dioxide) · **Think It Out** (clue tables,
+odd-one-out, sequencing) · **Test It** (fair tests, predictions, reading
+charts).
+
+The **Materials and Fuels** section runs through all eight sets and builds a
+chain rather than a list of facts: paper ← wood ← trees, plastic and petrol ←
+crude oil, metal ← ores ← smelting. It ends on consequences — burning a fuel
+releases carbon dioxide, and too much carbon dioxide warms the Earth — and in
+the challenge sets on what follows from that: a forest with no replanting runs
+out, oil took millions of years so it cannot be replaced in a lifetime, and
+heating crude oil to separate it is the same idea as evaporating salty water.
 
 The English is deliberately plainer than the other apps: short sentences,
 common words, and no long written answers. The thinking is meant to be the
