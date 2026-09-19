@@ -114,8 +114,6 @@ h1,h2,h3{font-family:var(--round);line-height:1.15;margin:0}
 .setcard .meta{color:var(--ink-soft);font-size:.95rem}
 .setcard .go{font-family:var(--round);font-weight:600;color:var(--leaf);font-size:1rem;white-space:nowrap}
 .chal{display:inline-block;font-family:var(--round);font-weight:600;font-size:.78rem;padding:.05rem .5rem;border-radius:999px;background:var(--sun-soft);border:2px solid var(--sun);color:var(--sun-deep);margin-left:.4rem;vertical-align:middle}
-.setcard.locked{opacity:.7;cursor:not-allowed}
-.setcard.locked .go{color:var(--ink-soft)}
 .stars{display:inline-flex;gap:2px;font-size:1.1rem;letter-spacing:1px}
 .star-on{color:var(--sun)}
 .star-off{color:var(--line)}
@@ -946,7 +944,6 @@ const norm = s => String(s).toLowerCase().replace(/[’']/g, '').replace(/[^a-z0
 const fmtTime = ms => { const s = Math.max(0, Math.round(ms / 1000)); const m = Math.floor(s / 60); return m ? `${m} min ${s % 60} sec` : `${s} sec`; };
 const fmtDate = t => { const d = new Date(t); return d.toLocaleDateString(undefined, {day:'numeric', month:'short'}) + ', ' + d.toLocaleTimeString(undefined, {hour:'2-digit', minute:'2-digit'}); };
 const pick = a => a[Math.floor(Math.random() * a.length)];
-const PASS = 60;
 
 /* Seeded shuffle: every learner gets their own set order, and that order
    never changes again once it is saved. */
@@ -1147,9 +1144,10 @@ const BADGES = [
 
 /* ============ STORAGE (kept in this browser) ============ */
 const KEY = 'worldExplorers.v1';
+const ART = 'worldExplorers.art.v1';
 const freshStats = () => ({compass:0, map:0, chart:0, climate:0, resources:0, draw:0, streak:0, fix:0});
 const fresh = () => ({v:1, seed:null, order:null, sets:{}, gallery:[], badges:[], stats:freshStats(),
-  current:null, lastRun:null, settings:{size:'normal', theme:'auto', sound:true, unlockAll:false}});
+  current:null, lastRun:null, settings:{size:'normal', theme:'auto', sound:true}});
 let S = fresh();
 let storageOK = true;
 function load() {
@@ -1162,21 +1160,63 @@ function load() {
       S.stats = Object.assign(freshStats(), d.stats || {});
     }
   } catch (e) { storageOK = false; }
+  /* Drawings live in their own key now. Saves made before that change
+     kept them in the main one; those are read above and move across on
+     the next save, so nobody loses a picture in the upgrade. */
+  try {
+    const art = localStorage.getItem(ART);
+    if (art) S.gallery = JSON.parse(art) || [];
+  } catch (e) {}
+  if (!Array.isArray(S.gallery)) S.gallery = [];
   if (S.seed === null || S.seed === undefined) S.seed = (Math.random() * 4294967296) >>> 0;
   setOrder();
 }
-/* Writes progress. If the browser is full, drop the oldest drawings rather
-   than losing every star the child has earned. */
-function save() {
-  S.updatedAt = Date.now();
-  for (let attempt = 0; attempt < 6; attempt++) {
-    try { localStorage.setItem(KEY, JSON.stringify(S)); storageOK = true; return true; }
-    catch (e) {
-      if (S.gallery.length) { S.gallery.pop(); continue; }
-      storageOK = false; return false;
+/* setItem throws when the browser is full, and in a couple of private modes
+   it fails quietly, so every write is read back before it is believed. */
+function writeKey(k, text) {
+  try {
+    localStorage.setItem(k, text);
+    return localStorage.getItem(k) === text;
+  } catch (e) { return false; }
+}
+/* All the activities on this site share one storage allowance. Saved art is
+   the throwaway tier wherever it came from, so one child's stars may clear
+   another activity's pictures — never the other way round. */
+function dropArtElsewhere() {
+  let keys, freed = false;
+  try { keys = Object.keys(localStorage); } catch (e) { return false; }
+  for (const k of keys) {
+    if (k !== ART && /\.art\.v\d+$/.test(k)) {
+      try { localStorage.removeItem(k); freed = true; } catch (e) {}
     }
   }
-  storageOK = false;
+  return freed;
+}
+/* Writes the child's progress. Nothing here may be lost for want of room, so
+   it gives up pictures — its own first, then any other activity's — before
+   it gives up itself. */
+function save() {
+  S.updatedAt = Date.now();
+  const {gallery, ...progress} = S;
+  const body = JSON.stringify(progress);
+  let ok = writeKey(KEY, body);
+  if (!ok) { try { localStorage.removeItem(ART); } catch (e) {} ok = writeKey(KEY, body); }
+  if (!ok && dropArtElsewhere()) ok = writeKey(KEY, body);
+  storageOK = ok;
+  saveArt();
+  return ok;
+}
+/* Pictures, written only once the stars are safely down. Oldest go first
+   until the rest fit; none of this can cost a star. */
+function saveArt() {
+  const clear = () => { try { localStorage.removeItem(ART); } catch (e) {} };
+  if (!storageOK || !S.gallery.length) { clear(); return false; }
+  let list = S.gallery;
+  while (list.length) {
+    if (writeKey(ART, JSON.stringify(list))) { S.gallery = list; return true; }
+    list = list.slice(0, list.length - 1);
+  }
+  clear(); S.gallery = [];
   return false;
 }
 function applySettings() {
@@ -1257,13 +1297,6 @@ const starRow = n => `<span class="stars" aria-label="${n} of 3 stars">${[0,1,2]
 const setsFinished = s => Object.values(s.sets).filter(r => r && r.best).length;
 const threeStarSets = s => Object.values(s.sets).filter(r => r && r.best && starsFor(r.best.pct) === 3).length;
 /* Unlocking follows the learner's own order, not the set numbers. */
-function isUnlocked(id) {
-  if (S.settings.unlockAll) return true;
-  const pos = orderPos(id);
-  if (pos <= 0) return true;
-  const prev = S.sets[setOrder()[pos - 1]];
-  return !!(prev && prev.best && prev.best.pct >= PASS);
-}
 function questionLabel(item) { return item.text || item.tip || item.prompt; }
 function answerText(item) {
   switch (item.t) {
@@ -1894,11 +1927,13 @@ TYPES.draw = (item, root, changed) => {
       let url = '';
       try {
         const small = document.createElement('canvas');
-        small.width = 420; small.height = 280;
+        small.width = 360; small.height = 240;
         const sc = small.getContext('2d');
-        sc.fillStyle = '#FFFFFF'; sc.fillRect(0, 0, 420, 280);
-        sc.drawImage(cv, 0, 0, 420, 280);
-        url = small.toDataURL('image/png');
+        sc.fillStyle = '#FFFFFF'; sc.fillRect(0, 0, 360, 240);
+        sc.drawImage(cv, 0, 0, 360, 240);
+        /* JPEG, not PNG. A drawing on white costs about a tenth as much that
+           way, and every activity on this site shares a few megabytes. */
+        url = small.toDataURL('image/jpeg', 0.72);
       } catch (e) {}
       return {e: 0, t: 0, picture: url, strokes: strokes.length};
     }
@@ -1948,14 +1983,13 @@ function renderHome() {
     <section class="sets" aria-labelledby="setsT">
       <h2 class="label" id="setsT">Choose a set</h2>
       ${order.map((id, pos) => {
-        const set = getSet(id), rec = S.sets[id], open = isUnlocked(id), best = rec && rec.best;
-        const meta = !open ? `🔒 Score ${PASS}% or more on set ${pos} to open this one`
-          : best ? `Best: ${best.e} of ${best.t} (${best.pct}%)`
+        const set = getSet(id), rec = S.sets[id], best = rec && rec.best;
+        const meta = best ? `Best: ${best.e} of ${best.t} (${best.pct}%)`
           : `${flat(set).length} questions, ${setTotal(set)} stars to win`;
-        return `<button class="setcard ${open ? '' : 'locked'}" data-set="${id}" ${open ? '' : 'aria-disabled="true"'}>
+        return `<button class="setcard" data-set="${id}">
           <span class="emoji" aria-hidden="true">${set.emoji}</span>
           <span><span class="sc-title">Set ${pos + 1}: ${esc(set.title)}${set.challenge ? '<span class="chal">Challenge</span>' : ''}</span><br><span class="meta">${esc(set.about)}</span><br><span class="meta">${meta}</span></span>
-          <span class="go">${open ? (best ? starRow(starsFor(best.pct)) : 'Start ▶') : 'Locked'}</span>
+          <span class="go">${best ? starRow(starsFor(best.pct)) : 'Start ▶'}</span>
         </button>`;
       }).join('')}
     </section>
@@ -1975,12 +2009,6 @@ function renderHome() {
   }
   $$('.setcard').forEach(b => b.onclick = () => {
     const id = +b.dataset.set;
-    if (!isUnlocked(id)) {
-      const pos = orderPos(id);
-      let t = pos - 1; while (t > 0 && !isUnlocked(order[t])) t--;
-      confirmBox({title:'This set is locked', text:`Score ${PASS}% or more on set ${pos} to open this one. You can do it!`, yes:`Go to set ${t + 1}`, no:'Close', bot:true, onYes(){ tryStart(order[t]); }});
-      return;
-    }
     tryStart(id);
   });
   $('#histBtn').onclick = () => go('history');
@@ -2062,7 +2090,7 @@ function doCheck() {
   Q.checked = true;
   c.answers[Q.idx] = {e: res.e, t: res.t};
 
-  if (item.t === 'draw' && res.picture) { S.gallery.unshift({setId:set.id, img:res.picture, tip:item.tip, date:Date.now()}); S.gallery = S.gallery.slice(0, 12); }
+  if (item.t === 'draw' && res.picture) { S.gallery.unshift({setId:set.id, img:res.picture, tip:item.tip, date:Date.now()}); S.gallery = S.gallery.slice(0, 8); }
 
   const full = res.t > 0 && res.e === res.t;
   if (item.t === 'compass' && full) S.stats.compass++;
@@ -2140,14 +2168,12 @@ function finishRun() {
   c.queue.forEach(i => { const a = c.answers[i], s = f[i].sec; bySec[s] = bySec[s] || {e:0, t:0}; if (a) { e += a.e; t += a.t; bySec[s].e += a.e; bySec[s].t += a.t; } });
   const pct = t ? Math.round(e / t * 100) : 0;
   const order = setOrder(), pos = orderPos(set.id), nextId = pos >= 0 && pos + 1 < order.length ? order[pos + 1] : null;
-  const wasOpen = nextId !== null && isUnlocked(nextId);
   const rec = S.sets[set.id] = S.sets[set.id] || {attempts:[], best:null};
   rec.attempts.unshift({mode:c.mode, e, t, pct, time:c.elapsed, date:Date.now()});
   rec.attempts = rec.attempts.slice(0, 20);
   if (c.mode === 'full' && (!rec.best || pct > rec.best.pct || (pct === rec.best.pct && c.elapsed < rec.best.time))) rec.best = {e, t, pct, time:c.elapsed, date:Date.now()};
   if (c.mode === 'fix') S.stats.fix++;
-  S.lastRun = {setId:set.id, mode:c.mode, e, t, pct, time:c.elapsed, bySec, answers:c.answers, queue:c.queue,
-    newlyOpen: nextId !== null && !wasOpen && isUnlocked(nextId)};
+  S.lastRun = {setId:set.id, mode:c.mode, e, t, pct, time:c.elapsed, bySec, answers:c.answers, queue:c.queue};
   S.current = null;
   const earned = newBadges();
   S.lastRun.badges = earned.map(b => b.id);
@@ -2161,13 +2187,13 @@ function renderResults() {
   const set = getSet(r.setId), f = flat(set), stars = starsFor(r.pct);
   const order = setOrder(), pos = orderPos(set.id);
   const nextSet = pos + 1 < order.length ? getSet(order[pos + 1]) : null;
-  const nextOpen = nextSet && isUnlocked(nextSet.id);
   const wrong = r.queue.filter(i => r.answers[i] && r.answers[i].t > 0 && r.answers[i].e < r.answers[i].t);
   const msg = r.mode === 'fix'
     ? (r.e === r.t ? 'You fixed every single mistake. Brilliant!' : `You fixed ${r.e} of ${r.t}. Keep going — you are getting better!`)
     : stars === 3 ? 'Outstanding work, explorer!' : stars === 2 ? 'Really good work!' : stars === 1 ? 'Good effort — keep practising!' : 'Every explorer starts somewhere. Try again!';
   const gotBadges = (r.badges || []).map(id => BADGES.find(b => b.id === id)).filter(Boolean);
   app.innerHTML = `
+    ${storageOK ? '' : '<div class="notice">⚠️ This browser would not save these results. Nothing is lost while this page stays open — open Settings and use <b>Save backup</b> to keep them.</div>'}
     <div class="result-head">
       ${globe(stars >= 2 ? 'happy' : '')}
       <h1 id="rT" class="sr">Results</h1>
@@ -2175,7 +2201,6 @@ function renderResults() {
       <p class="score-big">${r.e} / ${r.t}</p>
       <p>${r.pct}% — ${esc(msg)}</p>
       <p>Time: ${fmtTime(r.time)}</p>
-      ${r.newlyOpen && nextSet ? `<p><b>🔓 You have opened ${nextSet.emoji} ${esc(nextSet.title)}!</b></p>` : ''}
     </div>
     ${gotBadges.length ? `<div class="card" style="margin-bottom:1rem"><h2 style="font-size:1.2rem">🎉 New badges</h2><div class="badges">${gotBadges.map(b => `<div class="badge on"><span class="bi">${b.icon}</span><b>${esc(b.name)}</b><small>${esc(b.desc)}</small></div>`).join('')}</div></div>` : ''}
     <div class="card">
@@ -2191,16 +2216,15 @@ function renderResults() {
       }).join('')}</ol></details></div>` : ''}
       <div class="stack" style="margin-top:1.2rem">
         ${wrong.length ? `<button class="btn btn-go btn-wide" id="fixBtn">🔁 Fix my mistakes (${wrong.length})</button>` : ''}
-        ${nextSet ? (nextOpen
+        ${nextSet
           ? `<button class="btn ${wrong.length ? 'btn-sun' : 'btn-go'} btn-wide" id="upBtn">⬆ Next set: ${nextSet.emoji} ${esc(nextSet.title)}</button>`
-          : `<p class="tip" style="text-align:center">Score ${PASS}% or more on the whole set to open ${nextSet.emoji} ${esc(nextSet.title)}.</p>`)
           : `<p class="tip" style="text-align:center">You have reached the last set in your atlas! 🏁</p>`}
         <button class="btn btn-wide" id="againBtn">Try the whole set again</button>
         <button class="btn btn-wide" id="homeBtn2">🏠 Home</button>
       </div>
     </div>`;
   if (wrong.length) $('#fixBtn').onclick = () => startSet(set.id, 'fix', wrong);
-  if (nextSet && nextOpen) $('#upBtn').onclick = () => tryStart(nextSet.id);
+  if (nextSet) $('#upBtn').onclick = () => tryStart(nextSet.id);
   $('#againBtn').onclick = () => startSet(set.id, 'full');
   $('#homeBtn2').onclick = () => go('home');
 }
@@ -2246,7 +2270,6 @@ function renderSettings() {
       <div class="setting"><div><b>Text size</b><small>Bigger text is easier on young eyes.</small></div>${seg('size', [['normal', 'Big'], ['big', 'Bigger']])}</div>
       <div class="setting"><div><b>Colours</b><small>Dark is gentle at night.</small></div>${seg('theme', [['auto', 'Auto'], ['light', 'Light'], ['dark', 'Dark']])}</div>
       <div class="setting"><div><b>Sounds</b><small>Little chimes for right and wrong answers.</small></div>${seg('sound', [[true, 'On'], [false, 'Off']])}</div>
-      <div class="setting"><div><b>Open all sets</b><small>Normally a set opens after ${PASS}% on the one before it.</small></div>${seg('unlockAll', [[false, 'No'], [true, 'Yes']])}</div>
       <div class="setting"><div><b>Backup progress</b><small>Saves a file with stars, badges and sketchbook drawings.</small></div><button class="btn btn-small" id="exportBtn">Save backup</button></div>
       <div class="setting"><div><b>Restore progress</b><small>Load a backup from another device or an earlier day.</small></div><button class="btn btn-small" id="importBtn">Load backup</button><input type="file" id="importFile" accept="application/json,.json" style="display:none"></div>
       <div class="setting"><div><b>Clear all progress</b><small>Removes scores, badges, sketchbook and any paused set.</small></div><button class="btn btn-small" id="resetBtn">Clear progress</button></div>

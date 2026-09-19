@@ -75,13 +75,20 @@ earn the same stars.
 
 ### Each learner gets their own set order
 
-A brand-new learner is given a random seed on first visit, and the six sets are
+A brand-new learner is given a random seed on first visit, and the sets are
 shuffled with it. That order is saved immediately and is **never reshuffled** —
-a returning learner always sees the same journey, on every visit, and sets
-unlock along their own order rather than by set number. A backup file carries
-the seed and the order, so restoring on a new device keeps the same journey.
-A grown-up can deliberately draw a new order in Settings (for a second child
-sharing a device); nothing else changes it.
+a returning learner always sees the same journey, on every visit. A backup file
+carries the seed and the order, so restoring on a new device keeps the same
+journey. A grown-up can deliberately draw a new order in Settings (for a second
+child sharing a device); nothing else changes it.
+
+The order decides how the sets are *presented*, not what may be played. **Every
+set is open from the first visit**, in every app. Sets used to unlock one after
+another at 60%, which meant a child who wanted more practice on one topic had
+to score their way to it — and, when a save failed, could be shut out of work
+they had already finished. Because the sets are parallel rather than
+progressive (every set covers every topic), nothing is lost by letting a child
+pick whichever one they like.
 
 ## Science Detectives
 
@@ -236,15 +243,43 @@ are *true*.
 
 ### Storage rule for new apps
 
-All apps share one browser origin, so **`localStorage` keys must be namespaced per app**.
-English Explorer uses `englishExplorer.v1`, Inventors Lab uses
-`inventorsLab.v1`, Science Detectives uses `scienceDetectives.v1` and World
-Explorers uses `worldExplorers.v1`. Use `<appName>.v1` for anything new —
-never a bare key like `progress`.
+All apps share one browser origin **and one storage allowance** — about 5 MB
+between the four of them — so keys must be namespaced per app, and a new app
+has to assume the others have already used most of the room.
 
-The three newer apps store drawings as PNG data URLs. Their `save()` drops the
-oldest drawings rather than failing if the browser's storage quota is reached,
-so a full gallery can never cost a child their stars.
+Each app keeps **two** keys:
+
+| key | holds | may be lost |
+| --- | --- | --- |
+| `<appName>.v1` | stars, badges, set order, settings, paused set | never |
+| `<appName>.art.v1` | drawings, as JPEG data URLs | freely |
+
+That split is the whole point. Stars and drawings used to share one key, and a
+single drawing is far bigger than a whole year of progress — so a browser with
+no room left could not save the picture, the write failed, and **the child's
+stars went down with it**. Now progress is written first and on its own; art is
+written afterwards and is thrown away, oldest first, until the rest fits.
+Nothing about a picture can cost a star.
+
+Three rules follow, for any new app here:
+
+1. **Write progress before art, in separate keys.** `save()` must succeed on a
+   full browser.
+2. **Read every write back.** `setItem` throws when the browser is full, and in
+   some private modes it fails silently, so `writeKey()` compares what came back
+   before believing it.
+3. **Art is the shared throwaway tier.** When progress will not fit, an app
+   deletes its own `*.art.v1` first, then *any other app's* — those are
+   replaceable, a child's record of their own work is not. Name the key with the
+   `.art.v` suffix so the other apps recognise it.
+
+Drawings are saved as JPEG rather than PNG: a child's drawing on a white
+background costs roughly a tenth as much that way (about 30 KB instead of
+360 KB), and the gallery keeps the 8 most recent.
+
+Progress made while the browser refuses to save is not silently dropped — the
+home and results screens both say so, and point at **Save backup** in
+Settings.
 
 ## Why the Home Screen matters on iPad / iPhone
 
