@@ -18,11 +18,15 @@ Static, zero-build collection of practice apps. Every push to `main` deploys aut
     │   └── index.html          Year 3–4 English: pronouns, job words, word
     │                           families, to + verb, reading, 2D/3D shapes,
     │                           optical illusions (6 sets)
-    └── science-detectives/
-        └── index.html          Year 3–4 science: states of matter, particles,
-                                separating mixtures, dissolving, natural
-                                resources, fair tests
-                                (6 core sets + 2 challenge sets)
+    ├── science-detectives/
+    │   └── index.html          Year 3–4 science: states of matter, particles,
+    │                           separating mixtures, dissolving, natural
+    │                           resources, fair tests
+    │                           (6 core sets + 2 challenge sets)
+    └── world-explorers/
+        └── index.html          Year 3–4 social studies: climate zones, the
+                                compass, map keys and grids, landforms,
+                                natural resources, people and travel (4 sets)
 ```
 
 Each app is one self-contained HTML file: no build step, no dependencies, no
@@ -166,6 +170,56 @@ in set 8, water and a pile of dry sand score identically on all three tests,
 which is the whole point of the question. That item carries `sameRowsOk: true`
 so the intent is recorded in the content rather than argued about later.
 
+## World Explorers
+
+Built from the Y3 social studies final exam review. 4 sets × 27 questions (108
+questions, 306 stars). Like the science sets these are **parallel, not a
+progression** — every set covers all six topics, so any set is a safe place to
+start and the shuffled set order stays safe.
+
+Six sections per set: **Climate Zones** (polar, temperate, tropical, arid,
+Mediterranean, and how climate changes what people grow and wear) · **The
+Compass** (the four and eight points, clockwise order, turning and reversing a
+direction) · **Reading Maps** (keys, relief colours, grid coordinates) ·
+**Landforms** (mountain, plateau, plain, valley, island, inlet, oasis, cave) ·
+**Natural Resources** (ores and metals, wood, stone, water, and using them so
+they last) · **People and Travel** (land/water/air/rail transport, public
+versus private, age groups and what a town needs).
+
+The English is kept as plain as Science Detectives. Two question types were
+added for this subject, because a map and a compass are things you point at,
+not things you describe:
+
+- **`compass`** — drag N, E, S and W (or all eight points) onto a drawn compass
+  rose, or tap a label and then tap a point. **One star per point**, so a
+  half-remembered rose earns half the marks instead of nothing.
+- **`gridmap`** — tap the square on a lettered-and-numbered map grid. The
+  places are drawn into the cells, so the question is read off the map rather
+  than off the text. One star. Some questions ask for a square that is
+  *empty* ("which square is north of the hospital?"), which is the point:
+  coordinates have to be worked out, not spotted.
+
+Both live alongside the ten types Science Detectives already had: `choice`,
+`match`, `type`, `tfgrid`, `multi`, `sort`, `order`, `fill`, `grid` and `draw`
+— twelve in all, and every one of them is used in every set.
+
+Figures are generated inline as SVG (`climatebands`, `rose4`, `reliefkey`,
+`reliefmap`, `landprofile`, `cavecut`, and two bar charts), so a question about
+"the tallest bar" and the bar actually drawn come from the same array.
+
+### Property tables have to be true of every example
+
+The tick-and-cross `grid` questions are the easiest place to write something
+that is *usually* true and key it as always true. Three were rewritten during
+review for exactly that: "found in a desert" had no honest answer for a cave or
+a river (the Nile runs through one), "a desert is flat land" is wrong for the
+dunes of the Sahara and the high Gobi, and "a cave is made of land" is odd for
+something that is a space *inside* land. The replacements — "made mostly of
+sand", a beach instead of a desert, and "you can stand on dry ground there" —
+are true of every row they are asked about. Worth remembering when adding rows:
+the audit can prove the rows are *distinct*, but only reading them proves they
+are *true*.
+
 ## Adding a new quiz
 
 1. Create `apps/<folder-name>/index.html` — one self-contained HTML file.
@@ -184,10 +238,11 @@ so the intent is recorded in the content rather than argued about later.
 
 All apps share one browser origin, so **`localStorage` keys must be namespaced per app**.
 English Explorer uses `englishExplorer.v1`, Inventors Lab uses
-`inventorsLab.v1` and Science Detectives uses `scienceDetectives.v1`. Use
-`<appName>.v1` for anything new — never a bare key like `progress`.
+`inventorsLab.v1`, Science Detectives uses `scienceDetectives.v1` and World
+Explorers uses `worldExplorers.v1`. Use `<appName>.v1` for anything new —
+never a bare key like `progress`.
 
-Both newer apps store drawings as PNG data URLs. Their `save()` drops the
+The three newer apps store drawings as PNG data URLs. Their `save()` drops the
 oldest drawings rather than failing if the browser's storage quota is reached,
 so a full gallery can never cost a child their stars.
 

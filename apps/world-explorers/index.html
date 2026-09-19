@@ -1,0 +1,2369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>World Explorers</title>
+<meta name="description" content="Climate zones, the compass, maps, landforms, natural resources, transport and people for Year 3 and Year 4.">
+<meta name="theme-color" content="#5B48A8">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Learning">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<link rel="icon" href="/icons/favicon-64.png" sizes="64x64">
+<link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ECEAF6; --paper:#FCFBFF; --paper-2:#F1EFFA; --ink:#241F3D; --ink-soft:#5A5478; --line:#C9C3E2;
+  --leaf:#5B48A8; --leaf-deep:#3E3078; --leaf-soft:#DFD9F4; --on-leaf:#FFFFFF;
+  --sun:#D9841C; --sun-soft:#FBE6C7; --sun-deep:#A56209;
+  --sky:#2F76A8; --sky-soft:#D8E9F4;
+  --berry:#B23F4B; --berry-soft:#F6DCDE;
+  --bark:#9A93B8;
+  --sea:#8FC5E8; --land:#7FB069; --globe-dark:#28618C;
+  --overlay:rgba(24,18,52,.58);
+  --read:'Andika','Trebuchet MS',Verdana,system-ui,sans-serif;
+  --round:'Fredoka','Andika','Trebuchet MS',system-ui,sans-serif;
+  font-size:20px;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#181430; --paper:#231D42; --paper-2:#2C2551; --ink:#E9E5F7; --ink-soft:#B0A8CE; --line:#443A70;
+    --leaf:#9C8AE0; --leaf-deep:#6E5CBC; --leaf-soft:#2E2758; --on-leaf:#150F2E;
+    --sun:#EDBB55; --sun-soft:#463619; --sun-deep:#B98A2C;
+    --sky:#72B6E2; --sky-soft:#1E3A4B;
+    --berry:#EC8490; --berry-soft:#4C2A30;
+    --bark:#7E77A0; --sea:#2F5B7C; --land:#4E7F48; --globe-dark:#A8D2EE;
+    --overlay:rgba(0,0,0,.62);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#181430; --paper:#231D42; --paper-2:#2C2551; --ink:#E9E5F7; --ink-soft:#B0A8CE; --line:#443A70;
+  --leaf:#9C8AE0; --leaf-deep:#6E5CBC; --leaf-soft:#2E2758; --on-leaf:#150F2E;
+  --sun:#EDBB55; --sun-soft:#463619; --sun-deep:#B98A2C;
+  --sky:#72B6E2; --sky-soft:#1E3A4B;
+  --berry:#EC8490; --berry-soft:#4C2A30;
+  --bark:#7E77A0; --sea:#2F5B7C; --land:#4E7F48; --globe-dark:#A8D2EE;
+  --overlay:rgba(0,0,0,.62);
+  color-scheme:dark;
+}
+:root[data-size="big"]{font-size:23px}
+
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--read);line-height:1.5;min-height:100vh;-webkit-tap-highlight-color:transparent}
+img,svg{max-width:100%}
+button{font:inherit;color:inherit}
+h1,h2,h3{font-family:var(--round);line-height:1.15;margin:0}
+.wrap{max-width:820px;margin:0 auto;padding:1rem 1rem 2rem}
+.hidden{display:none!important}
+:focus-visible{outline:4px solid var(--sun);outline-offset:3px;border-radius:10px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:3.1rem;padding:.4rem 1.4rem;border-radius:999px;border:3px solid var(--line);background:var(--paper);font-family:var(--round);font-weight:600;font-size:1.05rem;cursor:pointer;box-shadow:0 4px 0 var(--line);transition:transform .08s,box-shadow .08s;text-decoration:none;user-select:none}
+.btn:active:not(:disabled){transform:translateY(3px);box-shadow:0 1px 0 var(--line)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn-go{background:var(--leaf);border-color:var(--leaf);color:var(--on-leaf);box-shadow:0 5px 0 var(--leaf-deep)}
+.btn-go:active:not(:disabled){box-shadow:0 2px 0 var(--leaf-deep)}
+.btn-sun{background:var(--sun-soft);border-color:var(--sun);box-shadow:0 4px 0 var(--sun)}
+.btn-wide{width:100%}
+.btn-icon{width:3.1rem;padding:0;flex:none;font-size:1.3rem}
+.btn-small{min-height:2.5rem;font-size:.9rem;padding:.2rem 1rem;box-shadow:0 3px 0 var(--line)}
+.row{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center}
+.stack{display:grid;gap:.75rem}
+
+/* Terra the globe mascot */
+.gl-bench{stroke:var(--bark);stroke-width:7;stroke-linecap:round;fill:none}
+.gl-ball{fill:var(--sea);stroke:var(--globe-dark);stroke-width:3.5}
+.gl-land{fill:var(--land);stroke:none}
+.gl-line{fill:none;stroke:var(--globe-dark);stroke-width:2;opacity:.4}
+.gl-eye{fill:#FFFFFF;stroke:var(--globe-dark);stroke-width:2.5}
+.gl-pupil{fill:#20203A}
+.gl-mouth{fill:none;stroke:var(--globe-dark);stroke-width:3;stroke-linecap:round}
+.gl-stand{fill:none;stroke:var(--bark);stroke-width:5;stroke-linecap:round}
+.globe{transition:filter .4s}
+.globe.happy{animation:hop .6s ease}
+.globe.happy .gl-land{animation:spin .6s ease}
+.globe.sleepy .gl-pupil{display:none}
+@keyframes hop{0%,100%{transform:translateY(0)}35%{transform:translateY(-14px) rotate(-4deg)}65%{transform:translateY(0)}80%{transform:translateY(-4px)}}
+@keyframes spin{0%,100%{transform:translateX(0)}50%{transform:translateX(5px)}}
+
+/* Home */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:1rem;padding:1.25rem 0 .5rem}
+.hero h1{font-size:2.5rem;font-weight:700;letter-spacing:-.5px}
+.hero p{margin:.4rem 0 0;color:var(--ink-soft);font-size:1.1rem;max-width:30ch}
+.hero .globe{width:clamp(120px,26vw,185px);height:auto;display:block}
+.notice{background:var(--sun-soft);border:3px solid var(--sun);border-radius:20px;padding:.9rem 1.1rem;margin:1rem 0}
+.resume{background:var(--sky-soft);border:3px solid var(--sky);border-radius:24px;padding:1.1rem 1.2rem;margin:1rem 0;display:grid;gap:.75rem}
+.resume h2{font-size:1.35rem}
+.resume p{margin:0;color:var(--ink-soft)}
+.sets{display:grid;gap:1rem;margin-top:1.25rem}
+.sets h2.label{font-size:1.4rem}
+.setcard{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:1rem;align-items:center;text-align:left;width:100%;padding:1rem 1.1rem;border-radius:26px;border:3px solid var(--line);background:var(--paper);cursor:pointer;box-shadow:0 5px 0 var(--line)}
+.setcard:active:not(:disabled){transform:translateY(3px);box-shadow:0 2px 0 var(--line)}
+.setcard .emoji{font-size:2.4rem;width:3.6rem;height:3.6rem;display:grid;place-items:center;border-radius:18px;background:var(--paper-2)}
+.setcard .sc-title{font-family:var(--round);font-weight:600;font-size:1.3rem;line-height:1.2}
+.setcard .meta{color:var(--ink-soft);font-size:.95rem}
+.setcard .go{font-family:var(--round);font-weight:600;color:var(--leaf);font-size:1rem;white-space:nowrap}
+.chal{display:inline-block;font-family:var(--round);font-weight:600;font-size:.78rem;padding:.05rem .5rem;border-radius:999px;background:var(--sun-soft);border:2px solid var(--sun);color:var(--sun-deep);margin-left:.4rem;vertical-align:middle}
+.setcard.locked{opacity:.7;cursor:not-allowed}
+.setcard.locked .go{color:var(--ink-soft)}
+.stars{display:inline-flex;gap:2px;font-size:1.1rem;letter-spacing:1px}
+.star-on{color:var(--sun)}
+.star-off{color:var(--line)}
+.homefoot{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.5rem}
+.result-head .globe{width:150px;height:auto;display:block;margin:0 auto .5rem}
+
+/* Knowledge list */
+.knows{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.5rem}
+.know{font-size:.85rem;background:var(--paper-2);border:2px solid var(--line);border-radius:999px;padding:.1rem .6rem;color:var(--ink-soft)}
+
+/* Quiz top */
+.topbar{display:flex;align-items:center;gap:.75rem;position:sticky;top:0;z-index:20;background:var(--bg);padding:.6rem 0 .4rem}
+.topbar .where{flex:1;min-width:0}
+.topbar .where b{font-family:var(--round);font-size:1.05rem;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topbar .where span{color:var(--ink-soft);font-size:.9rem}
+.pill{font-family:var(--round);font-weight:600;background:var(--sun-soft);border:3px solid var(--sun);border-radius:999px;padding:.25rem .85rem;white-space:nowrap}
+.pill.fire{background:var(--berry-soft);border-color:var(--berry);animation:pulse 1s ease infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
+.track-wrap{position:relative;height:3.4rem;margin:.2rem 0 .6rem}
+.track-wrap .track{position:absolute;left:0;right:0;bottom:.55rem;height:12px;border-radius:99px;background:var(--bark);opacity:.35}
+.track-wrap .fill{position:absolute;left:0;bottom:.55rem;height:12px;border-radius:99px;background:var(--leaf);transition:width .5s ease}
+.track-wrap .walker{position:absolute;bottom:.3rem;width:3.6rem;transform:translateX(-50%);transition:left .5s ease}
+.track-wrap .walker .gl-bench{display:none}
+.track-wrap .goal{position:absolute;right:-.2rem;bottom:.6rem;font-size:1.4rem}
+
+/* Question card */
+.card{background:var(--paper);border:3px solid var(--line);border-radius:30px;padding:1.2rem 1.2rem 1.5rem;box-shadow:0 6px 0 var(--line)}
+.sec-tag{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--round);font-weight:600;font-size:.95rem;padding:.2rem .8rem;border-radius:999px;background:var(--paper-2);border:2px solid var(--line);color:var(--ink-soft)}
+.prompt{display:flex;gap:.75rem;align-items:flex-start;margin:.9rem 0 1rem}
+.prompt h2{font-size:1.35rem;font-weight:600;flex:1}
+.speak{flex:none;width:2.8rem;height:2.8rem;border-radius:50%;border:3px solid var(--sky);background:var(--sky-soft);cursor:pointer;font-size:1.15rem;display:grid;place-items:center}
+.qtext{font-size:1.45rem;line-height:1.6;margin:0 0 1.1rem}
+.blank{display:inline-block;min-width:4.6em;border-bottom:4px dashed var(--sky);text-align:center;color:var(--sky);font-weight:700;padding:0 .2em}
+.blank.filled{border-bottom-style:solid}
+
+/* Choice */
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(6.5rem,1fr));gap:.8rem}
+.opts.long{grid-template-columns:1fr}
+.opt{min-height:4rem;border-radius:20px;border:3px solid var(--line);background:var(--paper-2);font-size:1.3rem;font-weight:700;cursor:pointer;padding:.5rem 1rem;box-shadow:0 4px 0 var(--line);text-align:center;display:flex;align-items:center;justify-content:center;gap:.5rem;flex-direction:column}
+.opts.long .opt{font-size:1.15rem;text-align:left;align-items:flex-start;font-weight:400}
+.opt:active:not(:disabled){transform:translateY(3px);box-shadow:0 1px 0 var(--line)}
+.opt.sel{border-color:var(--sky);background:var(--sky-soft);box-shadow:0 4px 0 var(--sky)}
+.opt.ok{border-color:var(--leaf);background:var(--leaf-soft);box-shadow:0 4px 0 var(--leaf)}
+.opt.no{border-color:var(--berry);background:var(--berry-soft);box-shadow:0 4px 0 var(--berry)}
+.opts.multi{grid-template-columns:1fr}
+.opts.multi .opt{flex-direction:row;justify-content:flex-start;gap:.7rem;text-align:left;font-weight:400;font-size:1.12rem}
+.tickbox{flex:none;width:2rem;height:2rem;border-radius:8px;border:3px solid var(--line);background:var(--paper);display:grid;place-items:center;font-size:1.15rem;font-weight:700;color:var(--leaf-deep);line-height:1}
+.opt.sel .tickbox{border-color:var(--sky);background:var(--sky-soft)}
+.opt.ok .tickbox{border-color:var(--leaf);background:var(--leaf-soft)}
+.opt.no .tickbox{border-color:var(--berry);background:var(--berry-soft)}
+.opt .should{margin-left:auto;font-size:.85rem;color:var(--ink-soft);white-space:nowrap;font-family:var(--round)}
+
+/* Chips, bins, blanks */
+.bank{display:flex;flex-wrap:wrap;gap:.65rem;justify-content:center;min-height:4rem;padding:.8rem;border-radius:22px;background:var(--paper-2);border:3px dashed var(--line);margin-bottom:1rem}
+.bank-label{width:100%;text-align:center;color:var(--ink-soft);font-size:.9rem}
+.chip{display:inline-flex;align-items:center;justify-content:center;min-height:3.2rem;min-width:3.2rem;padding:.2rem 1.05rem;border-radius:16px;background:var(--sun-soft);border:3px solid var(--sun);font-size:1.2rem;font-weight:700;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;box-shadow:0 4px 0 var(--sun)}
+.chip.sel{background:var(--sky-soft);border-color:var(--sky);box-shadow:0 0 0 4px var(--sky)}
+.chip.dragging{opacity:.3}
+.chip.ok{background:var(--leaf-soft);border-color:var(--leaf);box-shadow:0 4px 0 var(--leaf)}
+.chip.no{background:var(--berry-soft);border-color:var(--berry);box-shadow:0 4px 0 var(--berry)}
+.ghost{position:fixed;left:0;top:0;z-index:1000;pointer-events:none;transform:translate(-50%,-60%) scale(1.1);opacity:.95}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(10rem,1fr));gap:.9rem}
+.bin{min-height:9rem;border:3px dashed var(--line);border-radius:22px;padding:.7rem;display:flex;flex-direction:column;gap:.6rem;cursor:pointer}
+.bin h3{font-size:1.05rem;text-align:center}
+.bin .hint{font-size:.85rem;color:var(--ink-soft);text-align:center;margin-top:-.4rem}
+.bin .inside{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center}
+.over{border-color:var(--sky)!important;background:var(--sky-soft)!important}
+.poemtext{font-size:1.25rem;line-height:1.5;margin:0}
+.poemtext .line{display:block;margin:0 0 .9rem}
+.nowrap{white-space:nowrap}
+.slot{display:inline-flex;vertical-align:middle;align-items:center;justify-content:center;min-width:5.5rem;min-height:3.2rem;margin:0 .15rem;border-bottom:4px dashed var(--sky);border-radius:12px 12px 4px 4px;background:var(--sky-soft);cursor:pointer;line-height:1.2}
+.slot .chip{box-shadow:none}
+
+/* Order (drag to sequence) */
+.orderlist{display:grid;gap:.6rem;margin-bottom:.8rem}
+.ord{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:.7rem;align-items:center;padding:.6rem .8rem;border-radius:18px;border:3px solid var(--line);background:var(--paper-2);font-size:1.05rem;line-height:1.35;touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab;text-align:left}
+.ord .num{font-family:var(--round);font-weight:700;width:2rem;height:2rem;display:grid;place-items:center;border-radius:50%;background:var(--sun-soft);border:2px solid var(--sun);flex:none;font-size:.95rem}
+.ord.dragging{opacity:.35}
+.ord.ok{border-color:var(--leaf);background:var(--leaf-soft)}
+.ord.no{border-color:var(--berry);background:var(--berry-soft)}
+.ord-move{display:flex;flex-direction:column;gap:.2rem}
+.ord-move button{width:2.1rem;height:1.6rem;border-radius:8px;border:2px solid var(--line);background:var(--paper);cursor:pointer;font-size:.8rem;line-height:1;padding:0}
+.ord-move button:disabled{opacity:.3;cursor:default}
+
+/* Match lines */
+.match{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);column-gap:clamp(2.6rem,11vw,6rem)}
+.match-col{display:grid;grid-template-columns:minmax(0,1fr);gap:.7rem;align-content:stretch;position:relative;z-index:2}
+.match svg.lines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;overflow:visible}
+.m-item{position:relative;min-width:0;overflow-wrap:anywhere;display:flex;align-items:center;gap:.5rem;min-height:4rem;padding:.45rem .8rem;border-radius:18px;border:3px solid var(--line);background:var(--paper-2);cursor:pointer;touch-action:none;user-select:none;-webkit-user-select:none;text-align:left;font-size:1.05rem;line-height:1.3}
+.m-item.left{font-weight:700;font-size:1.15rem}
+.m-item.right{padding-left:1.15rem}
+.m-item .dot{position:absolute;top:50%;width:18px;height:18px;border-radius:50%;background:var(--paper);border:4px solid var(--ink-soft);transform:translateY(-50%)}
+.m-item.left .dot{right:-11px}
+.m-item.right .dot{left:-11px}
+.m-item.sel{border-color:var(--sky);background:var(--sky-soft)}
+.m-item.linked .dot{background:var(--sky);border-color:var(--sky)}
+.m-item.ok{border-color:var(--leaf);background:var(--leaf-soft)}
+.m-item.no{border-color:var(--berry);background:var(--berry-soft)}
+.m-item.ok .dot{background:var(--leaf);border-color:var(--leaf)}
+.m-item.no .dot{background:var(--berry);border-color:var(--berry)}
+.lines path{fill:none;stroke-width:5;stroke-linecap:round}
+
+/* Tick-or-cross grid */
+.gridq{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.gridq table{border-collapse:separate;border-spacing:4px;margin:0 auto}
+.gridq th{font-family:var(--round);font-weight:600;font-size:.88rem;line-height:1.2;color:var(--ink-soft);padding:.2rem .3rem;vertical-align:bottom;max-width:7.5rem;min-width:4.6rem}
+.gridq th.rowhead{text-align:right;vertical-align:middle;color:var(--ink);font-size:1.05rem;white-space:nowrap;padding-right:.5rem}
+.cell{width:3.4rem;height:3.4rem;border-radius:14px;border:3px solid var(--line);background:var(--paper-2);font-size:1.5rem;font-weight:700;cursor:pointer;padding:0;line-height:1}
+.cell.tick{color:var(--leaf-deep);border-color:var(--leaf);background:var(--leaf-soft)}
+.cell.cross{color:var(--berry);border-color:var(--berry);background:var(--berry-soft)}
+.cell.ok{box-shadow:inset 0 0 0 3px var(--leaf)}
+.cell.no{box-shadow:inset 0 0 0 3px var(--berry);opacity:.85}
+.cell .mark-was{display:block;font-size:.65rem;font-weight:400;color:var(--ink-soft)}
+
+/* True / false rows */
+.tflist{display:grid;gap:.7rem}
+.tfrow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.7rem;align-items:center;padding:.6rem .8rem;border-radius:18px;border:3px solid var(--line);background:var(--paper-2);font-size:1.08rem;line-height:1.35}
+.tfrow.ok{border-color:var(--leaf);background:var(--leaf-soft)}
+.tfrow.no{border-color:var(--berry);background:var(--berry-soft)}
+.tfbtns{display:flex;gap:.4rem;flex:none}
+.tfbtns button{min-width:4rem;min-height:2.8rem;border-radius:14px;border:3px solid var(--line);background:var(--paper);font-family:var(--round);font-weight:600;cursor:pointer;font-size:.95rem}
+.tfbtns button[aria-pressed="true"]{background:var(--sky-soft);border-color:var(--sky)}
+.tfbtns button:disabled{cursor:default}
+.tfrow.ok .tfbtns button[aria-pressed="true"]{background:var(--leaf);border-color:var(--leaf);color:var(--on-leaf)}
+.tfrow.no .tfbtns button[aria-pressed="true"]{background:var(--berry);border-color:var(--berry);color:#fff}
+
+/* Spell */
+.boxes{display:grid;gap:.35rem;justify-content:center;margin:.5rem 0 1.2rem}
+.box{width:100%;aspect-ratio:.8;padding:0;border-radius:12px;border:3px solid var(--line);background:var(--paper-2);display:grid;place-items:center;font-size:1.6em;font-weight:700;cursor:pointer;color:var(--ink)}
+.box.next{border-color:var(--sky);box-shadow:0 0 0 3px var(--sky-soft)}
+.box.ok{border-color:var(--leaf);background:var(--leaf-soft)}
+.box.no{border-color:var(--berry);background:var(--berry-soft)}
+.tiles{display:flex;flex-wrap:wrap;gap:.55rem;justify-content:center}
+.tile{width:3.2rem;height:3.2rem;border-radius:14px;border:3px solid var(--sun);background:var(--sun-soft);font-size:1.6rem;font-weight:700;cursor:pointer;box-shadow:0 4px 0 var(--sun)}
+.tile:disabled{opacity:.25;cursor:default;box-shadow:none}
+.tile:active:not(:disabled){transform:translateY(3px);box-shadow:0 1px 0 var(--sun)}
+.clue{font-size:1.3rem;line-height:1.6;background:var(--paper-2);border-radius:20px;padding:.9rem 1.1rem;margin:0 0 1rem;border-left:8px solid var(--sun)}
+
+/* Type */
+.write{width:100%;font-family:var(--read);font-size:1.35rem;padding:.8rem 1rem;border-radius:18px;border:3px solid var(--line);background:var(--paper-2);color:var(--ink);line-height:1.5}
+.write:focus{outline:none;border-color:var(--sky);box-shadow:0 0 0 4px var(--sky-soft)}
+.tip{color:var(--ink-soft);font-size:1rem;margin:.6rem 0 0}
+.typeline{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap}
+.typeline .write{flex:1;min-width:10rem}
+.hintbox{margin:.7rem 0 0;background:var(--sun-soft);border-left:8px solid var(--sun);border-radius:14px;padding:.6rem .9rem;font-size:1.05rem}
+
+/* Compass rose: labels drop onto the points */
+.compasswrap{position:relative;width:min(100%,21rem);margin:0 auto 1rem;aspect-ratio:1}
+.compasswrap svg{width:100%;height:100%;display:block}
+.rose-ring{fill:var(--paper-2);stroke:var(--line);stroke-width:3}
+.rose-ring2{fill:none;stroke:var(--line);stroke-width:2;stroke-dasharray:5 6}
+.rose-arm{fill:var(--leaf-soft);stroke:var(--leaf);stroke-width:2.5;stroke-linejoin:round}
+.rose-spoke{fill:none;stroke:var(--leaf);stroke-width:4;stroke-linecap:round;opacity:.5}
+.rose-dot{fill:var(--leaf)}
+.cslot{position:absolute;transform:translate(-50%,-50%);min-width:3.1rem;min-height:3.1rem;display:flex;align-items:center;justify-content:center;border-radius:14px;border:3px dashed var(--sky);background:var(--paper);cursor:pointer;font-family:var(--round);font-weight:700}
+.cslot.ok{border-style:solid;border-color:var(--leaf)}
+.cslot.no{border-style:solid;border-color:var(--berry)}
+.cslot .chip{box-shadow:none;min-width:2.5rem;min-height:2.5rem;padding:.1rem .45rem;font-size:1rem}
+
+/* Map grid: tap the square that answers the question */
+.gmwrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.gmap{border-collapse:separate;border-spacing:4px;margin:0 auto}
+.gmap th{font-family:var(--round);font-weight:700;color:var(--ink-soft);font-size:1rem;width:2rem;height:2rem}
+.gcell{width:5.2rem;height:5.2rem;border-radius:14px;border:3px solid var(--line);background:var(--paper-2);cursor:pointer;padding:.15rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.1rem}
+.gcell.sel{border-color:var(--sky);background:var(--sky-soft);box-shadow:0 0 0 3px var(--sky-soft)}
+.gcell.ok{border-color:var(--leaf);background:var(--leaf-soft)}
+.gcell.no{border-color:var(--berry);background:var(--berry-soft)}
+.gcell .ge{font-size:1.7rem;line-height:1}
+.gcell .gn{font-size:.62rem;color:var(--ink-soft);line-height:1.1;text-align:center}
+
+/* Figures: diagrams, maps and charts */
+.z-polar{fill:#CFE6F2}
+.z-temp{fill:#9BD08E}
+.z-trop{fill:#F0C86A}
+.z-edge{fill:none;stroke:var(--globe-dark);stroke-width:3.5}
+.z-eq{fill:none;stroke:#C0392B;stroke-width:3;stroke-dasharray:8 6}
+.land-fill{fill:var(--land);stroke:var(--ink-soft);stroke-width:2.5;stroke-linejoin:round}
+.land-ground{fill:none;stroke:var(--ink-soft);stroke-width:3.5;stroke-linecap:round}
+.cave-hole{fill:var(--paper);stroke:var(--ink-soft);stroke-width:2.5}
+.cave-drip{fill:none;stroke:var(--ink-soft);stroke-width:3;stroke-linecap:round}
+.figure{background:var(--paper-2);border:3px solid var(--line);border-radius:22px;padding:1rem;margin:0 0 1rem;text-align:center}
+.figure svg{width:100%;max-width:27rem;height:auto}
+.fig-bg{fill:var(--paper)}
+.fig-ink{fill:none;stroke:var(--ink);stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round}
+.fig-fill{fill:var(--ink)}
+.fig-glass{fill:var(--glass);stroke:var(--liquid-dark);stroke-width:3.5;stroke-linejoin:round}
+.fig-liquid{fill:var(--liquid);opacity:.85}
+.fig-part{fill:var(--leaf-deep)}
+.fig-part2{fill:var(--sun-deep)}
+.fig-grid{fill:none;stroke:var(--line);stroke-width:2}
+.fig-bar{fill:var(--sky)}
+.fig-bar2{fill:var(--sun)}
+.fig-label{fill:var(--ink);font-family:var(--round);font-size:13px;font-weight:600}
+.fig-small{fill:var(--ink-soft);font-family:var(--round);font-size:11px}
+.fig-head{fill:var(--ink-soft);font-family:var(--round);font-size:11px;font-weight:600}
+.fig-sand{fill:var(--sun-deep);opacity:.8}
+.fig-magnet{fill:var(--berry)}
+.fig-iron{fill:var(--bark)}
+.fig-heat{fill:none;stroke:var(--sun);stroke-width:3;stroke-linecap:round}
+.fig-arrow{fill:none;stroke:var(--sky);stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round}
+.fig-dirty{fill:#8A7048;opacity:.75}
+.fig-clean{fill:var(--sky);opacity:.35}
+
+/* Drawing pad */
+.padwrap{display:grid;gap:.7rem}
+.pad{width:100%;aspect-ratio:3/2;border-radius:20px;border:3px solid var(--line);background:#FFFFFF;touch-action:none;cursor:crosshair;display:block}
+.padtools{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;justify-content:center}
+.swatch{width:2.5rem;height:2.5rem;border-radius:50%;border:3px solid var(--line);cursor:pointer;padding:0}
+.swatch[aria-pressed="true"]{box-shadow:0 0 0 4px var(--sky);border-color:var(--paper)}
+.padnote{color:var(--ink-soft);font-size:.95rem;text-align:center;margin:0}
+
+/* Badges */
+.badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(8.5rem,1fr));gap:.7rem;margin-top:.7rem}
+.badge{display:grid;gap:.15rem;justify-items:center;text-align:center;padding:.7rem .5rem;border-radius:18px;border:3px solid var(--line);background:var(--paper-2)}
+.badge.on{border-color:var(--sun);background:var(--sun-soft)}
+.badge .bi{font-size:1.9rem;line-height:1}
+.badge.off .bi{filter:grayscale(1);opacity:.35}
+.badge b{font-family:var(--round);font-size:.95rem;font-weight:600}
+.badge small{color:var(--ink-soft);font-size:.8rem;line-height:1.25}
+.badge-pop{display:flex;gap:.6rem;align-items:center;background:var(--sun-soft);border:3px solid var(--sun);border-radius:18px;padding:.5rem .8rem;margin:.6rem 0 0}
+.badge-pop .bi{font-size:1.8rem}
+
+/* Bottom sheet */
+.dock-space{height:9rem}
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--bg);border-top:3px solid var(--line);padding:.8rem 1rem calc(.8rem + env(safe-area-inset-bottom))}
+.dock .inner{max-width:820px;margin:0 auto}
+.dock.good{background:var(--leaf-soft);border-color:var(--leaf)}
+.dock.bad{background:var(--berry-soft);border-color:var(--berry)}
+.dock.part{background:var(--sun-soft);border-color:var(--sun)}
+.fb{max-height:48vh;overflow:auto;margin-bottom:.8rem}
+.fb h3{font-size:1.45rem;display:flex;gap:.5rem;align-items:center}
+.fb .gain{font-family:var(--round);font-size:1rem;font-weight:600;margin-left:auto;white-space:nowrap}
+.fb p{margin:.45rem 0 0;font-size:1.1rem;line-height:1.55}
+.fb .ans{font-weight:700}
+.fb .why{background:var(--paper);border-radius:14px;padding:.5rem .8rem;margin-top:.6rem!important}
+
+/* Overlay & modal */
+.overlay{position:fixed;inset:0;z-index:100;background:var(--overlay);display:grid;place-items:center;padding:1rem}
+.modal{background:var(--paper);border-radius:30px;border:3px solid var(--line);padding:1.5rem;max-width:30rem;width:100%;text-align:center;display:grid;gap:1rem;max-height:92vh;overflow:auto}
+.modal h2{font-size:1.6rem}
+.modal p{margin:0;font-size:1.1rem;color:var(--ink-soft)}
+.modal .globe{width:150px;margin:0 auto;display:block}
+
+/* Results */
+.result-head{text-align:center;padding:1rem 0}
+.big-stars{font-size:3.4rem;letter-spacing:.3rem;line-height:1}
+.big-stars span{display:inline-block}
+.big-stars .star-on{animation:pop .5s both}
+.big-stars span:nth-child(2){animation-delay:.2s}
+.big-stars span:nth-child(3){animation-delay:.4s}
+@keyframes pop{0%{transform:scale(0)}70%{transform:scale(1.25)}100%{transform:scale(1)}}
+.result-head .score-big{font-family:var(--round);font-size:2.6rem;font-weight:700;margin:.4rem 0 0}
+.result-head p{margin:.3rem 0;font-size:1.15rem;color:var(--ink-soft)}
+.bars{display:grid;gap:.9rem;margin:1rem 0}
+.bar-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.3rem .8rem;align-items:center;font-size:1.05rem}
+.bar{grid-column:1/-1;height:16px;border-radius:99px;background:var(--paper-2);border:2px solid var(--line);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--leaf);border-radius:99px}
+.review{margin-top:1rem}
+.review details{border:3px solid var(--line);border-radius:20px;background:var(--paper-2);padding:.4rem 1rem}
+.review summary{cursor:pointer;font-family:var(--round);font-weight:600;padding:.4rem 0}
+.review li{margin:.6rem 0;font-size:1.05rem}
+.review ol{padding-left:1.3rem}
+
+/* History & settings */
+.page-head{display:flex;align-items:center;gap:.75rem;padding:.8rem 0}
+.page-head h1{font-size:1.8rem;flex:1}
+.hist{display:grid;gap:1rem}
+.hist .card{padding:1rem 1.1rem}
+.hist table{width:100%;border-collapse:collapse;font-size:1rem;margin-top:.5rem}
+.hist td,.hist th{text-align:left;padding:.35rem .3rem;border-bottom:2px solid var(--paper-2)}
+.hist th{color:var(--ink-soft);font-weight:400;font-size:.9rem}
+.scroll-x{overflow-x:auto}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(11rem,1fr));gap:.8rem;margin-top:.6rem}
+.gallery figure{margin:0}
+.gallery img{width:100%;border-radius:16px;border:3px solid var(--line);background:#fff;display:block}
+.gallery figcaption{color:var(--ink-soft);font-size:.85rem;margin-top:.25rem;text-align:center}
+.setting{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.8rem 0;border-bottom:2px solid var(--paper-2);flex-wrap:wrap}
+.setting b{font-family:var(--round);font-weight:600;font-size:1.1rem}
+.setting small{display:block;color:var(--ink-soft);font-size:.9rem}
+.seg{display:inline-flex;border:3px solid var(--line);border-radius:999px;overflow:hidden}
+.seg button{border:0;background:transparent;padding:.45rem .95rem;cursor:pointer;font-family:var(--round);font-weight:600;min-height:2.6rem}
+.seg button[aria-pressed="true"]{background:var(--leaf);color:var(--on-leaf)}
+
+@media (max-width:520px){
+  :root{font-size:18px}
+  :root[data-size="big"]{font-size:21px}
+  .hero h1{font-size:2rem}
+  .card{padding:1rem .8rem 1.2rem;border-radius:24px}
+  .setcard{grid-template-columns:auto minmax(0,1fr)}
+  .setcard .go{grid-column:1/-1;text-align:right}
+  .m-item{font-size:.96rem;padding:.4rem .55rem}
+  .m-item.left{font-size:1rem;text-align:center;justify-content:center}
+  .match{column-gap:2.4rem}
+  .qtext{font-size:1.28rem}
+  .ord{font-size:.96rem;padding:.5rem .6rem;gap:.5rem}
+  .tfrow{font-size:.98rem;grid-template-columns:1fr;gap:.5rem}
+  .tfbtns{justify-content:flex-end}
+  .cell{width:2.9rem;height:2.9rem;font-size:1.3rem}
+  .gridq th{font-size:.78rem;min-width:4rem}
+  .gridq th.rowhead{font-size:.95rem}
+  /* the whole map grid has to fit on a phone: a map you scroll sideways
+     stops looking like a map */
+  .gcell{width:3.5rem;height:3.5rem;border-radius:11px;border-width:2px}
+  .gcell .ge{font-size:1.25rem}
+  .gcell .gn{font-size:.58rem}
+  .gmap{border-spacing:3px}
+  .gmap th{width:1.4rem;height:1.4rem;font-size:.9rem}
+  .cslot{min-width:2.6rem;min-height:2.6rem}
+  .cslot .chip{min-width:2.1rem;min-height:2.1rem;font-size:.92rem}
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<main id="app" class="wrap" aria-live="polite"></main>
+<div id="dock" class="dock hidden"><div class="inner" id="dockInner"></div></div>
+<div id="layer"></div>
+<script>
+/* ==========================================================================
+   CONTENT — 4 sets of Year 3 / Year 4 social studies, built from the S1
+   final exam review: climate zones, the compass, reading maps, landforms,
+   natural resources, and transport and population. The four sets are
+   parallel, so a learner can start with any of them.
+   ========================================================================== */
+const SETS = [
+/* ---------------------------- SET 1 ---------------------------- */
+{
+  id:1, title:'The Compass Trail', emoji:'🧭', about:'Directions, zones and first maps',
+  aligns:['Climate zones','Compass and compass rose','Map keys','Landform names','Ores and metals','Kinds of transport'],
+  sections:[
+    {key:'climate', items:[
+      {t:'choice', prompt:'Look at the Earth, then answer.', fig:'climatebands', long:true,
+        text:'Which zone is around the middle line of the Earth, the equator?',
+        opts:['The tropical zone','The polar zone','The temperate zone'], ans:0,
+        explain:'At the equator the sun shines almost straight down, so it is hot all year. That band is the tropical zone.'},
+      {t:'match', prompt:'Match each climate zone to what it is like.',
+        left:[{label:'Polar'},{label:'Temperate'},{label:'Tropical'},{label:'Arid'}],
+        right:['freezing cold, covered in ice and snow','four clear seasons, warm summers and chilly winters','hot all year, with heavy rain','almost no rain, hot by day and cold at night'],
+        explain:'Each zone has its own pattern. Polar is frozen, temperate has four seasons, tropical is hot and wet, and arid is dry.'},
+      {t:'tfgrid', prompt:'True or false?',
+        rows:[['A climate zone is a large area where the weather is usually the same kind.', true],
+              ['The polar zone is at the top and the bottom of the Earth.', true],
+              ['The tropical zone is cold all year.', false],
+              ['The arid zone gets almost no rain.', true]],
+        explain:'The tropical zone is the hot one. Arid means dry, which is why deserts are found there.'},
+      {t:'type', prompt:'Type one word.', text:'The line around the middle of the Earth is called the ______.',
+        accept:['equator'], hint:'It starts with "e" and sounds like "equal".',
+        explain:'The equator. It splits the Earth into a top half and a bottom half, and the hottest zone sits along it.'},
+      {t:'fill', prompt:'Drag the right zone into each gap.',
+        lines:['The {polar} zone is covered in ice and snow.','The {tropical} zone is hot and rainy all year.','The {arid} zone gets almost no rain.'],
+        decoys:['sunny','windy'],
+        explain:'Frozen, hot and wet, or dry. Those three words are enough to tell these zones apart.'}
+    ]},
+    {key:'compass', items:[
+      {t:'compass', prompt:'Put the four main directions on the compass rose.', points:4,
+        explain:'Going clockwise from the top: North, East, South, West. Never Eat Soggy Waffles is the trick for remembering the order.'},
+      {t:'choice', prompt:'Tell them apart.', long:true,
+        text:'What is the difference between a compass and a compass rose?',
+        opts:['A compass is a tool with a needle; a compass rose is a drawing on a map','They are exactly the same thing','A compass rose is a kind of flower'], ans:0,
+        explain:'You hold a compass in your hand and its needle swings to point north. A compass rose is printed on a map to show you which way is which.'},
+      {t:'order', prompt:'Put the directions in clockwise order, starting at north.',
+        items:['North','East','South','West'],
+        explain:'Never Eat Soggy Waffles: N, E, S, W. Clockwise means the way the hands of a clock go round.'},
+      {t:'type', prompt:'Type one word.', text:'Never Eat Soggy Waffles reminds you of north, east, south and ______.',
+        accept:['west'], hint:'It is the one opposite east.',
+        explain:'West. Each first letter matches a direction, which makes the clockwise order easy to remember.'}
+    ]},
+    {key:'maps', items:[
+      {t:'gridmap', prompt:'Use the map grid.', text:'Which square is the school in?',
+        cols:['A','B','C','D'], rows:[1,2,3],
+        places:[{n:'School', e:'🏫', c:'B', r:2},{n:'Park', e:'🌳', c:'D', r:1},{n:'Shop', e:'🏪', c:'A', r:3}],
+        ans:'B2',
+        explain:'Read the letter across the top first, then the number down the side. The school sits in column B and row 2, so its square is B2.'},
+      {t:'choice', prompt:'What does it show?', long:true, text:'A relief map shows something special about the land. What is it?',
+        opts:['How high or how low the land is','What people in the area are called','What day of the week it is'], ans:0,
+        explain:'Relief means the shape of the land. A relief map tells you where the mountains and the low flat parts are.'},
+      {t:'choice', prompt:'Read the map key.', fig:'reliefkey', long:true,
+        text:'On this key, which colour shows the highest land?',
+        opts:['Dark brown','Green','Yellow'], ans:0,
+        explain:'Most relief maps use green for the lowest land and dark brown for the highest, with yellow and light brown in between.'},
+      {t:'type', prompt:'Type one word.', text:'The part of a map that explains what the colours and symbols mean is called the ______.',
+        accept:['key','legend'], hint:'It unlocks the meaning of the map.',
+        explain:'The key (some maps call it the legend). Without it you would not know what the colours stood for.'}
+    ]},
+    {key:'land', items:[
+      {t:'match', prompt:'Match each landform to its description.',
+        left:[{label:'Mountain'},{label:'Plateau'},{label:'Plain'},{label:'Desert'}],
+        right:['very tall land that rises sharply above the land around it','tall like a mountain, but flat on the top','a wide area of flat land','a large, often sandy area with very little rain'],
+        explain:'A plateau is the tricky one: it is high like a mountain, but you could play football on the top.'},
+      {t:'choice', prompt:'Look at the drawing.', fig:'landprofile', long:true,
+        text:'Which one in the picture is the plateau?',
+        opts:['B','A','C'], ans:0,
+        explain:'B is high AND flat on top, so B is the plateau. A comes to a sharp point, so A is the mountain, and C is low and flat, so C is the plain.'},
+      {t:'type', prompt:'Type one word.', text:'The highest mountain in the whole world is Mount ______.',
+        accept:['everest'], hint:'It starts with "Ev".',
+        explain:'Mount Everest. It sits in the Himalayas and is nearly nine kilometres above the sea.'},
+      {t:'sort', prompt:'Where would you find each one?',
+        bins:[['In a hot desert','very little rain'],['By the sea','water beside or all around']],
+        chips:[['an oasis',0],['sand dunes',0],['camels',0],['an island',1],['an inlet',1],['a beach',1]],
+        explain:'An oasis is a desert spot with water and plants. An inlet is a narrow strip of sea reaching into the land, and an island has water all the way around it.'},
+      {t:'grid', prompt:'Tick \u2713 or cross \u2717 in every box.',
+        cols:['It is high above the land around it','It is flat','It has water in it'],
+        rows:[['Mountain',[1,0,0]],['Plateau',[1,1,0]],['Plain',[0,1,0]],['Lake',[0,1,1]]],
+        explain:'A plateau is the only one that is both high AND flat. That is exactly what makes it a plateau and not a mountain.'}
+    ]},
+    {key:'resources', items:[
+      {t:'choice', prompt:'What is inside?', long:true, text:'Ores are special rocks dug out of the ground. What is hidden inside them?',
+        opts:['Metal','Fresh water','Air'], ans:0,
+        explain:'An ore is a rock with metal locked inside. People heat it until the clean metal runs out.'},
+      {t:'multi', prompt:'Tick EVERY thing that is made from metal.',
+        opts:[['bridges', true], ['coins', true], ['water pipes', true], ['rain', false], ['sunlight', false]],
+        explain:'Metal is strong and can be shaped, so it turns up in bridges, coins, pipes, cans and wires. Rain and sunlight are not made by anybody.'},
+      {t:'order', prompt:'Put the steps in order, from rock to ring.',
+        items:['Ore is dug out of the ground','The rock is heated until it melts','The clean metal is taken out','A ring is made from the metal'],
+        explain:'Dig, heat, separate, shape. Every metal thing around you has been through those four steps.'},
+      {t:'type', prompt:'Type one word.', text:'People melt ores in high heat to pull out the clean ______.',
+        accept:['metal','metals'], hint:'It is shiny and strong.',
+        explain:'Metal. The heat separates it from the useless rock around it.'}
+    ]},
+    {key:'people', items:[
+      {t:'sort', prompt:'Which kind of transport is it?',
+        bins:[['Land','on roads'],['Water','on rivers or the sea'],['Air','up in the sky']],
+        chips:[['car',0],['bus',0],['ferry',1],['ship',1],['aeroplane',2],['helicopter',2]],
+        explain:'Transport is grouped by where it travels. There is a fourth group too: rail transport, which runs on tracks.'},
+      {t:'choice', prompt:'Pick the right one.', text:'Which one of these is rail transport?',
+        opts:['A train','A ferry','A helicopter'], ans:0,
+        explain:'Rail transport runs on rails, which is why a train belongs there and not with cars and buses.'},
+      {t:'match', prompt:'Match each person to the place they need most.',
+        left:[{label:'A young child'},{label:'A grown-up who works'},{label:'An elderly person'},{label:'A baby'}],
+        right:['a school to learn in','a place of work','a hospital to stay healthy','a nursery to be looked after safely'],
+        explain:'Different ages need different things. That is why a town needs schools, workplaces, hospitals and nurseries all at once.'},
+      {t:'multi', prompt:'Tick EVERY one that is public transport, shared by everybody for a fare.',
+        opts:[['a city bus', true], ['a train', true], ['a ferry', true], ['your family car', false], ['your own bicycle', false]],
+        explain:'Public transport is shared and anybody can pay to ride. Your own car and bicycle are private, because only your family uses them.'},
+      {t:'draw', prompt:'Drawing time!',
+        tip:'Draw one kind of land transport and one kind of water transport. Label each one.',
+        explain:'Land transport travels on roads, water transport on rivers and the sea. Air and rail are the other two kinds.'}
+    ]}
+  ]
+},
+/* ---------------------------- SET 2 ---------------------------- */
+{
+  id:2, title:'Desert and Oasis', emoji:'🏜️', about:'Dry lands, caves and using resources well',
+  aligns:['Climate zones','Climate and weather','Relief maps','Caves and oases','Looking after resources','Towns and people'],
+  sections:[
+    {key:'climate', items:[
+      {t:'choice', prompt:'What is it like there?', long:true, text:'A desert is in the arid zone. What is the weather usually like?',
+        opts:['Very hot in the day and cold at night, with almost no rain','Cold and snowy all year round','Heavy rain every single day'], ans:0,
+        explain:'Arid means dry. With no clouds to hold the heat in, a desert loses it fast once the sun goes down, so the nights can be freezing.'},
+      {t:'tfgrid', prompt:'True or false?',
+        rows:[['The arid zone gets almost no rain.', true], ['A desert can be cold at night.', true],
+              ['The Mediterranean zone has warm dry summers and mild rainy winters.', true],
+              ['Every hot place in the world is a desert.', false]],
+        explain:'A tropical rainforest is hot too, but it is soaking wet. It is the lack of rain, not the heat, that makes a desert.'},
+      {t:'choice', prompt:'Weather or climate?', long:true,
+        text:'Someone says, "It is raining here today." Are they talking about weather or climate?',
+        opts:['Weather, because it is about right now','Climate, because it is about many years','Neither of them'], ans:0,
+        explain:'Weather is what it is doing today and it changes fast. Climate is the usual pattern over many, many years.'},
+      {t:'match', prompt:'Match each zone to a place you would find it.',
+        left:[{label:'Polar'},{label:'Tropical'},{label:'Mediterranean'},{label:'Arid'}],
+        right:['the North and South Poles','a rainforest near the equator','sunny Spain and Greece','the Sahara Desert'],
+        explain:'Zones are bands of the world, so places in the same band share a climate even when they are far apart.'},
+      {t:'fill', prompt:'Drag the right word into each gap.',
+        lines:['A {desert} gets almost no rain all year.','The {Mediterranean} zone has dry summers and rainy winters.','The {equator} runs around the middle of the Earth.'],
+        decoys:['ocean','island'],
+        explain:'Deserts are about rain, not heat. The Mediterranean zone gets its rain in winter, and the equator is the hot line round the middle.'}
+    ]},
+    {key:'compass', items:[
+      {t:'choice', prompt:'Look at the compass rose.', fig:'rose4', text:'Which direction is opposite north?',
+        opts:['South','East','West'], ans:0,
+        explain:'North and south face each other, and so do east and west. Opposite directions are always across the middle of the rose.'},
+      {t:'order', prompt:'You turn slowly clockwise, starting by facing north. Put the directions in the order you face them.',
+        items:['North','East','South','West'],
+        explain:'Clockwise from north goes N, E, S, W. If you turned the other way it would be N, W, S, E.'},
+      {t:'choice', prompt:'Work it out.', long:true,
+        text:'You walk east. Then you turn right round and walk back the way you came. Which way are you walking now?',
+        opts:['West','North','South'], ans:0,
+        explain:'Turning right round means facing the opposite way, and the opposite of east is west.'},
+      {t:'type', prompt:'Type one word.', text:'The needle of a compass always points to the ______.',
+        accept:['north'], hint:'It is the direction at the top of most maps.',
+        explain:'North. That one fixed direction is what lets you work out all the others.'}
+    ]},
+    {key:'maps', items:[
+      {t:'gridmap', prompt:'Use the map grid.', text:'Which square is the well in?',
+        cols:['A','B','C','D'], rows:[1,2,3],
+        places:[{n:'Well', e:'💧', c:'C', r:3},{n:'Tent', e:'⛺', c:'A', r:1},{n:'Palms', e:'🌴', c:'D', r:2}],
+        ans:'C3',
+        explain:'Letter first, then number. The well is in column C and row 3, so the square is C3.'},
+      {t:'choice', prompt:'Why is it useful?', long:true, text:'Why are relief maps useful to people?',
+        opts:['They show how high or low the land is, which changes the rain and how easy it is to travel','They show what time the shops open','They show what people like to eat'], ans:0,
+        explain:'High land is usually cooler and wetter, and much harder to walk or drive over. A relief map warns you about both.'},
+      {t:'choice', prompt:'Read the map and its key.', fig:'reliefmap', long:true,
+        text:'Which area on this map is the highest land?',
+        opts:['Area C','Area A','Area B'], ans:0,
+        explain:'Area C is dark brown, and the key shows dark brown as the highest land. Area A is green, the lowest of all.'},
+      {t:'tfgrid', prompt:'True or false?',
+        rows:[['On most relief maps, green shows the lowest land.', true],
+              ['On most relief maps, dark brown shows the highest land.', true],
+              ['A map key explains what the colours mean.', true],
+              ['A relief map tells you tomorrow’s weather.', false]],
+        explain:'A relief map shows the shape of the land, which never changes from day to day. Weather needs a different map altogether.'}
+    ]},
+    {key:'land', items:[
+      {t:'match', prompt:'Match each landform to its description.',
+        left:[{label:'Oasis'},{label:'Island'},{label:'Inlet'},{label:'Cave'}],
+        right:['a place in a desert with water and plants','land with water all the way around it','a narrow strip of sea reaching into the land','a natural underground space big enough to walk into'],
+        explain:'An inlet is water reaching into land; an island is land with water around it. They are almost opposites.'},
+      {t:'choice', prompt:'How are they made?', fig:'cavecut', long:true, text:'How are most caves made?',
+        opts:['Rainwater slowly dissolves the rock underground','People dig them out in about a week','They drop from the sky in a storm'], ans:0,
+        explain:'Rainwater trickles into the rock and dissolves a little of it away. Over thousands or even millions of years that hollows out whole passages.'},
+      {t:'type', prompt:'Type one word.', text:'A place in the desert where there is water and plants is called an ______.',
+        accept:['oasis'], hint:'It starts with "o".',
+        explain:'An oasis. Travellers have used them for thousands of years as places to rest and refill their water.'},
+      {t:'multi', prompt:'Tick EVERY reason caves are important.',
+        opts:[['Early people used them as shelter', true], ['They protect fossils from wind and rain', true],
+              ['They keep rare minerals', true], ['They make the rain fall', false], ['They grow food for towns', false]],
+        explain:'A cave is shelter, a store of minerals and a natural time capsule for fossils and old paintings. It cannot make weather or grow crops.'},
+      {t:'grid', prompt:'Tick \u2713 or cross \u2717 in every box.',
+        cols:['Has fresh water','Made mostly of sand','Is underground'],
+        rows:[['Oasis',[1,0,0]],['Cave',[0,0,1]],['Sand dune',[0,1,0]],['Well',[1,0,1]]],
+        explain:'The well is the tricky one: it holds fresh water AND it reaches underground. That is exactly why people dig one when there is no oasis nearby.'}
+    ]},
+    {key:'resources', items:[
+      {t:'order', prompt:'You reach an oasis after days of walking. Put your first steps in order, most urgent first.',
+        items:['Drink the fresh water and fill your bottles','Use palm wood to build a shelter','Plant some wild seeds so you have food later','Look at the shiny rocks for metal ores'],
+        explain:'Water first, because you cannot last long without it. Then shelter, then food for the future, and tools last of all.'},
+      {t:'choice', prompt:'Think ahead.', long:true,
+        text:'If you cut down ALL the palm trees at the oasis, what will happen?',
+        opts:['There will be no shade and no wood left for later','New trees will grow back the next day','The water will turn into sand'], ans:0,
+        explain:'A palm takes years to grow. Cut them all and the oasis loses its shade, its wood and the roots that hold the sand in place.'},
+      {t:'choice', prompt:'Use it carefully.', long:true,
+        text:'How can you use the oasis so that it does not run out?',
+        opts:['Only take what you need, and plant new trees','Take everything as quickly as you can','Build a wall and let nothing grow'], ans:0,
+        explain:'Taking only what you need, and putting something back, is how a resource lasts for the people who come after you.'},
+      {t:'tfgrid', prompt:'True or false?',
+        rows:[['Natural resources are things from nature that people use.', true],
+              ['Resources can run out if we use them too fast.', true],
+              ['Palm trees grow back in a single day.', false],
+              ['Water is a natural resource.', true]],
+        explain:'Water, wood, stone and metal ore all come from nature. None of them is endless, so all of them need looking after.'}
+    ]},
+    {key:'people', items:[
+      {t:'choice', prompt:'Read and answer.', long:true,
+        text:'When early people settled in a new area, what did they do to the land first?',
+        opts:['They cleared away the natural plants','They built a railway station','They opened a shopping centre'], ans:0,
+        explain:'They cleared the natural vegetation, and on the cleared land they built houses, planted crops and kept animals.'},
+      {t:'sort', prompt:'Which kind of transport is it?',
+        bins:[['Land','on roads or tracks'],['Water','on rivers or the sea'],['Air','up in the sky']],
+        chips:[['camel',0],['lorry',0],['sailing boat',1],['canoe',1],['hot air balloon',2],['jet plane',2]],
+        explain:'A camel really is land transport — in a desert it carries people and goods where a lorry cannot go.'},
+      {t:'multi', prompt:'Tick EVERY thing a town needs for its people.',
+        opts:[['schools for the children', true], ['places for grown-ups to work', true],
+              ['hospitals for people who are ill', true], ['a volcano', false], ['a desert', false]],
+        explain:'A town is built around what its people need. Different ages need different places, so a town needs several kinds at once.'},
+      {t:'choice', prompt:'Read the chart.', fig:'agebars', long:true,
+        text:'The chart shows the people living in a village. Which age group is the biggest?',
+        opts:['Grown-ups','Children','Elderly people'], ans:0,
+        explain:'The tallest bar is the grown-ups at 260. Children come next with 120, and elderly people are the smallest group at 90.'},
+      {t:'draw', prompt:'Drawing time!',
+        tip:'Draw a 4-year-old child, and next to them draw the place that gives them what they need.',
+        explain:'A very young child needs somewhere safe to play and learn, so a nursery is a good answer. Every age group needs something different.'}
+    ]}
+  ]
+},
+/* ---------------------------- SET 3 ---------------------------- */
+{
+  id:3, title:'Mountains and Maps', emoji:'⛰️', about:'High land, relief maps and getting about',
+  aligns:['Climate zones','Directions and turning','Relief maps and elevation','Mountains and valleys','What resources give us','Reading a travel chart'],
+  sections:[
+    {key:'climate', items:[
+      {t:'choice', prompt:'Name the seasons.', long:true, text:'The temperate zone has four clear seasons. Which list is right?',
+        opts:['Spring, summer, autumn, winter','Wet, dry, hot, cold','Morning, noon, evening, night'], ans:0,
+        explain:'The UK, most of Europe and most of North America sit in the temperate zone, which is why they get four different seasons each year.'},
+      {t:'sort', prompt:'Which zone does each clue belong to?',
+        bins:[['Polar zone','freezing'],['Temperate zone','mild, four seasons'],['Tropical zone','hot and rainy']],
+        chips:[['ice and snow all year',0],['polar bears and penguins',0],['warm summers and chilly winters',1],['the UK and most of Europe',1],['rainforests',2],['hot all year round',2]],
+        explain:'Here is a fact worth knowing: polar bears live only in the far north and penguins only in the far south, so in the wild they never meet.'},
+      {t:'tfgrid', prompt:'True or false?',
+        rows:[['Climate is the usual weather over a long time.', true], ['Weather can change from one day to the next.', true],
+              ['Climate changes every hour.', false], ['The tropical zone is near the equator.', true]],
+        explain:'Weather is today. Climate is the pattern of many years. Mixing the two up is the commonest mistake in this topic.'},
+      {t:'choice', prompt:'Put two ideas together.', long:true,
+        text:'High mountains are colder than the land below, even in a hot country. Why is that worth knowing when you read a relief map?',
+        opts:['Because the height of the land changes how cold and how rainy a place is','Because mountains are always coloured blue','Because maps are printed on flat paper'], ans:0,
+        explain:'A relief map does not only show the shape of the land. Because height changes temperature and rainfall, it quietly tells you about the climate too.'},
+      {t:'fill', prompt:'Drag the right word into each gap.',
+        lines:['The {temperate} zone has four clear seasons.','Places near the {equator} are hot all year round.','The {polar} zone gets very little sunshine.'],
+        decoys:['desert','harbour'],
+        explain:'Four seasons means temperate. Hot all year means near the equator. Very little sunshine means polar.'}
+    ]},
+    {key:'compass', items:[
+      {t:'compass', prompt:'Put the four main directions on the compass rose.', points:4,
+        explain:'North at the top, then clockwise to east, south and west. On almost every map you will ever use, north is upwards.'},
+      {t:'choice', prompt:'Which way is up?', text:'On most maps, which direction is at the top?',
+        opts:['North','South','East'], ans:0,
+        explain:'Mapmakers agreed long ago to put north at the top, so that everybody reads a map the same way round.'},
+      {t:'choice', prompt:'Turn and think.', long:true,
+        text:'You are walking north. You turn to your right. Which way are you facing now?',
+        opts:['East','West','South'], ans:0,
+        explain:'Turning right goes clockwise round the rose, and the next direction clockwise from north is east.'},
+      {t:'type', prompt:'Type one word.', text:'The drawing on a map that shows the directions is called a compass ______.',
+        accept:['rose'], hint:'It is named after a flower.',
+        explain:'A compass rose. It got its name because the points spreading out look a little like petals.'}
+    ]},
+    {key:'maps', items:[
+      {t:'gridmap', prompt:'Use the map grid.', text:'Which square is the mountain in?',
+        cols:['A','B','C','D'], rows:[1,2,3],
+        places:[{n:'Mountain', e:'⛰️', c:'D', r:1},{n:'Lake', e:'🌊', c:'B', r:3},{n:'Village', e:'🏘️', c:'A', r:2}],
+        ans:'D1',
+        explain:'Column D, row 1. Coordinates always give the letter across first, then the number down.'},
+      {t:'choice', prompt:'Read the map and its key.', fig:'reliefmap', long:true,
+        text:'Which area on this map is the lowest land?',
+        opts:['Area A','Area B','Area C'], ans:0,
+        explain:'Area A is green, and the key shows green as the lowest land. That is usually where rivers, farms and towns are found.'},
+      {t:'order', prompt:'Put the relief map colours in order, from the lowest land to the highest.',
+        items:['Green','Yellow','Light brown','Dark brown'],
+        explain:'Green, yellow, light brown, dark brown. Once you know that order you can read the height of any relief map at a glance.'},
+      {t:'choice', prompt:'Who needs it?', long:true, text:'Why would a walker want a relief map before a long hike?',
+        opts:['To see how steep and how high the walk will be','To find out what the shops sell','To check what date it is'], ans:0,
+        explain:'A flat-looking route on an ordinary map can be a hard climb in real life. The relief map is what tells you the difference.'}
+    ]},
+    {key:'land', items:[
+      {t:'match', prompt:'Match each landform to its description.',
+        left:[{label:'Mountain'},{label:'Plateau'},{label:'Plain'},{label:'Valley'}],
+        right:['rises sharply and is very tall','high, but flat across the top','wide flat land, good for farming','low land lying between hills or mountains'],
+        explain:'Mountains and valleys go together: the low ground between two high places is the valley.'},
+      {t:'choice', prompt:'Look at the drawing.', fig:'landprofile', long:true,
+        text:'Which one in the picture is the mountain?',
+        opts:['A','B','C'], ans:0,
+        explain:'A rises to a sharp point, so A is the mountain. B is high but flat on top, which makes it a plateau, and C is the low flat plain.'},
+      {t:'type', prompt:'Type one word.', text:'High like a mountain, but flat across the top. This landform is a ______.',
+        accept:['plateau'], hint:'It starts with "plat", like "plate".',
+        explain:'A plateau. Think of a plate held up high: flat on top, with steep sides falling away.'},
+      {t:'multi', prompt:'Tick EVERY true thing about Mount Everest.',
+        opts:[['It is the highest mountain in the world', true], ['It is a landform', true],
+              ['It is higher than a plain', true], ['It is in the middle of the sea', false], ['It is a kind of desert', false]],
+        explain:'Everest is a landform, it is the highest mountain there is, and it is certainly higher than flat land. It stands in the Himalayas, far from any sea.'},
+      {t:'grid', prompt:'Tick \u2713 or cross \u2717 in every box.',
+        cols:['High land','Flat land','Good for farming'],
+        rows:[['Mountain',[1,0,0]],['Plateau',[1,1,0]],['Plain',[0,1,1]],['Beach',[0,1,0]]],
+        explain:'Flat is not enough on its own. A beach is flat, but it is sand and salt water, so nothing will grow. A plain is flat AND has soil and rain.'}
+    ]},
+    {key:'resources', items:[
+      {t:'choice', prompt:'Why do they matter?', long:true,
+        text:'Why are the natural resources in a region important to the people who live there?',
+        opts:['People use them for food, water, shelter and tools','They make the map look more colourful','They decide what day of the week it is'], ans:0,
+        explain:'Where people settle has always depended on what the land can give them. No water or no wood usually meant no village.'},
+      {t:'match', prompt:'Match each resource to what people make from it.',
+        left:[{label:'Metal ore'},{label:'Wood'},{label:'Stone'},{label:'Water'}],
+        right:['bridges, cans and coins','houses and furniture','walls and statues','drinking, washing and growing crops'],
+        explain:'Each resource suits a different job, because of what it is like. Stone lasts, wood is easy to cut, and metal is strong.'},
+      {t:'multi', prompt:'Tick EVERY thing that metal is used for.',
+        opts:[['wires that carry electricity', true], ['aeroplanes', true], ['water pipes', true],
+              ['clouds', false], ['sunshine', false]],
+        explain:'Metal carries electricity, holds up aeroplanes and keeps water flowing. Clouds and sunshine are not made of anything people dig up.'},
+      {t:'tfgrid', prompt:'True or false?',
+        rows:[['Ores are rocks with metal inside them.', true], ['Metal is taken out of ore using high heat.', true],
+              ['Metal grows on trees.', false], ['Coins can be made from metal.', true]],
+        explain:'Metal has to be dug up and melted out. Nothing about it grows, which is part of why it must be used carefully.'}
+    ]},
+    {key:'people', items:[
+      {t:'sort', prompt:'Public or private?',
+        bins:[['Public transport','shared, and you pay a fare'],['Private transport','just for you or your family']],
+        chips:[['city bus',0],['train',0],['ferry',0],['family car',1],['your own bicycle',1],['walking to school',1]],
+        explain:'Public transport is shared by anybody who pays. Your own car, your own bicycle and your own legs are private.'},
+      {t:'choice', prompt:'Read the chart.', fig:'transbars', long:true,
+        text:'The chart shows how children travel to school. Which way is the most common?',
+        opts:['Walking','By bus','By car'], ans:0,
+        explain:'Walking has the tallest bar at 40 children. The bus comes next with 30, then the car with 20, and the bicycle with 10.'},
+      {t:'choice', prompt:'Use the same chart and work it out.', fig:'transbars', long:true,
+        text:'How many MORE children walk to school than come by car?',
+        opts:['20','10','60'], ans:0,
+        explain:'40 children walk and 20 come by car. 40 take away 20 leaves 20 more. Reading a chart often means doing a small sum as well.'},
+      {t:'match', prompt:'Match each one to its kind of transport.',
+        left:[{label:'Train'},{label:'Ferry'},{label:'Aeroplane'},{label:'Bicycle'}],
+        right:['rail transport','water transport','air transport','land transport'],
+        explain:'There are four kinds: land, water, air and rail. Rail gets its own group because it needs tracks to run on.'},
+      {t:'draw', prompt:'Drawing time!',
+        tip:'Draw a train on its track and a ferry on the water. Label which one is rail transport and which one is water transport.',
+        explain:'Rail transport gets its own group because it needs tracks. A ferry carries people and cars across water.'}
+    ]}
+  ]
+},
+/* ---------------------------- SET 4 ---------------------------- */
+{
+  id:4, title:'Towns and People', emoji:'🏙️', about:'How climate, land and people fit together',
+  aligns:['Climate and living','Eight-point compass','Keys and coordinates','Caves and landforms','Natural or made by people','Ages and what they need'],
+  sections:[
+    {key:'climate', items:[
+      {t:'match', prompt:'Match each climate zone to what it is like.',
+        left:[{label:'Polar'},{label:'Temperate'},{label:'Tropical'},{label:'Mediterranean'}],
+        right:['freezing, with ice and snow','four seasons, mild for most of the year','hot and rainy all year','dry warm summers and mild rainy winters'],
+        explain:'The Mediterranean zone is the odd one out: its rain falls in winter, not summer, which suits olives, grapes and lemons perfectly.'},
+      {t:'choice', prompt:'Think about growing food.', long:true, text:'Why is it hard to grow crops in the polar zone?',
+        opts:['The ground is frozen and there is very little sunshine','It rains far too much','The sun is much too close'], ans:0,
+        explain:'Plants need warmth, light and unfrozen soil. The polar zone is short of all three, so people there have always relied on hunting and fishing instead.'},
+      {t:'choice', prompt:'Think about growing food.', long:true,
+        text:'Why can farmers in the Mediterranean zone grow plenty of food?',
+        opts:['The winters are mild and rainy, so the plants get the water they need','It snows there all year','It never rains there at all'], ans:0,
+        explain:'Warm sunshine in summer and rain in winter is a very good combination for crops, which is why that zone has farmed the same land for thousands of years.'},
+      {t:'tfgrid', prompt:'True or false?',
+        rows:[['Climate zones change what people are able to grow.', true],
+              ['People in cold places need warm homes and warm clothes.', true],
+              ['The climate is exactly the same everywhere on Earth.', false],
+              ['A tropical rainforest gets a great deal of rain.', true]],
+        explain:'Climate shapes how people live: what they grow, what they wear and how they build. That is why it matters in social studies, not just science.'},
+      {t:'fill', prompt:'Drag the right zone into each gap.',
+        lines:['People in the {polar} zone need very warm clothes.','Farmers in the {Mediterranean} zone grow olives and grapes.','The {tropical} zone has huge rainforests.'],
+        decoys:['city','valley'],
+        explain:'Climate decides what people wear, what they grow and even what grows there without being planted.'}
+    ]},
+    {key:'compass', items:[
+      {t:'compass', prompt:'Put all eight directions on the compass rose.', points:8,
+        explain:'Between each pair of main directions sits a halfway one: north-east, south-east, south-west and north-west. Eight points let you say exactly which way you mean.'},
+      {t:'choice', prompt:'Halfway between.', text:'Which direction is halfway between north and east?',
+        opts:['North-east','South-west','West'], ans:0,
+        explain:'The halfway directions take both names, with the north or south part said first: north-east, south-east, south-west, north-west.'},
+      {t:'choice', prompt:'Turn it round.', long:true,
+        text:'The park is north of the school. Where is the school compared with the park?',
+        opts:['South of the park','North of the park','East of the park'], ans:0,
+        explain:'Directions work both ways round. If the park is north of the school, then looking back the other way, the school must be south of the park.'},
+      {t:'type', prompt:'Type one word.', text:'The direction halfway between south and west is called south-______.',
+        accept:['west'], hint:'It is the second half of the name.',
+        explain:'South-west. The north or south part always comes first in the name.'}
+    ]},
+    {key:'maps', items:[
+      {t:'gridmap', prompt:'Use the map grid.', text:'Which square is NORTH of the hospital?',
+        cols:['A','B','C','D'], rows:[1,2,3],
+        places:[{n:'Hospital', e:'🏥', c:'C', r:2},{n:'Station', e:'🚉', c:'A', r:3},{n:'Museum', e:'🏛️', c:'D', r:3}],
+        ans:'C1',
+        explain:'North is up the map, so from the hospital in C2 you move up one row to C1. The letter stays the same because you have not moved sideways.'},
+      {t:'choice', prompt:'Tell them apart.', long:true,
+        text:'What is the difference between a map key and a compass rose?',
+        opts:['A key explains the symbols and colours; a compass rose shows the directions','They are two names for the same thing','A key shows the weather'], ans:0,
+        explain:'Both live in a corner of the map and both help you read it, but one explains WHAT you are looking at and the other WHICH WAY it lies.'},
+      {t:'choice', prompt:'Read the map key.', fig:'reliefkey', long:true,
+        text:'On this key, which colour shows the lowest land?',
+        opts:['Green','Dark brown','Light brown'], ans:0,
+        explain:'Green is always the lowest on a relief map, then yellow, then light brown, with dark brown highest of all.'},
+      {t:'tfgrid', prompt:'True or false?',
+        rows:[['A map key tells you what the symbols mean.', true], ['A compass rose shows the directions.', true],
+              ['Coordinates help you find one square on a map.', true],
+              ['A map is always exactly the same size as the real place.', false]],
+        explain:'A map is a shrunken drawing of somewhere real. Keys, compass roses and coordinates are the three tools that make that drawing usable.'}
+    ]},
+    {key:'land', items:[
+      {t:'sort', prompt:'Land or water?',
+        bins:[['Made of land','you could stand on it'],['Made of water','you would swim or sail']],
+        chips:[['plateau',0],['plain',0],['island',0],['inlet',1],['lake',1],['river',1]],
+        explain:'An island counts as land: it is the water going all the way around it that makes it an island.'},
+      {t:'choice', prompt:'Think about why.', fig:'cavecut', long:true,
+        text:'Caves are sometimes called natural time capsules. Why?',
+        opts:['They protect fossils and old paintings from wind, rain and sun','They keep food fresh for years','They can tell you the time'], ans:0,
+        explain:'Inside a cave the weather never gets at anything. That is why cave paintings tens of thousands of years old are still there to be seen.'},
+      {t:'match', prompt:'Match each landform to its description.',
+        left:[{label:'Cave'},{label:'Oasis'},{label:'Island'},{label:'Mountain'}],
+        right:['an underground space where early people sheltered','water and plants in the middle of a desert','land with sea all the way around it','very tall land that rises sharply'],
+        explain:'Three of these gave early people something they badly needed: shelter, water, or a high place to watch from.'},
+      {t:'type', prompt:'Type one word.', text:'A natural underground space big enough to walk into is called a ______.',
+        accept:['cave'], hint:'Bats like to sleep in one.',
+        explain:'A cave. Hunter-gatherers used caves as ready-made shelters against harsh weather and wild animals.'},
+      {t:'grid', prompt:'Tick \u2713 or cross \u2717 in every box.',
+        cols:['You can stand on dry ground there','Has water all around it','Is underground'],
+        rows:[['Island',[1,1,0]],['Cave',[1,0,1]],['Plain',[1,0,0]],['Lake',[0,0,0]]],
+        explain:'A lake gets three crosses because it is the water itself, not land. An island is land with water around it \u2014 not the same thing at all.'}
+    ]},
+    {key:'resources', items:[
+      {t:'choice', prompt:'Read and answer.', long:true,
+        text:'Early people cleared the natural plants from a piece of land. What did they do with the cleared land?',
+        opts:['They built houses, planted crops and kept animals','They left it completely empty for ever','They filled the whole thing with water'], ans:0,
+        explain:'Clearing the land was the first big change people made to their natural surroundings, and everything else — farms, villages, towns — followed from it.'},
+      {t:'multi', prompt:'Tick EVERY one that is a natural resource.',
+        opts:[['water', true], ['wood', true], ['metal ore', true], ['a plastic toy', false], ['a television', false]],
+        explain:'A natural resource comes straight from nature. A plastic toy and a television are made by people — though both started out as natural resources.'},
+      {t:'choice', prompt:'Think ahead.', long:true,
+        text:'A village burns all of its wood in a single year. What is the problem?',
+        opts:['There will be none left for the years that come after','The wood will become heavier','The village will float away'], ans:0,
+        explain:'Trees take years to grow back. Using a whole supply at once leaves nothing for next year, and that is exactly how a resource runs out.'},
+      {t:'tfgrid', prompt:'True or false?',
+        rows:[['Some resources run out if we use them too fast.', true], ['We should take only what we need.', true],
+              ['Trees can be planted again.', true], ['Metal ore can be planted and grown like a crop.', false]],
+        explain:'Trees can be replaced if people bother to plant them. Metal ore cannot be grown at all, which makes recycling metal so worthwhile.'}
+    ]},
+    {key:'people', items:[
+      {t:'choice', prompt:'Read the chart.', fig:'agebars', long:true,
+        text:'The chart shows a village by age group. Which group is the smallest?',
+        opts:['Elderly people','Children','Grown-ups'], ans:0,
+        explain:'Elderly people have the shortest bar at 90. Children are next at 120, and grown-ups are the biggest group at 260.'},
+      {t:'choice', prompt:'Use the chart to decide.', fig:'agebars', long:true,
+        text:'Which sentence matches the chart best?',
+        opts:['Grown-ups are the biggest group, and they need places to work','Children are the biggest group, and they need hospitals','Elderly people are the biggest group, and they need schools'], ans:0,
+        explain:'Read the bars first, then match each group to what it needs. Grown-ups are the tallest bar, and what grown-ups need most is somewhere to work.'},
+      {t:'match', prompt:'Match each person to the place that gives them what they need.',
+        left:[{label:'A 4-year-old boy'},{label:'A 29-year-old woman'},{label:'An 80-year-old man'},{label:'A 10-year-old girl'}],
+        right:['a nursery to play and learn safely','a place of work','a hospital for check-ups','a primary school'],
+        explain:'Age changes what somebody needs most. A town that plans well makes room for every age at once.'},
+      {t:'multi', prompt:'Tick EVERY true statement about the people in a town.',
+        opts:[['Different ages need different things', true], ['Children need schools', true],
+              ['The number of young and old people can change over time', true],
+              ['Everybody needs exactly the same things', false], ['Only grown-ups live in towns', false]],
+        explain:'A town is a mixture of ages, and that mixture shifts over the years. Planners count the age groups so they know what to build next.'},
+      {t:'draw', prompt:'Drawing time!',
+        tip:'Draw a 29-year-old woman at work, and the place that gives her what she needs.',
+        explain:'A grown-up of that age usually needs somewhere to work. That is why towns need offices, shops and workshops as well as schools.'}
+    ]}
+  ]
+}
+];
+
+const SECTIONS = {
+  climate:{name:'Climate Zones', icon:'🌡️'},
+  compass:{name:'The Compass', icon:'🧭'},
+  maps:{name:'Reading Maps', icon:'🗺️'},
+  land:{name:'Landforms', icon:'⛰️'},
+  resources:{name:'Natural Resources', icon:'🌴'},
+  people:{name:'People and Travel', icon:'👥'}
+};
+
+/* ============ UTILITIES ============ */
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const shuffle = a => { a = [...a]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const shuffleNotSame = a => { if (a.length < 2) return [...a]; let s; do { s = shuffle(a); } while (s.every((v, i) => v === a[i])); return s; };
+const norm = s => String(s).toLowerCase().replace(/[’']/g, '').replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim();
+const fmtTime = ms => { const s = Math.max(0, Math.round(ms / 1000)); const m = Math.floor(s / 60); return m ? `${m} min ${s % 60} sec` : `${s} sec`; };
+const fmtDate = t => { const d = new Date(t); return d.toLocaleDateString(undefined, {day:'numeric', month:'short'}) + ', ' + d.toLocaleTimeString(undefined, {hour:'2-digit', minute:'2-digit'}); };
+const pick = a => a[Math.floor(Math.random() * a.length)];
+const PASS = 60;
+
+/* Seeded shuffle: every learner gets their own set order, and that order
+   never changes again once it is saved. */
+function mulberry32(a) {
+  return function () {
+    a = a + 0x6D2B79F5 | 0;
+    let t = Math.imul(a ^ a >>> 15, 1 | a);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+function seededShuffle(arr, seed) {
+  const rnd = mulberry32(seed >>> 0), a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+  return a;
+}
+
+function lev(a, b) { // optimal string alignment distance (forgives swapped letters)
+  const d = Array.from({length: a.length + 1}, (_, i) => [i, ...Array(b.length).fill(0)]);
+  for (let j = 1; j <= b.length; j++) d[0][j] = j;
+  for (let i = 1; i <= a.length; i++) for (let j = 1; j <= b.length; j++) {
+    const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+    d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + cost);
+    if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) d[i][j] = Math.min(d[i][j], d[i - 2][j - 2] + 1);
+  }
+  return d[a.length][b.length];
+}
+const tolFor = w => w.length >= 8 ? 2 : w.length >= 4 ? 1 : 0;
+/* One-word answers: ignore case, punctuation and a leading a/an/the, and
+   forgive a slip or two of the pen. Short words still need to be exact. */
+function answerMatches(input, accept) {
+  const t = norm(input).replace(/^(a|an|the)\s+/, '');
+  if (!t) return false;
+  return accept.some(a => {
+    const k = norm(a);
+    if (t === k) return true;
+    const kw = k.split(' '), tw = t.split(' ');
+    if (kw.length !== tw.length) return false;
+    return kw.every((w, i) => w === tw[i] || (tolFor(w) > 0 && lev(tw[i], w) <= tolFor(w)));
+  });
+}
+/* Greedy word wrap, for text inside an SVG diagram. */
+function wrapText(text, max) {
+  const out = []; let cur = '';
+  for (const w of String(text).split(' ')) {
+    if (!cur) cur = w;
+    else if ((cur + ' ' + w).length <= max) cur += ' ' + w;
+    else { out.push(cur); cur = w; }
+  }
+  if (cur) out.push(cur);
+  return out;
+}
+
+function globe(cls = '') {
+  return `<svg class="globe ${cls}" viewBox="0 0 130 104" aria-hidden="true">
+    <path class="gl-bench" d="M8 98 H122"/>
+    <path class="gl-stand" d="M65 84 V94 M50 94 H80"/>
+    <circle class="gl-ball" cx="65" cy="48" r="38"/>
+    <path class="gl-land" d="M34 34 q14 -10 27 -3 q9 6 1 14 q-16 7 -28 1 z"/>
+    <path class="gl-land" d="M74 60 q15 -9 22 3 q-3 14 -19 13 q-12 -5 -3 -16 z"/>
+    <path class="gl-land" d="M38 66 q10 -5 15 3 q-2 9 -13 8 q-7 -5 -2 -11 z"/>
+    <path class="gl-line" d="M27 48 H103"/>
+    <circle class="gl-eye" cx="55" cy="45" r="7"/><circle class="gl-eye" cx="77" cy="45" r="7"/>
+    <circle class="gl-pupil" cx="56.5" cy="46" r="3"/><circle class="gl-pupil" cx="78.5" cy="46" r="3"/>
+    <path class="gl-mouth" d="M57 60 q8 7 16 0"/>
+  </svg>`;
+}
+
+/* ============ DIAGRAMS, MAPS AND CHARTS ============
+   Built from small helpers so every chart in the app looks the same and the
+   numbers a question asks about come from the same place as the drawing. */
+
+/* Greedy word wrap for text inside a diagram. */
+function wrapFig(text, max) {
+  const out = []; let cur = '';
+  for (const w of String(text).split(' ')) {
+    if (!cur) cur = w;
+    else if ((cur + ' ' + w).length <= max) cur += ' ' + w;
+    else { out.push(cur); cur = w; }
+  }
+  if (cur) out.push(cur);
+  return out;
+}
+
+/* A simple bar chart. The numbers in the question come from this list. */
+function barFig(items, unit, cap) {
+  const bw = 52, gap = 30, left = 46, top = 30, plotH = 132, base = top + plotH;
+  const max = Math.max(...items.map(i => i[1]));
+  const step = max <= 6 ? 2 : max <= 12 ? 4 : max <= 30 ? 10 : max <= 60 ? 20 : max <= 150 ? 50 : 100;
+  const w = left + items.length * (bw + gap) + 18;
+  const h = base + 54;
+  let svg = `<path class="fig-grid" d="M${left - 8} ${base} H${w - 10}"/>`;
+  for (let v = 0; v <= max; v += step) {
+    const y = base - v / max * plotH;
+    svg += `<path class="fig-grid" d="M${left - 8} ${y} H${w - 10}" stroke-dasharray="4 5"/>`
+         + `<text class="fig-small" x="${left - 14}" y="${y + 4}" text-anchor="end">${v}</text>`;
+  }
+  items.forEach(([label, v], i) => {
+    const x = left + i * (bw + gap) + gap / 2;
+    const bh = max ? v / max * plotH : 0;
+    if (bh > 0) svg += `<rect class="${i % 2 ? 'fig-bar2' : 'fig-bar'}" x="${x}" y="${base - bh}" width="${bw}" height="${bh}" rx="5"/>`;
+    svg += `<text class="fig-label" x="${x + bw / 2}" y="${base - bh - 7}" text-anchor="middle">${v}</text>`;
+    wrapFig(label, 9).forEach((line, li) => {
+      svg += `<text class="fig-small" x="${x + bw / 2}" y="${base + 18 + li * 13}" text-anchor="middle">${esc(line)}</text>`;
+    });
+  });
+  svg += `<text class="fig-small" x="2" y="${top - 6}" text-anchor="start">${esc(unit)}</text>`;
+  return {box:`0 0 ${w} ${h}`, cap, svg};
+}
+
+/* The four or eight arms of a compass rose, drawn once and reused. */
+function roseSvg(points, labelled) {
+  const C = 100, R = 84;
+  const diamond = (tx, ty, ax, ay) =>
+    `<polygon class="rose-arm" points="${tx},${ty} ${C + ax},${C + ay} ${C},${C} ${C - ax},${C - ay}"/>`;
+  let s = `<circle class="rose-ring" cx="${C}" cy="${C}" r="${R}"/><circle class="rose-ring2" cx="${C}" cy="${C}" r="${R - 22}"/>`;
+  if (points === 8) {
+    [[1,-1],[1,1],[-1,1],[-1,-1]].forEach(([dx, dy]) => {
+      s += `<path class="rose-spoke" d="M${C} ${C} L${(C + dx * 54).toFixed(0)} ${(C + dy * 54).toFixed(0)}"/>`;
+    });
+  }
+  s += diamond(C, C - R + 6, 9, -9) + diamond(C, C + R - 6, -9, 9)
+     + diamond(C + R - 6, C, 9, 9) + diamond(C - R + 6, C, -9, -9);
+  s += `<circle class="rose-dot" cx="${C}" cy="${C}" r="7"/>`;
+  if (labelled) {
+    const at = [['N', C, C - R + 24], ['E', C + R - 24, C + 5], ['S', C, C + R - 14], ['W', C - R + 24, C + 5]];
+    at.forEach(([t, x, y]) => { s += `<text class="fig-label" x="${x}" y="${y}" text-anchor="middle" style="font-size:19px">${t}</text>`; });
+  }
+  return s;
+}
+
+const RELIEF = [['Dark brown', 'over 2000 m', '#8A5A2B'], ['Light brown', '1000 to 2000 m', '#B98A55'],
+                ['Yellow', '500 to 1000 m', '#E3C567'], ['Green', 'under 500 m', '#7FB069']];
+
+const FIGURES = {
+  climatebands:{box:'0 0 320 220', cap:'The Earth with its climate zones in bands',
+    svg:'<defs><clipPath id="earthclip"><circle cx="140" cy="105" r="90"/></clipPath></defs>'
+      + '<g clip-path="url(#earthclip)">'
+      + [['z-polar', 10, 32], ['z-temp', 42, 32], ['z-trop', 74, 62], ['z-temp', 136, 32], ['z-polar', 168, 32]]
+          .map(([c, y, hh]) => `<rect class="${c}" x="46" y="${y}" width="188" height="${hh}"/>`).join('')
+      + '</g><circle class="z-edge" cx="140" cy="105" r="90"/>'
+      + '<path class="z-eq" d="M46 105 H234"/>'
+      + [['polar', 24], ['temperate', 56], ['tropical', 108], ['temperate', 150], ['polar', 182]]
+          .map(([t, y]) => `<text class="fig-small" x="240" y="${y + 4}">${t}</text>`).join('')
+      + '<text class="fig-label" x="140" y="214" text-anchor="middle">the red line is the equator</text>'},
+  rose4:{box:'0 0 200 200', cap:'A compass rose with north, east, south and west', svg:roseSvg(4, true)},
+  reliefkey:{box:'0 0 300 176', cap:'The key from a relief map, showing what each colour means',
+    svg:'<text class="fig-label" x="12" y="18">Key: height of the land</text>'
+      + RELIEF.map(([name, band, col], i) => {
+          const y = 30 + i * 34;
+          return `<rect x="14" y="${y}" width="46" height="26" rx="5" fill="${col}" stroke="var(--line)" stroke-width="2"/>`
+               + `<text class="fig-small" x="70" y="${y + 17}">${esc(name)} — ${esc(band)}</text>`;
+        }).join('')},
+  reliefmap:{box:'0 0 330 210', cap:'A small relief map with three areas and a key',
+    svg:'<rect x="10" y="10" width="200" height="160" rx="10" fill="#7FB069" stroke="var(--line)" stroke-width="3"/>'
+      + '<path d="M60 150 q40 -70 100 -40 q30 18 20 60 z" fill="#E3C567"/>'
+      + '<path d="M96 146 q26 -46 66 -26 q18 12 10 38 z" fill="#8A5A2B"/>'
+      + '<text class="fig-label" x="32" y="40">A</text>'
+      + '<text class="fig-label" x="76" y="140">B</text>'
+      + '<text class="fig-label" x="128" y="134" style="fill:#FFFFFF">C</text>'
+      + '<text class="fig-small" x="222" y="24">Key</text>'
+      + [['#8A5A2B', 'highest'], ['#E3C567', 'middle'], ['#7FB069', 'lowest']].map(([col, t], i) => {
+          const y = 36 + i * 30;
+          return `<rect x="222" y="${y}" width="26" height="20" rx="4" fill="${col}" stroke="var(--line)" stroke-width="2"/>`
+               + `<text class="fig-small" x="254" y="${y + 15}">${t}</text>`;
+        }).join('')},
+  landprofile:{box:'0 0 340 190', cap:'A side view of three landforms, labelled A, B and C',
+    svg:'<path class="land-fill" d="M6 160 L52 44 L98 160 Z"/>'
+      + '<path class="land-fill" d="M124 160 L146 72 H212 L234 160 Z"/>'
+      + '<path class="land-fill" d="M250 160 V146 q0 -5 5 -5 H331 q5 0 5 5 V160 Z"/>'
+      + '<path class="land-ground" d="M4 160 H336"/>'
+      + [['A', 52], ['B', 179], ['C', 293]].map(([t, x]) => `<text class="fig-label" x="${x}" y="182" text-anchor="middle">${t}</text>`).join('')},
+  cavecut:{box:'0 0 320 190', cap:'A cut-through view of a cave inside a hill',
+    svg:'<path class="land-fill" d="M10 156 q60 -110 150 -104 q90 6 150 104 Z"/>'
+      + '<path class="cave-hole" d="M112 156 q-4 -52 46 -56 q56 -4 56 40 q0 10 -10 16 Z"/>'
+      + '<path class="cave-hole" d="M56 156 q10 -26 56 -22 v22 Z"/>'
+      + [130, 152, 174, 196].map((x, i) => `<path class="cave-drip" d="M${x} 112 l${i % 2 ? 4 : -4} 16"/>`).join('')
+      + '<path class="land-ground" d="M4 156 H316"/>'
+      + '<text class="fig-small" x="62" y="176">entrance</text>'
+      + '<text class="fig-small" x="196" y="176">chamber</text>'},
+  agebars:barFig([['Children',120],['Grown-ups',260],['Elderly',90]], 'people', 'The people of a village, by age group'),
+  transbars:barFig([['Walk',40],['Bus',30],['Car',20],['Bicycle',10]], 'children', 'How children travel to school')
+};
+
+/* ============ BADGES ============ */
+const BADGES = [
+  {id:'first',   icon:'🌍', name:'First Journey',  desc:'Finish your first whole set',         got:s => setsFinished(s) >= 1},
+  {id:'three',   icon:'⭐',        name:'Star Collector', desc:'Win 3 stars on three sets',           got:s => threeStarSets(s) >= 3},
+  {id:'perfect', icon:'💯', name:'Perfect Run',    desc:'Score 100% on a whole set',           got:s => Object.values(s.sets).some(r => r.best && r.best.pct === 100)},
+  {id:'compass', icon:'🧭', name:'True North',     desc:'Finish 3 compass roses perfectly',    got:s => s.stats.compass >= 3},
+  {id:'mapper',  icon:'🗺️', name:'Map Reader', desc:'Find 4 map squares correctly',      got:s => s.stats.map >= 4},
+  {id:'chart',   icon:'📊', name:'Chart Reader',   desc:'Read 4 charts correctly',             got:s => s.stats.chart >= 4},
+  {id:'zones',   icon:'🌡️', name:'Zone Expert', desc:'Get 8 climate questions right',    got:s => s.stats.climate >= 8},
+  {id:'care',    icon:'🌱', name:'Resource Keeper',desc:'Get 8 resource questions right',      got:s => s.stats.resources >= 8},
+  {id:'streak',  icon:'🔥', name:'On Fire',        desc:'Get 6 questions right in a row',      got:s => s.stats.streak >= 6},
+  {id:'master',  icon:'🏆', name:'World Explorer', desc:'Finish every set in the atlas',       got:s => setsFinished(s) >= SETS.length}
+];
+
+/* ============ STORAGE (kept in this browser) ============ */
+const KEY = 'worldExplorers.v1';
+const freshStats = () => ({compass:0, map:0, chart:0, climate:0, resources:0, draw:0, streak:0, fix:0});
+const fresh = () => ({v:1, seed:null, order:null, sets:{}, gallery:[], badges:[], stats:freshStats(),
+  current:null, lastRun:null, settings:{size:'normal', theme:'auto', sound:true, unlockAll:false}});
+let S = fresh();
+let storageOK = true;
+function load() {
+  try {
+    const raw = localStorage.getItem(KEY);
+    if (raw) {
+      const d = JSON.parse(raw);
+      S = Object.assign(fresh(), d);
+      S.settings = Object.assign(fresh().settings, d.settings || {});
+      S.stats = Object.assign(freshStats(), d.stats || {});
+    }
+  } catch (e) { storageOK = false; }
+  if (S.seed === null || S.seed === undefined) S.seed = (Math.random() * 4294967296) >>> 0;
+  setOrder();
+}
+/* Writes progress. If the browser is full, drop the oldest drawings rather
+   than losing every star the child has earned. */
+function save() {
+  S.updatedAt = Date.now();
+  for (let attempt = 0; attempt < 6; attempt++) {
+    try { localStorage.setItem(KEY, JSON.stringify(S)); storageOK = true; return true; }
+    catch (e) {
+      if (S.gallery.length) { S.gallery.pop(); continue; }
+      storageOK = false; return false;
+    }
+  }
+  storageOK = false;
+  return false;
+}
+function applySettings() {
+  const r = document.documentElement;
+  r.dataset.size = S.settings.size;
+  if (S.settings.theme === 'auto') r.removeAttribute('data-theme'); else r.dataset.theme = S.settings.theme;
+}
+/* The learner's personal set order. Built once, then only ever added to. */
+function setOrder() {
+  const ids = SETS.map(s => s.id);
+  const kept = (S.order || []).filter(id => ids.includes(id));
+  const missing = ids.filter(id => !kept.includes(id));
+  if (missing.length || kept.length !== (S.order || []).length) {
+    /* Core sets are shuffled among themselves and challenge sets among
+       themselves, but a challenge set never lands before a core one. A
+       returning learner keeps the order already saved; new sets are only
+       ever appended to it. */
+    const spread = list => list.length > 1 ? seededShuffle(list, S.seed + kept.length + list.length) : list;
+    const core = missing.filter(id => !getSet(id).challenge);
+    const chal = missing.filter(id => getSet(id).challenge);
+    S.order = [...kept, ...spread(core), ...spread(chal)];
+  }
+  return S.order;
+}
+const orderPos = id => setOrder().indexOf(id);
+
+/* ============ SOUND + READ ALOUD ============ */
+let actx = null;
+function beep(kind) {
+  if (!S.settings.sound) return;
+  try {
+    actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+    const notes = kind === 'good' ? [523, 659, 784] : kind === 'part' ? [523, 587] : [330, 262];
+    notes.forEach((f, i) => {
+      const o = actx.createOscillator(), g = actx.createGain();
+      o.type = 'sine'; o.frequency.value = f;
+      g.gain.setValueAtTime(0.0001, actx.currentTime + i * 0.1);
+      g.gain.exponentialRampToValueAtTime(0.16, actx.currentTime + i * 0.1 + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, actx.currentTime + i * 0.1 + 0.22);
+      o.connect(g); g.connect(actx.destination);
+      o.start(actx.currentTime + i * 0.1); o.stop(actx.currentTime + i * 0.1 + 0.25);
+    });
+  } catch (e) {}
+}
+const canSpeak = 'speechSynthesis' in window;
+function speak(text) {
+  if (!canSpeak) return;
+  try {
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(String(text).replace(/_+/g, ' blank '));
+    u.lang = 'en-GB'; u.rate = 0.9; u.pitch = 1.05;
+    speechSynthesis.speak(u);
+  } catch (e) {}
+}
+
+/* ============ CONTENT HELPERS ============ */
+const getSet = id => SETS.find(s => s.id === id);
+const blanksOf = item => { const out = []; item.lines.forEach(l => l.replace(/\{([^}]+)\}/g, (m, w) => { out.push(w); return m; })); return out; };
+function itemTotal(item) {
+  switch (item.t) {
+    case 'sort':   return item.chips.length;
+    case 'match':  return item.left.length;
+    case 'fill':   return blanksOf(item).length;
+    case 'order':  return item.items.length;
+    case 'grid':   return item.rows.length * item.cols.length;
+    case 'tfgrid': return item.rows.length;
+    case 'multi':   return item.opts.length;
+    case 'compass': return (item.points || 4);
+    case 'gridmap': return 1;
+    case 'draw':   return 0;
+    default: return 1;
+  }
+}
+function flat(set) { if (!set._flat) { set._flat = []; set.sections.forEach(sec => sec.items.forEach(item => set._flat.push({sec:sec.key, item}))); } return set._flat; }
+const setTotal = set => flat(set).reduce((a, q) => a + itemTotal(q.item), 0);
+const starsFor = pct => pct >= 90 ? 3 : pct >= 70 ? 2 : pct >= 50 ? 1 : 0;
+const starRow = n => `<span class="stars" aria-label="${n} of 3 stars">${[0,1,2].map(i => `<span class="${i < n ? 'star-on' : 'star-off'}">★</span>`).join('')}</span>`;
+const setsFinished = s => Object.values(s.sets).filter(r => r && r.best).length;
+const threeStarSets = s => Object.values(s.sets).filter(r => r && r.best && starsFor(r.best.pct) === 3).length;
+/* Unlocking follows the learner's own order, not the set numbers. */
+function isUnlocked(id) {
+  if (S.settings.unlockAll) return true;
+  const pos = orderPos(id);
+  if (pos <= 0) return true;
+  const prev = S.sets[setOrder()[pos - 1]];
+  return !!(prev && prev.best && prev.best.pct >= PASS);
+}
+function questionLabel(item) { return item.text || item.tip || item.prompt; }
+function answerText(item) {
+  switch (item.t) {
+    case 'choice': return item.opts[item.ans];
+    case 'sort':   return item.bins.map((b, bi) => `${b[0]}: ${item.chips.filter(c => c[1] === bi).map(c => c[0]).join(', ')}`).join('. ');
+    case 'type':   return item.accept[0];
+    case 'match':  return item.left.map((l, i) => `${l.label} goes with ${item.right[i]}`).join('. ');
+    case 'fill':   return item.lines.map(l => l.replace(/\{([^}]+)\}/g, '$1')).join(' ');
+    case 'order':  return item.items.map((t, i) => `${i + 1}. ${t}`).join('. ');
+    case 'grid':   return item.rows.map(([label, want]) => `${label}: ${want.map((m, i) => `${item.cols[i]} ${m ? 'yes' : 'no'}`).join(', ')}`).join('. ');
+    case 'tfgrid': return item.rows.map(([text, want]) => `${want ? 'True' : 'False'}: ${text}`).join('. ');
+    case 'multi':   return 'Tick: ' + item.opts.filter(o => o[1]).map(o => o[0]).join(', ');
+    case 'compass': return COMPASS_PTS[item.points || 4].map(pt => pt[0]).join(', ');
+    case 'gridmap': return item.ans;
+    default: return '';
+  }
+}
+function speakText(item) {
+  const bits = [item.prompt];
+  if (item.text) bits.push(item.text.replace(/_{2,}/g, ' blank '));
+  if (item.tip) bits.push(item.tip);
+  if (item.t === 'choice') bits.push(item.opts.join(', or '));
+  if (item.t === 'fill') bits.push(item.lines.map(l => l.replace(/\{[^}]+\}/g, 'blank')).join(' '));
+  if (item.t === 'order') bits.push(item.items.join('. '));
+  if (item.t === 'tfgrid') bits.push(item.rows.map(r => r[0]).join('. '));
+  if (item.t === 'multi') bits.push(item.opts.map(o => o[0]).join('. '));
+  if (item.t === 'gridmap') bits.push(item.places.map(pl => `${pl.n} is in square ${pl.c}${pl.r}`).join('. '));
+  return bits.join('. ');
+}
+function blankify(text, word) {
+  const parts = String(text).split(/_{2,}/);
+  if (parts.length < 2) return esc(text);
+  return esc(parts[0]) + (word
+    ? `<span class="blank filled">${esc(word)}</span>`
+    : '<span class="blank"><span class="sr">blank</span>&nbsp;</span>') + esc(parts.slice(1).join(' '));
+}
+
+/* ============ AUTO-SCROLL WHILE DRAGGING ============ */
+function autoScroller(onScroll) {
+  let y = null, raf = null;
+  const step = () => {
+    if (y === null) { raf = null; return; }
+    const dockH = dock.classList.contains('hidden') ? 0 : dock.offsetHeight;
+    const bottom = window.innerHeight - dockH;
+    let d = 0;
+    if (y > bottom - 70) d = Math.min(20, (y - (bottom - 70)) / 3 + 2);
+    else if (y < 120) d = -Math.min(20, (120 - y) / 3 + 2);
+    if (d) { const before = window.scrollY; window.scrollBy(0, d); if (window.scrollY !== before && onScroll) onScroll(); }
+    raf = requestAnimationFrame(step);
+  };
+  return {update(ny) { y = ny; if (!raf) raf = requestAnimationFrame(step); }, stop() { y = null; }};
+}
+
+/* ============ DRAG + TAP HELPER (chips into zones) ============ */
+function dnd(root, o) {
+  let suppress = false;
+  root.addEventListener('pointerdown', e => {
+    const chip = e.target.closest('.chip[data-id]');
+    if (!chip || o.locked() || e.button > 0) return;
+    e.preventDefault();
+    const id = chip.dataset.id, sx = e.clientX, sy = e.clientY;
+    let ghost = null, over = null, lx = sx, ly = sy;
+    const findZone = () => {
+      const hit = document.elementFromPoint(lx, ly);
+      const z = hit && hit.closest('[data-drop]');
+      const zone = z && root.contains(z) ? z : null;
+      if (zone !== over) { if (over) over.classList.remove('over'); if (zone) zone.classList.add('over'); over = zone; }
+    };
+    const scroller = autoScroller(findZone);
+    const move = ev => {
+      lx = ev.clientX; ly = ev.clientY;
+      if (!ghost) {
+        if (Math.hypot(ev.clientX - sx, ev.clientY - sy) < 8) return;
+        ghost = chip.cloneNode(true); ghost.classList.add('ghost'); ghost.classList.remove('sel');
+        document.body.appendChild(ghost); chip.classList.add('dragging');
+      }
+      ghost.style.left = ev.clientX + 'px'; ghost.style.top = ev.clientY + 'px';
+      scroller.update(ev.clientY);
+      findZone();
+    };
+    const end = ev => {
+      scroller.stop();
+      window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', end); window.removeEventListener('pointercancel', end);
+      if (over) over.classList.remove('over');
+      if (ghost) { suppress = true; setTimeout(() => { suppress = false; }, 0); ghost.remove(); chip.classList.remove('dragging'); if (ev.type === 'pointerup' && over) o.drop(id, over.dataset.drop); }
+      else if (ev.type === 'pointerup') setTimeout(() => o.tap(id), 0);
+    };
+    window.addEventListener('pointermove', move); window.addEventListener('pointerup', end); window.addEventListener('pointercancel', end);
+  });
+  root.addEventListener('click', e => {
+    if (o.locked() || suppress || e.target.closest('.chip')) return;
+    const z = e.target.closest('[data-drop]');
+    if (z) o.zoneTap(z.dataset.drop);
+  });
+  root.addEventListener('keydown', e => {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    if (o.locked()) return;
+    const chip = e.target.closest('.chip[data-id]');
+    const z = e.target.closest('[data-drop]');
+    if (chip) { e.preventDefault(); e.stopPropagation(); o.tap(chip.dataset.id); }
+    else if (z) { e.preventDefault(); e.stopPropagation(); o.zoneTap(z.dataset.drop); }
+  });
+}
+
+/* ============ QUESTION TYPES ============ */
+const TYPES = {};
+
+TYPES.choice = (item, root, changed) => {
+  let sel = -1, locked = false;
+  root.innerHTML = `${item.text ? `<p class="qtext" id="qt">${blankify(item.text, null)}</p>` : ''}
+    <div class="opts ${item.long ? 'long' : ''}" role="group" aria-label="Answers">${item.opts.map((o, i) =>
+      `<button class="opt" data-i="${i}">${esc(o)}</button>`).join('')}</div>`;
+  const btns = $$('.opt', root);
+  btns.forEach(b => b.addEventListener('click', () => {
+    if (locked) return;
+    sel = +b.dataset.i;
+    btns.forEach(x => { x.classList.toggle('sel', x === b); x.setAttribute('aria-pressed', x === b); });
+    if (item.text && /_{2,}/.test(item.text)) $('#qt', root).innerHTML = blankify(item.text, item.opts[sel]);
+    changed();
+  }));
+  return {
+    ready: () => sel >= 0,
+    check() {
+      locked = true;
+      btns.forEach((b, i) => { b.disabled = true; b.classList.remove('sel'); if (i === item.ans) b.classList.add('ok'); else if (i === sel) b.classList.add('no'); });
+      return {e: sel === item.ans ? 1 : 0, t: 1, answer: esc(item.opts[item.ans])};
+    }
+  };
+};
+
+TYPES.sort = (item, root, changed) => {
+  const chips = shuffle(item.chips.map((c, i) => ({id:i, w:c[0], b:c[1], state:''})));
+  const place = {};
+  let sel = null, locked = false;
+  const chipHtml = c => `<span class="chip ${sel === c.id ? 'sel' : ''} ${c.state}" data-id="${c.id}" role="button" tabindex="0">${esc(c.w)}</span>`;
+  function draw() {
+    const inBank = chips.filter(c => place[c.id] === undefined);
+    root.innerHTML = `<div class="bank" data-drop="bank"><span class="bank-label">${inBank.length ? 'Drag a card to a box, or tap a card and then tap a box.' : 'All sorted! Tap Check when you are ready.'}</span>${inBank.map(chipHtml).join('')}</div>
+      <div class="bins">${item.bins.map((b, bi) => `<div class="bin" data-drop="${bi}" tabindex="0" role="button" aria-label="Box: ${esc(b[0])}"><h3>${esc(b[0])}</h3><div class="hint">${esc(b[1])}</div><div class="inside">${chips.filter(c => place[c.id] === bi).map(chipHtml).join('')}</div></div>`).join('')}</div>`;
+  }
+  function drop(id, zone) { id = +id; if (zone === 'bank') delete place[id]; else place[id] = +zone; sel = null; draw(); changed(); }
+  draw();
+  dnd(root, {
+    locked: () => locked,
+    tap(id) { id = +id; if (place[id] !== undefined) { delete place[id]; sel = null; } else sel = sel === id ? null : id; draw(); changed(); },
+    drop,
+    zoneTap(zone) { if (sel !== null) drop(sel, zone); }
+  });
+  return {
+    ready: () => Object.keys(place).length === chips.length,
+    check() {
+      locked = true; let e = 0;
+      chips.forEach(c => { const ok = place[c.id] === c.b; c.state = ok ? 'ok' : 'no'; if (ok) e++; });
+      sel = null; draw();
+      return {e, t: chips.length, answer: item.bins.map((b, bi) => `<b>${esc(b[0])}:</b> ${item.chips.filter(c => c[1] === bi).map(c => esc(c[0])).join(', ')}`).join('<br>')};
+    }
+  };
+};
+
+TYPES.fill = (item, root, changed) => {
+  const answers = blanksOf(item);
+  const words = shuffle([...answers, ...item.decoys]).map((w, i) => ({id:i, w}));
+  const slots = answers.map(() => null);
+  const spare = item.decoys.length;
+  let sel = null, locked = false, marks = null;
+  function draw() {
+    let k = 0;
+    const lines = item.lines.map(l => {
+      const parts = l.split(/(\{[^}]+\})/);
+      let out = '';
+      for (let pi = 0; pi < parts.length; pi++) {
+        const part = parts[pi];
+        if (!/^\{[^}]+\}$/.test(part)) { out += esc(part); continue; }
+        const si = k++, cid = slots[si], w = cid === null ? null : words[cid];
+        let punct = '';
+        if (parts[pi + 1]) { const m = parts[pi + 1].match(/^[,.!?;:]+/); if (m) { punct = m[0]; parts[pi + 1] = parts[pi + 1].slice(punct.length); } }
+        out += `<span class="nowrap"><span class="slot" data-drop="${si}" role="button" tabindex="0" aria-label="Gap ${si + 1}${w ? ': ' + esc(w.w) : ''}">${w ? `<span class="chip ${marks ? (marks[si] ? 'ok' : 'no') : ''}" data-id="${w.id}">${esc(w.w)}</span>` : ''}</span>${esc(punct)}</span>`;
+      }
+      return `<span class="line">${out}</span>`;
+    }).join('');
+    const bank = words.filter(w => !slots.includes(w.id));
+    root.innerHTML = `<div class="bank" data-drop="bank"><span class="bank-label">Drag a card into a gap, or tap a card and then tap a gap. ${spare} card${spare === 1 ? ' is' : 's are'} left over!</span>${bank.map(w => `<span class="chip ${sel === w.id ? 'sel' : ''}" data-id="${w.id}" role="button" tabindex="0">${esc(w.w)}</span>`).join('')}</div><p class="poemtext">${lines}</p>`;
+  }
+  function drop(id, zone) {
+    id = +id; const from = slots.indexOf(id);
+    if (zone === 'bank') { if (from >= 0) slots[from] = null; }
+    else { const si = +zone; const prev = slots[si]; if (from >= 0) slots[from] = prev; slots[si] = id; }
+    sel = null; draw(); changed();
+  }
+  draw();
+  dnd(root, {
+    locked: () => locked,
+    tap(id) { id = +id; if (slots.includes(id)) drop(id, 'bank'); else { sel = sel === id ? null : id; draw(); } },
+    drop,
+    zoneTap(zone) { if (sel !== null) drop(sel, zone); else if (zone !== 'bank' && slots[+zone] !== null) drop(slots[+zone], 'bank'); }
+  });
+  return {
+    ready: () => slots.every(s => s !== null),
+    check() {
+      locked = true;
+      marks = slots.map((cid, si) => cid !== null && words[cid].w === answers[si]);
+      draw();
+      return {e: marks.filter(Boolean).length, t: answers.length, answer: item.lines.map(l => esc(l).replace(/\{([^}]+)\}/g, '<b>$1</b>')).join('<br>')};
+    }
+  };
+};
+
+TYPES.type = (item, root, changed) => {
+  root.innerHTML = `<p class="qtext" id="qt">${blankify(item.text, null)}</p>
+    <div class="typeline">
+      <label class="sr" for="wr">Your answer</label>
+      <input id="wr" class="write" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" maxlength="24" placeholder="Type one word">
+      ${item.hint ? '<button class="btn btn-small" id="hintBtn" type="button">💡 Hint</button>' : ''}
+    </div>
+    <div id="hintOut"></div>`;
+  const inp = $('#wr', root), qt = $('#qt', root);
+  inp.addEventListener('input', () => { qt.innerHTML = blankify(item.text, inp.value.trim()); changed(); });
+  const hb = $('#hintBtn', root);
+  if (hb) hb.onclick = () => { $('#hintOut', root).innerHTML = `<p class="hintbox">💡 ${esc(item.hint)}</p>`; hb.disabled = true; inp.focus(); };
+  return {
+    ready: () => norm(inp.value).length >= 1,
+    check() {
+      inp.readOnly = true;
+      const ok = answerMatches(inp.value, item.accept);
+      qt.innerHTML = blankify(item.text, inp.value.trim());
+      inp.style.borderColor = ok ? 'var(--leaf)' : 'var(--berry)';
+      const exact = item.accept.some(a => norm(a) === norm(inp.value).replace(/^(a|an|the)\s+/, ''));
+      return {e: ok ? 1 : 0, t: 1, answer: esc(item.accept[0]), nearly: ok && !exact};
+    },
+    focus: () => inp.focus()
+  };
+};
+
+/* The tick-or-cross table from the worksheet. Tap a box to cycle it. */
+TYPES.grid = (item, root, changed) => {
+  const state = item.rows.map(() => item.cols.map(() => 0)); // 0 blank, 1 tick, 2 cross
+  let locked = false, marks = null;
+  function draw() {
+    root.innerHTML = `<div class="gridq"><table>
+      <thead><tr><th></th>${item.cols.map(c => `<th scope="col">${esc(c)}</th>`).join('')}</tr></thead>
+      <tbody>${item.rows.map(([label], r) => `<tr><th class="rowhead" scope="row">${esc(label)}</th>${item.cols.map((col, c) => {
+        const v = state[r][c], ok = marks ? marks[r][c] : null;
+        return `<td><button type="button" class="cell ${v === 1 ? 'tick' : v === 2 ? 'cross' : ''} ${ok === true ? 'ok' : ok === false ? 'no' : ''}"
+          data-r="${r}" data-c="${c}" ${locked ? 'disabled' : ''}
+          aria-label="${esc(label)}, ${esc(col)}: ${v === 1 ? 'tick' : v === 2 ? 'cross' : 'not answered yet'}">${v === 1 ? '✓' : v === 2 ? '✗' : ''}</button></td>`;
+      }).join('')}</tr>`).join('')}</tbody></table></div>
+      <p class="tip">Tap a box to change it: empty → ✓ → ✗ → empty. Fill in every box.</p>`;
+  }
+  root.addEventListener('click', e => {
+    const b = e.target.closest('.cell');
+    if (!b || locked) return;
+    const r = +b.dataset.r, c = +b.dataset.c;
+    state[r][c] = (state[r][c] + 1) % 3;
+    draw(); changed();
+  });
+  draw();
+  return {
+    ready: () => state.every(row => row.every(v => v !== 0)),
+    check() {
+      locked = true;
+      marks = state.map((row, r) => row.map((v, c) => (v === 1) === (item.rows[r][1][c] === 1)));
+      draw();
+      return {e: marks.flat().filter(Boolean).length, t: item.rows.length * item.cols.length,
+        answer: item.rows.map(([label, want]) => `<b>${esc(label)}:</b> ${want.map((m, i) => `${esc(item.cols[i])} ${m ? '✓' : '✗'}`).join(' · ')}`).join('<br>')};
+    }
+  };
+};
+
+/* Tick every one that is true. Scored per option, so a child has to judge
+   each line on its own instead of hunting for the single best answer. */
+TYPES.multi = (item, root, changed) => {
+  const sel = item.opts.map(() => false);
+  let locked = false, marks = null;
+  function draw() {
+    root.innerHTML = `${item.text ? `<p class="qtext">${esc(item.text)}</p>` : ''}
+      <div class="opts long multi" role="group" aria-label="Tick every one that is true">${item.opts.map(([txt, want], i) =>
+        `<button type="button" class="opt ${sel[i] ? 'sel' : ''} ${marks ? (marks[i] ? 'ok' : 'no') : ''}" data-i="${i}"
+           aria-pressed="${sel[i]}" ${locked ? 'disabled' : ''}>
+           <span class="tickbox" aria-hidden="true">${sel[i] ? '\u2713' : ''}</span><span>${esc(txt)}</span>
+           ${marks ? `<span class="should">${want ? 'should be ticked' : 'should be left'}</span>` : ''}
+         </button>`).join('')}</div>
+      <p class="tip">Tick as many as you need \u2014 there may be more than one. Every line you get right is a star.</p>`;
+  }
+  root.addEventListener('click', e => {
+    const b = e.target.closest('.opt');
+    if (!b || locked) return;
+    const i = +b.dataset.i;
+    sel[i] = !sel[i];
+    draw(); changed();
+  });
+  draw();
+  return {
+    ready: () => sel.some(Boolean),
+    check() {
+      locked = true;
+      marks = sel.map((v, i) => v === item.opts[i][1]);
+      draw();
+      return {e: marks.filter(Boolean).length, t: item.opts.length,
+        answer: item.opts.filter(o => o[1]).map(o => `\u2713 ${esc(o[0])}`).join('<br>')};
+    }
+  };
+};
+
+/* Several statements, each one true or false. One star per row. */
+TYPES.tfgrid = (item, root, changed) => {
+  const given = item.rows.map(() => null);
+  let locked = false, marks = null;
+  function draw() {
+    root.innerHTML = `<div class="tflist">${item.rows.map(([text], i) => `
+      <div class="tfrow ${marks ? (marks[i] ? 'ok' : 'no') : ''}">
+        <span>${esc(text)}</span>
+        <span class="tfbtns" role="group" aria-label="True or false: ${esc(text)}">
+          <button type="button" data-i="${i}" data-v="1" aria-pressed="${given[i] === true}" ${locked ? 'disabled' : ''}>True</button>
+          <button type="button" data-i="${i}" data-v="0" aria-pressed="${given[i] === false}" ${locked ? 'disabled' : ''}>False</button>
+        </span>
+      </div>`).join('')}</div>`;
+  }
+  root.addEventListener('click', e => {
+    const b = e.target.closest('[data-v]');
+    if (!b || locked) return;
+    given[+b.dataset.i] = b.dataset.v === '1';
+    draw(); changed();
+  });
+  draw();
+  return {
+    ready: () => given.every(a => a !== null),
+    check() {
+      locked = true;
+      marks = given.map((a, i) => a === item.rows[i][1]);
+      draw();
+      return {e: marks.filter(Boolean).length, t: item.rows.length,
+        answer: item.rows.map(([text, want]) => `<b>${want ? 'True' : 'False'}</b> — ${esc(text)}`).join('<br>')};
+    }
+  };
+};
+
+const LINE_COLORS = ['var(--sky)', 'var(--sun)', '#8E6AC8', '#D0668E', '#2E9C96', '#C07A34'];
+TYPES.match = (item, root, changed, cleanups) => {
+  const n = item.left.length;
+  const rightOrder = shuffleNotSame(item.right.map((_, i) => i));
+  const conn = {};
+  let sel = null, temp = null, locked = false, result = false;
+  root.innerHTML = `<p class="tip" style="margin:0 0 .9rem">Drag from a box on one side to a box on the other, or tap one on each side.</p>
+    <div class="match">
+      <svg class="lines" aria-hidden="true"></svg>
+      <div class="match-col">${item.left.map((l, i) => `<button class="m-item left" data-side="L" data-i="${i}"><span>${esc(l.label)}</span><span class="dot"></span></button>`).join('')}</div>
+      <div class="match-col">${rightOrder.map(ri => `<button class="m-item right" data-side="R" data-i="${ri}">${esc(item.right[ri])}<span class="dot"></span></button>`).join('')}</div>
+    </div>
+    <div class="row" style="justify-content:flex-end;margin-top:.9rem"><button class="btn btn-small" id="clearLines" type="button">Clear lines</button></div>`;
+  const box = $('.match', root), svg = $('svg.lines', root);
+  const itemEl = (side, i) => box.querySelector(`.m-item[data-side="${side}"][data-i="${i}"]`);
+  const dotPt = el => { const b = box.getBoundingClientRect(), r = el.getBoundingClientRect(); return {x: (el.dataset.side === 'L' ? r.right : r.left) - b.left, y: r.top + r.height / 2 - b.top}; };
+  const curve = (a, b) => { const dx = (b.x - a.x) * 0.45; return `M${a.x} ${a.y} C${a.x + dx} ${a.y} ${b.x - dx} ${b.y} ${b.x} ${b.y}`; };
+  function redraw() {
+    let html = '';
+    Object.entries(conn).forEach(([li, ri]) => {
+      const a = dotPt(itemEl('L', li)), b = dotPt(itemEl('R', ri));
+      let color = LINE_COLORS[li % LINE_COLORS.length], extra = '';
+      if (result) { const ok = +li === +ri; color = ok ? 'var(--leaf)' : 'var(--berry)'; if (!ok) extra = 'stroke-dasharray="10 8"'; }
+      html += `<path d="${curve(a, b)}" stroke="${color}" ${extra}/>`;
+    });
+    if (temp) { const bb = box.getBoundingClientRect(); html += `<path d="${curve(dotPt(temp.el), {x: temp.cx - bb.left, y: temp.cy - bb.top})}" stroke="var(--ink-soft)" stroke-dasharray="6 7"/>`; }
+    svg.innerHTML = html;
+    $$('.m-item', box).forEach(el => {
+      const side = el.dataset.side, i = +el.dataset.i;
+      el.classList.toggle('linked', side === 'L' ? conn[i] !== undefined : Object.values(conn).includes(i));
+      el.classList.toggle('sel', !!sel && sel.side === side && sel.i === i);
+    });
+  }
+  function link(li, ri) { for (const k in conn) if (conn[k] === ri) delete conn[k]; conn[li] = ri; sel = null; redraw(); changed(); }
+  function unlink(side, i) { if (side === 'L') delete conn[i]; else for (const k in conn) if (conn[k] === i) delete conn[k]; }
+  function tapItem(side, i) {
+    if (sel && sel.side !== side) { side === 'L' ? link(i, sel.i) : link(sel.i, i); return; }
+    if (sel && sel.side === side && sel.i === i) { unlink(side, i); sel = null; redraw(); changed(); return; }
+    sel = {side, i}; redraw();
+  }
+  box.addEventListener('pointerdown', e => {
+    const el = e.target.closest('.m-item');
+    if (!el || locked || e.button > 0) return;
+    e.preventDefault();
+    const side = el.dataset.side, i = +el.dataset.i, sx = e.clientX, sy = e.clientY;
+    let dragging = false;
+    const scroller = autoScroller(() => { if (temp) redraw(); });
+    const move = ev => {
+      if (!dragging && Math.hypot(ev.clientX - sx, ev.clientY - sy) > 10) dragging = true;
+      if (dragging) { temp = {el, cx: ev.clientX, cy: ev.clientY}; sel = {side, i}; scroller.update(ev.clientY); redraw(); }
+    };
+    const end = ev => {
+      scroller.stop();
+      window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', end); window.removeEventListener('pointercancel', end);
+      if (dragging) {
+        temp = null;
+        const hit = document.elementFromPoint(ev.clientX, ev.clientY);
+        const t = hit && hit.closest('.m-item');
+        if (ev.type === 'pointerup' && t && box.contains(t) && t.dataset.side !== side) { const j = +t.dataset.i; side === 'L' ? link(i, j) : link(j, i); }
+        else { sel = null; redraw(); }
+      } else if (ev.type === 'pointerup') tapItem(side, i);
+    };
+    window.addEventListener('pointermove', move); window.addEventListener('pointerup', end); window.addEventListener('pointercancel', end);
+  });
+  box.addEventListener('click', e => { const el = e.target.closest('.m-item'); if (el && e.detail === 0 && !locked) tapItem(el.dataset.side, +el.dataset.i); });
+  $('#clearLines', root).addEventListener('click', () => { if (locked) return; for (const k in conn) delete conn[k]; sel = null; redraw(); changed(); });
+  const ro = new ResizeObserver(() => redraw()); ro.observe(box);
+  cleanups.push(() => ro.disconnect());
+  requestAnimationFrame(redraw);
+  return {
+    ready: () => Object.keys(conn).length === n,
+    check() {
+      locked = true; result = true; let e = 0;
+      for (let i = 0; i < n; i++) {
+        const ok = conn[i] === i; if (ok) e++;
+        itemEl('L', i).classList.add(ok ? 'ok' : 'no');
+        const r = itemEl('R', i), rOk = Object.entries(conn).some(([li, ri]) => ri === i && +li === i);
+        r.classList.add(rOk ? 'ok' : 'no');
+      }
+      $$('.m-item', box).forEach(b => b.disabled = true);
+      $('#clearLines', root).disabled = true;
+      redraw();
+      return {e, t: n, answer: item.left.map((l, i) => `<b>${esc(l.label)}</b> ➜ ${esc(item.right[i])}`).join('<br>')};
+    }
+  };
+};
+
+/* Put the steps in the right order: drag them, or use the little arrows. */
+TYPES.order = (item, root, changed) => {
+  const n = item.items.length;
+  let seq = shuffleNotSame(item.items.map((_, i) => i));
+  let locked = false, marks = null, dragPos = -1;
+  function draw() {
+    root.innerHTML = `<p class="tip" style="margin:0 0 .9rem">Drag a card up or down, or use the ▲ ▼ arrows, until the order is right.</p>
+      <div class="orderlist">${seq.map((si, p) => `
+        <div class="ord ${dragPos === p ? 'dragging' : ''} ${marks ? (marks[p] ? 'ok' : 'no') : ''}" data-p="${p}" role="listitem" aria-label="Position ${p + 1}: ${esc(item.items[si])}">
+          <span class="num">${p + 1}</span>
+          <span>${esc(item.items[si])}</span>
+          <span class="ord-move">
+            <button type="button" data-up="${p}" aria-label="Move up" ${p === 0 || locked ? 'disabled' : ''}>▲</button>
+            <button type="button" data-down="${p}" aria-label="Move down" ${p === n - 1 || locked ? 'disabled' : ''}>▼</button>
+          </span>
+        </div>`).join('')}</div>`;
+  }
+  function move(from, to) {
+    if (to < 0 || to >= n || from === to) return;
+    const [x] = seq.splice(from, 1); seq.splice(to, 0, x);
+  }
+  draw();
+  root.addEventListener('click', e => {
+    if (locked) return;
+    const up = e.target.closest('[data-up]'), dn = e.target.closest('[data-down]');
+    if (up) { const p = +up.dataset.up; move(p, p - 1); draw(); changed(); const f = $(`[data-up="${p - 1}"]`, root); if (f) f.focus(); }
+    else if (dn) { const p = +dn.dataset.down; move(p, p + 1); draw(); changed(); const f = $(`[data-down="${p + 1}"]`, root); if (f) f.focus(); }
+  });
+  root.addEventListener('pointerdown', e => {
+    const el = e.target.closest('.ord');
+    if (!el || locked || e.button > 0 || e.target.closest('.ord-move')) return;
+    e.preventDefault();
+    const sy = e.clientY;
+    dragPos = +el.dataset.p;
+    let ghost = null;
+    const scroller = autoScroller(() => {});
+    const place = y => {
+      const rows = $$('.ord', root);
+      let target = dragPos;
+      for (let i = 0; i < rows.length; i++) {
+        const r = rows[i].getBoundingClientRect();
+        if (y > r.top && y < r.bottom) { target = i; break; }
+        if (i === 0 && y <= r.top) target = 0;
+        if (i === rows.length - 1 && y >= r.bottom) target = rows.length - 1;
+      }
+      if (target !== dragPos) { move(dragPos, target); dragPos = target; draw(); }
+    };
+    const onMove = ev => {
+      if (!ghost) {
+        if (Math.abs(ev.clientY - sy) < 8) return;
+        ghost = el.cloneNode(true);
+        ghost.classList.add('ghost'); ghost.classList.remove('dragging');
+        ghost.style.width = el.getBoundingClientRect().width + 'px';
+        document.body.appendChild(ghost);
+        draw();
+      }
+      ghost.style.left = ev.clientX + 'px'; ghost.style.top = ev.clientY + 'px';
+      scroller.update(ev.clientY);
+      place(ev.clientY);
+    };
+    const end = () => {
+      scroller.stop();
+      window.removeEventListener('pointermove', onMove); window.removeEventListener('pointerup', end); window.removeEventListener('pointercancel', end);
+      if (ghost) { ghost.remove(); changed(); }
+      dragPos = -1; draw();
+    };
+    window.addEventListener('pointermove', onMove); window.addEventListener('pointerup', end); window.addEventListener('pointercancel', end);
+  });
+  return {
+    ready: () => true,
+    check() {
+      locked = true;
+      marks = seq.map((si, p) => si === p);
+      draw();
+      return {e: marks.filter(Boolean).length, t: n, answer: item.items.map((t, i) => `<b>${i + 1}.</b> ${esc(t)}`).join('<br>')};
+    }
+  };
+};
+
+/* Label the compass rose. One star per point. */
+const COMPASS_PTS = {
+  4: [['N', 50, 8], ['E', 92, 50], ['S', 50, 92], ['W', 8, 50]],
+  8: [['N', 50, 6], ['NE', 84, 16], ['E', 94, 50], ['SE', 84, 84], ['S', 50, 94], ['SW', 16, 84], ['W', 6, 50], ['NW', 16, 16]]
+};
+TYPES.compass = (item, root, changed) => {
+  const pts = COMPASS_PTS[item.points || 4];
+  const words = shuffleNotSame(pts.map(pt => pt[0])).map((w, i) => ({id:i, w}));
+  const slots = pts.map(() => null);
+  let sel = null, locked = false, marks = null;
+  function draw() {
+    const bank = words.filter(w => !slots.includes(w.id));
+    root.innerHTML = `<div class="bank" data-drop="bank"><span class="bank-label">Drag a label onto a point of the rose, or tap a label and then tap a point.</span>${bank.map(w =>
+        `<span class="chip ${sel === w.id ? 'sel' : ''}" data-id="${w.id}" role="button" tabindex="0">${esc(w.w)}</span>`).join('')}</div>
+      <div class="compasswrap"><svg viewBox="0 0 200 200" aria-hidden="true">${roseSvg(pts.length, false)}</svg>
+      ${pts.map((pt, i) => {
+        const cid = slots[i], w = cid === null ? null : words[cid];
+        const mk = marks ? (marks[i] ? ' ok' : ' no') : '';
+        return `<span class="cslot${mk}" data-drop="${i}" role="button" tabindex="0" style="left:${pt[1]}%;top:${pt[2]}%"
+           aria-label="Compass point ${i + 1}${w ? ': ' + esc(w.w) : ', empty'}">${w ? `<span class="chip ${marks ? (marks[i] ? 'ok' : 'no') : ''}" data-id="${w.id}">${esc(w.w)}</span>` : ''}</span>`;
+      }).join('')}</div>`;
+  }
+  function drop(id, zone) {
+    id = +id; const from = slots.indexOf(id);
+    if (zone === 'bank') { if (from >= 0) slots[from] = null; }
+    else { const si = +zone, prev = slots[si]; if (from >= 0) slots[from] = prev; slots[si] = id; }
+    sel = null; draw(); changed();
+  }
+  draw();
+  dnd(root, {
+    locked: () => locked,
+    tap(id) { id = +id; if (slots.includes(id)) drop(id, 'bank'); else { sel = sel === id ? null : id; draw(); } },
+    drop,
+    zoneTap(zone) { if (sel !== null) drop(sel, zone); else if (zone !== 'bank' && slots[+zone] !== null) drop(slots[+zone], 'bank'); }
+  });
+  return {
+    ready: () => slots.every(x => x !== null),
+    check() {
+      locked = true;
+      marks = slots.map((cid, i) => cid !== null && words[cid].w === pts[i][0]);
+      draw();
+      return {e: marks.filter(Boolean).length, t: pts.length,
+        answer: pts.map(pt => `<b>${pt[0]}</b>`).join(' \u2192 ') + ' going clockwise from the top'};
+    }
+  };
+};
+
+/* Find the square on a map grid. Coordinates read letter first, then number. */
+TYPES.gridmap = (item, root, changed) => {
+  let sel = null, locked = false;
+  function draw() {
+    root.innerHTML = `${item.text ? `<p class="qtext">${esc(item.text)}</p>` : ''}
+      <div class="gmwrap"><table class="gmap">
+        <thead><tr><th></th>${item.cols.map(c => `<th scope="col">${esc(c)}</th>`).join('')}</tr></thead>
+        <tbody>${item.rows.map(r => `<tr><th scope="row">${esc(String(r))}</th>${item.cols.map(c => {
+          const key = c + r;
+          const here = item.places.filter(pl => pl.c === c && String(pl.r) === String(r));
+          const state = locked ? (key === item.ans ? 'ok' : key === sel ? 'no' : '') : (key === sel ? 'sel' : '');
+          return `<td><button type="button" class="gcell ${state}" data-k="${key}" ${locked ? 'disabled' : ''}
+             aria-label="Square ${key}${here.length ? ': ' + here.map(pl => pl.n).join(', ') : ', empty'}">${here.map(pl =>
+               `<span class="ge" aria-hidden="true">${pl.e}</span><span class="gn">${esc(pl.n)}</span>`).join('')}</button></td>`;
+        }).join('')}</tr>`).join('')}</tbody>
+      </table></div>
+      <p class="tip">Tap the square that answers the question. Read the letter across the top first, then the number down the side.</p>`;
+  }
+  root.addEventListener('click', e => {
+    const b = e.target.closest('.gcell');
+    if (!b || locked) return;
+    sel = b.dataset.k; draw(); changed();
+  });
+  draw();
+  return {
+    ready: () => sel !== null,
+    check() { locked = true; draw(); return {e: sel === item.ans ? 1 : 0, t: 1, answer: `square <b>${esc(item.ans)}</b>`}; }
+  };
+};
+
+/* Draw a picture. Saved in My Sketchbook. */
+const PEN_COLORS = ['#1F2A37', '#C0392B', '#2F76A8', '#2E8B57', '#D9841C', '#8E6AC8'];
+TYPES.draw = (item, root, changed) => {
+  root.innerHTML = `<p class="clue">${esc(item.tip)}</p>
+    <div class="padwrap">
+      <canvas id="pad" class="pad" width="600" height="400" aria-label="Drawing area. Use a finger, a pen or a mouse."></canvas>
+      <div class="padtools" role="group" aria-label="Drawing tools">
+        ${PEN_COLORS.map((c, i) => `<button type="button" class="swatch" data-c="${i}" style="background:${c}" aria-label="Colour ${i + 1}" aria-pressed="${i === 0}"></button>`).join('')}
+        <button type="button" class="btn btn-small" id="undoBtn">↶ Undo</button>
+        <button type="button" class="btn btn-small" id="clearPad">Start again</button>
+      </div>
+      <p class="padnote">Draw your picture, then tap Save. There are no wrong answers here.</p>
+    </div>`;
+  const cv = $('#pad', root), ctx = cv.getContext('2d');
+  let strokes = [], cur = null, color = PEN_COLORS[0], locked = false;
+  function repaint() {
+    ctx.fillStyle = '#FFFFFF'; ctx.fillRect(0, 0, cv.width, cv.height);
+    ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    for (const s of strokes.concat(cur ? [cur] : [])) {
+      if (s.pts.length < 2) { ctx.fillStyle = s.c; ctx.beginPath(); ctx.arc(s.pts[0].x, s.pts[0].y, s.w / 2, 0, 7); ctx.fill(); continue; }
+      ctx.strokeStyle = s.c; ctx.lineWidth = s.w;
+      ctx.beginPath(); ctx.moveTo(s.pts[0].x, s.pts[0].y);
+      for (let i = 1; i < s.pts.length; i++) ctx.lineTo(s.pts[i].x, s.pts[i].y);
+      ctx.stroke();
+    }
+  }
+  const pos = e => { const r = cv.getBoundingClientRect(); return {x: (e.clientX - r.left) * cv.width / r.width, y: (e.clientY - r.top) * cv.height / r.height}; };
+  cv.addEventListener('pointerdown', e => {
+    if (locked) return;
+    e.preventDefault(); cv.setPointerCapture(e.pointerId);
+    cur = {c: color, w: 6, pts: [pos(e)]}; repaint();
+  });
+  cv.addEventListener('pointermove', e => { if (!cur) return; cur.pts.push(pos(e)); repaint(); });
+  const stop = () => { if (!cur) return; strokes.push(cur); cur = null; repaint(); changed(); };
+  cv.addEventListener('pointerup', stop);
+  cv.addEventListener('pointercancel', stop);
+  cv.addEventListener('pointerleave', stop);
+  $$('.swatch', root).forEach(b => b.onclick = () => {
+    color = PEN_COLORS[+b.dataset.c];
+    $$('.swatch', root).forEach(x => x.setAttribute('aria-pressed', x === b));
+  });
+  $('#undoBtn', root).onclick = () => { if (locked) return; strokes.pop(); repaint(); changed(); };
+  $('#clearPad', root).onclick = () => { if (locked) return; strokes = []; repaint(); changed(); };
+  repaint();
+  return {
+    ready: () => strokes.length > 0,
+    check() {
+      locked = true;
+      let url = '';
+      try {
+        const small = document.createElement('canvas');
+        small.width = 420; small.height = 280;
+        const sc = small.getContext('2d');
+        sc.fillStyle = '#FFFFFF'; sc.fillRect(0, 0, 420, 280);
+        sc.drawImage(cv, 0, 0, 420, 280);
+        url = small.toDataURL('image/png');
+      } catch (e) {}
+      return {e: 0, t: 0, picture: url, strokes: strokes.length};
+    }
+  };
+};
+
+/* ============ APP ============ */
+const app = $('#app'), dock = $('#dock'), dockInner = $('#dockInner'), layer = $('#layer');
+let screen = 'home', Q = null, timer = null, paused = false, cleanups = [], streak = 0;
+
+function runCleanups() { cleanups.forEach(f => { try { f(); } catch (e) {} }); cleanups = []; }
+function showLayer(html) { layer.innerHTML = html; const b = $('button', layer); if (b) b.focus(); }
+function hideLayer() { layer.innerHTML = ''; }
+function confirmBox({title, text, yes, no = 'Cancel', onYes, bot = false}) {
+  showLayer(`<div class="overlay" role="dialog" aria-modal="true" aria-labelledby="cbT"><div class="modal">${bot ? globe() : ''}<h2 id="cbT">${esc(title)}</h2><p>${esc(text)}</p><button class="btn btn-go btn-wide" id="cbYes">${esc(yes)}</button>${no === null ? '' : `<button class="btn btn-wide" id="cbNo">${esc(no)}</button>`}</div></div>`);
+  $('#cbYes').onclick = () => { hideLayer(); onYes(); };
+  const nb = $('#cbNo'); if (nb) nb.onclick = hideLayer;
+}
+
+function go(name) {
+  screen = name; runCleanups(); hideLayer(); stopTimer();
+  dock.className = 'dock hidden'; dockInner.innerHTML = ''; Q = null;
+  ({home:renderHome, quiz:openQuiz, results:renderResults, history:renderHistory, settings:renderSettings}[name] || renderHome)();
+  if (name !== 'quiz') window.scrollTo(0, 0);
+}
+
+/* ---------- Home ---------- */
+function renderHome() {
+  const c = S.current;
+  let resume = '';
+  if (c) {
+    const set = getSet(c.setId), done = Object.keys(c.answers).length;
+    resume = `<section class="resume" aria-labelledby="rsT">
+      <h2 id="rsT">⏸ Paused: ${set.emoji} ${esc(set.title)}</h2>
+      <p>${done} of ${c.queue.length} questions done${c.mode === 'fix' ? ' while fixing mistakes' : ''}. Time so far: ${fmtTime(c.elapsed)}.</p>
+      <div class="row"><button class="btn btn-go" id="contBtn">▶ Continue</button><button class="btn" id="discardBtn">Start over</button></div>
+    </section>`;
+  }
+  const order = setOrder();
+  app.innerHTML = `
+    <header class="hero">
+      <div><h1>World Explorers</h1><p>Climate, compasses, maps, landforms, resources and people.</p></div>
+      ${globe()}
+    </header>
+    ${storageOK ? '' : '<div class="notice">This browser is not saving progress right now. You can still play, but results may be lost when you close the page.</div>'}
+    ${resume}
+    <section class="sets" aria-labelledby="setsT">
+      <h2 class="label" id="setsT">Choose a set</h2>
+      ${order.map((id, pos) => {
+        const set = getSet(id), rec = S.sets[id], open = isUnlocked(id), best = rec && rec.best;
+        const meta = !open ? `🔒 Score ${PASS}% or more on set ${pos} to open this one`
+          : best ? `Best: ${best.e} of ${best.t} (${best.pct}%)`
+          : `${flat(set).length} questions, ${setTotal(set)} stars to win`;
+        return `<button class="setcard ${open ? '' : 'locked'}" data-set="${id}" ${open ? '' : 'aria-disabled="true"'}>
+          <span class="emoji" aria-hidden="true">${set.emoji}</span>
+          <span><span class="sc-title">Set ${pos + 1}: ${esc(set.title)}${set.challenge ? '<span class="chal">Challenge</span>' : ''}</span><br><span class="meta">${esc(set.about)}</span><br><span class="meta">${meta}</span></span>
+          <span class="go">${open ? (best ? starRow(starsFor(best.pct)) : 'Start ▶') : 'Locked'}</span>
+        </button>`;
+      }).join('')}
+    </section>
+    <section class="card" style="margin-top:1.25rem">
+      <h2 style="font-size:1.15rem">What every set covers</h2>
+      <div class="knows">${Object.values(SECTIONS).map(s => `<span class="know">${s.icon} ${esc(s.name)}</span>`).join('')}</div>
+      <p class="tip">Every set covers all six topics, so you can start with any set you like.</p>
+    </section>
+    <nav class="homefoot" aria-label="More">
+      <button class="btn btn-sun" id="histBtn">🏆 My results</button>
+      <button class="btn" id="setBtn">⚙️ Settings for grown-ups</button>
+      <a class="btn" href="/">🏠 All activities</a>
+    </nav>`;
+  if (c) {
+    $('#contBtn').onclick = () => go('quiz');
+    $('#discardBtn').onclick = () => confirmBox({title:'Start over?', text:'The answers in your paused set will be cleared.', yes:'Yes, clear it', no:'Keep it', onYes(){ S.current = null; save(); go('home'); }});
+  }
+  $$('.setcard').forEach(b => b.onclick = () => {
+    const id = +b.dataset.set;
+    if (!isUnlocked(id)) {
+      const pos = orderPos(id);
+      let t = pos - 1; while (t > 0 && !isUnlocked(order[t])) t--;
+      confirmBox({title:'This set is locked', text:`Score ${PASS}% or more on set ${pos} to open this one. You can do it!`, yes:`Go to set ${t + 1}`, no:'Close', bot:true, onYes(){ tryStart(order[t]); }});
+      return;
+    }
+    tryStart(id);
+  });
+  $('#histBtn').onclick = () => go('history');
+  $('#setBtn').onclick = () => go('settings');
+}
+
+function tryStart(id, mode = 'full', queue = null) {
+  const c = S.current;
+  if (c && c.setId === id && mode === 'full') {
+    confirmBox({title:'That set is paused', text:'Do you want to keep going from where you stopped?', yes:'▶ Continue', no:'Start again', onYes(){ go('quiz'); }});
+    $('#cbNo').onclick = () => { hideLayer(); startSet(id, mode, queue); };
+    return;
+  }
+  if (c) { confirmBox({title:'You have a paused set', text:`Starting now will clear your paused set: ${getSet(c.setId).title}.`, yes:'Start the new set', no:'Cancel', onYes(){ startSet(id, mode, queue); }}); return; }
+  startSet(id, mode, queue);
+}
+function startSet(id, mode = 'full', queue = null) {
+  const f = flat(getSet(id));
+  S.current = {setId:id, mode, queue: queue || f.map((_, i) => i), answers:{}, elapsed:0, started:Date.now()};
+  streak = 0;
+  save(); go('quiz');
+}
+
+/* ---------- Quiz ---------- */
+function startTimer() {
+  stopTimer();
+  let last = Date.now(), ticks = 0;
+  timer = setInterval(() => { const now = Date.now(); if (S.current && !paused) { S.current.elapsed += now - last; if (++ticks % 5 === 0) save(); } last = now; }, 1000);
+}
+function stopTimer() { if (timer) clearInterval(timer); timer = null; }
+function openQuiz() { if (!S.current) return go('home'); paused = false; renderQuestion(); if (screen === 'quiz' && S.current) startTimer(); }
+function tally(c) { let e = 0, t = 0; Object.values(c.answers).forEach(a => { e += a.e; t += a.t; }); return {e, t}; }
+
+function renderQuestion() {
+  runCleanups();
+  const c = S.current, set = getSet(c.setId), f = flat(set);
+  const pos = c.queue.findIndex(i => !c.answers[i]);
+  if (pos < 0) return finishRun();
+  const idx = c.queue[pos], {sec, item} = f[idx];
+  const done = c.queue.length - c.queue.filter(i => !c.answers[i]).length;
+  const pct = done / c.queue.length;
+  const {e, t} = tally(c);
+  const fig = item.fig ? FIGURES[item.fig] : null;
+  app.innerHTML = `
+    <div class="topbar">
+      <button class="btn btn-icon" id="pauseBtn" aria-label="Pause">⏸</button>
+      <span class="where"><b>${set.emoji} ${esc(set.title)}</b><span>Question ${done + 1} of ${c.queue.length}</span></span>
+      ${streak >= 3 ? `<span class="pill fire" aria-label="${streak} right in a row">🔥 ${streak}</span>` : ''}
+      <span class="pill" id="scorePill" aria-label="${e} stars out of ${t}">⭐ ${e}/${t}</span>
+    </div>
+    <div class="track-wrap" aria-hidden="true">
+      <div class="track"></div><div class="fill" style="width:${pct * 100}%"></div>
+      <div class="walker" style="left:${pct * 100}%">${globe()}</div><div class="goal">🏁</div>
+    </div>
+    <article class="card" id="qcard">
+      <span class="sec-tag">${SECTIONS[sec].icon} ${SECTIONS[sec].name}</span>
+      <div class="prompt"><h2>${esc(item.prompt)}</h2>${canSpeak ? '<button class="speak" id="speakBtn" aria-label="Read the question out loud">🔊</button>' : ''}</div>
+      ${fig ? `<div class="figure"><svg viewBox="${fig.box}" role="img" aria-label="${esc(fig.cap)}">${fig.svg}</svg></div>` : ''}
+      <div id="qbody"></div>
+    </article>
+    <div class="dock-space" id="dockSpace"></div>`;
+  const body = $('#qbody');
+  const h = TYPES[item.t](item, body, () => { const b = $('#checkBtn'); if (b) b.disabled = !h.ready(); }, cleanups);
+  Q = {idx, item, sec, h, checked:false};
+  const sb = $('#speakBtn'); if (sb) sb.onclick = () => speak(speakText(item));
+  $('#pauseBtn').onclick = pause;
+  dock.className = 'dock';
+  dockInner.innerHTML = `<button class="btn btn-go btn-wide" id="checkBtn" disabled>${item.t === 'draw' ? 'Save my drawing' : 'Check my answer'}</button>`;
+  $('#checkBtn').onclick = doCheck;
+  $('#checkBtn').disabled = !h.ready();
+  syncDockSpace();
+}
+function syncDockSpace() { const sp = $('#dockSpace'); if (sp) sp.style.height = (dock.offsetHeight + 24) + 'px'; }
+
+function doCheck() {
+  if (!Q || Q.checked || !Q.h.ready()) return;
+  const c = S.current, set = getSet(c.setId), item = Q.item;
+  const res = Q.h.check();
+  Q.checked = true;
+  c.answers[Q.idx] = {e: res.e, t: res.t};
+
+  if (item.t === 'draw' && res.picture) { S.gallery.unshift({setId:set.id, img:res.picture, tip:item.tip, date:Date.now()}); S.gallery = S.gallery.slice(0, 12); }
+
+  const full = res.t > 0 && res.e === res.t;
+  if (item.t === 'compass' && full) S.stats.compass++;
+  if (item.t === 'gridmap' && full) S.stats.map++;
+  if (item.t === 'draw') S.stats.draw++;
+  if (item.fig && /bars$/.test(item.fig) && full) S.stats.chart++;
+  if (Q.sec === 'climate' && full) S.stats.climate++;
+  if (Q.sec === 'resources' && full) S.stats.resources++;
+  if (res.t > 0) { streak = full ? streak + 1 : 0; if (streak > S.stats.streak) S.stats.streak = streak; }
+
+  const earned = newBadges();
+  save();
+
+  const {e, t} = tally(c);
+  const pill = $('#scorePill'); pill.textContent = `⭐ ${e}/${t}`; pill.setAttribute('aria-label', `${e} stars out of ${t}`);
+
+  const kind = res.t === 0 || res.e === res.t ? 'good' : res.e === 0 ? 'bad' : 'part';
+  let title, body = '';
+  if (item.t === 'draw') {
+    title = '🎨 Lovely drawing!';
+    body = `<p>Your drawing is saved in My Sketchbook. ${res.strokes > 12 ? 'You put a lot of detail into that one!' : 'Come back any time and draw another.'}</p>`;
+  } else {
+    /* With a table worth a dozen stars, "nearly all of it" has to mean it. */
+    const frac = res.t ? res.e / res.t : 1;
+    title = kind === 'good' ? '✅ ' + pick(['Great thinking!', 'You got it!', 'Spot on!', 'Well done!', 'Exactly right!'])
+      : kind === 'part' ? '🌟 ' + (frac >= 0.6
+          ? pick(['Almost!', 'So close!', 'Good work, nearly all of it!'])
+          : pick(['A good start!', 'Some of it is right.', 'Part of the way there.']))
+      : '💪 ' + pick(['Nice try!', 'Good try!', 'Not quite yet.']);
+    if (item.t === 'type' && res.nearly) body += `<p>Right word — just watch the spelling: <b>${esc(item.accept[0])}</b>.</p>`;
+    if (kind !== 'good') body += `<p><span class="ans">The answer:</span><br>${res.answer}</p>`;
+    if (kind === 'part' && res.t > 2) body += `<p>You got ${res.e} of the ${res.t} parts right.</p>`;
+  }
+  if (item.explain) body += `<p class="why">💡 ${esc(item.explain)}</p>`;
+  if (streak === 3) body += `<p>🔥 Three right in a row!</p>`;
+  else if (streak >= 6) body += `<p>🔥 ${streak} in a row — you are on fire!</p>`;
+  earned.forEach(b => { body += `<div class="badge-pop"><span class="bi">${b.icon}</span><span><b>New badge: ${esc(b.name)}</b><br><small>${esc(b.desc)}</small></span></div>`; });
+
+  const gain = res.t ? `+${res.e} of ${res.t}` : 'Saved';
+  const last = c.queue.every(i => c.answers[i]);
+  dock.className = 'dock ' + kind;
+  dockInner.innerHTML = `<div class="fb" role="status"><h3>${title}<span class="gain">${gain}</span></h3>${body}</div>
+    <button class="btn btn-go btn-wide" id="nextBtn">${last ? '🏁 See my results' : 'Next question ▶'}</button>`;
+  $('#nextBtn').onclick = next;
+  $('#nextBtn').focus({preventScroll:true});
+  syncDockSpace();
+  beep(res.t === 0 ? 'good' : kind);
+  if (kind === 'good') { const b = $('.walker .globe'); if (b) { b.classList.remove('happy'); void b.offsetWidth; b.classList.add('happy'); } }
+}
+function next() { if (!Q || !Q.checked) return; renderQuestion(); window.scrollTo(0, 0); const f = Q && Q.h && Q.h.focus; if (f && matchMedia('(pointer: fine)').matches) f(); }
+
+function newBadges() {
+  const out = [];
+  BADGES.forEach(b => { if (!S.badges.includes(b.id) && b.got(S)) { S.badges.push(b.id); out.push(b); } });
+  return out;
+}
+
+function pause() {
+  if (!S.current) return;
+  paused = true; save();
+  const {e, t} = tally(S.current);
+  showLayer(`<div class="overlay" role="dialog" aria-modal="true" aria-labelledby="pT"><div class="modal">${globe('sleepy')}<h2 id="pT">Paused</h2>
+    <p>You have ${e} of ${t} stars so far. Your place is saved, so you can come back any time.</p>
+    <button class="btn btn-go btn-wide" id="resumeBtn">▶ Keep going</button>
+    <button class="btn btn-wide" id="homeBtn">Save and go home</button></div></div>`);
+  $('#resumeBtn').onclick = resumeQuiz;
+  $('#homeBtn').onclick = () => go('home');
+}
+function resumeQuiz() { paused = false; hideLayer(); }
+
+function finishRun() {
+  stopTimer();
+  const c = S.current, set = getSet(c.setId), f = flat(set);
+  let e = 0, t = 0; const bySec = {};
+  c.queue.forEach(i => { const a = c.answers[i], s = f[i].sec; bySec[s] = bySec[s] || {e:0, t:0}; if (a) { e += a.e; t += a.t; bySec[s].e += a.e; bySec[s].t += a.t; } });
+  const pct = t ? Math.round(e / t * 100) : 0;
+  const order = setOrder(), pos = orderPos(set.id), nextId = pos >= 0 && pos + 1 < order.length ? order[pos + 1] : null;
+  const wasOpen = nextId !== null && isUnlocked(nextId);
+  const rec = S.sets[set.id] = S.sets[set.id] || {attempts:[], best:null};
+  rec.attempts.unshift({mode:c.mode, e, t, pct, time:c.elapsed, date:Date.now()});
+  rec.attempts = rec.attempts.slice(0, 20);
+  if (c.mode === 'full' && (!rec.best || pct > rec.best.pct || (pct === rec.best.pct && c.elapsed < rec.best.time))) rec.best = {e, t, pct, time:c.elapsed, date:Date.now()};
+  if (c.mode === 'fix') S.stats.fix++;
+  S.lastRun = {setId:set.id, mode:c.mode, e, t, pct, time:c.elapsed, bySec, answers:c.answers, queue:c.queue,
+    newlyOpen: nextId !== null && !wasOpen && isUnlocked(nextId)};
+  S.current = null;
+  const earned = newBadges();
+  S.lastRun.badges = earned.map(b => b.id);
+  save();
+  go('results');
+}
+
+/* ---------- Results ---------- */
+function renderResults() {
+  const r = S.lastRun; if (!r) return go('home');
+  const set = getSet(r.setId), f = flat(set), stars = starsFor(r.pct);
+  const order = setOrder(), pos = orderPos(set.id);
+  const nextSet = pos + 1 < order.length ? getSet(order[pos + 1]) : null;
+  const nextOpen = nextSet && isUnlocked(nextSet.id);
+  const wrong = r.queue.filter(i => r.answers[i] && r.answers[i].t > 0 && r.answers[i].e < r.answers[i].t);
+  const msg = r.mode === 'fix'
+    ? (r.e === r.t ? 'You fixed every single mistake. Brilliant!' : `You fixed ${r.e} of ${r.t}. Keep going — you are getting better!`)
+    : stars === 3 ? 'Outstanding work, explorer!' : stars === 2 ? 'Really good work!' : stars === 1 ? 'Good effort — keep practising!' : 'Every explorer starts somewhere. Try again!';
+  const gotBadges = (r.badges || []).map(id => BADGES.find(b => b.id === id)).filter(Boolean);
+  app.innerHTML = `
+    <div class="result-head">
+      ${globe(stars >= 2 ? 'happy' : '')}
+      <h1 id="rT" class="sr">Results</h1>
+      <div class="big-stars" aria-label="${stars} of 3 stars">${[0,1,2].map(i => `<span class="${i < stars ? 'star-on' : 'star-off'}">★</span>`).join('')}</div>
+      <p class="score-big">${r.e} / ${r.t}</p>
+      <p>${r.pct}% — ${esc(msg)}</p>
+      <p>Time: ${fmtTime(r.time)}</p>
+      ${r.newlyOpen && nextSet ? `<p><b>🔓 You have opened ${nextSet.emoji} ${esc(nextSet.title)}!</b></p>` : ''}
+    </div>
+    ${gotBadges.length ? `<div class="card" style="margin-bottom:1rem"><h2 style="font-size:1.2rem">🎉 New badges</h2><div class="badges">${gotBadges.map(b => `<div class="badge on"><span class="bi">${b.icon}</span><b>${esc(b.name)}</b><small>${esc(b.desc)}</small></div>`).join('')}</div></div>` : ''}
+    <div class="card">
+      <h2 style="font-size:1.25rem">How each topic went</h2>
+      <div class="bars">${Object.keys(SECTIONS).filter(k => r.bySec[k] && r.bySec[k].t).map(k => {
+        const b = r.bySec[k], p = Math.round(b.e / b.t * 100);
+        return `<div class="bar-row"><span>${SECTIONS[k].icon} ${SECTIONS[k].name}</span><span>${b.e}/${b.t}</span><span class="bar"><i style="width:${p}%"></i></span></div>`;
+      }).join('')}</div>
+      <p class="tip">This set covered: ${set.aligns.map(a => esc(a)).join(' · ')}</p>
+      ${wrong.length ? `<div class="review"><details><summary>🔎 Look again at ${wrong.length} question${wrong.length === 1 ? '' : 's'}</summary><ol>${wrong.map(i => {
+        const it = f[i].item;
+        return `<li><b>${esc(questionLabel(it))}</b><br>Answer: ${esc(answerText(it))}${it.explain ? `<br><span style="color:var(--ink-soft)">💡 ${esc(it.explain)}</span>` : ''}</li>`;
+      }).join('')}</ol></details></div>` : ''}
+      <div class="stack" style="margin-top:1.2rem">
+        ${wrong.length ? `<button class="btn btn-go btn-wide" id="fixBtn">🔁 Fix my mistakes (${wrong.length})</button>` : ''}
+        ${nextSet ? (nextOpen
+          ? `<button class="btn ${wrong.length ? 'btn-sun' : 'btn-go'} btn-wide" id="upBtn">⬆ Next set: ${nextSet.emoji} ${esc(nextSet.title)}</button>`
+          : `<p class="tip" style="text-align:center">Score ${PASS}% or more on the whole set to open ${nextSet.emoji} ${esc(nextSet.title)}.</p>`)
+          : `<p class="tip" style="text-align:center">You have reached the last set in your atlas! 🏁</p>`}
+        <button class="btn btn-wide" id="againBtn">Try the whole set again</button>
+        <button class="btn btn-wide" id="homeBtn2">🏠 Home</button>
+      </div>
+    </div>`;
+  if (wrong.length) $('#fixBtn').onclick = () => startSet(set.id, 'fix', wrong);
+  if (nextSet && nextOpen) $('#upBtn').onclick = () => tryStart(nextSet.id);
+  $('#againBtn').onclick = () => startSet(set.id, 'full');
+  $('#homeBtn2').onclick = () => go('home');
+}
+
+/* ---------- My results ---------- */
+function renderHistory() {
+  const order = setOrder();
+  const any = order.some(id => S.sets[id] && S.sets[id].attempts.length);
+  app.innerHTML = `
+    <div class="page-head"><button class="btn btn-icon" id="backBtn" aria-label="Back to home">⬅</button><h1>🏆 My results</h1></div>
+    <div class="hist">
+      <section class="card">
+        <h2 style="font-size:1.3rem">Badges (${S.badges.length} of ${BADGES.length})</h2>
+        <div class="badges">${BADGES.map(b => {
+          const on = S.badges.includes(b.id);
+          return `<div class="badge ${on ? 'on' : 'off'}"><span class="bi">${b.icon}</span><b>${on ? esc(b.name) : 'Locked'}</b><small>${esc(b.desc)}</small></div>`;
+        }).join('')}</div>
+      </section>
+      ${!any ? `<div class="card"><p style="margin:0;font-size:1.15rem">No results yet. Pick a set on the home page and start exploring!</p></div>` : ''}
+      ${order.map((id, pos) => {
+        const set = getSet(id), rec = S.sets[id];
+        if (!rec || !rec.attempts.length) return '';
+        return `<section class="card"><h2 style="font-size:1.3rem">${set.emoji} Set ${pos + 1}: ${esc(set.title)}</h2>
+          <p style="margin:.3rem 0">${rec.best ? `Best score: <b>${rec.best.e} of ${rec.best.t}</b> (${rec.best.pct}%) ${starRow(starsFor(rec.best.pct))}` : 'Not finished as a whole set yet'}</p>
+          <div class="knows">${set.aligns.map(a => `<span class="know">${esc(a)}</span>`).join('')}</div>
+          <div class="scroll-x"><table><thead><tr><th>When</th><th>Type</th><th>Score</th><th>Time</th></tr></thead><tbody>
+            ${rec.attempts.slice(0, 8).map(a => `<tr><td>${fmtDate(a.date)}</td><td>${a.mode === 'fix' ? 'Fix mistakes' : 'Whole set'}</td><td>${a.e}/${a.t} (${a.pct}%)</td><td>${fmtTime(a.time)}</td></tr>`).join('')}
+          </tbody></table></div></section>`;
+      }).join('')}
+      ${S.gallery.length ? `<section class="card"><h2 style="font-size:1.3rem">📓 My Sketchbook</h2>
+        <div class="gallery">${S.gallery.map(g => `<figure><img src="${g.img}" alt="A diagram drawn on ${fmtDate(g.date)}"><figcaption>${fmtDate(g.date)}</figcaption></figure>`).join('')}</div></section>` : ''}
+    </div>`;
+  $('#backBtn').onclick = () => go('home');
+}
+
+/* ---------- Settings ---------- */
+function renderSettings() {
+  const seg = (key, opts) => `<div class="seg" role="group">${opts.map(([v, l]) => `<button data-k="${key}" data-v="${v}" aria-pressed="${String(S.settings[key]) === String(v)}">${l}</button>`).join('')}</div>`;
+  const order = setOrder();
+  app.innerHTML = `
+    <div class="page-head"><button class="btn btn-icon" id="backBtn" aria-label="Back to home">⬅</button><h1>⚙️ Settings</h1></div>
+    <div class="card">
+      <div class="setting"><div><b>Text size</b><small>Bigger text is easier on young eyes.</small></div>${seg('size', [['normal', 'Big'], ['big', 'Bigger']])}</div>
+      <div class="setting"><div><b>Colours</b><small>Dark is gentle at night.</small></div>${seg('theme', [['auto', 'Auto'], ['light', 'Light'], ['dark', 'Dark']])}</div>
+      <div class="setting"><div><b>Sounds</b><small>Little chimes for right and wrong answers.</small></div>${seg('sound', [[true, 'On'], [false, 'Off']])}</div>
+      <div class="setting"><div><b>Open all sets</b><small>Normally a set opens after ${PASS}% on the one before it.</small></div>${seg('unlockAll', [[false, 'No'], [true, 'Yes']])}</div>
+      <div class="setting"><div><b>Backup progress</b><small>Saves a file with stars, badges and sketchbook drawings.</small></div><button class="btn btn-small" id="exportBtn">Save backup</button></div>
+      <div class="setting"><div><b>Restore progress</b><small>Load a backup from another device or an earlier day.</small></div><button class="btn btn-small" id="importBtn">Load backup</button><input type="file" id="importFile" accept="application/json,.json" style="display:none"></div>
+      <div class="setting"><div><b>Clear all progress</b><small>Removes scores, badges, sketchbook and any paused set.</small></div><button class="btn btn-small" id="resetBtn">Clear progress</button></div>
+    </div>
+    <div class="card" style="margin-top:1rem">
+      <h2 style="font-size:1.2rem">This learner's set order</h2>
+      <p style="margin:.5rem 0 0;font-size:1.05rem">Each new learner gets the sets in their own shuffled order, and that order then stays the same for ever, on every visit. Every set covers all six topics, so no order is harder than another. This device is using:</p>
+      <p style="margin:.5rem 0 0;font-size:1.05rem">${order.map((id, i) => `<b>${i + 1}.</b> ${getSet(id).emoji} ${esc(getSet(id).title)}`).join(' &nbsp; ')}</p>
+      <div class="setting" style="border:0"><div><b>Give a new order</b><small>Only for a different child sharing this device. It also clears their progress.</small></div><button class="btn btn-small" id="reshuffleBtn">Shuffle again</button></div>
+    </div>
+    <div class="card" style="margin-top:1rem">
+      <h2 style="font-size:1.2rem">What this covers</h2>
+      <p style="margin:.5rem 0 .5rem;font-size:1.05rem">Year 3 to Year 4 social studies: climate zones, the compass and directions, reading maps and relief maps, landforms, natural resources and how to look after them, and how people travel and live together.</p>
+      <div class="knows">${[...new Set(SETS.flatMap(s => s.aligns))].map(a => `<span class="know">${esc(a)}</span>`).join('')}</div>
+    </div>
+    <div class="card" style="margin-top:1rem">
+      <h2 style="font-size:1.2rem">How scoring works</h2>
+      <p style="margin:.5rem 0 0;font-size:1.05rem">Each question counts the first answer. Sorting, matching, ordering, gap-filling, compass roses, tick-and-cross tables and true-or-false lists all give one star per part, so a nearly-right answer still earns most of the stars. Drawings are saved in My Sketchbook rather than marked. "Fix my mistakes" repeats only what was missed; the best score always comes from a whole-set try.</p>
+      <div id="iosNote"></div>
+    </div>`;
+  $('#backBtn').onclick = () => go('home');
+  $$('.seg button').forEach(b => b.onclick = () => {
+    const k = b.dataset.k; let v = b.dataset.v;
+    if (v === 'true') v = true; else if (v === 'false') v = false;
+    S.settings[k] = v; save(); applySettings(); renderSettings();
+    const again = $(`.seg button[data-k="${k}"][data-v="${b.dataset.v}"]`); if (again) again.focus();
+  });
+  $('#reshuffleBtn').onclick = () => confirmBox({
+    title:'Give a new set order?',
+    text:'This is for a different child using the same device. It picks a fresh order and clears the stars, badges and sketchbook on this device.',
+    yes:'Yes, new learner', no:'Cancel',
+    onYes(){ const keep = S.settings; S = fresh(); S.settings = keep; S.seed = (Math.random() * 4294967296) >>> 0; setOrder(); save(); go('home'); }
+  });
+  const installed = window.navigator.standalone === true || window.matchMedia('(display-mode: standalone)').matches;
+  const onIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  const note = $('#iosNote');
+  if (note) {
+    if (onIOS && !installed) {
+      note.innerHTML = '<p style="margin:.6rem 0 0;font-size:1.05rem;background:var(--sun-soft);border-left:8px solid var(--sun);border-radius:14px;padding:.7rem .9rem">' +
+        '<b>Worth doing:</b> add this page to the Home Screen (Share → Add to Home Screen) and open it from that icon. ' +
+        'Safari erases saved progress after about a week of not visiting. Home Screen apps keep theirs.</p>';
+    } else if (installed) {
+      note.innerHTML = '<p style="margin:.6rem 0 0;font-size:1.05rem;color:var(--ink-soft)">Running from the Home Screen — progress is kept safely.</p>';
+    }
+  }
+  $('#exportBtn').onclick = () => {
+    try {
+      const stamp = new Date().toISOString().slice(0, 10);
+      const blob = new Blob([JSON.stringify(S, null, 2)], {type: 'application/json'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'world-explorers-' + stamp + '.json';
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 2000);
+    } catch (e) {
+      confirmBox({title:'Could not save', text:'This browser would not let the file be saved.', yes:'OK', no:null, onYes(){}});
+    }
+  };
+  $('#importBtn').onclick = () => $('#importFile').click();
+  $('#importFile').onchange = ev => {
+    const f = ev.target.files && ev.target.files[0];
+    ev.target.value = '';
+    if (!f) return;
+    const r = new FileReader();
+    r.onload = () => {
+      let d = null;
+      try { d = JSON.parse(String(r.result)); } catch (e) {}
+      if (!d || typeof d !== 'object' || typeof d.sets !== 'object' || d.sets === null) {
+        confirmBox({title:'That file did not fit', text:'It is not a World Explorers backup. Look for a file named world-explorers-....json', yes:'OK', no:null, onYes(){}});
+        return;
+      }
+      const done = Object.keys(d.sets).length, pics = Array.isArray(d.gallery) ? d.gallery.length : 0;
+      const bits = [done + ' set' + (done === 1 ? '' : 's') + ' started', pics + ' drawing' + (pics === 1 ? '' : 's')];
+      if (d.current) bits.push('a paused set');
+      confirmBox({
+        title:'Load this backup?',
+        text:'It has ' + bits.join(', ') + '. This replaces what is on this device now.',
+        yes:'Yes, load it', no:'Cancel',
+        onYes(){
+          S = Object.assign(fresh(), d);
+          S.settings = Object.assign(fresh().settings, d.settings || {});
+          S.stats = Object.assign(freshStats(), d.stats || {});
+          if (S.seed === null || S.seed === undefined) S.seed = (Math.random() * 4294967296) >>> 0;
+          setOrder(); save(); applySettings(); go('home');
+        }
+      });
+    };
+    r.readAsText(f);
+  };
+  $('#resetBtn').onclick = () => confirmBox({
+    title:'Clear all progress?',
+    text:'Scores, badges, sketchbook and paused sets will be removed. The set order and the settings stay the same.',
+    yes:'Yes, clear everything', no:'Cancel',
+    onYes(){ const keep = S.settings, seed = S.seed, order = S.order; S = fresh(); S.settings = keep; S.seed = seed; S.order = order; save(); go('home'); }
+  });
+}
+
+/* ---------- Global events ---------- */
+document.addEventListener('keydown', e => {
+  if (layer.innerHTML) { if (e.key === 'Escape') { if (paused) resumeQuiz(); else hideLayer(); } return; }
+  if (screen !== 'quiz' || !Q) return;
+  const tag = e.target.tagName;
+  if (e.key === 'Enter' && (tag === 'INPUT' || e.target === document.body)) {
+    e.preventDefault();
+    if (Q.checked) next(); else doCheck();
+  }
+});
+document.addEventListener('visibilitychange', () => { if (!document.hidden) return; if (screen === 'quiz') pause(); else save(); });
+window.addEventListener('resize', syncDockSpace);
+window.addEventListener('pagehide', save);
+
+load(); applySettings(); save(); go('home');
+
+/* ---------- Offline support ---------- */
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(() => {}));
+}
+</script>
+</body>
+</html>
