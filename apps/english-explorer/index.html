@@ -112,8 +112,6 @@ h1,h2,h3{font-family:var(--round);line-height:1.15;margin:0}
 .result-head .cham{width:150px;height:auto;display:block;margin:0 auto .5rem}
 .setcard .meta{color:var(--ink-soft);font-size:.95rem}
 .setcard .go{font-family:var(--round);font-weight:600;color:var(--leaf);font-size:1rem;white-space:nowrap}
-.setcard.locked{opacity:.7;cursor:not-allowed}
-.setcard.locked .go{color:var(--ink-soft)}
 .stars{display:inline-flex;gap:2px;font-size:1.1rem;letter-spacing:1px}
 .star-on{color:var(--sun)}
 .star-off{color:var(--line)}
@@ -711,7 +709,6 @@ const norm = s => String(s).toLowerCase().replace(/[^a-z\s]/g, ' ').replace(/\s+
 const fmtTime = ms => { const s = Math.max(0, Math.round(ms / 1000)); const m = Math.floor(s / 60); return m ? `${m} min ${s % 60} sec` : `${s} sec`; };
 const fmtDate = t => { const d = new Date(t); return d.toLocaleDateString(undefined, {day:'numeric', month:'short'}) + ', ' + d.toLocaleTimeString(undefined, {hour:'2-digit', minute:'2-digit'}); };
 const pick = a => a[Math.floor(Math.random() * a.length)];
-const PASS = 60;
 
 function lev(a, b) { // optimal string alignment distance (handles swapped letters)
   const d = Array.from({length: a.length + 1}, (_, i) => [i, ...Array(b.length).fill(0)]);
@@ -747,7 +744,7 @@ function chameleon(cls = '') {
 
 /* ============ STORAGE (saved in this browser) ============ */
 const KEY = 'englishExplorer.v1';
-const fresh = () => ({v:1, sets:{}, poems:[], current:null, lastRun:null, settings:{size:'normal', theme:'auto', sound:true, unlockAll:false}});
+const fresh = () => ({v:1, sets:{}, poems:[], current:null, lastRun:null, settings:{size:'normal', theme:'auto', sound:true}});
 let S = fresh();
 let storageOK = true;
 function load() {
@@ -756,9 +753,37 @@ function load() {
     if (raw) { const d = JSON.parse(raw); S = Object.assign(fresh(), d); S.settings = Object.assign(fresh().settings, d.settings || {}); }
   } catch (e) { storageOK = false; }
 }
+/* setItem throws when the browser is full, and in a couple of private modes
+   it fails quietly, so every write is read back before it is believed. */
+function writeKey(k, text) {
+  try {
+    localStorage.setItem(k, text);
+    return localStorage.getItem(k) === text;
+  } catch (e) { return false; }
+}
+/* All the activities on this site share one storage allowance. Saved art is
+   the throwaway tier wherever it came from, so one child's stars may clear
+   another activity's pictures — never the other way round. */
+function dropArtElsewhere() {
+  let keys, freed = false;
+  try { keys = Object.keys(localStorage); } catch (e) { return false; }
+  for (const k of keys) {
+    if (/\.art\.v\d+$/.test(k)) {
+      try { localStorage.removeItem(k); freed = true; } catch (e) {}
+    }
+  }
+  return freed;
+}
+/* Writes the child's progress. If the browser is full it clears the pictures
+   other activities on this site have saved — those are replaceable, a
+   child's record of their own work is not. */
 function save() {
   S.updatedAt = Date.now();
-  try { localStorage.setItem(KEY, JSON.stringify(S)); storageOK = true; } catch (e) { storageOK = false; }
+  const body = JSON.stringify(S);
+  let ok = writeKey(KEY, body);
+  if (!ok && dropArtElsewhere()) ok = writeKey(KEY, body);
+  storageOK = ok;
+  return ok;
 }
 function applySettings() {
   const r = document.documentElement;
@@ -804,11 +829,6 @@ function flat(set) { if (!set._flat) { set._flat = []; set.sections.forEach(sec 
 const setTotal = set => flat(set).reduce((a, q) => a + itemTotal(q.item), 0);
 const starsFor = pct => pct >= 90 ? 3 : pct >= 70 ? 2 : pct >= 50 ? 1 : 0;
 const starRow = n => `<span class="stars" aria-label="${n} of 3 stars">${[0,1,2].map(i => `<span class="${i < n ? 'star-on' : 'star-off'}">★</span>`).join('')}</span>`;
-function isUnlocked(id) {
-  if (id === 1 || S.settings.unlockAll) return true;
-  const prev = S.sets[id - 1];
-  return !!(prev && prev.best && prev.best.pct >= PASS);
-}
 function questionLabel(item) { return item.text || item.clue || (item.t === 'rhyme' ? `A word that rhymes with "${item.word}"` : item.prompt); }
 function answerText(item) {
   switch (item.t) {
@@ -1273,12 +1293,12 @@ function renderHome() {
     <section class="sets" aria-labelledby="setsT">
       <h2 class="label" id="setsT">Choose a set</h2>
       ${SETS.map(set => {
-        const rec = S.sets[set.id], open = isUnlocked(set.id), best = rec && rec.best;
-        const meta = !open ? `🔒 Get ${PASS}% or more on Set ${set.id - 1} to open` : best ? `Best: ${best.e} of ${best.t} (${best.pct}%)` : `${flat(set).length} questions, ${setTotal(set)} stars to win`;
-        return `<button class="setcard ${open ? '' : 'locked'}" data-set="${set.id}" ${open ? '' : 'aria-disabled="true"'}>
+        const rec = S.sets[set.id], best = rec && rec.best;
+        const meta = best ? `Best: ${best.e} of ${best.t} (${best.pct}%)` : `${flat(set).length} questions, ${setTotal(set)} stars to win`;
+        return `<button class="setcard" data-set="${set.id}">
           <span class="emoji" aria-hidden="true">${set.emoji}</span>
           <span><span class="sc-title">Set ${set.id}: ${esc(set.title)}</span><br><span class="meta">${esc(set.about)}</span><br><span class="meta">${meta}</span></span>
-          <span class="go">${open ? (best ? starRow(starsFor(best.pct)) : 'Start ▶') : 'Locked'}</span>
+          <span class="go">${best ? starRow(starsFor(best.pct)) : 'Start ▶'}</span>
         </button>`;
       }).join('')}
     </section>
@@ -1293,7 +1313,6 @@ function renderHome() {
   }
   $$('.setcard').forEach(b => b.onclick = () => {
     const id = +b.dataset.set;
-    if (!isUnlocked(id)) { let target = id - 1; while (target > 1 && !isUnlocked(target)) target--; confirmBox({title:'This set is locked', text:`Finish Set ${id - 1} with ${PASS}% or more to open it. You can do it!`, yes:`Go to Set ${target}`, no:'Close', cham:true, onYes(){ tryStart(target); }}); return; }
     tryStart(id);
   });
   $('#histBtn').onclick = () => go('history');
@@ -1420,13 +1439,11 @@ function finishRun() {
   let e = 0, t = 0; const bySec = {};
   c.queue.forEach(i => { const a = c.answers[i], s = f[i].sec; bySec[s] = bySec[s] || {e:0, t:0}; if (a) { e += a.e; t += a.t; bySec[s].e += a.e; bySec[s].t += a.t; } });
   const pct = t ? Math.round(e / t * 100) : 0;
-  const nextId = set.id + 1, wasOpen = nextId <= SETS.length && isUnlocked(nextId);
   const rec = S.sets[set.id] = S.sets[set.id] || {attempts:[], best:null};
   rec.attempts.unshift({mode:c.mode, e, t, pct, time:c.elapsed, date:Date.now()});
   rec.attempts = rec.attempts.slice(0, 20);
   if (c.mode === 'full' && (!rec.best || pct > rec.best.pct || (pct === rec.best.pct && c.elapsed < rec.best.time))) rec.best = {e, t, pct, time:c.elapsed, date:Date.now()};
-  S.lastRun = {setId:set.id, mode:c.mode, e, t, pct, time:c.elapsed, bySec, answers:c.answers, queue:c.queue,
-    newlyOpen: nextId <= SETS.length && !wasOpen && isUnlocked(nextId)};
+  S.lastRun = {setId:set.id, mode:c.mode, e, t, pct, time:c.elapsed, bySec, answers:c.answers, queue:c.queue};
   S.current = null; save();
   go('results');
 }
@@ -1440,8 +1457,8 @@ function renderResults() {
     ? (r.e === r.t ? 'You fixed every mistake. Amazing!' : `You fixed ${r.e} of ${r.t}. Keep going, you are getting better!`)
     : r.pct >= 90 ? 'Amazing! You are an English Explorer star!' : r.pct >= 70 ? 'Great work! You know so much!' : r.pct >= 50 ? 'Good job! A little more practice will help.' : 'Nice effort! Practice makes progress. Try again!';
   const nextSet = getSet(set.id + 1);
-  const nextOpen = nextSet && isUnlocked(nextSet.id);
   app.innerHTML = `
+    ${storageOK ? '' : '<div class="notice">⚠️ This browser would not save these results. Nothing is lost while this page stays open — open Settings and use <b>Save backup</b> to keep them.</div>'}
     <section class="result-head" aria-labelledby="rT">
       ${chameleon('happy')}
       <h1 id="rT" class="sr">Results</h1>
@@ -1450,20 +1467,19 @@ function renderResults() {
       <p>${r.pct}% correct in ${fmtTime(r.time)}</p>
       <p style="color:var(--ink);font-size:1.3rem;font-family:var(--round);font-weight:600">${msg}</p>
     </section>
-    ${r.newlyOpen ? `<div class="notice">🎉 You opened <b>Set ${nextSet.id}: ${esc(nextSet.title)}</b>!</div>` : ''}
     <div class="card">
       <h2 style="font-size:1.3rem">${r.mode === 'fix' ? 'Mistakes you fixed' : 'How you did in each part'}</h2>
       <div class="bars">${Object.entries(r.bySec).filter(([, v]) => v.t > 0).map(([k, v]) => `<div class="bar-row"><span>${SECTIONS[k].icon} ${SECTIONS[k].name}</span><b>${v.e}/${v.t}</b><div class="bar" aria-hidden="true"><i style="width:${Math.round(v.e / v.t * 100)}%"></i></div></div>`).join('')}</div>
       <div class="stack">
         ${wrong.length ? `<button class="btn btn-go btn-wide" id="fixBtn">🔁 Fix my mistakes (${wrong.length})</button>` : ''}
-        ${nextSet ? (nextOpen ? `<button class="btn ${wrong.length ? 'btn-sun' : 'btn-go'} btn-wide" id="upBtn">⬆ Next set: ${nextSet.emoji} ${esc(nextSet.title)}</button>` : `<p class="tip" style="text-align:center">Get ${PASS}% or more on the whole set to open Set ${nextSet.id}.</p>`) : `<p class="tip" style="text-align:center">You reached the last set! 🏁</p>`}
+        ${nextSet ? `<button class="btn ${wrong.length ? 'btn-sun' : 'btn-go'} btn-wide" id="upBtn">⬆ Next set: ${nextSet.emoji} ${esc(nextSet.title)}</button>` : `<p class="tip" style="text-align:center">You reached the last set! 🏁</p>`}
         <button class="btn btn-wide" id="againBtn">Try the whole set again</button>
         <button class="btn btn-wide" id="homeBtn2">🏠 Home</button>
       </div>
       ${wrong.length ? `<div class="review"><details><summary>👀 Look at the right answers (${wrong.length})</summary><ol>${wrong.map(i => `<li>${SECTIONS[f[i].sec].icon} ${esc(questionLabel(f[i].item))}<br><b>Answer:</b> ${esc(answerText(f[i].item))}</li>`).join('')}</ol></details></div>` : ''}
     </div>`;
   if (wrong.length) $('#fixBtn').onclick = () => tryStart(set.id, 'fix', wrong);
-  if (nextSet && nextOpen) $('#upBtn').onclick = () => tryStart(nextSet.id);
+  if (nextSet) $('#upBtn').onclick = () => tryStart(nextSet.id);
   $('#againBtn').onclick = () => tryStart(set.id);
   $('#homeBtn2').onclick = () => go('home');
   if (r.pct >= 70) beep('good');
@@ -1499,7 +1515,6 @@ function renderSettings() {
       <div class="setting"><div><b>Text size</b><small>Bigger text is easier on young eyes.</small></div>${seg('size', [['normal', 'Big'], ['big', 'Bigger']])}</div>
       <div class="setting"><div><b>Colors</b><small>Dark is gentle at night.</small></div>${seg('theme', [['auto', 'Auto'], ['light', 'Light'], ['dark', 'Dark']])}</div>
       <div class="setting"><div><b>Sounds</b><small>Little chimes for right and wrong answers.</small></div>${seg('sound', [[true, 'On'], [false, 'Off']])}</div>
-      <div class="setting"><div><b>Open all sets</b><small>Normally a set opens after ${PASS}% on the set before.</small></div>${seg('unlockAll', [[false, 'No'], [true, 'Yes']])}</div>
       <div class="setting"><div><b>Backup progress</b><small>Saves a file with stars, poems and settings.</small></div><button class="btn btn-small" id="exportBtn">Save backup</button></div>
       <div class="setting"><div><b>Restore progress</b><small>Load a backup from another device or an earlier day.</small></div><button class="btn btn-small" id="importBtn">Load backup</button><input type="file" id="importFile" accept="application/json,.json" style="display:none"></div>
       <div class="setting"><div><b>Clear all progress</b><small>Removes scores, poems and any paused set.</small></div><button class="btn btn-small" id="resetBtn">Clear progress</button></div>
