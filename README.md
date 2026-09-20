@@ -17,7 +17,7 @@ Static, zero-build collection of practice apps. Every push to `main` deploys aut
     ├── inventors-lab/
     │   └── index.html          Year 3–4 English: pronouns, job words, word
     │                           families, to + verb, reading, 2D/3D shapes,
-    │                           optical illusions (6 sets)
+    │                           optical illusions (6 sets of 42)
     ├── science-detectives/
     │   └── index.html          Year 3–4 science: states of matter, particles,
     │                           separating mixtures, dissolving, natural
@@ -34,9 +34,19 @@ shared runtime. Copying an app folder is a perfectly good way to start a new one
 
 ## Inventors Lab
 
-Built from the SG NEXT Year 3 review worksheets. 6 sets × 25 questions (150
-questions, 273 stars), each set with its own reading passage about a real
+Built from the SG NEXT Year 3 review worksheets. 6 sets × 42 questions (252
+questions, 470 stars), each set with its own reading passage about a real
 inventor or discovery.
+
+Every part of the two review sheets is covered several times over in every
+set, using the sheets' own sentences and definitions: all thirteen
+circle-the-pronoun sentences, the write-a-sentence-with-both-pronouns task
+(marked on whole words, so *he* is never found hiding inside *the*), all six
+job titles with the sheet's definitions, the four word-family pairs plus more,
+all six *to + verb* sentences, both reading passages with every question asked
+of them, and the eight-shape word bank — circle, square, triangle, rectangle,
+star, diamond, heart, oval — with star, heart and diamond drawn as their own
+shapes. A child who can do every set can do the sheet.
 
 Seven sections per set: **Pronouns** (subject/object) · **Job Words** ·
 **Word Families** (invent → inventor → invention) · **To + Verb** (want/hope/
@@ -93,8 +103,17 @@ pick whichever one they like.
 ## Science Detectives
 
 Built from the Y3 final science review packet and the "separating materials
-from natural gas" handout. 8 sets × 28 questions (224 questions, 593 stars),
+from natural gas" handout. 8 sets × 42 questions (336 questions, 940 stars),
 in two tiers.
+
+Every section of every set has six questions, and between them the sets ask
+every question on the review packet in several forms: the seven-property
+solid/liquid/gas table (split across two tick-and-cross grids so it fits a
+phone), the soluble-or-not list with all eight of its items, the four
+method-equipment-mixture matches, the *why can't a sieve / why can't a filter*
+explanations, the materials table with its magnet-sieve-or-hands decision, the
+filter prediction, all ten dissolving true-or-false statements, and the sugar
+chart with its most / least / in-between questions.
 
 The **six core sets** are parallel, not a progression — every one covers all six
 topics, which is what makes the shuffled set order safe. The **two challenge

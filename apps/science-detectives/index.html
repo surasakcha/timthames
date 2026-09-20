@@ -379,9 +379,11 @@ h1,h2,h3{font-family:var(--round);line-height:1.15;margin:0}
   .ord{font-size:.96rem;padding:.5rem .6rem;gap:.5rem}
   .tfrow{font-size:.98rem;grid-template-columns:1fr;gap:.5rem}
   .tfbtns{justify-content:flex-end}
-  .cell{width:2.9rem;height:2.9rem;font-size:1.3rem}
-  .gridq th{font-size:.78rem;min-width:4rem}
-  .gridq th.rowhead{font-size:.95rem}
+  /* a four-column tick table has to fit a phone without sideways scrolling */
+  .cell{width:2.4rem;height:2.4rem;font-size:1.1rem;border-width:2px;border-radius:10px}
+  .gridq table{border-spacing:3px}
+  .gridq th{font-size:.66rem;width:2.9rem;min-width:0;max-width:none;padding:.12rem .08rem;overflow-wrap:anywhere}
+  .gridq th.rowhead{font-size:.85rem;width:3.4rem;padding-right:.3rem;white-space:normal}
 }
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
@@ -419,7 +421,15 @@ const SETS = [
         explain:'A liquid always takes the shape of its container. The amount of water does not change — only its shape.'},
       {t:'type', prompt:'Type one word.', text:'Joe blows a bubble. Inside the bubble there is a ______.',
         accept:['gas'], hint:'Solid, liquid or gas?',
-        explain:'Joe blows air into the bubble, and air is a gas. The gas pushes out on all sides, which is why a bubble is round.'}
+        explain:'Joe blows air into the bubble, and air is a gas. The gas pushes out on all sides, which is why a bubble is round.'},
+      {t:'fill', prompt:'Drag the right state into each gap.',
+        lines:['The juice inside the glass is a {liquid}.','The ice cube is a {solid}.','The bubble inside the glass is full of {gas}.'],
+        decoys:['water','air'],
+        explain:'This is the picture question from the review packet. Juice flows, so it is a liquid. Ice keeps its shape, so it is a solid. A bubble is a thin skin with gas inside.'},
+      {t:'tfgrid', prompt:'True or false?',
+        rows:[['A solid keeps its own shape.', true], ['A liquid keeps its own shape.', false],
+              ['A gas spreads out to fill all of its container.', true], ['Ice and water are the same material in two different states.', true]],
+        explain:'Ice, water and steam are all water. What changes is how the particles are arranged, not what they are made of.'}
     ]},
     {key:'particles', items:[
       {t:'choice', prompt:'Look at the particles.', fig:'partsolid', text:'The little balls are particles. Which state is this?',
@@ -435,7 +445,14 @@ const SETS = [
         explain:'Particles are closest in a solid, a little looser in a liquid, and far apart in a gas.'},
       {t:'choice', prompt:'Think about the particles.', long:true, text:'Ice melts into water. What happens to the particles?',
         opts:['They start to slide past each other','They stop moving','They disappear'], ans:0,
-        explain:'Melting never destroys particles. They just get enough energy to slide past each other, so the water can flow.'}
+        explain:'Melting never destroys particles. They just get enough energy to slide past each other, so the water can flow.'},
+      {t:'grid', prompt:'Tick ✓ or cross ✗ in every box.',
+        cols:['Has a fixed shape','Takes the shape of its container','Has a fixed volume'],
+        rows:[['Solid',[1,0,1]],['Liquid',[0,1,1]],['Gas',[0,1,0]]],
+        explain:'This is the first half of the review packet\u2019s big table. Volume means how much space it takes up. A solid and a liquid both keep the same volume. Only a gas can spread out or be squashed, so only a gas has no fixed volume.'},
+      {t:'choice', prompt:'Look at the particles.', fig:'partgas', text:'The little balls are particles. Which state is this?',
+        opts:['Gas','Solid','Liquid'], ans:0,
+        explain:'The particles are far apart with big gaps and no pattern. That is a gas. In a liquid they would still be touching each other.'}
     ]},
     {key:'mixtures', items:[
       {t:'match', prompt:'Match each tool to the job it does.',
@@ -451,7 +468,14 @@ const SETS = [
         explain:'A sieve has small holes. Anything smaller than a hole drops through. Flour grains are much smaller than rice grains.'},
       {t:'type', prompt:'Type one word.', text:'A tool with lots of tiny holes that splits big bits from small bits is a ______.',
         accept:['sieve'], hint:'There is probably one in your kitchen.',
-        explain:'A sieve. The holes let small bits through and hold big bits back.'}
+        explain:'A sieve. The holes let small bits through and hold big bits back.'},
+      {t:'match', prompt:'Match each way of separating to the mixture it is best for.',
+        left:[{label:'Sieve'},{label:'Filter funnel'},{label:'Magnet'},{label:'Hand picking'}],
+        right:['rice and cereals','water and sand','iron filings and beans','a pencil and a pen'],
+        explain:'This is question 8 of the review packet. Rice and cereals are different sizes, so sieve. Sand does not dissolve in water, so filter. Iron filings are magnetic. A pencil and a pen are big enough to pick out.'},
+      {t:'choice', prompt:'Explain why.', long:true, text:'Why can you NOT separate a blue marble from a green marble using a sieve?',
+        opts:['They are the same size, so a sieve treats them exactly the same','Marbles are too heavy for a sieve','Marbles dissolve in the sieve'], ans:0,
+        explain:'A sieve only sorts by SIZE. Two marbles the same size either both fall through or both stay on top. Colour is the difference here, and the tool for a colour difference is your hands.'}
     ]},
     {key:'dissolving', items:[
       {t:'sort', prompt:'Stir each one into a glass of water.',
@@ -467,7 +491,16 @@ const SETS = [
         explain:'Nothing is lost. The salt has broken into tiny bits spread all through the water. Taste it and it is still salty.'},
       {t:'type', prompt:'Type one word.', text:'A solid that will not dissolve is called ______.',
         accept:['insoluble'], hint:'It starts with "in", like "in-visible".',
-        explain:'Insoluble. The "in" at the front means "not", so insoluble means "not soluble".'}
+        explain:'Insoluble. The "in" at the front means "not", so insoluble means "not soluble".'},
+      {t:'tfgrid', prompt:'True or false?',
+        rows:[['A dissolved substance cannot be seen, because it has become part of the water.', true],
+              ['Only white powder dissolves.', false],
+              ['A dissolved substance has disappeared for ever.', false],
+              ['The hotter the water, the quicker solids dissolve.', true]],
+        explain:'Three of these come straight from the review packet. Brown coffee and blue bath salts both dissolve, so it is not only white things. And nothing disappears: taste the water and the sugar is still there.'},
+      {t:'choice', prompt:'Explain why.', long:true, text:'Why are salt and sugar soluble, but sand and rock are not?',
+        opts:['Salt and sugar break into bits too small to see, and spread through the water; sand and rock stay whole','Salt and sugar are white and sand is not','Sand and rock are too heavy to float'], ans:0,
+        explain:'Soluble means the solid breaks up into invisible bits that mix all through the water. Sand and rock do not break up like that, however long you stir, so they are insoluble.'}
     ]},
     {key:'resources', items:[
       {t:'match', prompt:'Match each material to where it comes from.',
@@ -483,7 +516,14 @@ const SETS = [
         explain:'Oil, gas and ores were made under the ground long ago. Wood, cotton and rubber all grow on plants, so we can grow more of them.'},
       {t:'type', prompt:'Type one word.', text:'Metal is found inside rocks that are called ______.',
         accept:['ores','ore'], hint:'It rhymes with "more".',
-        explain:'An ore is a rock with metal locked inside it. The metal has to be got out before we can use it.'}
+        explain:'An ore is a rock with metal locked inside it. The metal has to be got out before we can use it.'},
+      {t:'choice', prompt:'Where does it come from?', long:true, text:'A wooden chair, a paper book and a cotton shirt. What do all three start as?',
+        opts:['A plant that grew','A rock from the ground','Oil from under the sea'], ans:0,
+        explain:'Wood and paper come from trees, and cotton grows on a plant. All three are materials we can grow more of.'},
+      {t:'tfgrid', prompt:'True or false?',
+        rows:[['Oil is found deep under the ground.', true], ['Plastic is made from oil.', true],
+              ['Wood is dug out of the ground.', false], ['Metal ore is a rock with metal inside it.', true]],
+        explain:'Wood is the odd one out: it grows on a tree. Oil, gas and ores all have to be drilled or dug from under the ground.'}
     ]},
     {key:'think', items:[
       {t:'match', prompt:'Read the table. Which is A, B and C?', fig:'logic1',
@@ -498,7 +538,15 @@ const SETS = [
         explain:'This is called evaporation. The water leaves as a gas, but salt cannot turn into a gas so easily, so the salt stays behind.'},
       {t:'choice', prompt:'Explain why.', long:true, text:'Why can a filter funnel NOT take the sugar out of sugary water?',
         opts:['The sugar broke into bits too small for the paper to catch','Sugar is magnetic','Filter paper has no holes at all'], ans:0,
-        explain:'Filter paper catches bits that are bigger than its holes. Dissolved sugar is far smaller than those holes, so it flows straight through with the water.'}
+        explain:'Filter paper catches bits that are bigger than its holes. Dissolved sugar is far smaller than those holes, so it flows straight through with the water.'},
+      {t:'choice', prompt:'Use what you know.', long:true,
+        text:'A sealed bottle of water is put in the freezer and turns to ice. Then it is left out and melts again. What is in the bottle now?',
+        opts:['Exactly the same water as before','Less water, because some froze away','Different water'], ans:0,
+        explain:'Freezing and melting only change the state. Nothing is added and nothing gets out of a sealed bottle, so it is the same water, all of it.'},
+      {t:'multi', prompt:'Tick EVERY one that is a gas.',
+        opts:[['the air in a balloon', true], ['steam from a kettle', true], ['the bubbles inside fizzy drink', true],
+              ['a puddle of water', false], ['an ice cube', false]],
+        explain:'Air, steam and the bubbles are all gas. A puddle is liquid water and an ice cube is solid water.'}
     ]},
     {key:'investigate', items:[
       {t:'choice', prompt:'Predict what happens.', fig:'filterdirty', long:true,
@@ -517,7 +565,15 @@ const SETS = [
         explain:'Separating just moves things apart. It never changes what they are made of. An iron nail and salt are very different: one is magnetic and hard, the other dissolves.'},
       {t:'draw', prompt:'Draw the particles.',
         tip:'Draw a box of solid particles and a box of gas particles. Put the solid ones close together in rows. Put the gas ones far apart.',
-        explain:'Scientists draw particles as little balls all the time. It is the quickest way to show why a solid keeps its shape and a gas does not.'}
+        explain:'Scientists draw particles as little balls all the time. It is the quickest way to show why a solid keeps its shape and a gas does not.'},
+      {t:'choice', prompt:'Predict the result.', long:true,
+        text:'Ben pours dirty pond water through a coffee filter. Three children make predictions. Who is most likely to be right?',
+        opts:['Mia: "The water will come out cleaner, but not perfectly clean"','Tom: "The water will be exactly as dirty as before"','Sam: "The water will be completely clean, like tap water"'], ans:0,
+        explain:'This is question 9 of the review packet. The filter catches the bits of mud, so the water is cleaner. But tiny bits and anything dissolved slip straight through, so it is not perfectly clean.'},
+      {t:'choice', prompt:'What went wrong?', long:true,
+        text:'Ann wants to know if hot water dissolves sugar faster. She uses a big spoon of sugar in the hot cup and a small spoon in the cold cup. Why is her test unfair?',
+        opts:['She changed two things at once: the temperature AND the amount of sugar','Hot water cannot be tested','She should have used salt'], ans:0,
+        explain:'If the hot cup wins, was it the heat or the smaller spoonful? She cannot tell. A fair test changes ONE thing and keeps everything else the same.'}
     ]}
   ]
 },
@@ -539,7 +595,15 @@ const SETS = [
         explain:'Only a solid keeps its own shape. Liquids and gases both take the shape of whatever holds them.'},
       {t:'type', prompt:'Type one word.', text:'When water gets very cold it freezes into a solid called ______.',
         accept:['ice'], hint:'You put it in a drink on a hot day.',
-        explain:'Ice. It is the same water — the particles have just slowed down and locked into place.'}
+        explain:'Ice. It is the same water — the particles have just slowed down and locked into place.'},
+      {t:'fill', prompt:'Drag the right state into each gap.',
+        lines:['The butter in the fridge is a {solid}.','The milk in the jug is a {liquid}.','The steam above the kettle is a {gas}.'],
+        decoys:['drink','food'],
+        explain:'Cold butter keeps its shape. Milk pours. Steam spreads out into the whole kitchen.'},
+      {t:'tfgrid', prompt:'True or false?',
+        rows:[['Honey is a liquid, even though it is slow.', true], ['A gas has a fixed volume.', false],
+              ['A liquid takes the shape of its container.', true], ['Flour is a liquid because you can pour it.', false]],
+        explain:'Flour is the trap. You can pour a bag of flour, but each tiny grain keeps its own shape, so flour is a solid in small pieces. Honey really does flow and take the shape of its jar.'}
     ]},
     {key:'particles', items:[
       {t:'choice', prompt:'Look at the particles.', fig:'partgas', text:'The little balls are particles. Which state is this?',
@@ -555,7 +619,14 @@ const SETS = [
       {t:'fill', prompt:'Drag the right word into each gap.',
         lines:['A {solid} keeps its own shape.','A {liquid} can be poured into a cup.','A {gas} spreads out to fill the whole room.'],
         decoys:['bubble','spoon'],
-        explain:'These three sentences are the quickest test there is. Ask: does it keep its shape, can it be poured, does it fill the room?'}
+        explain:'These three sentences are the quickest test there is. Ask: does it keep its shape, can it be poured, does it fill the room?'},
+      {t:'grid', prompt:'Tick ✓ or cross ✗ in every box.',
+        cols:['Big spaces between the particles','Particles can move around','Can flow'],
+        rows:[['Solid',[0,0,0]],['Liquid',[0,1,1]],['Gas',[1,1,1]]],
+        explain:'This is the second half of the review packet\u2019s big table. In a solid the particles are locked in place, so it cannot flow. In a liquid they slide past each other, so it flows — but they are still touching. Only in a gas are there big spaces.'},
+      {t:'choice', prompt:'Look at the particles.', fig:'partliquid', text:'The little balls are particles. Which state is this?',
+        opts:['Liquid','Solid','Gas'], ans:0,
+        explain:'The particles are touching but jumbled, not in rows. They can slide past each other. That is a liquid.'}
     ]},
     {key:'mixtures', items:[
       {t:'choice', prompt:'What happens?', fig:'magnetsep', long:true,
@@ -571,7 +642,14 @@ const SETS = [
         explain:'A sieve only sorts by SIZE. The marbles are the same size, so the sieve cannot tell them apart. Your hands can, because you can see the colour.'},
       {t:'type', prompt:'Type one word.', text:'Iron and steel are the metals that are pulled by a ______.',
         accept:['magnet'], hint:'It sticks to the fridge door.',
-        explain:'A magnet. Most other metals, such as copper and aluminium, are not pulled at all.'}
+        explain:'A magnet. Most other metals, such as copper and aluminium, are not pulled at all.'},
+      {t:'choice', prompt:'Explain why.', long:true,
+        text:'Tom uses a magnet to lift the iron nail out of his mixture of nail, salt and rice. Why does the magnet take the nail and leave the rest?',
+        opts:['Iron is magnetic, and salt and rice are not','The nail is the biggest thing','The nail is the heaviest thing'], ans:0,
+        explain:'A magnet only pulls magnetic materials. Iron is one; salt and rice are not, so they do not move. Size and weight have nothing to do with it.'},
+      {t:'choice', prompt:'Finish Tom’s job.', long:true, text:'Tom now has salt mixed with rice. How can he separate the salt from the rice?',
+        opts:['Add water so the salt dissolves, pour it through a sieve or filter to catch the rice, then evaporate the water to get the salt back','Use the magnet again','Leave it in the sun'], ans:0,
+        explain:'Salt dissolves and rice does not. Once the salt is in the water, the rice can be caught, and warming the water brings the salt back as dry crystals.'}
     ]},
     {key:'dissolving', items:[
       {t:'tfgrid', prompt:'True or false?',
@@ -589,7 +667,15 @@ const SETS = [
       {t:'choice', prompt:'What does this tell you?', long:true,
         text:'You stir sugar into hot tea until it vanishes. The tea still tastes sweet. What does that prove?',
         opts:['The sugar is still there, in tiny bits','The sugar has gone','The sugar turned into tea'], ans:0,
-        explain:'Your tongue can find the sugar even when your eyes cannot. Dissolving hides a solid; it never destroys it.'}
+        explain:'Your tongue can find the sugar even when your eyes cannot. Dissolving hides a solid; it never destroys it.'},
+      {t:'sort', prompt:'Stir each one into water. Does it dissolve?',
+        bins:[['Soluble','it dissolves'],['Not soluble','it does not dissolve']],
+        chips:[['salt',0],['sugar',0],['rock',1],['sand',1],['wax',1],['oil',1]],
+        explain:'These are from question 1 of the review packet. Salt and sugar dissolve. Rock, sand and wax stay as they are, and oil floats on top in its own layer.'},
+      {t:'tfgrid', prompt:'True or false?',
+        rows:[['Some solids dissolve.', true], ['All materials dissolve.', false],
+              ['A substance that does not dissolve is called insoluble.', true], ['Only powders dissolve.', false]],
+        explain:'A sugar cube is not a powder, but it dissolves. A powder of chalk is a powder, but it does not. Being a powder is nothing to do with it.'}
     ]},
     {key:'resources', items:[
       {t:'choice', prompt:'What is it for?', long:true, text:'Natural gas is burned in a cooker at home. What is it doing there?',
@@ -605,7 +691,13 @@ const SETS = [
         explain:'We pick a material for the job it is good at. Petrol burns easily, metal is strong, and stone lasts a very long time.'},
       {t:'type', prompt:'Type one word.', text:'A power plant burns fuel to make ______ for our homes.',
         accept:['electricity','power'], hint:'It comes out of the plug in the wall.',
-        explain:'Power plants burn fuel to make electricity, which then travels along wires to every house.'}
+        explain:'Power plants burn fuel to make electricity, which then travels along wires to every house.'},
+      {t:'sort', prompt:'Is it a fuel?', bins:[['A fuel','burned to give heat or power'],['Not a fuel','used for something else']],
+        chips:[['natural gas',0],['petrol',0],['wood',0],['sand',1],['glass',1],['water',1]],
+        explain:'A fuel is anything we burn to get energy. Gas, petrol and wood all burn. Sand, glass and water do not.'},
+      {t:'choice', prompt:'Think about the kitchen.', long:true, text:'A gas cooker burns natural gas under a pan. What is the gas giving the pan?',
+        opts:['Heat','Water','Light only'], ans:0,
+        explain:'Burning a fuel releases heat. That heat goes into the pan, and the pan warms the food.'}
     ]},
     {key:'think', items:[
       {t:'match', prompt:'Read the table. Which is A, B and C?', fig:'logic2',
@@ -620,7 +712,14 @@ const SETS = [
         explain:'Set the equipment up first, then pour. If you pour before the funnel is over the jar, the water goes on the table!'},
       {t:'choice', prompt:'Is he right?', long:true, text:'Ben says, "All metals are magnetic." Is Ben right?',
         opts:['No — only some metals, like iron and steel, are magnetic','Yes — every metal is magnetic','Yes — but only when the metal is cold'], ans:0,
-        explain:'Try it on a copper coin or an aluminium can and nothing happens. Only a few metals, mainly iron, steel, nickel and cobalt, are magnetic.'}
+        explain:'Try it on a copper coin or an aluminium can and nothing happens. Only a few metals, mainly iron, steel, nickel and cobalt, are magnetic.'},
+      {t:'match', prompt:'Read the table. Which is A, B, C and D?', fig:'logic9',
+        left:[{label:'A'},{label:'B'},{label:'C'},{label:'D'}],
+        right:['iron filings','white sugar','grey gravel','blue marbles'],
+        explain:'A is the only magnetic one: iron filings. B is small and not magnetic: sugar. C and D are both big; only D is blue, so D is the marbles and C is the gravel.'},
+      {t:'choice', prompt:'Use the table again.', long:true, text:'C and D are both big and neither is magnetic. What is the best way to separate them?',
+        opts:['Pick them out by hand, because you can see which is which','Use a sieve','Use a magnet'], ans:0,
+        explain:'Same size means a sieve is useless. Not magnetic means a magnet is useless. The difference left is colour, and colour is something your eyes and hands can use.'}
     ]},
     {key:'investigate', items:[
       {t:'choice', prompt:'Who made the best prediction?', long:true,
@@ -637,7 +736,15 @@ const SETS = [
         explain:'Change one thing, measure carefully, and repeat. Those three habits are what turn a guess into an experiment.'},
       {t:'draw', prompt:'Draw the equipment.',
         tip:'Draw a filter funnel standing on a jar. Show the muddy water going in at the top and the cleaner water dripping out at the bottom.',
-        explain:'Drawing the set-up before you start is what scientists do. It helps you spot a missing piece before you spill anything.'}
+        explain:'Drawing the set-up before you start is what scientists do. It helps you spot a missing piece before you spill anything.'},
+      {t:'choice', prompt:'Read the chart.', fig:'drinkbars', long:true,
+        text:'Tina and Ted measured the sugar in four drinks. Which drink has the LEAST sugar?',
+        opts:['Milk','Cola','Fizzy orange','Apple juice'], ans:0,
+        explain:'The shortest bar is milk, at 5 grams. Cola has the tallest bar, so it has the most.'},
+      {t:'choice', prompt:'Read between the bars.', fig:'drinkbars', long:true,
+        text:'A new drink is sweeter than apple juice but less sweet than cola. How much sugar could it have?',
+        opts:['11 grams','9 grams','13 grams'], ans:0,
+        explain:'Apple juice has 10 and cola has 12, so the new drink must sit between them: 11. Nine would be less than apple juice and thirteen more than cola.'}
     ]}
   ]
 },
@@ -659,7 +766,14 @@ const SETS = [
         explain:'A liquid only fills the bottom of its container. A gas keeps spreading until it fills every corner.'},
       {t:'type', prompt:'Type one word.', text:'Sea water is a ______ because it flows and takes the shape of the rock pool.',
         accept:['liquid'], hint:'Solid, liquid or gas?',
-        explain:'A liquid. Flowing and taking the shape of the container are the two big clues.'}
+        explain:'A liquid. Flowing and taking the shape of the container are the two big clues.'},
+      {t:'fill', prompt:'Drag the right state into each gap.',
+        lines:['A pebble on the beach is a {solid}.','The sea is a {liquid}.','The wind blowing across the sand is moving {gas}.'],
+        decoys:['sand','wave'],
+        explain:'Wind is air on the move, and air is a gas. The pebble keeps its shape; the sea flows.'},
+      {t:'multi', prompt:'Tick EVERY one that is a solid.',
+        opts:[['a shell', true], ['a grain of sand', true], ['a bucket', true], ['sea water', false], ['the air in a beach ball', false]],
+        explain:'Each grain of sand is a tiny solid — it keeps its shape. The shell and the bucket do too. Sea water is a liquid and the air in the ball is a gas.'}
     ]},
     {key:'particles', items:[
       {t:'choice', prompt:'Look at the particles.', fig:'partliquid', text:'The little balls are particles. Which state is this?',
@@ -675,7 +789,14 @@ const SETS = [
       {t:'fill', prompt:'Drag the right word into each gap.',
         lines:['The particles in a {solid} are locked in place.','The particles in a {liquid} slide over each other.','The particles in a {gas} fly far apart.'],
         decoys:['shell','wave'],
-        explain:'Locked, sliding, flying — three words that tell you everything about the three states.'}
+        explain:'Locked, sliding, flying — three words that tell you everything about the three states.'},
+      {t:'grid', prompt:'Tick ✓ or cross ✗ in every box.',
+        cols:['Particles packed in neat rows','Particles touching but jumbled','Particles far apart'],
+        rows:[['Solid',[1,0,0]],['Liquid',[0,1,0]],['Gas',[0,0,1]]],
+        explain:'Three pictures, three states. Rows for a solid, a jumble for a liquid, and far apart for a gas.'},
+      {t:'choice', prompt:'Explain with particles.', long:true, text:'You can push your hand through sea water, but not through a rock. Why?',
+        opts:['Water particles slide out of the way; rock particles are locked in place','Water is lighter than rock','Rock is colder than water'], ans:0,
+        explain:'Liquid particles can move past each other, so your hand pushes them aside. Solid particles are held in fixed positions and will not move for you.'}
     ]},
     {key:'mixtures', items:[
       {t:'choice', prompt:'What is left behind?', fig:'funnel', long:true,
@@ -692,7 +813,14 @@ const SETS = [
         explain:'Each tool uses a different difference: size, dissolving, magnetism, and turning into a gas.'},
       {t:'type', prompt:'Type one word.', text:'Leave sea water in a warm dish until all the water has gone. What is left is dry ______.',
         accept:['salt'], hint:'It makes the sea taste the way it does.',
-        explain:'Salt. The water turns into a gas and floats away, but the salt cannot, so it is left behind.'}
+        explain:'Salt. The water turns into a gas and floats away, but the salt cannot, so it is left behind.'},
+      {t:'match', prompt:'Match each way of separating to the mixture it is best for.',
+        left:[{label:'Sieve'},{label:'Filter funnel'},{label:'Magnet'},{label:'Hand picking'}],
+        right:['pebbles and sand','sea water and sand','steel nails and shells','a bucket and a spade'],
+        explain:'Pebbles are bigger than sand, so sieve. Sand does not dissolve, so it stays on the filter paper. Steel is magnetic. A bucket and a spade are big enough to just pick up.'},
+      {t:'choice', prompt:'Explain why.', long:true, text:'Why can you NOT separate sugar from water using a filter funnel?',
+        opts:['The sugar has dissolved into bits far smaller than the holes in the paper','Sugar is too heavy for the paper','Filter paper melts in sugar water'], ans:0,
+        explain:'Filter paper catches things that are bigger than its holes. Dissolved sugar is in bits far too small, so it goes straight through with the water. To get it back you need to evaporate the water.'}
     ]},
     {key:'dissolving', items:[
       {t:'tfgrid', prompt:'True or false?',
@@ -709,7 +837,15 @@ const SETS = [
       {t:'choice', prompt:'What is left?', fig:'evaporating', long:true,
         text:'A dish of sea water is left in a warm place for two days. What is in the dish now?',
         opts:['Dry white salt','Clear water','Completely nothing'], ans:0,
-        explain:'The water evaporated — it turned into a gas and drifted away. Salt cannot do that so easily, so it stayed as white crystals.'}
+        explain:'The water evaporated — it turned into a gas and drifted away. Salt cannot do that so easily, so it stayed as white crystals.'},
+      {t:'sort', prompt:'Stir each one into water. Does it mix in, or stay separate?',
+        bins:[['Mixes evenly into the water','you cannot pick it out again'],['Stays separate','you can still see it on its own']],
+        chips:[['vinegar',0],['salt',0],['milk',0],['oil',1],['sand',1],['wax',1]],
+        explain:'From question 1 of the review packet. Vinegar and milk are liquids that mix all through the water. Oil is a liquid too, but it will not mix — it floats in a layer on top. Sand and wax sink and stay whole.'},
+      {t:'tfgrid', prompt:'True or false?',
+        rows:[['A dissolved substance is called soluble.', true], ['The bigger the lump of a soluble solid, the faster it dissolves.', false],
+              ['You can get dissolved salt back by evaporating the water.', true], ['Sea water has salt dissolved in it.', true]],
+        explain:'A big lump dissolves SLOWER, because less of it is touching the water. Crush it into grains and the water reaches all of it at once.'}
     ]},
     {key:'resources', items:[
       {t:'order', prompt:'Put the journey in order, from the ground to a car.',
@@ -724,7 +860,14 @@ const SETS = [
         explain:'One barrel of crude oil can become petrol, diesel AND plastic. Wood, stone and cotton have nothing to do with oil.'},
       {t:'type', prompt:'Type one word.', text:'Crude oil is heated and separated to make petrol and ______.',
         accept:['diesel'], hint:'Buses and lorries usually run on it.',
-        explain:'Petrol and diesel both come out of the same crude oil. Heating separates the lighter liquids from the heavier ones.'}
+        explain:'Petrol and diesel both come out of the same crude oil. Heating separates the lighter liquids from the heavier ones.'},
+      {t:'choice', prompt:'Think about the sand.', long:true, text:'Glass is made by heating sand until it melts. Which kind of change is that?',
+        opts:['Making a new material out of a natural one','Separating a mixture','Dissolving'], ans:0,
+        explain:'Sand is a natural material. Melting it and letting it cool makes glass, a new material with new properties. That is different from separating, which only moves things apart.'},
+      {t:'tfgrid', prompt:'True or false?',
+        rows:[['Crude oil comes from under the ground or the sea bed.', true], ['Petrol is made from crude oil.', true],
+              ['Plastic grows on a bush.', false], ['Rubber comes from a tree.', true]],
+        explain:'Plastic is made from oil, not grown. Rubber really does come from a tree: the sap of the rubber tree.'}
     ]},
     {key:'think', items:[
       {t:'match', prompt:'Read the table. Which is A, B and C?', fig:'logic3',
@@ -740,7 +883,15 @@ const SETS = [
       {t:'choice', prompt:'Why is he wrong?', long:true,
         text:'Ravi says, "If I filter sea water, the salt will stay on the paper." Why is Ravi wrong?',
         opts:['The salt has dissolved, so it goes through with the water','Salt is magnetic and sticks to the funnel','Filter paper has no holes in it'], ans:0,
-        explain:'Filtering only catches solids that have NOT dissolved. Dissolved salt is far smaller than the holes, so it goes straight through.'}
+        explain:'Filtering only catches solids that have NOT dissolved. Dissolved salt is far smaller than the holes, so it goes straight through.'},
+      {t:'choice', prompt:'Plan the separation.', long:true,
+        text:'A jar holds sand, salt and sea shells all mixed together. Which order of steps gets all three apart?',
+        opts:['Pick out the shells, add water to dissolve the salt, filter out the sand, evaporate the water','Evaporate first, then filter, then pick out the shells','Filter first, before adding any water'], ans:0,
+        explain:'Take out the big, obvious thing first. Then use water for the salt, the filter for the sand, and heat to get the salt back. Filtering before there is any water makes no sense at all.'},
+      {t:'choice', prompt:'Find the mistake.', long:true,
+        text:'Ravi filters sea water and expects to see salt on the paper. Nothing is there. What does that tell him?',
+        opts:['The salt is dissolved, so it went through the paper with the water','There was never any salt in the sea water','The filter paper was broken'], ans:0,
+        explain:'An empty filter paper is not a failure — it is a result. It proves the salt is dissolved. Ravi should now taste the water, or leave it to evaporate.'}
     ]},
     {key:'investigate', items:[
       {t:'choice', prompt:'Read the chart.', fig:'poolbars', long:true,
@@ -757,7 +908,15 @@ const SETS = [
         explain:'Sand stays whole, so a filter catches it. Salt dissolves, so a filter cannot. To get salt back you need to evaporate the water instead.'},
       {t:'draw', prompt:'Draw the rock pool.',
         tip:'Draw a rock pool with sand at the bottom and salty water above it. Draw the sun shining down on the pool.',
-        explain:'That sun is doing real science: it warms the water, the water evaporates, and the pool slowly gets saltier.'}
+        explain:'That sun is doing real science: it warms the water, the water evaporates, and the pool slowly gets saltier.'},
+      {t:'choice', prompt:'Read the chart.', fig:'poolbars', long:true,
+        text:'Four rock pools were tested for salt. How much MORE salt did pool C have than pool D?',
+        opts:['7 grams','2 grams','11 grams'], ans:0,
+        explain:'Pool C had 9 grams and pool D had 2. Nine take away two is seven.'},
+      {t:'multi', prompt:'Maya wants to test whether sea water evaporates faster in the sun than in the shade. Tick EVERY thing she must keep the same.',
+        opts:[['the amount of water in each dish', true], ['the size and shape of the dishes', true], ['how long she leaves them', true],
+              ['whether the dish is in the sun or the shade', false]],
+        explain:'Sun or shade is the ONE thing she is changing. Everything else has to match, or she will not know what made the difference.'}
     ]}
   ]
 },
@@ -779,7 +938,15 @@ const SETS = [
         explain:'A liquid has no fixed shape, but it does keep the same amount. A gas keeps spreading, so it has neither.'},
       {t:'type', prompt:'Type one word.', text:'At room temperature nearly every metal is a ______, because it keeps its own shape.',
         accept:['solid','solids'], hint:'Solid, liquid or gas?',
-        explain:'A solid. Metals have to be heated until they are extremely hot before they melt into a liquid.'}
+        explain:'A solid. Metals have to be heated until they are extremely hot before they melt into a liquid.'},
+      {t:'fill', prompt:'Drag the right state into each gap.',
+        lines:['A copper coin is a {solid}.','Melted metal in a factory is a {liquid}.','The bubbles in a fizzy drink are full of {gas}.'],
+        decoys:['metal','magnet'],
+        explain:'Even metal can be a liquid — it just has to be extremely hot. At room temperature every coin in your pocket is a solid.'},
+      {t:'tfgrid', prompt:'True or false?',
+        rows:[['A solid has a fixed volume.', true], ['A liquid can be poured.', true],
+              ['A gas keeps its own shape.', false], ['Metal can never melt.', false]],
+        explain:'Metal melts at a very high temperature — that is how it is shaped in a factory. A gas has no shape of its own at all.'}
     ]},
     {key:'particles', items:[
       {t:'choice', prompt:'Look at the three jars.', fig:'states3', text:'Which jar shows a liquid?',
@@ -796,7 +963,14 @@ const SETS = [
       {t:'fill', prompt:'Drag the right word into each gap.',
         lines:['A {solid} has a fixed shape and a fixed amount.','A {liquid} has a fixed amount but no fixed shape.','A {gas} has no fixed shape and no fixed amount.'],
         decoys:['nail','jar'],
-        explain:'Read them in order and you can see the pattern: each state keeps one less thing fixed than the one before.'}
+        explain:'Read them in order and you can see the pattern: each state keeps one less thing fixed than the one before.'},
+      {t:'grid', prompt:'Tick ✓ or cross ✗ in every box.',
+        cols:['Particles are locked in place','Particles can slide past each other','Can be squashed into a smaller space'],
+        rows:[['Solid',[1,0,0]],['Liquid',[0,1,0]],['Gas',[0,1,1]]],
+        explain:'Only a gas can be squashed, because only a gas has big empty spaces between its particles. In a solid and a liquid the particles are already touching.'},
+      {t:'choice', prompt:'Explain with particles.', long:true, text:'Why can you squash the air in a bicycle pump, but not the water in a bottle?',
+        opts:['Air particles have big gaps between them; water particles are already touching','Water is heavier than air','Air is warmer than water'], ans:0,
+        explain:'Squashing means pushing particles closer together. Gas particles have room to move closer. Liquid particles are already side by side, so there is nowhere for them to go.'}
     ]},
     {key:'mixtures', items:[
       {t:'sort', prompt:'Will a magnet pick it up?',
@@ -814,7 +988,15 @@ const SETS = [
       {t:'tfgrid', prompt:'True or false?',
         rows:[['All metals are magnetic.', false], ['Iron is magnetic.', true],
               ['Plastic is magnetic.', false], ['A magnet can separate iron from sand.', true]],
-        explain:'Only a few metals are magnetic — mainly iron, steel, nickel and cobalt. Copper, gold and aluminium are not, and nor is plastic.'}
+        explain:'Only a few metals are magnetic — mainly iron, steel, nickel and cobalt. Copper, gold and aluminium are not, and nor is plastic.'},
+      {t:'match', prompt:'Match each way of separating to the mixture it is best for.',
+        left:[{label:'Magnet'},{label:'Sieve'},{label:'Filter funnel'},{label:'Hand picking'}],
+        right:['iron filings and beans','rice and cereals','water and sand','a pencil and a pen'],
+        explain:'Ask what is DIFFERENT. Iron filings are magnetic. Rice is smaller than cereal. Sand does not dissolve. A pencil and a pen are big enough to just lift out.'},
+      {t:'choice', prompt:'Use the material table.', long:true,
+        text:'Material A is small, silver and magnetic. Material C is small, white and not magnetic. What separates A from C?',
+        opts:['A magnet, because only A is magnetic','A sieve, because they are different sizes','Nothing can separate them'], ans:0,
+        explain:'They are the same size, so a sieve is no use. But one is magnetic and one is not, and that one difference is enough for a magnet.'}
     ]},
     {key:'dissolving', items:[
       {t:'sort', prompt:'Stir each one into a jar of water.',
@@ -830,7 +1012,16 @@ const SETS = [
         explain:'Dissolved things go straight through a filter. Evaporating is the trick that brings them back.'},
       {t:'type', prompt:'Type one word.', text:'When a solid dissolves in a liquid, the clear mixture we get is called a ______.',
         accept:['solution'], hint:'It starts with the same letters as "soluble".',
-        explain:'A solution. Salt water is a solution: the salt is still in there, spread all the way through.'}
+        explain:'A solution. Salt water is a solution: the salt is still in there, spread all the way through.'},
+      {t:'tfgrid', prompt:'True or false?',
+        rows:[['A dissolved substance cannot be seen because it has become part of the water.', true],
+              ['A dissolved substance has disappeared and is gone.', false],
+              ['Only white powder dissolves.', false],
+              ['The hotter the water, the quicker solids dissolve.', true]],
+        explain:'"Cannot be seen" and "gone" are not the same thing. Dissolved salt is still in the water — you can taste it and you can get it back by evaporating.'},
+      {t:'choice', prompt:'Think it through.', long:true, text:'A magnet does not pick up salt. Does that mean salt cannot be separated from water?',
+        opts:['No — salt can be got back by evaporating the water','Yes, salt water can never be separated','Yes, because salt is not magnetic'], ans:0,
+        explain:'A magnet is only one tool. Salt is not magnetic, but it IS soluble, and evaporating uses that instead. Every mixture has its own best tool.'}
     ]},
     {key:'resources', items:[
       {t:'choice', prompt:'Name the process.', long:true,
@@ -847,7 +1038,14 @@ const SETS = [
         explain:'Three of these need a lot of work before we can use them. Only stone is close to ready as soon as it is dug out.'},
       {t:'choice', prompt:'Explain why.', long:true, text:'Why do we heat an ore until it is glowing hot?',
         opts:['To separate the metal from the rest of the rock','To make the rock heavier','To turn the rock into water'], ans:0,
-        explain:'Heating is another way of separating a mixture. The metal comes away from the rock it was mixed with, just like salt coming back from salty water.'}
+        explain:'Heating is another way of separating a mixture. The metal comes away from the rock it was mixed with, just like salt coming back from salty water.'},
+      {t:'sort', prompt:'Can we grow more of it, or will it run out?',
+        bins:[['We can grow more','from plants and animals'],['It will run out one day','dug or drilled from the ground']],
+        chips:[['wood',0],['cotton',0],['wool',0],['metal ore',1],['oil',1],['natural gas',1]],
+        explain:'Trees, cotton plants and sheep can be replaced. Ore, oil and gas were made under the ground long ago, and when they are used up there will be no more.'},
+      {t:'choice', prompt:'Why does it matter?', long:true, text:'Why is it a good idea to recycle metal cans instead of throwing them away?',
+        opts:['Metal ore will run out, so using the same metal again saves digging up more','Cans are too heavy for a bin','Recycled metal is magnetic'], ans:0,
+        explain:'Every new can needs ore that had to be dug up and smelted. Melting an old can down again skips all of that, and saves ore for later.'}
     ]},
     {key:'think', items:[
       {t:'match', prompt:'Read the table. Which is A, B, C and D?', fig:'logic4',
@@ -864,7 +1062,15 @@ const SETS = [
       {t:'choice', prompt:'Explain why.', long:true,
         text:'Why is it a good idea to lift the iron out with a magnet BEFORE you add any water?',
         opts:['Dry iron filings are much easier for a magnet to pick up','Iron dissolves in water','A magnet only works underwater'], ans:0,
-        explain:'Once the filings are wet they clump together and stick to the jar, so the magnet cannot lift them cleanly. Doing the dry step first saves a lot of mess.'}
+        explain:'Once the filings are wet they clump together and stick to the jar, so the magnet cannot lift them cleanly. Doing the dry step first saves a lot of mess.'},
+      {t:'choice', prompt:'Use the material table.', long:true,
+        text:'Material D is big and grey. Material E is big and blue. Neither is magnetic. What is the best way to separate D from E?',
+        opts:['Pick them out by hand, because you can see the colour difference','Use a sieve','Use a magnet'], ans:0,
+        explain:'Same size, so no sieve. Not magnetic, so no magnet. The only difference left is colour, and hands and eyes are the tool for that. This is question 5 of the review packet.'},
+      {t:'multi', prompt:'Tick EVERY pair that a sieve could separate.',
+        opts:[['small salt grains and big gravel', true], ['iron filings and big pebbles', true],
+              ['two marbles of the same size', false], ['flour and rice', true], ['salt and sugar grains of the same size', false]],
+        explain:'A sieve needs a SIZE difference, and nothing else. It does not care about colour, weight or whether something is magnetic.'}
     ]},
     {key:'investigate', items:[
       {t:'choice', prompt:'Read the chart.', fig:'magnetbars', long:true,
@@ -881,7 +1087,15 @@ const SETS = [
         explain:'A surprising result is the most interesting thing in science. It usually means there is something new to find out.'},
       {t:'draw', prompt:'Draw the test.',
         tip:'Draw a magnet held over a pile of rice mixed with iron nails. Show which bits jump up to the magnet and which bits stay behind.',
-        explain:'Only the nails should be on the magnet. Rice is not magnetic, so every grain stays exactly where it was.'}
+        explain:'Only the nails should be on the magnet. Rice is not magnetic, so every grain stays exactly where it was.'},
+      {t:'choice', prompt:'Read the chart.', fig:'magnetbars', long:true,
+        text:'Magnet B held 14 clips and magnet C held 5. How many MORE did B hold?',
+        opts:['9','19','5'], ans:0,
+        explain:'Fourteen take away five is nine. Reading a chart often means doing a small sum with the numbers you find on it.'},
+      {t:'choice', prompt:'Predict, then explain.', long:true,
+        text:'Jo holds the same magnet over a mixture of iron filings and sand, first close and then far away. What will she see?',
+        opts:['It picks up more filings when it is close, and fewer when it is far away','It picks up the same amount both times','It picks up sand when it is far away'], ans:0,
+        explain:'A magnet’s pull gets weaker with distance. Sand is never picked up, however close the magnet gets, because sand is not magnetic.'}
     ]}
   ]
 },
@@ -903,7 +1117,15 @@ const SETS = [
         explain:'Solid, liquid and gas are the three states of matter. Most substances can be all three if you change the temperature enough.'},
       {t:'type', prompt:'Type one word.', text:'When a liquid slowly turns into a gas we say it ______.',
         accept:['evaporates','evaporate'], hint:'It starts with "e", like "escape".',
-        explain:'It evaporates. Warmth and wind both make evaporation happen faster.'}
+        explain:'It evaporates. Warmth and wind both make evaporation happen faster.'},
+      {t:'fill', prompt:'Drag the right words into the gaps.',
+        lines:['When ice warms up it {melts} into water.','When water gets very cold it {freezes} into ice.','When water is heated it {evaporates} into a gas.'],
+        decoys:['dissolves','disappears'],
+        explain:'Three changes of state, three words. Dissolving is different: it needs a second material to mix into.'},
+      {t:'tfgrid', prompt:'True or false?',
+        rows:[['Water vapour is water in the gas state.', true], ['A puddle that dries up has turned into a gas.', true],
+              ['Steam is a solid.', false], ['Freezing turns a liquid into a solid.', true]],
+        explain:'A dried-up puddle has not vanished — the water is still there, spread through the air as an invisible gas.'}
     ]},
     {key:'particles', items:[
       {t:'choice', prompt:'Think about the particles.', long:true, text:'When water evaporates, what happens to its particles?',
@@ -919,7 +1141,14 @@ const SETS = [
       {t:'fill', prompt:'Drag the right word into each gap.',
         lines:['When ice melts it turns into {water}.','When water evaporates it turns into a {gas}.','When water vapour cools it turns back into a {liquid}.'],
         decoys:['ice','wind'],
-        explain:'Melting, evaporating and cooling back down. Water goes round and round between the three states for ever.'}
+        explain:'Melting, evaporating and cooling back down. Water goes round and round between the three states for ever.'},
+      {t:'grid', prompt:'Tick ✓ or cross ✗ in every box.',
+        cols:['Has a fixed shape','Has a fixed volume','Particles can move around'],
+        rows:[['Ice',[1,1,0]],['Water',[0,1,1]],['Water vapour',[0,0,1]]],
+        explain:'All three are water. Ice keeps shape and volume. Liquid water keeps only the volume. Vapour keeps neither, and its particles fly about freely.'},
+      {t:'choice', prompt:'Explain with particles.', long:true, text:'Why does a wet towel dry faster on a warm day than a cold one?',
+        opts:['Warmth makes the water particles move faster, so more of them escape into the air as a gas','Warm air pulls the water out','The towel gets smaller in the warm'], ans:0,
+        explain:'Evaporation is particles escaping from the liquid. Heat makes them move faster, and faster particles escape more often. That is why washing dries in the sun.'}
     ]},
     {key:'mixtures', items:[
       {t:'choice', prompt:'Pick the best tool.', fig:'funnel', long:true,
@@ -936,7 +1165,14 @@ const SETS = [
         explain:'These four words are opposites in pairs. Melting undoes freezing, and condensing undoes evaporating.'},
       {t:'type', prompt:'Type one word.', text:'Water vapour touches a cold window and turns back into a liquid. This is called ______.',
         accept:['condensation','condensing'], hint:'It starts with "con".',
-        explain:'Condensation. It is the reason a cold window goes misty on a chilly morning.'}
+        explain:'Condensation. It is the reason a cold window goes misty on a chilly morning.'},
+      {t:'match', prompt:'Match each way of separating to the mixture it is best for.',
+        left:[{label:'Filter funnel'},{label:'Sieve'},{label:'Magnet'},{label:'Evaporating'}],
+        right:['muddy water','gravel and sand','steel pins and sand','salt dissolved in water'],
+        explain:'Mud does not dissolve, so filter it. Gravel is bigger than sand. Steel is magnetic. Salt that has dissolved cannot be filtered — only evaporating gets it back.'},
+      {t:'choice', prompt:'Explain why.', long:true, text:'Why can a filter get mud out of puddle water, but not the salt that is dissolved in sea water?',
+        opts:['Mud is in bits bigger than the paper’s holes; dissolved salt is in bits far smaller','Salt is heavier than mud','Mud is magnetic'], ans:0,
+        explain:'Filtering is all about size. Mud is caught because its bits are big. Dissolved salt slips through because its bits are tiny. Same paper, two different results.'}
     ]},
     {key:'dissolving', items:[
       {t:'choice', prompt:'Read the chart and work it out.', fig:'dissolvebars', long:true,
@@ -953,7 +1189,15 @@ const SETS = [
         explain:'Powders that vanish into the water are soluble. Anything you can still see afterwards is insoluble.'},
       {t:'choice', prompt:'Work it out.', long:true, text:'A puddle dries up and leaves a faint white ring on the ground. What is the ring made of?',
         opts:['Things that were dissolved in the water','Water that is somehow still there','Nothing real — it is just a shadow'], ans:0,
-        explain:'The water evaporated and left its dissolved solids behind, just like salt left in an evaporating dish. That ring is the proof they were there all along.'}
+        explain:'The water evaporated and left its dissolved solids behind, just like salt left in an evaporating dish. That ring is the proof they were there all along.'},
+      {t:'tfgrid', prompt:'True or false?',
+        rows:[['Some solids dissolve.', true], ['All materials dissolve.', false],
+              ['Only powders dissolve.', false], ['The bigger the piece of a soluble solid, the faster it dissolves.', false]],
+        explain:'Three false in a row — the review packet does that on purpose to see if you read carefully. Smaller pieces dissolve FASTER, not slower.'},
+      {t:'choice', prompt:'Read the chart.', fig:'dissolvebars', long:true,
+        text:'The sugar cube took 20 seconds in hot water and 80 in cold. How many times longer did the cold water take?',
+        opts:['4 times longer','2 times longer','60 times longer'], ans:0,
+        explain:'Eighty is four lots of twenty. So the cold water took four times as long. The difference is 60 seconds, but the question asked how many TIMES.'}
     ]},
     {key:'resources', items:[
       {t:'order', prompt:'Put the chain in order.',
@@ -968,7 +1212,14 @@ const SETS = [
         explain:'Burning fuel is useful, but it is not free. It always adds carbon dioxide to the air, and the air has to hold all of it.'},
       {t:'type', prompt:'Type one word.', text:'Too much carbon dioxide in the air causes global ______.',
         accept:['warming'], hint:'It means the Earth getting hotter.',
-        explain:'Global warming means the whole Earth slowly getting warmer, which changes weather, ice and sea levels.'}
+        explain:'Global warming means the whole Earth slowly getting warmer, which changes weather, ice and sea levels.'},
+      {t:'choice', prompt:'Follow the chain.', long:true, text:'A car burns petrol. Where did the petrol come from, all the way back?',
+        opts:['Crude oil, drilled from deep under the ground and then heated to separate the petrol out','A petrol tree','Rain water'], ans:0,
+        explain:'Petrol is one of the liquids inside crude oil. The oil is drilled up, heated in a tall tower, and the petrol separates from the rest.'},
+      {t:'multi', prompt:'Tick EVERY thing that is true about burning fuels.',
+        opts:[['It gives us heat', true], ['It puts carbon dioxide into the air', true], ['Too much carbon dioxide warms the Earth', true],
+              ['It makes new oil under the ground', false], ['It cleans the air', false]],
+        explain:'Burning gives heat and makes carbon dioxide. Carbon dioxide traps warmth around the Earth. Nothing about burning makes more fuel or cleaner air.'}
     ]},
     {key:'think', items:[
       {t:'match', prompt:'Read the table. Which is A, B and C?', fig:'logic5',
@@ -983,7 +1234,14 @@ const SETS = [
         explain:'Water goes round this loop for ever. The rain in your puddle today may have been in the sea last month.'},
       {t:'choice', prompt:'Explain why.', long:true, text:'A puddle dries up faster on a windy day than on a still day. Why?',
         opts:['The wind carries the water vapour away, so more can evaporate','The wind makes the puddle colder','The wind pushes the water down into the ground'], ans:0,
-        explain:'If the air just above the puddle is already full of water vapour, evaporation slows down. Wind sweeps that damp air away and lets more water escape.'}
+        explain:'If the air just above the puddle is already full of water vapour, evaporation slows down. Wind sweeps that damp air away and lets more water escape.'},
+      {t:'match', prompt:'Read the table. Which is A, B, C and D?', fig:'logic10',
+        left:[{label:'A'},{label:'B'},{label:'C'},{label:'D'}],
+        right:['salt','iron filings','water','sand'],
+        explain:'C is the only liquid: water. A dissolves and is not magnetic: salt. B is magnetic: iron filings. D is none of those: sand.'},
+      {t:'choice', prompt:'Use the table again.', long:true, text:'You have A and D from the table mixed together. Both are in small grains. How would you separate them?',
+        opts:['Add water so A dissolves, filter out D, then evaporate the water to get A back','Use a sieve','Use a magnet'], ans:0,
+        explain:'Same size rules out the sieve. Neither is magnetic. The table says only A dissolves — so water, filter, evaporate.'}
     ]},
     {key:'investigate', items:[
       {t:'choice', prompt:'Predict what happens.', long:true,
@@ -1000,7 +1258,15 @@ const SETS = [
         explain:'Warm and windy both speed it up. And nothing is lost — the water comes back as rain later on.'},
       {t:'draw', prompt:'Draw the water cycle.',
         tip:'Draw the sun, the sea, a cloud and rain falling. Draw arrows to show the water going round and round.',
-        explain:'Those arrows are the whole idea: the same water keeps travelling round, changing state as it goes.'}
+        explain:'Those arrows are the whole idea: the same water keeps travelling round, changing state as it goes.'},
+      {t:'choice', prompt:'Predict the result.', long:true,
+        text:'Two dishes of water are the same size and hold the same amount. One is in the sun, one in the shade. Which dries first, and why?',
+        opts:['The sunny one, because heat speeds up evaporation','The shady one, because shade is drier','Both at the same moment'], ans:0,
+        explain:'The only difference is the sun, and sun means warmth. Warm water evaporates faster, so the sunny dish is empty first.'},
+      {t:'multi', prompt:'Sam finds the shady dish dried first. Tick EVERY sensible thing to do.',
+        opts:[['Check whether the dishes were really the same size', true], ['Check whether it was windy in the shade', true],
+              ['Do the test again', true], ['Change the result to what he expected', false]],
+        explain:'A surprise means something was different that Sam did not plan. Wind is a common one — it dries puddles too. Check, repeat, and never change what really happened.'}
     ]}
   ]
 },
@@ -1024,7 +1290,15 @@ const SETS = [
         explain:'Clue 1 rules out water and air, because neither keeps its shape. Clue 2 fits iron perfectly. Two clues together can pin down one answer.'},
       {t:'type', prompt:'Type one word.', text:'A ______ has a fixed shape AND a fixed amount of space.',
         accept:['solid'], hint:'Solid, liquid or gas?',
-        explain:'A solid. A liquid keeps the amount but not the shape, and a gas keeps neither.'}
+        explain:'A solid. A liquid keeps the amount but not the shape, and a gas keeps neither.'},
+      {t:'fill', prompt:'Drag the right state into each gap.',
+        lines:['It fills the whole jar, right to the lid: it is a {gas}.','It fills the bottom of the jar and takes its shape: it is a {liquid}.','It keeps its own shape in the jar: it is a {solid}.'],
+        decoys:['mixture','powder'],
+        explain:'Three clues, three states. The detective’s rule: shape tells you solid or not, and filling all the space tells you gas or not.'},
+      {t:'multi', prompt:'Tick EVERY clue that means a mystery substance is a SOLID.',
+        opts:[['It keeps its own shape', true], ['It has a fixed volume', true], ['It cannot be poured as a whole', true],
+              ['It spreads out to fill the container', false], ['It takes the shape of the container', false]],
+        explain:'A solid keeps shape and volume and stays put. Spreading out and taking the container’s shape are what liquids and gases do.'}
     ]},
     {key:'particles', items:[
       {t:'choice', prompt:'Look at the three jars.', fig:'states3', text:'Which jar shows a gas?',
@@ -1041,7 +1315,14 @@ const SETS = [
       {t:'fill', prompt:'Drag the right word into each gap.',
         lines:['Particles in a {solid} cannot swap places.','Particles in a {liquid} swap places but stay touching.','Particles in a {gas} are far apart and very fast.'],
         decoys:['clue','jar'],
-        explain:'Cannot swap, swap while touching, far apart. Those three lines explain nearly everything about the three states.'}
+        explain:'Cannot swap, swap while touching, far apart. Those three lines explain nearly everything about the three states.'},
+      {t:'grid', prompt:'Tick ✓ or cross ✗ in every box.',
+        cols:['Particles far apart','Particles in neat rows','Particles touching but jumbled'],
+        rows:[['Gas',[1,0,0]],['Solid',[0,1,0]],['Liquid',[0,0,1]]],
+        explain:'Read the row label carefully — they are not in the usual order. Far apart is gas, neat rows is solid, jumbled but touching is liquid.'},
+      {t:'choice', prompt:'Work backwards.', long:true, text:'A mystery substance can be squashed into half its space. What does that prove?',
+        opts:['It is a gas, because only gas particles have big gaps to squash','It is a solid','It is a liquid'], ans:0,
+        explain:'Solids and liquids hardly squash at all — their particles are already touching. Big gaps to squash means a gas. One clue, one answer.'}
     ]},
     {key:'mixtures', items:[
       {t:'choice', prompt:'Choose the plan that works.', long:true,
@@ -1058,7 +1339,14 @@ const SETS = [
       {t:'tfgrid', prompt:'True or false?',
         rows:[['A sieve sorts things by size.', true], ['A magnet sorts things by colour.', false],
               ['A filter catches solids that do not dissolve.', true], ['Evaporating brings back a solid that dissolved.', true]],
-        explain:'A magnet sorts by one thing only: whether the material is magnetic. Colour makes no difference at all.'}
+        explain:'A magnet sorts by one thing only: whether the material is magnetic. Colour makes no difference at all.'},
+      {t:'match', prompt:'Match each way of separating to the mixture it is best for.',
+        left:[{label:'Hand picking'},{label:'Magnet'},{label:'Sieve'},{label:'Filter funnel'}],
+        right:['a pencil and a pen','iron filings and beans','rice and cereals','water and sand'],
+        explain:'The same four from the review packet, in a new order. Big things by hand, magnetic things by magnet, different sizes by sieve, and a solid in a liquid by filter.'},
+      {t:'choice', prompt:'Rule it out.', long:true, text:'A detective must separate two powders. A magnet does nothing. A sieve does nothing. What does that tell her to try next?',
+        opts:['Add water — maybe one dissolves and the other does not','Give up, they cannot be separated','Use a bigger magnet'], ans:0,
+        explain:'A magnet that does nothing means neither is magnetic. A sieve that does nothing means they are the same size. Dissolving is the difference that is left to test.'}
     ]},
     {key:'dissolving', items:[
       {t:'choice', prompt:'Read the chart.', fig:'sugarbars', long:true,
@@ -1075,7 +1363,17 @@ const SETS = [
         explain:'Small grains dissolve faster, not slower, because the water can touch far more of the sugar at once. That is why caster sugar beats a sugar cube.'},
       {t:'type', prompt:'Type one word.', text:'Sugar dissolves in water, so we say that sugar is ______.',
         accept:['soluble'], hint:'The opposite of insoluble.',
-        explain:'Soluble. Salt and sugar are soluble in water. Sand and chalk are not.'}
+        explain:'Soluble. Salt and sugar are soluble in water. Sand and chalk are not.'},
+      {t:'sort', prompt:'Stir each one into water. Does it dissolve?',
+        bins:[['Soluble','it dissolves'],['Not soluble','it stays as it is']],
+        chips:[['sugar',0],['salt',0],['instant coffee',0],['rock',1],['wax',1],['sand',1]],
+        explain:'The review packet’s list again. Sugar, salt and coffee dissolve. Rock, wax and sand do not, however hard you stir.'},
+      {t:'tfgrid', prompt:'True or false?',
+        rows:[['A dissolved substance cannot be seen because it has become part of the water.', true],
+              ['A dissolved substance is called soluble.', true],
+              ['A dissolved substance disappears for ever.', false],
+              ['The bigger the piece, the faster it dissolves.', false]],
+        explain:'Cannot be seen is true; gone for ever is false. And big pieces dissolve slower, because less of the solid is touching the water.'}
     ]},
     {key:'resources', items:[
       {t:'match', prompt:'Match each property to the job it makes the material good for.',
@@ -1091,7 +1389,14 @@ const SETS = [
         explain:'The right-hand box all began in the left-hand box. Plastic and petrol both start as crude oil, and paper starts as wood.'},
       {t:'type', prompt:'Type one word.', text:'Natural gas is used to make fuel, plastics and even some ______.',
         accept:['medicine','medicines'], hint:'The doctor gives it to you when you are ill.',
-        explain:'The same gas that cooks your dinner can also be turned into plastics and some medicines. One resource, many different uses.'}
+        explain:'The same gas that cooks your dinner can also be turned into plastics and some medicines. One resource, many different uses.'},
+      {t:'sort', prompt:'Natural material, or made by people?',
+        bins:[['Natural','found or grown just like this'],['Made by people','changed into something new']],
+        chips:[['wood',0],['sand',0],['cotton',0],['plastic',1],['glass',1],['paper',1]],
+        explain:'Wood, sand and cotton are used much as we find them. Plastic is made from oil, glass from sand, and paper from wood — each one changed into a new material.'},
+      {t:'choice', prompt:'Choose by property.', long:true, text:'You need a material for a window. Which property matters most?',
+        opts:['It lets light through','It is magnetic','It dissolves in water'], ans:0,
+        explain:'A window’s whole job is to let light in, so that property comes first. Glass has it; wood and metal do not.'}
     ]},
     {key:'think', items:[
       {t:'match', prompt:'Read the table. Which is A, B, C and D?', fig:'logic6',
@@ -1108,7 +1413,14 @@ const SETS = [
       {t:'choice', prompt:'Design the test.', long:true,
         text:'Two white powders look exactly the same. One dissolves and one does not. What is the best test?',
         opts:['Stir a spoon of each into its own glass of water','Look at them again from further away','Weigh them both on a balance'], ans:0,
-        explain:'Test the property that is actually different. Looking and weighing tell you nothing about dissolving — only water can answer that question.'}
+        explain:'Test the property that is actually different. Looking and weighing tell you nothing about dissolving — only water can answer that question.'},
+      {t:'choice', prompt:'Judge the evidence.', long:true,
+        text:'Two white powders look exactly the same. One dissolves in water and one does not. Which is the FAIR way to tell them apart?',
+        opts:['Put the same spoonful of each into the same amount of water, stir the same way, and see which vanishes','Taste both','Guess by which one is whiter'], ans:0,
+        explain:'A fair test with one difference. Never taste an unknown powder — and "whiter" is not a difference the story gave you.'},
+      {t:'order', prompt:'Put the detective’s plan in order for a mixture of salt, sand and iron filings.',
+        items:['Hold a magnet over the dry mixture to lift out the iron','Add water and stir so the salt dissolves','Pour it through a filter to catch the sand','Leave the clear water in a warm place until the salt is left behind'],
+        explain:'Magnet first, while it is dry. Water second, so only the salt can dissolve. Filter third for the sand. Evaporate last for the salt. Four steps, each removing exactly one thing.'}
     ]},
     {key:'investigate', items:[
       {t:'choice', prompt:'Why do scientists do this?', long:true, text:'Why do scientists repeat a test more than once?',
@@ -1124,7 +1436,15 @@ const SETS = [
         explain:'Writing down every result, even the awkward ones, is what makes an experiment honest.'},
       {t:'draw', prompt:'Design your own mystery.',
         tip:'Draw a jar holding your own mystery mixture. Then draw the tool you would use to separate it.',
-        explain:'If you can name the difference between the parts, you can always name the tool. That is the whole trick.'}
+        explain:'If you can name the difference between the parts, you can always name the tool. That is the whole trick.'},
+      {t:'choice', prompt:'Read the chart.', fig:'sugarbars', long:true,
+        text:'How much MORE sugar does cola have than orange?',
+        opts:['4 grams','2 grams','18 grams'], ans:0,
+        explain:'Cola is 11 grams and orange is 7. Eleven take away seven is four.'},
+      {t:'choice', prompt:'Spot the unfair test.', long:true,
+        text:'A detective tests which of two magnets is stronger. She holds magnet A close to the clips and magnet B far away. Why is the result worthless?',
+        opts:['The distance was different, so she does not know if it was the magnet or the distance','Magnets cannot be compared','Paper clips are not magnetic'], ans:0,
+        explain:'Two things changed at once: the magnet and the distance. To compare magnets fairly, everything except the magnet must be the same.'}
     ]}
   ]
 }
@@ -1152,7 +1472,15 @@ const SETS = [
       {t:'choice', prompt:'Find the example that breaks the rule.', long:true,
         text:'Ben says, "Anything you can pour must be a liquid." Which one shows Ben is wrong?',
         opts:['Dry sand, which pours but is a solid','Water, which pours and is a liquid','A brick, which you cannot pour'], ans:0,
-        explain:'One example that breaks a rule is enough to show the rule is wrong. Sand pours because the grains slide, but every single grain keeps its own shape, so sand is a solid.'}
+        explain:'One example that breaks a rule is enough to show the rule is wrong. Sand pours because the grains slide, but every single grain keeps its own shape, so sand is a solid.'},
+      {t:'grid', prompt:'Tick ✓ or cross ✗ in every box. Think carefully about volume.',
+        cols:['Has a fixed shape','Has a fixed volume','Can be squashed'],
+        rows:[['Solid',[1,1,0]],['Liquid',[0,1,0]],['Gas',[0,0,1]]],
+        explain:'Squashing means changing the volume. Only a gas can do that, so only a gas has NO fixed volume. Look at how the middle and last columns are opposites of each other.'},
+      {t:'choice', prompt:'Use the evidence.', long:true,
+        text:'A sealed syringe holds a mystery substance. When you push the plunger it moves in easily. When a second syringe of another substance is pushed, the plunger will not move at all. What can you say?',
+        opts:['The first is a gas; the second is a solid or a liquid','The first is a liquid; the second is a gas','Both are gases'], ans:0,
+        explain:'Easy to squash means big gaps between particles: a gas. Impossible to squash means the particles are already touching: a solid or a liquid. You cannot yet tell which of those two.'}
     ]},
     {key:'particles', items:[
       {t:'choice', prompt:'Use the particle model.', long:true,
@@ -1170,7 +1498,15 @@ const SETS = [
       {t:'fill', prompt:'Drag the right words into the gaps.',
         lines:['Squashing a gas pushes its particles {closer together}.','Heating a liquid makes its particles move {faster}.','Cooling a gas makes its particles move {slower}.'],
         decoys:['further apart','heavier'],
-        explain:'Heat is really just particle movement. More heat means faster particles; less heat means slower ones. Squashing changes the spacing, not the speed.'}
+        explain:'Heat is really just particle movement. More heat means faster particles; less heat means slower ones. Squashing changes the spacing, not the speed.'},
+      {t:'choice', prompt:'Predict from the model.', long:true,
+        text:'A balloon full of air is put in a freezer. The air particles slow down and take up less room. What happens to the balloon?',
+        opts:['It shrinks a little','It gets bigger','It pops'], ans:0,
+        explain:'Slower particles hit the inside of the balloon less hard and less often, so the balloon pulls in a little. Warm it up again and it grows back.'},
+      {t:'multi', prompt:'Tick EVERY true statement about particles when ice melts.',
+        opts:[['The particles start to slide past each other', true], ['The number of particles stays the same', true],
+              ['The particles get smaller', false], ['The particles are still water particles', true], ['Some particles turn into air', false]],
+        explain:'Melting changes how particles MOVE and nothing else. Same number, same size, still water. That is why melted ice weighs exactly what the ice did.'}
     ]},
     {key:'mixtures', items:[
       {t:'choice', prompt:'Work backwards from the result.', long:true,
@@ -1187,7 +1523,15 @@ const SETS = [
       {t:'choice', prompt:'Why is the order important?', long:true,
         text:'In that plan, why must the filtering happen AFTER the salt has dissolved?',
         opts:['While the salt is still solid, the filter would catch it along with the sand','Filters only work on wet sand','Salt tears filter paper'], ans:0,
-        explain:'A filter cannot tell salt from sand while both are solid grains. Dissolving the salt first turns it into something the paper lets straight through, so only the sand is caught.'}
+        explain:'A filter cannot tell salt from sand while both are solid grains. Dissolving the salt first turns it into something the paper lets straight through, so only the sand is caught.'},
+      {t:'choice', prompt:'Work backwards from the result.', long:true,
+        text:'A mixture is poured through filter paper. Half of it is left on the paper and the water that comes through is salty. What was in the mixture?',
+        opts:['An insoluble solid AND a dissolved solid, both mixed in water','Only sand and water','Only salt and water'], ans:0,
+        explain:'Something stayed on the paper, so there was an insoluble solid. The water tastes salty, so something else had dissolved and went through. Two different solids, two different results.'},
+      {t:'multi', prompt:'Tick EVERY mixture that a filter funnel could separate.',
+        opts:[['sand and water', true], ['chalk powder and water', true], ['salt dissolved in water', false],
+              ['muddy pond water', true], ['sugar dissolved in tea', false]],
+        explain:'A filter catches solids that have NOT dissolved. Anything dissolved goes straight through, so salt water and sweet tea come out exactly as they went in.'}
     ]},
     {key:'dissolving', items:[
       {t:'choice', prompt:'Think about the weight.', long:true,
@@ -1209,7 +1553,15 @@ const SETS = [
               ['Filtering gets back a solid that dissolved.', false],
               ['Separating a mixture changes what the materials are made of.', false],
               ['A filter can catch a solid that did not dissolve.', true]],
-        explain:'Clear does not mean empty — salt water is completely clear. And the two methods are not interchangeable: filters catch whole solids, evaporating recovers dissolved ones.'}
+        explain:'Clear does not mean empty — salt water is completely clear. And the two methods are not interchangeable: filters catch whole solids, evaporating recovers dissolved ones.'},
+      {t:'choice', prompt:'Weigh the evidence.', long:true,
+        text:'A dish of salty water weighs 250 g. After a week in the sun only dry salt is left, and the dish weighs 20 g. Where did the missing 230 g go?',
+        opts:['Into the air, as water vapour','It was destroyed by the sun','It turned into salt'], ans:0,
+        explain:'Weight does not vanish. The water evaporated — it is still around, spread through the air as a gas. The 20 g of salt was there all along, dissolved.'},
+      {t:'tfgrid', prompt:'True or false?',
+        rows:[['Stirring makes sugar dissolve faster.', true], ['Stirring lets you dissolve MORE sugar in the end.', false],
+              ['Hot water can hold more dissolved sugar than cold water.', true], ['A soluble solid that has dissolved has stopped being that solid.', false]],
+        explain:'Stirring only changes the SPEED. Heat changes both the speed and how much will fit. And dissolved sugar is still sugar — it has spread out, not changed.'}
     ]},
     {key:'resources', items:[
       {t:'multi', prompt:'Tick EVERY thing that comes from crude oil.',
@@ -1227,7 +1579,14 @@ const SETS = [
         opts:[['Burning fuel releases carbon dioxide', true], ['Too much carbon dioxide makes the Earth warmer', true],
               ['Burning fuel gives us heat and electricity', true], ['Burning fuel makes more oil under the ground', false],
               ['Burning fuel takes carbon dioxide out of the air', false]],
-        explain:'The first three are all true at once, which is exactly why the question is hard: a fuel can be genuinely useful AND cause a real problem.'}
+        explain:'The first three are all true at once, which is exactly why the question is hard: a fuel can be genuinely useful AND cause a real problem.'},
+      {t:'choice', prompt:'Follow the consequence.', long:true,
+        text:'A town gets all its electricity by burning natural gas. It doubles the number of houses. What happens to the carbon dioxide going into the air?',
+        opts:['It goes up, because more gas is burned','It stays the same','It goes down'], ans:0,
+        explain:'More houses need more electricity, more electricity means more gas burned, and every bit of gas burned makes carbon dioxide. Each step causes the next.'},
+      {t:'order', prompt:'Put the journey of a plastic bottle in order.',
+        items:['Crude oil is drilled from under the ground','The oil is heated and separated in a tall tower','One part of it is turned into plastic','The plastic is shaped into a bottle'],
+        explain:'Every plastic thing began as oil. The separating step in the middle is the same idea as evaporating salt water: heat splits a mixture into its parts.'}
     ]},
     {key:'think', items:[
       {t:'match', prompt:'Read the table. No single clue is enough — combine two.', fig:'logic7',
@@ -1246,7 +1605,15 @@ const SETS = [
         opts:[['Stir some into water to see if it dissolves', true], ['Hold a magnet close to it', true],
               ['Look at it through a magnifying glass to see the grain size', true],
               ['Ask a friend to guess what it is', false], ['Weigh the empty pot it came in', false]],
-        explain:'A test only counts as evidence if its result could come out more than one way and tells you about the powder itself. A guess and an empty pot tell you nothing about the powder.'}
+        explain:'A test only counts as evidence if its result could come out more than one way and tells you about the powder itself. A guess and an empty pot tell you nothing about the powder.'},
+      {t:'choice', prompt:'Judge the evidence.', long:true,
+        text:'Ana says, "This liquid must be water, because it is clear." Why is that weak evidence?',
+        opts:['Lots of clear liquids are not water — vinegar and salt water, for two','Water is never clear','Only coloured liquids can be tested'], ans:0,
+        explain:'Clear tells you what it is NOT (not milk, not cola) but never what it IS. To be sure you need a test, not a look.'},
+      {t:'multi', prompt:'Tick EVERY result that would PROVE a white powder is NOT salt.',
+        opts:[['It does not dissolve in water', true], ['A magnet picks it up', true],
+              ['It is white', false], ['It is in small grains', false], ['It dissolves in water', false]],
+        explain:'Salt dissolves and is not magnetic, so either of the first two rules it out completely. Being white and small are things salt IS, so they prove nothing either way.'}
     ]},
     {key:'investigate', items:[
       {t:'choice', prompt:'Find the mistake.', long:true,
@@ -1264,7 +1631,15 @@ const SETS = [
         explain:'Two changes at once muddle the answer, and one clue rarely proves anything. But a result that surprises you is a gift — it usually means there is something you had not thought of.'},
       {t:'draw', prompt:'Draw the plan.',
         tip:'Draw the three steps for getting salt out of a mixture of salt and sand. Show the water, the filter, and the warm dish at the end.',
-        explain:'Dissolve, filter, evaporate. Being able to draw a plan before you start is how you spot a missing step while it is still cheap to fix.'}
+        explain:'Dissolve, filter, evaporate. Being able to draw a plan before you start is how you spot a missing step while it is still cheap to fix.'},
+      {t:'choice', prompt:'Read the results.', long:true,
+        text:'Three sugar cubes are dissolved in hot, warm and cold water. The hot cup takes 20 seconds, the warm 45 and the cold 80. What pattern do the numbers show?',
+        opts:['The colder the water, the longer it takes','The warmer the water, the longer it takes','There is no pattern'], ans:0,
+        explain:'Line the numbers up with the temperatures: hot 20, warm 45, cold 80. As it gets colder the time goes up every step. That is a pattern you can predict from.'},
+      {t:'multi', prompt:'Tick EVERY thing that must be kept the same in that sugar test.',
+        opts:[['the amount of water in each cup', true], ['the size of the sugar cube', true], ['how much you stir each cup', true],
+              ['the temperature of the water', false]],
+        explain:'Temperature is the ONE thing being changed on purpose. Everything else has to match, or the times cannot be compared.'}
     ]}
   ]
 }
@@ -1293,7 +1668,15 @@ const SETS = [
         /* Water and dry sand score identically here on purpose - that clash IS the question. */
         sameRowsOk:true,
         rows:[['A brick',[1,0,0]],['Water',[0,1,0]],['Air',[0,0,1]],['Dry sand',[0,1,0]]],
-        explain:'A whole pile of sand behaves rather like water, because the grains slide over each other. But look at ONE grain and it keeps its own shape perfectly — which is why sand is still a solid. The row and the label disagree, and both are right, at different sizes.'}
+        explain:'A whole pile of sand behaves rather like water, because the grains slide over each other. But look at ONE grain and it keeps its own shape perfectly — which is why sand is still a solid. The row and the label disagree, and both are right, at different sizes.'},
+      {t:'choice', prompt:'Design a test.', long:true,
+        text:'You have a jar of a mystery substance and must find out whether it is a liquid or a gas. Which ONE test settles it?',
+        opts:['Tip the jar: a liquid pours out and sits at the bottom of a new jar, a gas fills all of it','Weigh the jar','Look at its colour'], ans:0,
+        explain:'A liquid keeps its volume, so it only fills the bottom. A gas spreads to fill every corner. One tip of the jar shows which happened.'},
+      {t:'tfgrid', prompt:'True or false?',
+        rows:[['A pile of sand is a solid, even though you can pour the pile.', true], ['A liquid has a fixed shape.', false],
+              ['A gas can be squashed into a smaller space.', true], ['Every liquid is the same runniness.', false]],
+        explain:'Honey and water are both liquids, but one is far slower. Runniness is a property of each liquid, not of being a liquid.'}
     ]},
     {key:'particles', items:[
       {t:'choice', prompt:'Explain it with particles.', long:true,
@@ -1312,7 +1695,15 @@ const SETS = [
       {t:'fill', prompt:'Drag the right words into the gaps.',
         lines:['You can smell food from far away because gas particles {spread out}.','A gas can be squashed because its particles have {big gaps}.','A liquid can hardly be squashed because its particles are {already touching}.'],
         decoys:['locked in place','get smaller'],
-        explain:'One idea explains all three sentences: how much empty space sits between the particles.'}
+        explain:'One idea explains all three sentences: how much empty space sits between the particles.'},
+      {t:'grid', prompt:'Tick ✓ or cross ✗ in every box.',
+        cols:['Particles keep the same neighbours','Particles can swap places','Particles fly off in every direction'],
+        rows:[['Solid',[1,0,0]],['Liquid',[0,1,0]],['Gas',[0,1,1]]],
+        explain:'In a solid each particle keeps its neighbours for ever. In a liquid they swap around but stay close. In a gas they swap AND fly apart.'},
+      {t:'choice', prompt:'Explain the evidence.', long:true,
+        text:'A drop of perfume is opened at one end of a room. A minute later someone at the other end smells it. Which is the best explanation?',
+        opts:['Perfume particles turned into a gas and spread out across the room','The perfume flew through the air as a drop','The person imagined it'], ans:0,
+        explain:'Gas particles move fast and keep spreading until they are everywhere. A whole drop could not cross a room by itself.'}
     ]},
     {key:'mixtures', items:[
       {t:'choice', prompt:'Choose your equipment.', long:true,
@@ -1330,7 +1721,17 @@ const SETS = [
       {t:'match', prompt:'Match each method to WHY it works.',
         left:[{label:'Sieving'},{label:'Filtering'},{label:'Using a magnet'},{label:'Evaporating'}],
         right:['works because the pieces are different sizes','works because one solid will not dissolve','works because only some metals are pulled','works because a liquid can turn into a gas'],
-        explain:'Every method uses one property that the two things do NOT share. Naming that property is how you choose the method in the first place.'}
+        explain:'Every method uses one property that the two things do NOT share. Naming that property is how you choose the method in the first place.'},
+      {t:'choice', prompt:'Plan the whole job.', long:true,
+        text:'A jar holds iron filings, sand and salt. Which plan gets all three out separately with the FEWEST steps?',
+        opts:['Magnet for the iron; add water; filter for the sand; evaporate for the salt','Add water first, then use the magnet, then filter','Filter first, then magnet, then evaporate'], ans:0,
+        explain:'Magnet first while it is dry, or the wet filings clump. Water next so only the salt dissolves. Filter catches the sand. Evaporate brings the salt back. Four steps, none wasted.'},
+      {t:'tfgrid', prompt:'True or false?',
+        rows:[['When you separate a mixture, the materials come out the same as they went in.', true],
+              ['Rice has the same properties in a mixture and after it is taken out.', true],
+              ['An iron nail has the same properties as salt.', false],
+              ['Burning a mixture is a good way to separate it.', false]],
+        explain:'Separating never changes what things are made of. Burning does — it makes new substances — so burning is not separating at all.'}
     ]},
     {key:'dissolving', items:[
       {t:'choice', prompt:'Read between the bars.', fig:'dissolvebars', long:true,
@@ -1351,7 +1752,15 @@ const SETS = [
               ['Hot water can usually dissolve more sugar than cold water.', true],
               ['One big lump dissolves faster than the same amount of loose grains.', false],
               ['Dissolving turns sugar into water.', false]],
-        explain:'Stirring and heating both speed things up, but only heating lets the water hold more sugar in the end. And the sugar is always still sugar — taste it and you will find it.'}
+        explain:'Stirring and heating both speed things up, but only heating lets the water hold more sugar in the end. And the sugar is always still sugar — taste it and you will find it.'},
+      {t:'choice', prompt:'Read between the numbers.', fig:'dissolvebars', long:true,
+        text:'A cup of water even hotter than the "hot" cup is tested. Which time is most likely?',
+        opts:['About 12 seconds','About 30 seconds','About 45 seconds'], ans:0,
+        explain:'Hotter than hot should be faster than 20 seconds. Only 12 is less than 20. Thirty and forty-five would be slower than the hot cup, which makes no sense.'},
+      {t:'multi', prompt:'Tick EVERY true statement from the review packet.',
+        opts:[['A substance that does not dissolve is called insoluble', true], ['A dissolved substance cannot be seen because it becomes part of the water', true],
+              ['All materials dissolve', false], ['Only powders dissolve', false], ['The bigger the soluble piece, the faster it dissolves', false]],
+        explain:'Two true, three false. The last one is backwards: smaller pieces dissolve faster because more of the solid touches the water.'}
     ]},
     {key:'resources', items:[
       {t:'choice', prompt:'Spot the same idea in a new place.', long:true,
@@ -1369,7 +1778,14 @@ const SETS = [
         explain:'Match the property to the demand. Outside for a hundred years means rain, frost and sun, so lasting matters far more than being easy to cut or light to carry.'},
       {t:'order', prompt:'Put the whole journey in order, from rock to ring.',
         items:['Ore is dug out of the ground','The ore is heated until the metal separates out','The metal is shaped and polished','The ring is sold in a shop'],
-        explain:'Every metal thing you own has been on this journey. The middle step, smelting, is the one that turns a dull rock into something useful.'}
+        explain:'Every metal thing you own has been on this journey. The middle step, smelting, is the one that turns a dull rock into something useful.'},
+      {t:'choice', prompt:'Choose by property, and say why.', long:true,
+        text:'You need a material for a saucepan. Which is the best choice, and why?',
+        opts:['Metal, because it lets heat through and does not melt on a cooker','Plastic, because it is light','Wood, because it is cheap'], ans:0,
+        explain:'A saucepan must pass heat to the food and survive the flame. Metal does both. Plastic and wood would melt or burn.'},
+      {t:'multi', prompt:'Tick EVERY material that can be grown again in a few years.',
+        opts:[['wood', true], ['cotton', true], ['paper', true], ['metal', false], ['oil', false]],
+        explain:'Paper is made from wood, and wood grows on trees, so it belongs with the growing ones. Metal ore and oil took millions of years and cannot be grown at all.'}
     ]},
     {key:'think', items:[
       {t:'match', prompt:'Read the table. You will need two clues for each one.', fig:'logic8',
@@ -1386,7 +1802,15 @@ const SETS = [
         explain:'Plenty of grey things are not magnetic at all — aluminium foil and pencil lead, for two. The only way to know is to hold a magnet near it and look.'},
       {t:'order', prompt:'Put the steps of a good investigation in order.',
         items:['Ask a question you can actually test','Predict what you think will happen','Plan a fair test and get the equipment ready','Do the test and write down what really happens','Say whether your prediction was right, and why'],
-        explain:'Predicting BEFORE you test is what makes the result mean something. If you only decide what you expected afterwards, you can never be surprised — and being surprised is how you learn.'}
+        explain:'Predicting BEFORE you test is what makes the result mean something. If you only decide what you expected afterwards, you can never be surprised — and being surprised is how you learn.'},
+      {t:'choice', prompt:'Rule the methods out.', long:true,
+        text:'Two powders are the same size and the same colour. One is magnetic. Which tool, and why?',
+        opts:['A magnet, because being magnetic is the only difference between them','A sieve, because they are small','Hand picking, because you can see them'], ans:0,
+        explain:'Same size rules out a sieve. Same colour rules out picking by eye. One magnetic and one not is a difference, and the magnet uses exactly that.'},
+      {t:'multi', prompt:'Tick EVERY question a scientist could actually test.',
+        opts:[['Does salt dissolve faster in hot water than in cold?', true], ['Which of these three magnets is strongest?', true],
+              ['Is sugar nicer than salt?', false], ['Does stirring speed up dissolving?', true], ['Is red a better colour than blue?', false]],
+        explain:'A testable question has an answer you can measure. "Nicer" and "better" are opinions — there is nothing to weigh, time or count.'}
     ]},
     {key:'investigate', items:[
       {t:'choice', prompt:'Find the mistake.', long:true,
@@ -1404,7 +1828,14 @@ const SETS = [
         explain:'Less mud getting through means more of it was caught, and catching more means smaller holes. You never saw the holes, but the result tells you about them.'},
       {t:'draw', prompt:'Design your own fair test.',
         tip:'Draw two cups that are the same in every single way except for the ONE thing you are testing. Label the thing that is different.',
-        explain:'If you can point at exactly one difference in your own drawing, your test is fair. If you find two, it is not — and that is the quickest check there is.'}
+        explain:'If you can point at exactly one difference in your own drawing, your test is fair. If you find two, it is not — and that is the quickest check there is.'},
+      {t:'choice', prompt:'Fix the method.', long:true,
+        text:'Kim tests three cloths to see which filters muddy water best. She uses the same amount of water each time, but pours it faster through cloth A. What should she change?',
+        opts:['Pour at the same speed every time','Use more water for cloth A','Test only one cloth'], ans:0,
+        explain:'Pouring faster forces more mud through, so cloth A looks worse than it is. Speed has to match, just like the amount of water did.'},
+      {t:'order', prompt:'Put the steps of a fair dissolving test in order.',
+        items:['Measure the same amount of water into three cups','Make one cup hot, one warm and one cold','Drop the same size sugar cube into each','Stir each cup the same number of times','Time how long each cube takes to vanish'],
+        explain:'Everything that must be the same is set up first. The one difference — temperature — is the only thing that changes. Then you measure.'}
     ]}
   ]
 }
@@ -1638,7 +2069,14 @@ const FIGURES = {
   dissolvebars:barFig([['Hot',20],['Warm',45],['Cold',80]], 'seconds', 'Time for a sugar cube to dissolve'),
   poolbars:barFig([['A',4],['B',6],['C',9],['D',2]], 'grams', 'Salt found in four rock pools'),
   magnetbars:barFig([['A',9],['B',14],['C',5]], 'clips', 'Paper clips each magnet could hold'),
-  sugarbars:barFig([['Lemonade',9],['Cola',11],['Orange',7],['Water',0]], 'grams', 'Sugar in four drinks')
+  sugarbars:barFig([['Lemonade',9],['Cola',11],['Orange',7],['Water',0]], 'grams', 'Sugar in four drinks'),
+  /* the review packet's materials table: A is magnetic and small, C small
+     and white, D and E both big and only told apart by colour */
+  logic9:tableFig(['A magnet picks it up','It is in small pieces','It is blue'],
+    [['A',[1,1,0]],['B',[0,1,0]],['C',[0,0,0]],['D',[0,0,1]]], 'A table of clues about A, B, C and D'),
+  logic10:tableFig(['It is a liquid','It dissolves in water','A magnet picks it up'],
+    [['A',[0,1,0]],['B',[0,0,1]],['C',[1,0,0]],['D',[0,0,0]]], 'A table of clues about A, B, C and D'),
+  drinkbars:barFig([['Cola',12],['Fizzy orange',9],['Apple juice',10],['Milk',5]], 'grams', 'Sugar in four drinks, measured by Tina and Ted')
 };
 
 /* ============ BADGES ============ */
