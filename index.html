@@ -46,7 +46,11 @@ h1,h2,h3{font-family:var(--round);line-height:1.15;margin:0}
 .hero h1{font-size:2.6rem;font-weight:700;letter-spacing:-.5px}
 .hero p{margin:.4rem 0 0;color:var(--ink-soft);font-size:1.1rem;max-width:32ch}
 .hero img{width:clamp(96px,24vw,150px);height:auto;display:block;border-radius:28px}
-.grid{display:grid;gap:1rem;margin-top:1.5rem}
+.grid{display:grid;gap:1.8rem;margin-top:1.5rem}
+.year-head{display:flex;align-items:baseline;gap:.7rem;font-size:1.5rem;font-weight:700;
+  margin:0 0 .7rem;padding-bottom:.4rem;border-bottom:3px solid var(--line)}
+.year-note{font-family:var(--read);font-size:.95rem;font-weight:400;color:var(--ink-soft)}
+.year-grid{display:grid;gap:1rem}
 .card{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:1rem;align-items:center;text-align:left;
   padding:1.1rem;border-radius:26px;border:3px solid var(--line);background:var(--paper);
   box-shadow:0 5px 0 var(--line);text-decoration:none;color:inherit}
@@ -107,41 +111,55 @@ footer{margin-top:2rem;color:var(--ink-soft);font-size:.95rem;text-align:center}
    ============================================================ */
 const APPS = [
   {
+    year: 1,
+    slug: 'number-friends',
+    emoji: '🦉',
+    title: 'Number Friends',
+    desc: 'Maths: counting, adding, taking away and finding the missing number — 5 sets of 28',
+    ready: true
+  },
+  {
+    year: 3,
     slug: 'english-explorer',
     emoji: '🦎',
     title: 'English Explorer',
-    desc: 'Pronouns, reading, shapes, riddles and rhymes — 5 sets',
+    desc: 'English: pronouns, reading, shapes, riddles and rhymes — 5 sets',
     ready: true
   },
   {
+    year: 3,
     slug: 'inventors-lab',
     emoji: '💡',
     title: 'Inventors Lab',
-    desc: 'Year 3–4: pronouns, job words, word families, to + verb, reading, 2D and 3D shapes, eye tricks — 6 sets of 42',
+    desc: 'English: pronouns, job words, word families, to + verb, reading, 2D and 3D shapes, eye tricks — 6 sets of 42',
     ready: true
   },
   {
+    year: 3,
     slug: 'science-detectives',
     emoji: '🔬',
     title: 'Science Detectives',
-    desc: 'Year 3–4 science: solids, liquids and gases, particles, separating mixtures, dissolving, rocks and fuels — 8 sets of 42',
+    desc: 'Science: solids, liquids and gases, particles, separating mixtures, dissolving, rocks and fuels — 8 sets of 42',
     ready: true
   },
   {
+    year: 3,
     slug: 'world-explorers',
     emoji: '🌍',
     title: 'World Explorers',
-    desc: 'Year 3–4 social studies: climate zones, the compass, map keys and grids, landforms, natural resources and people — 4 sets',
+    desc: 'Social studies: climate zones, the compass, map keys and grids, landforms, natural resources and people — 4 sets',
     ready: true
   }
-  // {
-  //   slug: 'math-explorer', emoji: '🔢', title: 'Math Explorer',
-  //   desc: 'Coming soon', ready: false
-  // },
 ];
 
-const grid = document.getElementById('grid');
-grid.innerHTML = APPS.map(a => a.ready
+/* One heading per school year, youngest first, so a grown-up handing over
+   the tablet can see at a glance which half of the page is theirs. */
+const YEARS = [
+  {year: 1, label: 'Year 1', note: 'Age 6–7'},
+  {year: 3, label: 'Year 3', note: 'Age 8–9'}
+];
+
+const cardHTML = a => a.ready
   ? `<a class="card" href="/apps/${a.slug}/">
        <span class="emoji" aria-hidden="true">${a.emoji}</span>
        <span><span class="t">${a.title}</span><span class="d">${a.desc}</span></span>
@@ -151,8 +169,18 @@ grid.innerHTML = APPS.map(a => a.ready
        <span class="emoji" aria-hidden="true">${a.emoji}</span>
        <span><span class="t">${a.title}</span><span class="d">${a.desc}</span></span>
        <span class="go">Soon</span>
-     </div>`
-).join('');
+     </div>`;
+
+const grid = document.getElementById('grid');
+grid.innerHTML = YEARS.map(y => {
+  const mine = APPS.filter(a => a.year === y.year);
+  if (!mine.length) return '';
+  const id = 'yr' + y.year;
+  return `<section class="year" aria-labelledby="${id}">
+      <h2 class="year-head" id="${id}">${y.label}<span class="year-note">${y.note}</span></h2>
+      <div class="year-grid">${mine.map(cardHTML).join('')}</div>
+    </section>`;
+}).join('');
 
 const readyCount = APPS.filter(a => a.ready).length;
 document.getElementById('foot').textContent =

@@ -6,12 +6,17 @@ Static, zero-build collection of practice apps. Every push to `main` deploys aut
 
 ```
 .
-├── index.html                  hub landing page (the APPS list lives here)
+├── index.html                  hub landing page (the APPS list lives here,
+│                               grouped into one section per school year)
 ├── manifest.webmanifest        PWA manifest — one installable app for the whole site
 ├── sw.js                       service worker (offline support)
 ├── vercel.json                 cache + security headers
 ├── icons/                      home-screen and favicon art
 └── apps/
+    ├── number-friends/
+    │   └── index.html          Year 1 maths: counting, adding, taking away,
+    │                           the missing number, number pairs to 10
+    │                           (5 sets of 28)
     ├── english-explorer/
     │   └── index.html          Pronouns, reading, shapes, riddles, rhymes (5 sets)
     ├── inventors-lab/
@@ -31,6 +36,60 @@ Static, zero-build collection of practice apps. Every push to `main` deploys aut
 
 Each app is one self-contained HTML file: no build step, no dependencies, no
 shared runtime. Copying an app folder is a perfectly good way to start a new one.
+
+## The hub is grouped by year
+
+`index.html` renders one labelled section per school year, youngest first, so
+a grown-up handing over the tablet can see at a glance which half of the page
+belongs to which child. Each entry in `APPS` carries a `year`, and `YEARS`
+holds the headings. Everything shipped so far is **Year 1** (maths) or
+**Year 3** (English, science, social studies); adding a year means adding one
+row to `YEARS` and tagging the apps that belong to it.
+
+## Number Friends
+
+Year 1 maths, built from the P.1 exercise-book pages on finding a missing
+number. 5 sets × 28 questions (140 questions, 235 stars).
+
+Six sections per set: **Counting** (to 10, one more and one less, ordering) ·
+**Add and Take Away** · **The Missing Number** · **Add or Take Away?** ·
+**Number Pairs** (the pairs that make 10) · **Story Sums**.
+
+The exercise book teaches four separate rules — one each for finding the first
+number of an addition, the first number of a subtraction, the added number and
+the subtracted number. They are really **one** rule, and every explanation in
+the app says the same thing:
+
+> If the box is the **biggest** number in the line, **add** the other two.
+> If the box is one of the smaller **parts**, **take away**.
+
+A six-year-old cannot be asked to go and find a keyboard, so three question
+types are new here:
+
+| type | what the child does | stars |
+| --- | --- | --- |
+| `keypad` | taps 0–9 to fill the box in a sentence such as `5 + □ = 8` | 1 |
+| `counters` | counts pictures laid out in ten-frames, then taps the number | 1 |
+| `bond` | fills the missing part of a part-part-whole diagram | 1 |
+
+They join `choice`, `match`, `sort`, `order`, `tfgrid` and `draw`. A `choice`
+may carry `big: true`, which shows its number sentence at full size with a real
+box — used for every tick-the-right-way question, because that sentence is the
+thing the child is actually solving.
+
+Two details that matter more at six than they would at eight: the text size
+starts on **Bigger** rather than Normal, and a `counters` question that takes
+some away draws them **crossed out** rather than removing them, so the child
+can see both the eight that were there and the three that went.
+
+### Every number is checked by arithmetic, not by eye
+
+`nf_check.mjs` re-derives all 140 answers rather than trusting them: it solves
+each number sentence for its box (including the reversed form, `10 = 6 + □`),
+re-adds every `bond`, re-counts every ten-frame, and confirms that each
+tick-the-right-way option really does produce the box. It also rejects a wrong
+option that does not itself add up — a child should have to know the rule to
+choose, not just spot the line with a mistake in it.
 
 ## Inventors Lab
 
@@ -263,8 +322,10 @@ are *true*.
 ### Storage rule for new apps
 
 All apps share one browser origin **and one storage allowance** — about 5 MB
-between the four of them — so keys must be namespaced per app, and a new app
-has to assume the others have already used most of the room.
+between the five of them — so keys must be namespaced per app, and a new app
+has to assume the others have already used most of the room. In use today:
+`englishExplorer.v1`, `inventorsLab.v1`, `scienceDetectives.v1`,
+`worldExplorers.v1` and `numberFriends.v1`.
 
 Each app keeps **two** keys:
 

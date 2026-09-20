@@ -1,0 +1,2313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Number Friends</title>
+<meta name="description" content="Counting, adding, taking away and finding the missing number, for Year 1.">
+<meta name="theme-color" content="#B4530E">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Learning">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<link rel="icon" href="/icons/favicon-64.png" sizes="64x64">
+<link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FBF2E7; --paper:#FFFCF7; --paper-2:#FAF0E2; --ink:#3A2415; --ink-soft:#7A5A43; --line:#E0CAAE;
+  --leaf:#B4530E; --leaf-deep:#8A3E09; --leaf-soft:#FBE3D0; --on-leaf:#FFFFFF;
+  --sun:#C98A00; --sun-soft:#FBEBC4; --sun-deep:#8F6200;
+  --sky:#2F76A8; --sky-soft:#DCEBF6;
+  --berry:#B23F4B; --berry-soft:#F8DEE0;
+  --bark:#B39A7E;
+  --owl:#D79A3E; --owl-dark:#8A5A18; --owl-tum:#F6E2BE;
+  --overlay:rgba(48,28,12,.58);
+  --read:'Andika','Trebuchet MS',Verdana,system-ui,sans-serif;
+  --round:'Fredoka','Andika','Trebuchet MS',system-ui,sans-serif;
+  font-size:20px;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#241A12; --paper:#31241A; --paper-2:#3C2D20; --ink:#F6E9DC; --ink-soft:#CBB09A; --line:#5C4634;
+    --leaf:#F0A068; --leaf-deep:#C77B45; --leaf-soft:#4A2A15; --on-leaf:#241208;
+    --sun:#EDBB55; --sun-soft:#4A3718; --sun-deep:#B98A2C;
+    --sky:#72B6E2; --sky-soft:#1E3A4B;
+    --berry:#EC8490; --berry-soft:#4C2A30;
+    --bark:#8A7460;
+    --owl:#C98A3A; --owl-dark:#F0C68A; --owl-tum:#5A4227;
+    --overlay:rgba(0,0,0,.62);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#241A12; --paper:#31241A; --paper-2:#3C2D20; --ink:#F6E9DC; --ink-soft:#CBB09A; --line:#5C4634;
+  --leaf:#F0A068; --leaf-deep:#C77B45; --leaf-soft:#4A2A15; --on-leaf:#241208;
+  --sun:#EDBB55; --sun-soft:#4A3718; --sun-deep:#B98A2C;
+  --sky:#72B6E2; --sky-soft:#1E3A4B;
+  --berry:#EC8490; --berry-soft:#4C2A30;
+  --bark:#8A7460;
+  --owl:#C98A3A; --owl-dark:#F0C68A; --owl-tum:#5A4227;
+  --overlay:rgba(0,0,0,.62);
+  color-scheme:dark;
+}
+:root[data-size="big"]{font-size:23px}
+
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--read);line-height:1.5;min-height:100vh;-webkit-tap-highlight-color:transparent}
+img,svg{max-width:100%}
+button{font:inherit;color:inherit}
+h1,h2,h3{font-family:var(--round);line-height:1.15;margin:0}
+.wrap{max-width:820px;margin:0 auto;padding:1rem 1rem 2rem}
+.hidden{display:none!important}
+:focus-visible{outline:4px solid var(--sun);outline-offset:3px;border-radius:10px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:3.1rem;padding:.4rem 1.4rem;border-radius:999px;border:3px solid var(--line);background:var(--paper);font-family:var(--round);font-weight:600;font-size:1.05rem;cursor:pointer;box-shadow:0 4px 0 var(--line);transition:transform .08s,box-shadow .08s;text-decoration:none;user-select:none}
+.btn:active:not(:disabled){transform:translateY(3px);box-shadow:0 1px 0 var(--line)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn-go{background:var(--leaf);border-color:var(--leaf);color:var(--on-leaf);box-shadow:0 5px 0 var(--leaf-deep)}
+.btn-go:active:not(:disabled){box-shadow:0 2px 0 var(--leaf-deep)}
+.btn-sun{background:var(--sun-soft);border-color:var(--sun);box-shadow:0 4px 0 var(--sun)}
+.btn-wide{width:100%}
+.btn-icon{width:3.1rem;padding:0;flex:none;font-size:1.3rem}
+.btn-small{min-height:2.5rem;font-size:.9rem;padding:.2rem 1rem;box-shadow:0 3px 0 var(--line)}
+.row{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center}
+.stack{display:grid;gap:.75rem}
+
+/* Hoot the owl, this activity’s mascot */
+.ow-branch{stroke:var(--bark);stroke-width:7;stroke-linecap:round;fill:none}
+.ow-body{fill:var(--owl);stroke:var(--owl-dark);stroke-width:3.5}
+.ow-tuft{fill:var(--owl);stroke:var(--owl-dark);stroke-width:3.5;stroke-linejoin:round}
+.ow-wing{fill:var(--owl-dark);opacity:.3;stroke:none}
+.ow-tum{fill:var(--owl-tum);stroke:none}
+.ow-eye{fill:#FFFFFF;stroke:var(--owl-dark);stroke-width:3}
+.ow-pupil{fill:#2A1B0C}
+.ow-beak{fill:var(--sun-deep);stroke:var(--owl-dark);stroke-width:2;stroke-linejoin:round}
+.ow-foot{fill:none;stroke:var(--sun-deep);stroke-width:4;stroke-linecap:round}
+.mascot{transition:filter .4s}
+.mascot.happy{animation:hop .6s ease}
+.mascot.happy .ow-tuft{animation:spin .6s ease;transform-origin:65px 26px}
+.mascot.sleepy .ow-pupil{display:none}
+@keyframes hop{0%,100%{transform:translateY(0)}35%{transform:translateY(-14px) rotate(-4deg)}65%{transform:translateY(0)}80%{transform:translateY(-4px)}}
+@keyframes spin{0%,100%{transform:translateX(0)}50%{transform:translateX(5px)}}
+
+/* Home */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:1rem;padding:1.25rem 0 .5rem}
+.hero h1{font-size:2.5rem;font-weight:700;letter-spacing:-.5px}
+.hero p{margin:.4rem 0 0;color:var(--ink-soft);font-size:1.1rem;max-width:30ch}
+.hero .mascot{width:clamp(120px,26vw,185px);height:auto;display:block}
+.notice{background:var(--sun-soft);border:3px solid var(--sun);border-radius:20px;padding:.9rem 1.1rem;margin:1rem 0}
+.resume{background:var(--sky-soft);border:3px solid var(--sky);border-radius:24px;padding:1.1rem 1.2rem;margin:1rem 0;display:grid;gap:.75rem}
+.resume h2{font-size:1.35rem}
+.resume p{margin:0;color:var(--ink-soft)}
+.sets{display:grid;gap:1rem;margin-top:1.25rem}
+.sets h2.label{font-size:1.4rem}
+.setcard{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:1rem;align-items:center;text-align:left;width:100%;padding:1rem 1.1rem;border-radius:26px;border:3px solid var(--line);background:var(--paper);cursor:pointer;box-shadow:0 5px 0 var(--line)}
+.setcard:active:not(:disabled){transform:translateY(3px);box-shadow:0 2px 0 var(--line)}
+.setcard .emoji{font-size:2.4rem;width:3.6rem;height:3.6rem;display:grid;place-items:center;border-radius:18px;background:var(--paper-2)}
+.setcard .sc-title{font-family:var(--round);font-weight:600;font-size:1.3rem;line-height:1.2}
+.setcard .meta{color:var(--ink-soft);font-size:.95rem}
+.setcard .go{font-family:var(--round);font-weight:600;color:var(--leaf);font-size:1rem;white-space:nowrap}
+.chal{display:inline-block;font-family:var(--round);font-weight:600;font-size:.78rem;padding:.05rem .5rem;border-radius:999px;background:var(--sun-soft);border:2px solid var(--sun);color:var(--sun-deep);margin-left:.4rem;vertical-align:middle}
+.stars{display:inline-flex;gap:2px;font-size:1.1rem;letter-spacing:1px}
+.star-on{color:var(--sun)}
+.star-off{color:var(--line)}
+.homefoot{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.5rem}
+.result-head .mascot{width:150px;height:auto;display:block;margin:0 auto .5rem}
+
+/* Knowledge list */
+.knows{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.5rem}
+.know{font-size:.85rem;background:var(--paper-2);border:2px solid var(--line);border-radius:999px;padding:.1rem .6rem;color:var(--ink-soft)}
+
+/* Quiz top */
+.topbar{display:flex;align-items:center;gap:.75rem;position:sticky;top:0;z-index:20;background:var(--bg);padding:.6rem 0 .4rem}
+.topbar .where{flex:1;min-width:0}
+.topbar .where b{font-family:var(--round);font-size:1.05rem;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topbar .where span{color:var(--ink-soft);font-size:.9rem}
+.pill{font-family:var(--round);font-weight:600;background:var(--sun-soft);border:3px solid var(--sun);border-radius:999px;padding:.25rem .85rem;white-space:nowrap}
+.pill.fire{background:var(--berry-soft);border-color:var(--berry);animation:pulse 1s ease infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
+.track-wrap{position:relative;height:3.4rem;margin:.2rem 0 .6rem}
+.track-wrap .track{position:absolute;left:0;right:0;bottom:.55rem;height:12px;border-radius:99px;background:var(--bark);opacity:.35}
+.track-wrap .fill{position:absolute;left:0;bottom:.55rem;height:12px;border-radius:99px;background:var(--leaf);transition:width .5s ease}
+.track-wrap .walker{position:absolute;bottom:.3rem;width:3.6rem;transform:translateX(-50%);transition:left .5s ease}
+.track-wrap .walker .ow-branch{display:none}
+.track-wrap .goal{position:absolute;right:-.2rem;bottom:.6rem;font-size:1.4rem}
+
+/* Question card */
+.card{background:var(--paper);border:3px solid var(--line);border-radius:30px;padding:1.2rem 1.2rem 1.5rem;box-shadow:0 6px 0 var(--line)}
+.sec-tag{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--round);font-weight:600;font-size:.95rem;padding:.2rem .8rem;border-radius:999px;background:var(--paper-2);border:2px solid var(--line);color:var(--ink-soft)}
+.prompt{display:flex;gap:.75rem;align-items:flex-start;margin:.9rem 0 1rem}
+.prompt h2{font-size:1.35rem;font-weight:600;flex:1}
+.speak{flex:none;width:2.8rem;height:2.8rem;border-radius:50%;border:3px solid var(--sky);background:var(--sky-soft);cursor:pointer;font-size:1.15rem;display:grid;place-items:center}
+.qtext{font-size:1.45rem;line-height:1.6;margin:0 0 1.1rem}
+.blank{display:inline-block;min-width:4.6em;border-bottom:4px dashed var(--sky);text-align:center;color:var(--sky);font-weight:700;padding:0 .2em}
+.blank.filled{border-bottom-style:solid}
+
+/* Choice */
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(6.5rem,1fr));gap:.8rem}
+.opts.long{grid-template-columns:1fr}
+.opt{min-height:4rem;border-radius:20px;border:3px solid var(--line);background:var(--paper-2);font-size:1.3rem;font-weight:700;cursor:pointer;padding:.5rem 1rem;box-shadow:0 4px 0 var(--line);text-align:center;display:flex;align-items:center;justify-content:center;gap:.5rem;flex-direction:column}
+.opts.long .opt{font-size:1.15rem;text-align:left;align-items:flex-start;font-weight:400}
+.opt:active:not(:disabled){transform:translateY(3px);box-shadow:0 1px 0 var(--line)}
+.opt.sel{border-color:var(--sky);background:var(--sky-soft);box-shadow:0 4px 0 var(--sky)}
+.opt.ok{border-color:var(--leaf);background:var(--leaf-soft);box-shadow:0 4px 0 var(--leaf)}
+.opt.no{border-color:var(--berry);background:var(--berry-soft);box-shadow:0 4px 0 var(--berry)}
+.opts.multi{grid-template-columns:1fr}
+.opts.multi .opt{flex-direction:row;justify-content:flex-start;gap:.7rem;text-align:left;font-weight:400;font-size:1.12rem}
+.tickbox{flex:none;width:2rem;height:2rem;border-radius:8px;border:3px solid var(--line);background:var(--paper);display:grid;place-items:center;font-size:1.15rem;font-weight:700;color:var(--leaf-deep);line-height:1}
+.opt.sel .tickbox{border-color:var(--sky);background:var(--sky-soft)}
+.opt.ok .tickbox{border-color:var(--leaf);background:var(--leaf-soft)}
+.opt.no .tickbox{border-color:var(--berry);background:var(--berry-soft)}
+.opt .should{margin-left:auto;font-size:.85rem;color:var(--ink-soft);white-space:nowrap;font-family:var(--round)}
+
+/* Chips, bins, blanks */
+.bank{display:flex;flex-wrap:wrap;gap:.65rem;justify-content:center;min-height:4rem;padding:.8rem;border-radius:22px;background:var(--paper-2);border:3px dashed var(--line);margin-bottom:1rem}
+.bank-label{width:100%;text-align:center;color:var(--ink-soft);font-size:.9rem}
+.chip{display:inline-flex;align-items:center;justify-content:center;min-height:3.2rem;min-width:3.2rem;padding:.2rem 1.05rem;border-radius:16px;background:var(--sun-soft);border:3px solid var(--sun);font-size:1.2rem;font-weight:700;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;box-shadow:0 4px 0 var(--sun)}
+.chip.sel{background:var(--sky-soft);border-color:var(--sky);box-shadow:0 0 0 4px var(--sky)}
+.chip.dragging{opacity:.3}
+.chip.ok{background:var(--leaf-soft);border-color:var(--leaf);box-shadow:0 4px 0 var(--leaf)}
+.chip.no{background:var(--berry-soft);border-color:var(--berry);box-shadow:0 4px 0 var(--berry)}
+.ghost{position:fixed;left:0;top:0;z-index:1000;pointer-events:none;transform:translate(-50%,-60%) scale(1.1);opacity:.95}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(10rem,1fr));gap:.9rem}
+.bin{min-height:9rem;border:3px dashed var(--line);border-radius:22px;padding:.7rem;display:flex;flex-direction:column;gap:.6rem;cursor:pointer}
+.bin h3{font-size:1.05rem;text-align:center}
+.bin .hint{font-size:.85rem;color:var(--ink-soft);text-align:center;margin-top:-.4rem}
+.bin .inside{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center}
+.over{border-color:var(--sky)!important;background:var(--sky-soft)!important}
+.poemtext{font-size:1.25rem;line-height:1.5;margin:0}
+.poemtext .line{display:block;margin:0 0 .9rem}
+.nowrap{white-space:nowrap}
+.slot{display:inline-flex;vertical-align:middle;align-items:center;justify-content:center;min-width:5.5rem;min-height:3.2rem;margin:0 .15rem;border-bottom:4px dashed var(--sky);border-radius:12px 12px 4px 4px;background:var(--sky-soft);cursor:pointer;line-height:1.2}
+.slot .chip{box-shadow:none}
+
+/* Order (drag to sequence) */
+.orderlist{display:grid;gap:.6rem;margin-bottom:.8rem}
+.ord{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:.7rem;align-items:center;padding:.6rem .8rem;border-radius:18px;border:3px solid var(--line);background:var(--paper-2);font-size:1.05rem;line-height:1.35;touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab;text-align:left}
+.ord .num{font-family:var(--round);font-weight:700;width:2rem;height:2rem;display:grid;place-items:center;border-radius:50%;background:var(--sun-soft);border:2px solid var(--sun);flex:none;font-size:.95rem}
+.ord.dragging{opacity:.35}
+.ord.ok{border-color:var(--leaf);background:var(--leaf-soft)}
+.ord.no{border-color:var(--berry);background:var(--berry-soft)}
+.ord-move{display:flex;flex-direction:column;gap:.2rem}
+.ord-move button{width:2.1rem;height:1.6rem;border-radius:8px;border:2px solid var(--line);background:var(--paper);cursor:pointer;font-size:.8rem;line-height:1;padding:0}
+.ord-move button:disabled{opacity:.3;cursor:default}
+
+/* Match lines */
+.match{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);column-gap:clamp(2.6rem,11vw,6rem)}
+.match-col{display:grid;grid-template-columns:minmax(0,1fr);gap:.7rem;align-content:stretch;position:relative;z-index:2}
+.match svg.lines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;overflow:visible}
+.m-item{position:relative;min-width:0;overflow-wrap:anywhere;display:flex;align-items:center;gap:.5rem;min-height:4rem;padding:.45rem .8rem;border-radius:18px;border:3px solid var(--line);background:var(--paper-2);cursor:pointer;touch-action:none;user-select:none;-webkit-user-select:none;text-align:left;font-size:1.05rem;line-height:1.3}
+.m-item.left{font-weight:700;font-size:1.15rem}
+.m-item.right{padding-left:1.15rem}
+.m-item .dot{position:absolute;top:50%;width:18px;height:18px;border-radius:50%;background:var(--paper);border:4px solid var(--ink-soft);transform:translateY(-50%)}
+.m-item.left .dot{right:-11px}
+.m-item.right .dot{left:-11px}
+.m-item.sel{border-color:var(--sky);background:var(--sky-soft)}
+.m-item.linked .dot{background:var(--sky);border-color:var(--sky)}
+.m-item.ok{border-color:var(--leaf);background:var(--leaf-soft)}
+.m-item.no{border-color:var(--berry);background:var(--berry-soft)}
+.m-item.ok .dot{background:var(--leaf);border-color:var(--leaf)}
+.m-item.no .dot{background:var(--berry);border-color:var(--berry)}
+.lines path{fill:none;stroke-width:5;stroke-linecap:round}
+
+/* Tick-or-cross grid */
+.gridq{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.gridq table{border-collapse:separate;border-spacing:4px;margin:0 auto}
+.gridq th{font-family:var(--round);font-weight:600;font-size:.88rem;line-height:1.2;color:var(--ink-soft);padding:.2rem .3rem;vertical-align:bottom;max-width:7.5rem;min-width:4.6rem}
+.gridq th.rowhead{text-align:right;vertical-align:middle;color:var(--ink);font-size:1.05rem;white-space:nowrap;padding-right:.5rem}
+.cell{width:3.4rem;height:3.4rem;border-radius:14px;border:3px solid var(--line);background:var(--paper-2);font-size:1.5rem;font-weight:700;cursor:pointer;padding:0;line-height:1}
+.cell.tick{color:var(--leaf-deep);border-color:var(--leaf);background:var(--leaf-soft)}
+.cell.cross{color:var(--berry);border-color:var(--berry);background:var(--berry-soft)}
+.cell.ok{box-shadow:inset 0 0 0 3px var(--leaf)}
+.cell.no{box-shadow:inset 0 0 0 3px var(--berry);opacity:.85}
+.cell .mark-was{display:block;font-size:.65rem;font-weight:400;color:var(--ink-soft)}
+
+/* True / false rows */
+.tflist{display:grid;gap:.7rem}
+.tfrow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.7rem;align-items:center;padding:.6rem .8rem;border-radius:18px;border:3px solid var(--line);background:var(--paper-2);font-size:1.08rem;line-height:1.35}
+.tfrow.ok{border-color:var(--leaf);background:var(--leaf-soft)}
+.tfrow.no{border-color:var(--berry);background:var(--berry-soft)}
+.tfbtns{display:flex;gap:.4rem;flex:none}
+.tfbtns button{min-width:4rem;min-height:2.8rem;border-radius:14px;border:3px solid var(--line);background:var(--paper);font-family:var(--round);font-weight:600;cursor:pointer;font-size:.95rem}
+.tfbtns button[aria-pressed="true"]{background:var(--sky-soft);border-color:var(--sky)}
+.tfbtns button:disabled{cursor:default}
+.tfrow.ok .tfbtns button[aria-pressed="true"]{background:var(--leaf);border-color:var(--leaf);color:var(--on-leaf)}
+.tfrow.no .tfbtns button[aria-pressed="true"]{background:var(--berry);border-color:var(--berry);color:#fff}
+
+/* Spell */
+.boxes{display:grid;gap:.35rem;justify-content:center;margin:.5rem 0 1.2rem}
+.box{width:100%;aspect-ratio:.8;padding:0;border-radius:12px;border:3px solid var(--line);background:var(--paper-2);display:grid;place-items:center;font-size:1.6em;font-weight:700;cursor:pointer;color:var(--ink)}
+.box.next{border-color:var(--sky);box-shadow:0 0 0 3px var(--sky-soft)}
+.box.ok{border-color:var(--leaf);background:var(--leaf-soft)}
+.box.no{border-color:var(--berry);background:var(--berry-soft)}
+.tiles{display:flex;flex-wrap:wrap;gap:.55rem;justify-content:center}
+.tile{width:3.2rem;height:3.2rem;border-radius:14px;border:3px solid var(--sun);background:var(--sun-soft);font-size:1.6rem;font-weight:700;cursor:pointer;box-shadow:0 4px 0 var(--sun)}
+.tile:disabled{opacity:.25;cursor:default;box-shadow:none}
+.tile:active:not(:disabled){transform:translateY(3px);box-shadow:0 1px 0 var(--sun)}
+.clue{font-size:1.3rem;line-height:1.6;background:var(--paper-2);border-radius:20px;padding:.9rem 1.1rem;margin:0 0 1rem;border-left:8px solid var(--sun)}
+
+/* Type */
+.write{width:100%;font-family:var(--read);font-size:1.35rem;padding:.8rem 1rem;border-radius:18px;border:3px solid var(--line);background:var(--paper-2);color:var(--ink);line-height:1.5}
+.write:focus{outline:none;border-color:var(--sky);box-shadow:0 0 0 4px var(--sky-soft)}
+.tip{color:var(--ink-soft);font-size:1rem;margin:.6rem 0 0}
+.typeline{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap}
+.typeline .write{flex:1;min-width:10rem}
+.hintbox{margin:.7rem 0 0;background:var(--sun-soft);border-left:8px solid var(--sun);border-radius:14px;padding:.6rem .9rem;font-size:1.05rem}
+
+/* A number sentence, big enough to read across the room, with a tappable box */
+.sentence{font-family:var(--round);font-weight:700;font-size:clamp(2rem,8.5vw,3rem);text-align:center;
+  margin:.4rem 0 1.1rem;line-height:1.5;display:flex;flex-wrap:wrap;gap:.3em;justify-content:center;align-items:center}
+.sbox{display:inline-flex;align-items:center;justify-content:center;min-width:2.1em;height:1.5em;
+  border:4px dashed var(--sky);border-radius:16px;background:var(--paper);color:var(--sky)}
+.sbox.filled{border-style:solid;background:var(--sky-soft);color:var(--ink)}
+.sbox.ok{border-style:solid;border-color:var(--leaf);background:var(--leaf-soft);color:var(--ink)}
+.sbox.no{border-style:solid;border-color:var(--berry);background:var(--berry-soft);color:var(--ink)}
+.story-line{font-size:1.3rem;text-align:center;margin:0 0 .2rem}
+
+/* Number keys. A six-year-old should never have to find a keyboard. */
+.numpad{display:grid;grid-template-columns:repeat(5,1fr);gap:.5rem;max-width:26rem;margin:0 auto}
+.numkey{font-family:var(--round);font-weight:700;font-size:1.6rem;min-height:3.4rem;border-radius:16px;
+  border:3px solid var(--line);background:var(--paper-2);color:var(--ink);cursor:pointer;box-shadow:0 4px 0 var(--line)}
+.numkey.clear{grid-column:1/-1;font-size:1.1rem;min-height:2.9rem}
+.numkey:active{transform:translateY(3px);box-shadow:0 1px 0 var(--line)}
+.numkey[disabled]{opacity:.45;cursor:default;box-shadow:none;transform:none}
+
+/* Ten-frames: counting is easier when the pictures sit in fives */
+.frames{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin:0 0 1rem}
+.frame{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;background:var(--paper-2);
+  border:3px solid var(--line);border-radius:18px;padding:6px}
+.fcell{position:relative;width:2.7rem;height:2.7rem;display:flex;align-items:center;justify-content:center;
+  font-size:1.6rem;line-height:1;background:var(--paper);border-radius:11px;border:2px solid var(--line)}
+.fcell.empty{background:transparent;border-style:dashed;opacity:.65}
+.fpic{line-height:1}
+.fcell.gone .fpic{opacity:.3}
+.fcell.gone::before,.fcell.gone::after{content:'';position:absolute;left:8%;right:8%;top:calc(50% - 2.5px);
+  height:5px;border-radius:3px;background:var(--berry)}
+.fcell.gone::before{transform:rotate(40deg)}
+.fcell.gone::after{transform:rotate(-40deg)}
+
+/* Part, part, whole */
+.bondwrap{display:block;width:min(100%,19rem);height:auto;margin:0 auto 1rem}
+.bond-link{fill:none;stroke:var(--line);stroke-width:6;stroke-linecap:round}
+.bond-ring{fill:var(--paper-2);stroke:var(--leaf);stroke-width:4}
+.bond-hole{fill:var(--paper);stroke:var(--sky);stroke-width:4;stroke-dasharray:9 8}
+.bond-hole.ok{stroke:var(--leaf);stroke-dasharray:none}
+.bond-hole.no{stroke:var(--berry);stroke-dasharray:none}
+.bond-num{fill:var(--ink);font-family:var(--round);font-weight:700;font-size:30px}
+
+/* Drawing pad */
+.padwrap{display:grid;gap:.7rem}
+.pad{width:100%;aspect-ratio:3/2;border-radius:20px;border:3px solid var(--line);background:#FFFFFF;touch-action:none;cursor:crosshair;display:block}
+.padtools{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;justify-content:center}
+.swatch{width:2.5rem;height:2.5rem;border-radius:50%;border:3px solid var(--line);cursor:pointer;padding:0}
+.swatch[aria-pressed="true"]{box-shadow:0 0 0 4px var(--sky);border-color:var(--paper)}
+.padnote{color:var(--ink-soft);font-size:.95rem;text-align:center;margin:0}
+
+/* Badges */
+.badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(8.5rem,1fr));gap:.7rem;margin-top:.7rem}
+.badge{display:grid;gap:.15rem;justify-items:center;text-align:center;padding:.7rem .5rem;border-radius:18px;border:3px solid var(--line);background:var(--paper-2)}
+.badge.on{border-color:var(--sun);background:var(--sun-soft)}
+.badge .bi{font-size:1.9rem;line-height:1}
+.badge.off .bi{filter:grayscale(1);opacity:.35}
+.badge b{font-family:var(--round);font-size:.95rem;font-weight:600}
+.badge small{color:var(--ink-soft);font-size:.8rem;line-height:1.25}
+.badge-pop{display:flex;gap:.6rem;align-items:center;background:var(--sun-soft);border:3px solid var(--sun);border-radius:18px;padding:.5rem .8rem;margin:.6rem 0 0}
+.badge-pop .bi{font-size:1.8rem}
+
+/* Bottom sheet */
+.dock-space{height:9rem}
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--bg);border-top:3px solid var(--line);padding:.8rem 1rem calc(.8rem + env(safe-area-inset-bottom))}
+.dock .inner{max-width:820px;margin:0 auto}
+.dock.good{background:var(--leaf-soft);border-color:var(--leaf)}
+.dock.bad{background:var(--berry-soft);border-color:var(--berry)}
+.dock.part{background:var(--sun-soft);border-color:var(--sun)}
+.fb{max-height:48vh;overflow:auto;margin-bottom:.8rem}
+.fb h3{font-size:1.45rem;display:flex;gap:.5rem;align-items:center}
+.fb .gain{font-family:var(--round);font-size:1rem;font-weight:600;margin-left:auto;white-space:nowrap}
+.fb p{margin:.45rem 0 0;font-size:1.1rem;line-height:1.55}
+.fb .ans{font-weight:700}
+.fb .why{background:var(--paper);border-radius:14px;padding:.5rem .8rem;margin-top:.6rem!important}
+
+/* Overlay & modal */
+.overlay{position:fixed;inset:0;z-index:100;background:var(--overlay);display:grid;place-items:center;padding:1rem}
+.modal{background:var(--paper);border-radius:30px;border:3px solid var(--line);padding:1.5rem;max-width:30rem;width:100%;text-align:center;display:grid;gap:1rem;max-height:92vh;overflow:auto}
+.modal h2{font-size:1.6rem}
+.modal p{margin:0;font-size:1.1rem;color:var(--ink-soft)}
+.modal .mascot{width:150px;margin:0 auto;display:block}
+
+/* Results */
+.result-head{text-align:center;padding:1rem 0}
+.big-stars{font-size:3.4rem;letter-spacing:.3rem;line-height:1}
+.big-stars span{display:inline-block}
+.big-stars .star-on{animation:pop .5s both}
+.big-stars span:nth-child(2){animation-delay:.2s}
+.big-stars span:nth-child(3){animation-delay:.4s}
+@keyframes pop{0%{transform:scale(0)}70%{transform:scale(1.25)}100%{transform:scale(1)}}
+.result-head .score-big{font-family:var(--round);font-size:2.6rem;font-weight:700;margin:.4rem 0 0}
+.result-head p{margin:.3rem 0;font-size:1.15rem;color:var(--ink-soft)}
+.bars{display:grid;gap:.9rem;margin:1rem 0}
+.bar-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.3rem .8rem;align-items:center;font-size:1.05rem}
+.bar{grid-column:1/-1;height:16px;border-radius:99px;background:var(--paper-2);border:2px solid var(--line);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--leaf);border-radius:99px}
+.review{margin-top:1rem}
+.review details{border:3px solid var(--line);border-radius:20px;background:var(--paper-2);padding:.4rem 1rem}
+.review summary{cursor:pointer;font-family:var(--round);font-weight:600;padding:.4rem 0}
+.review li{margin:.6rem 0;font-size:1.05rem}
+.review ol{padding-left:1.3rem}
+
+/* History & settings */
+.page-head{display:flex;align-items:center;gap:.75rem;padding:.8rem 0}
+.page-head h1{font-size:1.8rem;flex:1}
+.hist{display:grid;gap:1rem}
+.hist .card{padding:1rem 1.1rem}
+.hist table{width:100%;border-collapse:collapse;font-size:1rem;margin-top:.5rem}
+.hist td,.hist th{text-align:left;padding:.35rem .3rem;border-bottom:2px solid var(--paper-2)}
+.hist th{color:var(--ink-soft);font-weight:400;font-size:.9rem}
+.scroll-x{overflow-x:auto}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(11rem,1fr));gap:.8rem;margin-top:.6rem}
+.gallery figure{margin:0}
+.gallery img{width:100%;border-radius:16px;border:3px solid var(--line);background:#fff;display:block}
+.gallery figcaption{color:var(--ink-soft);font-size:.85rem;margin-top:.25rem;text-align:center}
+.setting{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.8rem 0;border-bottom:2px solid var(--paper-2);flex-wrap:wrap}
+.setting b{font-family:var(--round);font-weight:600;font-size:1.1rem}
+.setting small{display:block;color:var(--ink-soft);font-size:.9rem}
+.seg{display:inline-flex;border:3px solid var(--line);border-radius:999px;overflow:hidden}
+.seg button{border:0;background:transparent;padding:.45rem .95rem;cursor:pointer;font-family:var(--round);font-weight:600;min-height:2.6rem}
+.seg button[aria-pressed="true"]{background:var(--leaf);color:var(--on-leaf)}
+
+@media (max-width:520px){
+  :root{font-size:18px}
+  :root[data-size="big"]{font-size:21px}
+  .hero h1{font-size:2rem}
+  .card{padding:1rem .8rem 1.2rem;border-radius:24px}
+  .setcard{grid-template-columns:auto minmax(0,1fr)}
+  .setcard .go{grid-column:1/-1;text-align:right}
+  .m-item{font-size:.96rem;padding:.4rem .55rem}
+  .m-item.left{font-size:1rem;text-align:center;justify-content:center}
+  .match{column-gap:2.4rem}
+  .qtext{font-size:1.28rem}
+  .ord{font-size:.96rem;padding:.5rem .6rem;gap:.5rem}
+  .tfrow{font-size:.98rem;grid-template-columns:1fr;gap:.5rem}
+  .tfbtns{justify-content:flex-end}
+  /* a four-column tick table has to fit a phone without sideways scrolling */
+  .cell{width:2.4rem;height:2.4rem;font-size:1.1rem;border-width:2px;border-radius:10px}
+  .gridq table{border-spacing:3px}
+  .gridq th{font-size:.66rem;width:2.9rem;min-width:0;max-width:none;padding:.12rem .08rem;overflow-wrap:anywhere}
+  .gridq th.rowhead{font-size:.85rem;width:3.4rem;padding-right:.3rem;white-space:normal}
+  /* two ten-frames still have to sit side by side on a phone */
+  .fcell{width:2.1rem;height:2.1rem;font-size:1.25rem;border-radius:9px}
+  .frame{gap:3px;padding:4px;border-radius:14px}
+  .frames{gap:.6rem}
+  .numpad{gap:.4rem}
+  .numkey{font-size:1.4rem;min-height:3rem;border-radius:13px}
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<main id="app" class="wrap" aria-live="polite"></main>
+<div id="dock" class="dock hidden"><div class="inner" id="dockInner"></div></div>
+<div id="layer"></div>
+<script>
+/* ==========================================================================
+   CONTENT — five sets of Year 1 maths, built from the P.1 workbook pages on
+   finding a missing number. The workbook teaches four separate rules; they
+   are really one rule, and the app says so every time:
+
+     the box is the BIGGEST number  ->  ADD the two smaller ones
+     the box is one of the PARTS    ->  TAKE the small one AWAY from the big
+
+   The sets are parallel, not a progression: every set covers all six
+   topics, so a child can start anywhere.
+   ========================================================================== */
+const WHOLE = 'The box is the BIGGEST number, so you ADD the other two.';
+const PART  = 'The box is one of the smaller parts, so you TAKE AWAY.';
+
+const SETS = [
+/* ---------------------------- SET 1 ---------------------------- */
+{
+  id:1, title:'Apple Orchard', emoji:'🍎', about:'Counting and adding in the apple trees',
+  aligns:['Counting to 10','Adding and taking away','Finding the missing number','Add or take away?','Pairs that make 10','Story sums'],
+  sections:[
+    {key:'count', items:[
+      {t:'counters', prompt:'Count them.', text:'How many apples?', groups:[['🍎',7]], ans:7,
+        explain:'Seven apples. Touch each one as you count so you do not count the same apple twice.'},
+      {t:'choice', prompt:'Which number?', text:'Which number comes just after 7?',
+        opts:['8','6','9'], ans:0,
+        explain:'Counting up: 6, 7, 8. The number just after 7 is 8, which is one more.'},
+      {t:'order', prompt:'Put the numbers in order, smallest first.',
+        items:['2','5','7','9'],
+        explain:'2 is the smallest and 9 is the biggest. Say them out loud: two, five, seven, nine.'},
+      {t:'counters', prompt:'Count them.', text:'How many green apples?', groups:[['🍏',10]], ans:10,
+        explain:'Ten. A full ten-frame is always 10, so once the frame is full you do not need to count again.'},
+      {t:'tfgrid', prompt:'True or false?',
+        rows:[['6 is more than 4.', true], ['9 is less than 5.', false],
+              ['0 means none at all.', true], ['10 comes just after 9.', true]],
+        explain:'9 is MORE than 5, not less. Think of the counting order: the further along, the bigger.'}
+    ]},
+    {key:'addsub', items:[
+      {t:'keypad', prompt:'Work it out.', text:'4 + 3 = □', ans:7,
+        explain:'Start at 4 and count on three: 5, 6, 7.'},
+      {t:'keypad', prompt:'Work it out.', text:'9 − 2 = □', ans:7,
+        explain:'Start at 9 and count back two: 8, 7.'},
+      {t:'counters', prompt:'Add them together.', text:'How many apples altogether?',
+        groups:[['🍎',5],['🍏',3]], ans:8,
+        explain:'5 red and 3 green. Start at 5 and count on the green ones: 6, 7, 8.'},
+      {t:'match', prompt:'Match each sum to its answer.',
+        left:[{label:'2 + 2'},{label:'5 + 1'},{label:'3 + 4'},{label:'6 + 2'}],
+        right:['4','6','7','8'],
+        explain:'Double 2 is 4. One more than 5 is 6. 3 and 4 make 7. 6 and 2 make 8.'},
+      {t:'keypad', prompt:'Work it out.', text:'5 + 5 = □', ans:10,
+        explain:'Double 5 is 10. Five fingers on each hand makes ten.'}
+    ]},
+    {key:'missing', items:[
+      {t:'keypad', prompt:'Find the missing number.', text:'5 + □ = 8', ans:3,
+        explain:'8 is the biggest number, so the box is a part. ' + PART + ' 8 − 5 = 3.'},
+      {t:'keypad', prompt:'Find the missing number.', text:'□ + 3 = 7', ans:4,
+        explain:'7 is the biggest number, so the box is a part. ' + PART + ' 7 − 3 = 4.'},
+      {t:'keypad', prompt:'Find the missing number.', text:'9 − □ = 4', ans:5,
+        explain:'9 is the biggest number, so the box is a part. ' + PART + ' 9 − 4 = 5.'},
+      {t:'keypad', prompt:'Find the missing number.', text:'□ − 2 = 6', ans:8,
+        explain:'Here the box IS the biggest number. ' + WHOLE + ' 2 + 6 = 8.'},
+      {t:'bond', prompt:'Fill in the missing part.', whole:9, known:6, ans:3,
+        explain:'9 is the whole and 6 is one part, so the other part is 9 − 6 = 3.'}
+    ]},
+    {key:'method', items:[
+      {t:'choice', big:true, prompt:'Tick the right way to find the answer.', text:'6 − □ = 4',
+        opts:['6 − 4 = 2','6 + 4 = 10'], ans:0,
+        explain:'6 is the biggest number, so the box is a part. ' + PART + ' 6 − 4 = 2.'},
+      {t:'choice', big:true, prompt:'Tick the right way to find the answer.', text:'□ − 1 = 8',
+        opts:['8 + 1 = 9','8 − 1 = 7'], ans:0,
+        explain:'The box is the biggest number here. ' + WHOLE + ' 1 + 8 = 9.'},
+      {t:'choice', big:true, prompt:'Tick the right way to find the answer.', text:'9 − □ = 4',
+        opts:['9 + 4 = 13','9 − 4 = 5'], ans:1,
+        explain:'9 is the biggest number, so the box is a part. ' + PART + ' 9 − 4 = 5.'},
+      {t:'choice', big:true, prompt:'Tick the right way to find the answer.', text:'□ + 3 = 4',
+        opts:['4 + 3 = 7','4 − 3 = 1'], ans:1,
+        explain:'4 is the biggest number, so the box is a part. ' + PART + ' 4 − 3 = 1.'},
+      {t:'sort', prompt:'Add or take away to find the box?',
+        bins:[['Add','the box is the biggest number'],['Take away','the box is a smaller part']],
+        chips:[['□ − 1 = 8',0],['□ − 2 = 3',0],['6 − □ = 4',1],['5 + □ = 8',1]],
+        explain:'Look at the box. If it is the biggest number in the line, add the other two. If a bigger number is already showing, take away.'}
+    ]},
+    {key:'bonds', items:[
+      {t:'bond', prompt:'Fill in the missing part.', whole:10, known:4, ans:6,
+        explain:'4 and 6 make 10. Hold up 4 fingers — the 6 still down are the other part.'},
+      {t:'match', prompt:'Match each number to the one that makes 10 with it.',
+        left:[{label:'1'},{label:'3'},{label:'4'},{label:'7'}],
+        right:['9','7','6','3'],
+        explain:'1 and 9, 3 and 7, 4 and 6. Notice that 3 and 7 work both ways round.'},
+      {t:'keypad', prompt:'Find the missing number.', text:'10 = 6 + □', ans:4,
+        explain:'The 10 is on the left this time, but it is still the biggest number. 10 − 6 = 4.'},
+      {t:'sort', prompt:'Does it make 10?',
+        bins:[['Makes 10','the answer is 10'],['Does not make 10','the answer is not 10']],
+        chips:[['6 + 4',0],['8 + 2',0],['5 + 5',0],['3 + 4',1],['7 + 1',1],['2 + 6',1]],
+        explain:'6+4, 8+2 and 5+5 all make 10. The other three make 7, 8 and 8.'}
+    ]},
+    {key:'story', items:[
+      {t:'counters', prompt:'Take them away.', text:'There were 8 apples. 3 were eaten. How many are left?',
+        groups:[['🍎',8]], gone:3, ans:5,
+        explain:'The crossed-out apples are gone. Count the ones still whole: 5.'},
+      {t:'keypad', prompt:'Work out the story.', story:'Ben has 6 apples. He picks 3 more.',
+        text:'6 + 3 = □', ans:9,
+        explain:'"Picks more" means the pile grows, so you add. 6 and 3 make 9.'},
+      {t:'choice', prompt:'Which sum tells the story?', long:true,
+        text:'Mia had 9 stickers. She gave 4 away.',
+        opts:['9 − 4','9 + 4','4 − 9'], ans:0,
+        explain:'"Gave away" means fewer, so you take away. Start with what she had: 9 − 4.'},
+      {t:'draw', prompt:'Drawing time!',
+        tip:'Draw a tree with 7 apples on it. Count them to check you drew exactly 7.',
+        explain:'Drawing the right number is another way of counting. Your picture is saved in My Notebook.'}
+    ]}
+  ]
+},
+/* ---------------------------- SET 2 ---------------------------- */
+{
+  id:2, title:'The Fish Tank', emoji:'🐟', about:'Counting fish and taking them away',
+  aligns:['Counting to 10','Adding and taking away','Finding the missing number','Add or take away?','Pairs that make 10','Story sums'],
+  sections:[
+    {key:'count', items:[
+      {t:'counters', prompt:'Count them.', text:'How many fish?', groups:[['🐟',6]], ans:6,
+        explain:'Six fish. The ten-frame shows six filled and four empty.'},
+      {t:'choice', prompt:'Which number?', text:'Which number comes just before 5?',
+        opts:['4','6','3'], ans:0,
+        explain:'Counting up: 3, 4, 5. The number just before 5 is 4, which is one less.'},
+      {t:'order', prompt:'Put the numbers in order, smallest first.',
+        items:['1','4','6','8'],
+        explain:'1 is the smallest. Each one after it is bigger than the one before.'},
+      {t:'counters', prompt:'Count them.', text:'How many shells?', groups:[['🐚',9]], ans:9,
+        explain:'Nine. One space in the ten-frame is still empty, and 10 take away 1 is 9.'},
+      {t:'tfgrid', prompt:'True or false?',
+        rows:[['8 is more than 3.', true], ['5 comes just before 6.', true],
+              ['2 is more than 7.', false], ['7 is less than 10.', true]],
+        explain:'2 is LESS than 7. When you count up you say 2 long before you say 7.'}
+    ]},
+    {key:'addsub', items:[
+      {t:'keypad', prompt:'Work it out.', text:'3 + 5 = □', ans:8,
+        explain:'Start at 5 — the bigger number — and count on three: 6, 7, 8. It works either way round.'},
+      {t:'keypad', prompt:'Work it out.', text:'7 − 3 = □', ans:4,
+        explain:'Start at 7 and count back three: 6, 5, 4.'},
+      {t:'counters', prompt:'Take them away.', text:'7 fish. 2 swim away. How many are left?',
+        groups:[['🐟',7]], gone:2, ans:5,
+        explain:'Two are crossed out. Five fish are still swimming.'},
+      {t:'match', prompt:'Match each sum to its answer.',
+        left:[{label:'4 + 4'},{label:'9 − 3'},{label:'2 + 7'},{label:'8 − 5'}],
+        right:['8','6','9','3'],
+        explain:'Double 4 is 8. 9 back three is 6. 2 and 7 make 9. 8 back five is 3.'},
+      {t:'keypad', prompt:'Work it out.', text:'10 − 4 = □', ans:6,
+        explain:'10 take away 4. If you know 4 and 6 make 10, you already know the answer is 6.'}
+    ]},
+    {key:'missing', items:[
+      {t:'keypad', prompt:'Find the missing number.', text:'4 + □ = 9', ans:5,
+        explain:'9 is the biggest number, so the box is a part. ' + PART + ' 9 − 4 = 5.'},
+      {t:'keypad', prompt:'Find the missing number.', text:'□ + 6 = 8', ans:2,
+        explain:'8 is the biggest number, so the box is a part. ' + PART + ' 8 − 6 = 2.'},
+      {t:'keypad', prompt:'Find the missing number.', text:'7 − □ = 3', ans:4,
+        explain:'7 is the biggest number, so the box is a part. ' + PART + ' 7 − 3 = 4.'},
+      {t:'keypad', prompt:'Find the missing number.', text:'□ − 4 = 5', ans:9,
+        explain:'Here the box IS the biggest number. ' + WHOLE + ' 4 + 5 = 9.'},
+      {t:'bond', prompt:'Fill in the missing part.', whole:8, known:5, ans:3,
+        explain:'8 is the whole and 5 is one part, so the other part is 8 − 5 = 3.'}
+    ]},
+    {key:'method', items:[
+      {t:'choice', big:true, prompt:'Tick the right way to find the answer.', text:'□ − 3 = 5',
+        opts:['5 − 3 = 2','5 + 3 = 8'], ans:1,
+        explain:'The box is the biggest number here. ' + WHOLE + ' 3 + 5 = 8.'},
+      {t:'choice', big:true, prompt:'Tick the right way to find the answer.', text:'8 − □ = 2',
+        opts:['8 − 2 = 6','8 + 2 = 10'], ans:0,
+        explain:'8 is the biggest number, so the box is a part. ' + PART + ' 8 − 2 = 6.'},
+      {t:'choice', big:true, prompt:'Tick the right way to find the answer.', text:'4 + □ = 9',
+        opts:['9 + 4 = 13','9 − 4 = 5'], ans:1,
+        explain:'9 is the biggest number, so the box is a part. ' + PART + ' 9 − 4 = 5.'},
+      {t:'choice', big:true, prompt:'Tick the right way to find the answer.', text:'□ − 6 = 1',
+        opts:['6 + 1 = 7','6 − 1 = 5'], ans:0,
+        explain:'The box is the biggest number here. ' + WHOLE + ' 6 + 1 = 7.'},
+      {t:'sort', prompt:'Add or take away to find the box?',
+        bins:[['Add','the box is the biggest number'],['Take away','the box is a smaller part']],
+        chips:[['□ − 3 = 4',0],['□ − 5 = 2',0],['9 − □ = 6',1],['3 + □ = 7',1]],
+        explain:'In the first two the box sits at the front of a take-away, which always makes it the biggest number. Add to find those.'}
+    ]},
+    {key:'bonds', items:[
+      {t:'bond', prompt:'Fill in the missing part.', whole:10, known:7, ans:3,
+        explain:'7 and 3 make 10. If you count on from 7 — 8, 9, 10 — that is three steps.'},
+      {t:'match', prompt:'Match each number to the one that makes 10 with it.',
+        left:[{label:'2'},{label:'5'},{label:'6'},{label:'8'}],
+        right:['8','5','4','2'],
+        explain:'2 and 8, 5 and 5, 6 and 4. 5 is the only number that pairs with itself.'},
+      {t:'keypad', prompt:'Find the missing number.', text:'10 = □ + 3', ans:7,
+        explain:'10 is the biggest number, so the box is a part. 10 − 3 = 7.'},
+      {t:'sort', prompt:'Does it make 10?',
+        bins:[['Makes 10','the answer is 10'],['Does not make 10','the answer is not 10']],
+        chips:[['9 + 1',0],['4 + 6',0],['7 + 3',0],['5 + 4',1],['6 + 2',1],['8 + 1',1]],
+        explain:'9+1, 4+6 and 7+3 all make 10. The others make 9, 8 and 9 — each one short.'}
+    ]},
+    {key:'story', items:[
+      {t:'counters', prompt:'Add them together.', text:'How many sea animals altogether?',
+        groups:[['🐟',4],['🐙',3]], ans:7,
+        explain:'4 fish and 3 octopuses. Start at 4 and count on: 5, 6, 7.'},
+      {t:'keypad', prompt:'Work out the story.', story:'There are 9 fish. 5 hide in the weeds.',
+        text:'9 − 5 = □', ans:4,
+        explain:'"Hide" means you can see fewer, so you take away. 9 take away 5 leaves 4.'},
+      {t:'choice', prompt:'Which sum tells the story?', long:true,
+        text:'Sam had 3 shells. He found 5 more.',
+        opts:['3 + 5','5 − 3','3 − 5'], ans:0,
+        explain:'"Found more" means the pile grows, so you add. Start with what he had: 3 + 5.'},
+      {t:'draw', prompt:'Drawing time!',
+        tip:'Draw a tank with 6 fish in it. Then draw 2 more swimming in. How many is that?',
+        explain:'6 and 2 more makes 8. Drawing the story is a good way to check an answer.'}
+    ]}
+  ]
+},
+/* ---------------------------- SET 3 ---------------------------- */
+{
+  id:3, title:'The Toy Train', emoji:'🚂', about:'Carriages, steps and counting on',
+  aligns:['Counting to 10','Adding and taking away','Finding the missing number','Add or take away?','Pairs that make 10','Story sums'],
+  sections:[
+    {key:'count', items:[
+      {t:'counters', prompt:'Count them.', text:'How many carriages?', groups:[['🚃',8]], ans:8,
+        explain:'Eight carriages. Two spaces in the ten-frame are empty, and 10 take away 2 is 8.'},
+      {t:'choice', prompt:'Which number?', text:'Which number is missing? 4, 5, □, 7',
+        opts:['6','8','3'], ans:0,
+        explain:'Say the counting order out loud: 4, 5, 6, 7. The missing number is 6.'},
+      {t:'order', prompt:'Put the numbers in order, smallest first.',
+        items:['3','6','8','10'],
+        explain:'3 is the smallest and 10 is the biggest. Each number is bigger than the one before it.'},
+      {t:'counters', prompt:'Count them.', text:'How many wheels?', groups:[['🛞',5]], ans:5,
+        explain:'Five. One whole hand of fingers is five, so five is a useful number to know by sight.'},
+      {t:'tfgrid', prompt:'True or false?',
+        rows:[['The number after 9 is 10.', true], ['The number before 1 is 0.', true],
+              ['4 is more than 6.', false], ['0 is less than every other number.', true]],
+        explain:'4 is LESS than 6. Zero really is the smallest of all — it means nothing at all.'}
+    ]},
+    {key:'addsub', items:[
+      {t:'keypad', prompt:'Work it out.', text:'6 + 2 = □', ans:8,
+        explain:'Start at 6 and count on two: 7, 8.'},
+      {t:'keypad', prompt:'Work it out.', text:'8 − 6 = □', ans:2,
+        explain:'Start at 8 and count back six: 7, 6, 5, 4, 3, 2. Or think: 6 and what make 8?'},
+      {t:'counters', prompt:'Add them together.', text:'How many altogether?',
+        groups:[['🚃',6],['🚂',1]], ans:7,
+        explain:'6 carriages and 1 engine. One more than 6 is 7.'},
+      {t:'match', prompt:'Match each sum to its answer.',
+        left:[{label:'3 + 3'},{label:'10 − 8'},{label:'5 + 4'},{label:'7 − 3'}],
+        right:['6','2','9','4'],
+        explain:'Double 3 is 6. 10 back eight is 2. 5 and 4 make 9. 7 back three is 4.'},
+      {t:'keypad', prompt:'Work it out.', text:'2 + 8 = □', ans:10,
+        explain:'2 and 8 is one of the pairs that make 10. Worth remembering by heart.'}
+    ]},
+    {key:'missing', items:[
+      {t:'keypad', prompt:'Find the missing number.', text:'6 + □ = 10', ans:4,
+        explain:'10 is the biggest number, so the box is a part. ' + PART + ' 10 − 6 = 4.'},
+      {t:'keypad', prompt:'Find the missing number.', text:'□ + 2 = 9', ans:7,
+        explain:'9 is the biggest number, so the box is a part. ' + PART + ' 9 − 2 = 7.'},
+      {t:'keypad', prompt:'Find the missing number.', text:'8 − □ = 5', ans:3,
+        explain:'8 is the biggest number, so the box is a part. ' + PART + ' 8 − 5 = 3.'},
+      {t:'keypad', prompt:'Find the missing number.', text:'□ − 3 = 3', ans:6,
+        explain:'Here the box IS the biggest number. ' + WHOLE + ' 3 + 3 = 6.'},
+      {t:'bond', prompt:'Fill in the missing part.', whole:7, known:2, ans:5,
+        explain:'7 is the whole and 2 is one part, so the other part is 7 − 2 = 5.'}
+    ]},
+    {key:'method', items:[
+      {t:'choice', big:true, prompt:'Tick the right way to find the answer.', text:'□ + 5 = 7',
+        opts:['7 + 5 = 12','7 − 5 = 2'], ans:1,
+        explain:'7 is the biggest number, so the box is a part. ' + PART + ' 7 − 5 = 2.'},
+      {t:'choice', big:true, prompt:'Tick the right way to find the answer.', text:'□ − 2 = 7',
+        opts:['2 + 7 = 9','7 − 2 = 5'], ans:0,
+        explain:'The box is the biggest number here. ' + WHOLE + ' 2 + 7 = 9.'},
+      {t:'choice', big:true, prompt:'Tick the right way to find the answer.', text:'10 − □ = 6',
+        opts:['10 + 6 = 16','10 − 6 = 4'], ans:1,
+        explain:'10 is the biggest number, so the box is a part. ' + PART + ' 10 − 6 = 4.'},
+      {t:'choice', big:true, prompt:'Tick the right way to find the answer.', text:'3 + □ = 8',
+        opts:['8 − 3 = 5','8 + 3 = 11'], ans:0,
+        explain:'8 is the biggest number, so the box is a part. ' + PART + ' 8 − 3 = 5.'},
+      {t:'sort', prompt:'Add or take away to find the box?',
+        bins:[['Add','the box is the biggest number'],['Take away','the box is a smaller part']],
+        chips:[['□ − 4 = 4',0],['□ − 1 = 9',0],['7 − □ = 2',1],['□ + 6 = 9',1]],
+        explain:'The last one is the tricky one: the box is being ADDED to make 9, so it is a part. Take away to find it.'}
+    ]},
+    {key:'bonds', items:[
+      {t:'bond', prompt:'Fill in the missing part.', whole:10, known:2, ans:8,
+        explain:'2 and 8 make 10. Count on from 2: that is eight more steps to reach 10.'},
+      {t:'match', prompt:'Match each number to the one that makes 10 with it.',
+        left:[{label:'0'},{label:'3'},{label:'6'},{label:'9'}],
+        right:['10','7','4','1'],
+        explain:'Even 0 has a partner: 0 and 10. Adding nothing leaves the number just as it was.'},
+      {t:'keypad', prompt:'Find the missing number.', text:'□ + 5 = 10', ans:5,
+        explain:'5 and 5 make 10. It is the pair that is the same on both sides.'},
+      {t:'sort', prompt:'Does it make 10?',
+        bins:[['Makes 10','the answer is 10'],['Does not make 10','the answer is not 10']],
+        chips:[['2 + 8',0],['10 + 0',0],['6 + 4',0],['4 + 4',1],['3 + 6',1],['7 + 2',1]],
+        explain:'2+8, 10+0 and 6+4 make 10. The others make 8, 9 and 9.'}
+    ]},
+    {key:'story', items:[
+      {t:'counters', prompt:'Take them away.', text:'A train has 9 carriages. 4 are taken off. How many are left?',
+        groups:[['🚃',9]], gone:4, ans:5,
+        explain:'Four are crossed out. Five carriages are still on the train.'},
+      {t:'keypad', prompt:'Work out the story.', story:'A train has 5 carriages. 3 more are joined on.',
+        text:'5 + 3 = □', ans:8,
+        explain:'"Joined on" means the train grows, so you add. 5 and 3 make 8.'},
+      {t:'choice', prompt:'Which sum tells the story?', long:true,
+        text:'There were 10 seats. 6 people sat down.',
+        opts:['10 − 6','10 + 6','6 − 10'], ans:0,
+        explain:'To find the seats still empty you take the full ones away: 10 − 6.'},
+      {t:'draw', prompt:'Drawing time!',
+        tip:'Draw a train with 4 carriages. Then draw 3 more. Count how many carriages there are now.',
+        explain:'4 and 3 more makes 7. Drawing it out is a way to check without counting in your head.'}
+    ]}
+  ]
+},
+/* ---------------------------- SET 4 ---------------------------- */
+{
+  id:4, title:'Party Time', emoji:'🎂', about:'Candles, cakes and sharing out',
+  aligns:['Counting to 10','Adding and taking away','Finding the missing number','Add or take away?','Pairs that make 10','Story sums'],
+  sections:[
+    {key:'count', items:[
+      {t:'counters', prompt:'Count them.', text:'How many balloons?', groups:[['🎈',4]], ans:4,
+        explain:'Four balloons. A small number like 4 you can often see without counting.'},
+      {t:'choice', prompt:'Which number?', text:'Which number comes just after 9?',
+        opts:['10','8','11'], ans:0,
+        explain:'9 and one more is 10. Ten is the first number that needs two digits.'},
+      {t:'order', prompt:'Put the numbers in order, smallest first.',
+        items:['0','2','5','9'],
+        explain:'0 is the smallest of all. It means there is nothing there.'},
+      {t:'counters', prompt:'Count them.', text:'How many candles?', groups:[['🕯️',7]], ans:7,
+        explain:'Seven candles. Five in the top row and two below makes 7.'},
+      {t:'tfgrid', prompt:'True or false?',
+        rows:[['10 is the biggest number here: 3, 10, 7.', true],
+              ['1 is more than 0.', true],
+              ['6 comes just after 7.', false],
+              ['8 is less than 9.', true]],
+        explain:'6 comes just BEFORE 7, not after. Counting up goes 6, 7 — never the other way.'}
+    ]},
+    {key:'addsub', items:[
+      {t:'keypad', prompt:'Work it out.', text:'5 + 2 = □', ans:7,
+        explain:'Start at 5 and count on two: 6, 7.'},
+      {t:'keypad', prompt:'Work it out.', text:'10 − 7 = □', ans:3,
+        explain:'10 take away 7. If you know 7 and 3 make 10, the answer is already there.'},
+      {t:'counters', prompt:'Take them away.', text:'6 cakes. 4 are eaten. How many are left?',
+        groups:[['🧁',6]], gone:4, ans:2,
+        explain:'Four are crossed out, so only 2 cakes are left.'},
+      {t:'match', prompt:'Match each sum to its answer.',
+        left:[{label:'1 + 9'},{label:'6 − 2'},{label:'4 + 3'},{label:'9 − 6'}],
+        right:['10','4','7','3'],
+        explain:'1 and 9 make 10. 6 back two is 4. 4 and 3 make 7. 9 back six is 3.'},
+      {t:'keypad', prompt:'Work it out.', text:'3 + 3 = □', ans:6,
+        explain:'Double 3 is 6. Doubles are worth learning by heart — they come up everywhere.'}
+    ]},
+    {key:'missing', items:[
+      {t:'keypad', prompt:'Find the missing number.', text:'2 + □ = 6', ans:4,
+        explain:'6 is the biggest number, so the box is a part. ' + PART + ' 6 − 2 = 4.'},
+      {t:'keypad', prompt:'Find the missing number.', text:'□ + 5 = 9', ans:4,
+        explain:'9 is the biggest number, so the box is a part. ' + PART + ' 9 − 5 = 4.'},
+      {t:'keypad', prompt:'Find the missing number.', text:'10 − □ = 3', ans:7,
+        explain:'10 is the biggest number, so the box is a part. ' + PART + ' 10 − 3 = 7.'},
+      {t:'keypad', prompt:'Find the missing number.', text:'□ − 5 = 4', ans:9,
+        explain:'Here the box IS the biggest number. ' + WHOLE + ' 5 + 4 = 9.'},
+      {t:'bond', prompt:'Fill in the missing part.', whole:6, known:4, ans:2,
+        explain:'6 is the whole and 4 is one part, so the other part is 6 − 4 = 2.'}
+    ]},
+    {key:'method', items:[
+      {t:'choice', big:true, prompt:'Tick the right way to find the answer.', text:'□ − 4 = 2',
+        opts:['4 − 2 = 2','4 + 2 = 6'], ans:1,
+        explain:'The box is the biggest number here. ' + WHOLE + ' 4 + 2 = 6.'},
+      {t:'choice', big:true, prompt:'Tick the right way to find the answer.', text:'7 − □ = 1',
+        opts:['7 − 1 = 6','7 + 1 = 8'], ans:0,
+        explain:'7 is the biggest number, so the box is a part. ' + PART + ' 7 − 1 = 6.'},
+      {t:'choice', big:true, prompt:'Tick the right way to find the answer.', text:'□ + 1 = 10',
+        opts:['10 + 1 = 11','10 − 1 = 9'], ans:1,
+        explain:'10 is the biggest number, so the box is a part. ' + PART + ' 10 − 1 = 9.'},
+      {t:'choice', big:true, prompt:'Tick the right way to find the answer.', text:'□ − 7 = 2',
+        opts:['7 + 2 = 9','7 − 2 = 5'], ans:0,
+        explain:'The box is the biggest number here. ' + WHOLE + ' 7 + 2 = 9.'},
+      {t:'sort', prompt:'Add or take away to find the box?',
+        bins:[['Add','the box is the biggest number'],['Take away','the box is a smaller part']],
+        chips:[['□ − 6 = 3',0],['□ − 2 = 8',0],['10 − □ = 4',1],['□ + 4 = 6',1]],
+        explain:'A box at the front of a take-away is always the biggest number, so add. Anywhere else, take away.'}
+    ]},
+    {key:'bonds', items:[
+      {t:'bond', prompt:'Fill in the missing part.', whole:10, known:1, ans:9,
+        explain:'1 and 9 make 10. Take one finger down and nine are still up.'},
+      {t:'match', prompt:'Match each number to the one that makes 10 with it.',
+        left:[{label:'4'},{label:'7'},{label:'8'},{label:'10'}],
+        right:['6','3','2','0'],
+        explain:'4 and 6, 7 and 3, 8 and 2. 10 needs nothing more, so its partner is 0.'},
+      {t:'keypad', prompt:'Find the missing number.', text:'8 + □ = 10', ans:2,
+        explain:'10 is the biggest number, so the box is a part. 10 − 8 = 2.'},
+      {t:'sort', prompt:'Does it make 10?',
+        bins:[['Makes 10','the answer is 10'],['Does not make 10','the answer is not 10']],
+        chips:[['5 + 5',0],['3 + 7',0],['1 + 9',0],['2 + 7',1],['4 + 5',1],['6 + 3',1]],
+        explain:'5+5, 3+7 and 1+9 make 10. The others all make 9 — just one short.'}
+    ]},
+    {key:'story', items:[
+      {t:'counters', prompt:'Add them together.', text:'How many party things altogether?',
+        groups:[['🎈',5],['🎁',4]], ans:9,
+        explain:'5 balloons and 4 presents. Start at 5 and count on: 6, 7, 8, 9.'},
+      {t:'keypad', prompt:'Work out the story.', story:'There were 8 candles. 3 blew out.',
+        text:'8 − 3 = □', ans:5,
+        explain:'"Blew out" means fewer are still lit, so you take away. 8 take away 3 leaves 5.'},
+      {t:'choice', prompt:'Which sum tells the story?', long:true,
+        text:'Ana had 2 presents. She was given 6 more.',
+        opts:['2 + 6','6 − 2','2 − 6'], ans:0,
+        explain:'"Given more" means the pile grows, so you add. Start with what she had: 2 + 6.'},
+      {t:'draw', prompt:'Drawing time!',
+        tip:'Draw a birthday cake with 8 candles on it. Count them to check.',
+        explain:'Eight candles means eight years old. Drawing the right number is counting with a pencil.'}
+    ]}
+  ]
+},
+/* ---------------------------- SET 5 ---------------------------- */
+{
+  id:5, title:'Busy Bees', emoji:'🐝', about:'Bees, flowers and working it out',
+  aligns:['Counting to 10','Adding and taking away','Finding the missing number','Add or take away?','Pairs that make 10','Story sums'],
+  sections:[
+    {key:'count', items:[
+      {t:'counters', prompt:'Count them.', text:'How many bees?', groups:[['🐝',3]], ans:3,
+        explain:'Three bees. Three is small enough to see in one look.'},
+      {t:'choice', prompt:'Which number?', text:'Which number is missing? 6, □, 8, 9',
+        opts:['7','5','10'], ans:0,
+        explain:'Say the counting order out loud: 6, 7, 8, 9. The missing number is 7.'},
+      {t:'order', prompt:'Put the numbers in order, smallest first.',
+        items:['1','3','7','10'],
+        explain:'1 is the smallest and 10 is the biggest. The gaps between them do not have to be equal.'},
+      {t:'counters', prompt:'Count them.', text:'How many flowers?', groups:[['🌻',10]], ans:10,
+        explain:'Ten. Both rows of the ten-frame are full, and a full frame is always 10.'},
+      {t:'tfgrid', prompt:'True or false?',
+        rows:[['9 is more than 8.', true], ['The number before 4 is 3.', true],
+              ['10 is less than 2.', false], ['5 is more than 5.', false]],
+        explain:'The last one is the tricky one. 5 is EQUAL to 5, not more than it.'}
+    ]},
+    {key:'addsub', items:[
+      {t:'keypad', prompt:'Work it out.', text:'7 + 2 = □', ans:9,
+        explain:'Start at 7 and count on two: 8, 9.'},
+      {t:'keypad', prompt:'Work it out.', text:'9 − 5 = □', ans:4,
+        explain:'Start at 9 and count back five: 8, 7, 6, 5, 4.'},
+      {t:'counters', prompt:'Take them away.', text:'10 flowers. 6 are picked. How many are left?',
+        groups:[['🌻',10]], gone:6, ans:4,
+        explain:'Six are crossed out. Four flowers are still growing.'},
+      {t:'match', prompt:'Match each sum to its answer.',
+        left:[{label:'2 + 2'},{label:'8 − 3'},{label:'6 + 3'},{label:'10 − 4'}],
+        right:['4','5','9','6'],
+        explain:'Double 2 is 4. 8 back three is 5. 6 and 3 make 9. 10 back four is 6.'},
+      {t:'keypad', prompt:'Work it out.', text:'4 + 4 = □', ans:8,
+        explain:'Double 4 is 8. Four fingers on each hand makes eight.'}
+    ]},
+    {key:'missing', items:[
+      {t:'keypad', prompt:'Find the missing number.', text:'3 + □ = 9', ans:6,
+        explain:'9 is the biggest number, so the box is a part. ' + PART + ' 9 − 3 = 6.'},
+      {t:'keypad', prompt:'Find the missing number.', text:'□ + 4 = 10', ans:6,
+        explain:'10 is the biggest number, so the box is a part. ' + PART + ' 10 − 4 = 6.'},
+      {t:'keypad', prompt:'Find the missing number.', text:'6 − □ = 1', ans:5,
+        explain:'6 is the biggest number, so the box is a part. ' + PART + ' 6 − 1 = 5.'},
+      {t:'keypad', prompt:'Find the missing number.', text:'□ − 1 = 9', ans:10,
+        explain:'Here the box IS the biggest number. ' + WHOLE + ' 1 + 9 = 10.'},
+      {t:'bond', prompt:'Fill in the missing part.', whole:10, known:3, ans:7,
+        explain:'10 is the whole and 3 is one part, so the other part is 10 − 3 = 7.'}
+    ]},
+    {key:'method', items:[
+      {t:'choice', big:true, prompt:'Tick the right way to find the answer.', text:'□ + 2 = 5',
+        opts:['5 − 2 = 3','5 + 2 = 7'], ans:0,
+        explain:'5 is the biggest number, so the box is a part. ' + PART + ' 5 − 2 = 3.'},
+      {t:'choice', big:true, prompt:'Tick the right way to find the answer.', text:'□ − 3 = 6',
+        opts:['6 − 3 = 3','3 + 6 = 9'], ans:1,
+        explain:'The box is the biggest number here. ' + WHOLE + ' 3 + 6 = 9.'},
+      {t:'choice', big:true, prompt:'Tick the right way to find the answer.', text:'9 − □ = 7',
+        opts:['9 − 7 = 2','9 + 7 = 16'], ans:0,
+        explain:'9 is the biggest number, so the box is a part. ' + PART + ' 9 − 7 = 2.'},
+      {t:'choice', big:true, prompt:'Tick the right way to find the answer.', text:'□ − 8 = 1',
+        opts:['8 − 1 = 7','8 + 1 = 9'], ans:1,
+        explain:'The box is the biggest number here. ' + WHOLE + ' 8 + 1 = 9.'},
+      {t:'sort', prompt:'Add or take away to find the box?',
+        bins:[['Add','the box is the biggest number'],['Take away','the box is a smaller part']],
+        chips:[['□ − 2 = 6',0],['□ − 7 = 1',0],['8 − □ = 5',1],['□ + 2 = 7',1]],
+        explain:'Ask one question every time: is the box the biggest number in the line? Yes means add, no means take away.'}
+    ]},
+    {key:'bonds', items:[
+      {t:'bond', prompt:'Fill in the missing part.', whole:10, known:5, ans:5,
+        explain:'5 and 5 make 10. It is the only pair to 10 where both parts are the same.'},
+      {t:'match', prompt:'Match each number to the one that makes 10 with it.',
+        left:[{label:'1'},{label:'2'},{label:'7'},{label:'9'}],
+        right:['9','8','3','1'],
+        explain:'1 and 9, 2 and 8, 7 and 3. Notice 1 and 9 turn up twice, once each way round.'},
+      {t:'keypad', prompt:'Find the missing number.', text:'□ + 9 = 10', ans:1,
+        explain:'10 is the biggest number, so the box is a part. 10 − 9 = 1.'},
+      {t:'sort', prompt:'Does it make 10?',
+        bins:[['Makes 10','the answer is 10'],['Does not make 10','the answer is not 10']],
+        chips:[['8 + 2',0],['7 + 3',0],['0 + 10',0],['5 + 3',1],['6 + 1',1],['4 + 4',1]],
+        explain:'8+2, 7+3 and 0+10 make 10. The others make 8, 7 and 8.'}
+    ]},
+    {key:'story', items:[
+      {t:'counters', prompt:'Add them together.', text:'How many altogether?',
+        groups:[['🐝',6],['🦋',2]], ans:8,
+        explain:'6 bees and 2 butterflies. Start at 6 and count on: 7, 8.'},
+      {t:'keypad', prompt:'Work out the story.', story:'7 bees are on a flower. 4 fly away.',
+        text:'7 − 4 = □', ans:3,
+        explain:'"Fly away" means fewer are left, so you take away. 7 take away 4 leaves 3.'},
+      {t:'choice', prompt:'Which sum tells the story?', long:true,
+        text:'A hive had 10 bees. 3 went out to the flowers.',
+        opts:['10 − 3','10 + 3','3 − 10'], ans:0,
+        explain:'To find how many are still in the hive, take away the ones that left: 10 − 3.'},
+      {t:'draw', prompt:'Drawing time!',
+        tip:'Draw 5 flowers. Then draw a bee on 3 of them. How many flowers have no bee?',
+        explain:'5 take away 3 leaves 2 flowers with no bee. Your picture is saved in My Notebook.'}
+    ]}
+  ]
+}
+];
+
+const SECTIONS = {
+  count:  {name:'Counting',          icon:'🔢'},
+  addsub: {name:'Add and Take Away', icon:'➕'},
+  missing:{name:'The Missing Number',icon:'❓'},
+  method: {name:'Add or Take Away?', icon:'✅'},
+  bonds:  {name:'Number Pairs',      icon:'🤝'},
+  story:  {name:'Story Sums',        icon:'🧺'}
+};
+
+/* ============ UTILITIES ============ */
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const shuffle = a => { a = [...a]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const shuffleNotSame = a => { if (a.length < 2) return [...a]; let s; do { s = shuffle(a); } while (s.every((v, i) => v === a[i])); return s; };
+const norm = s => String(s).toLowerCase().replace(/[’']/g, '').replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim();
+const fmtTime = ms => { const s = Math.max(0, Math.round(ms / 1000)); const m = Math.floor(s / 60); return m ? `${m} min ${s % 60} sec` : `${s} sec`; };
+const fmtDate = t => { const d = new Date(t); return d.toLocaleDateString(undefined, {day:'numeric', month:'short'}) + ', ' + d.toLocaleTimeString(undefined, {hour:'2-digit', minute:'2-digit'}); };
+const pick = a => a[Math.floor(Math.random() * a.length)];
+
+/* Seeded shuffle: every learner gets their own set order, and that order
+   never changes again once it is saved. */
+function mulberry32(a) {
+  return function () {
+    a = a + 0x6D2B79F5 | 0;
+    let t = Math.imul(a ^ a >>> 15, 1 | a);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+function seededShuffle(arr, seed) {
+  const rnd = mulberry32(seed >>> 0), a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+  return a;
+}
+
+function lev(a, b) { // optimal string alignment distance (forgives swapped letters)
+  const d = Array.from({length: a.length + 1}, (_, i) => [i, ...Array(b.length).fill(0)]);
+  for (let j = 1; j <= b.length; j++) d[0][j] = j;
+  for (let i = 1; i <= a.length; i++) for (let j = 1; j <= b.length; j++) {
+    const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+    d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + cost);
+    if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) d[i][j] = Math.min(d[i][j], d[i - 2][j - 2] + 1);
+  }
+  return d[a.length][b.length];
+}
+const tolFor = w => w.length >= 8 ? 2 : w.length >= 4 ? 1 : 0;
+/* One-word answers: ignore case, punctuation and a leading a/an/the, and
+   forgive a slip or two of the pen. Short words still need to be exact. */
+function answerMatches(input, accept) {
+  const t = norm(input).replace(/^(a|an|the)\s+/, '');
+  if (!t) return false;
+  return accept.some(a => {
+    const k = norm(a);
+    if (t === k) return true;
+    const kw = k.split(' '), tw = t.split(' ');
+    if (kw.length !== tw.length) return false;
+    return kw.every((w, i) => w === tw[i] || (tolFor(w) > 0 && lev(tw[i], w) <= tolFor(w)));
+  });
+}
+/* Greedy word wrap, for text inside an SVG diagram. */
+function wrapText(text, max) {
+  const out = []; let cur = '';
+  for (const w of String(text).split(' ')) {
+    if (!cur) cur = w;
+    else if ((cur + ' ' + w).length <= max) cur += ' ' + w;
+    else { out.push(cur); cur = w; }
+  }
+  if (cur) out.push(cur);
+  return out;
+}
+
+function owl(cls = '') {
+  return `<svg class="mascot ${cls}" viewBox="0 0 130 104" aria-hidden="true">
+    <path class="ow-branch" d="M8 97 H122"/>
+    <path class="ow-foot" d="M56 86 v9 M63 86 v9 M70 86 v9 M77 86 v9"/>
+    <path class="ow-tuft" d="M40 30 L31 10 L54 22 Z"/>
+    <path class="ow-tuft" d="M90 30 L99 10 L76 22 Z"/>
+    <ellipse class="ow-body" cx="65" cy="54" rx="36" ry="34"/>
+    <path class="ow-wing" d="M33 48 q-7 22 7 35 q7 -20 5 -35 z"/>
+    <path class="ow-wing" d="M97 48 q7 22 -7 35 q-7 -20 -5 -35 z"/>
+    <ellipse class="ow-tum" cx="65" cy="77" rx="18" ry="11"/>
+    <circle class="ow-eye" cx="51" cy="45" r="13"/><circle class="ow-eye" cx="79" cy="45" r="13"/>
+    <circle class="ow-pupil" cx="52.5" cy="46" r="5.5"/><circle class="ow-pupil" cx="80.5" cy="46" r="5.5"/>
+    <path class="ow-beak" d="M65 54 L57 66 L73 66 Z"/>
+  </svg>`;
+}
+
+/* ============ BADGES ============ */
+const BADGES = [
+  {id:'first',   icon:'🦉', name:'First Flight',    desc:'Finish your first whole set',       got:s => setsFinished(s) >= 1},
+  {id:'three',   icon:'⭐',        name:'Star Collector',  desc:'Win 3 stars on three sets',         got:s => threeStarSets(s) >= 3},
+  {id:'perfect', icon:'💯', name:'Perfect Run',     desc:'Score 100% on a whole set',         got:s => Object.values(s.sets).some(r => r.best && r.best.pct === 100)},
+  {id:'counter', icon:'🔢', name:'Good Counter',    desc:'Count 8 pictures correctly',        got:s => s.stats.count >= 8},
+  {id:'finder',  icon:'❓',        name:'Box Finder',      desc:'Find 10 missing numbers',           got:s => s.stats.missing >= 10},
+  {id:'chooser', icon:'✅',        name:'Right Way Round', desc:'Pick the right way 8 times',        got:s => s.stats.method >= 8},
+  {id:'tens',    icon:'🤝', name:'Ten Maker',       desc:'Get 6 number-pair questions right', got:s => s.stats.bonds >= 6},
+  {id:'artist',  icon:'🎨', name:'Maths Artist',    desc:'Draw 3 maths pictures',             got:s => s.stats.draw >= 3},
+  {id:'streak',  icon:'🔥', name:'On Fire',         desc:'Get 6 questions right in a row',    got:s => s.stats.streak >= 6},
+  {id:'master',  icon:'🏆', name:'Number Friend',   desc:'Finish every set',                  got:s => setsFinished(s) >= SETS.length}
+];
+
+/* ============ STORAGE (kept in this browser) ============ */
+const KEY = 'numberFriends.v1';
+const ART = 'numberFriends.art.v1';
+const freshStats = () => ({count:0, missing:0, method:0, bonds:0, draw:0, streak:0, fix:0});
+const fresh = () => ({v:1, seed:null, order:null, sets:{}, gallery:[], badges:[], stats:freshStats(),
+  current:null, lastRun:null, settings:{size:'big', theme:'auto', sound:true}});
+let S = fresh();
+let storageOK = true;
+function load() {
+  try {
+    const raw = localStorage.getItem(KEY);
+    if (raw) {
+      const d = JSON.parse(raw);
+      S = Object.assign(fresh(), d);
+      S.settings = Object.assign(fresh().settings, d.settings || {});
+      S.stats = Object.assign(freshStats(), d.stats || {});
+    }
+  } catch (e) { storageOK = false; }
+  /* Drawings live in their own key now. Saves made before that change
+     kept them in the main one; those are read above and move across on
+     the next save, so nobody loses a picture in the upgrade. */
+  try {
+    const art = localStorage.getItem(ART);
+    if (art) S.gallery = JSON.parse(art) || [];
+  } catch (e) {}
+  if (!Array.isArray(S.gallery)) S.gallery = [];
+  if (S.seed === null || S.seed === undefined) S.seed = (Math.random() * 4294967296) >>> 0;
+  setOrder();
+}
+/* setItem throws when the browser is full, and in a couple of private modes
+   it fails quietly, so every write is read back before it is believed. */
+function writeKey(k, text) {
+  try {
+    localStorage.setItem(k, text);
+    return localStorage.getItem(k) === text;
+  } catch (e) { return false; }
+}
+/* All the activities on this site share one storage allowance. Saved art is
+   the throwaway tier wherever it came from, so one child's stars may clear
+   another activity's pictures — never the other way round. */
+function dropArtElsewhere() {
+  let keys, freed = false;
+  try { keys = Object.keys(localStorage); } catch (e) { return false; }
+  for (const k of keys) {
+    if (k !== ART && /\.art\.v\d+$/.test(k)) {
+      try { localStorage.removeItem(k); freed = true; } catch (e) {}
+    }
+  }
+  return freed;
+}
+/* Writes the child's progress. Nothing here may be lost for want of room, so
+   it gives up pictures — its own first, then any other activity's — before
+   it gives up itself. */
+function save() {
+  S.updatedAt = Date.now();
+  const {gallery, ...progress} = S;
+  const body = JSON.stringify(progress);
+  let ok = writeKey(KEY, body);
+  if (!ok) { try { localStorage.removeItem(ART); } catch (e) {} ok = writeKey(KEY, body); }
+  if (!ok && dropArtElsewhere()) ok = writeKey(KEY, body);
+  storageOK = ok;
+  saveArt();
+  return ok;
+}
+/* Pictures, written only once the stars are safely down. Oldest go first
+   until the rest fit; none of this can cost a star. */
+function saveArt() {
+  const clear = () => { try { localStorage.removeItem(ART); } catch (e) {} };
+  if (!storageOK || !S.gallery.length) { clear(); return false; }
+  let list = S.gallery;
+  while (list.length) {
+    if (writeKey(ART, JSON.stringify(list))) { S.gallery = list; return true; }
+    list = list.slice(0, list.length - 1);
+  }
+  clear(); S.gallery = [];
+  return false;
+}
+function applySettings() {
+  const r = document.documentElement;
+  r.dataset.size = S.settings.size;
+  if (S.settings.theme === 'auto') r.removeAttribute('data-theme'); else r.dataset.theme = S.settings.theme;
+}
+/* The learner's personal set order. Built once, then only ever added to. */
+function setOrder() {
+  const ids = SETS.map(s => s.id);
+  const kept = (S.order || []).filter(id => ids.includes(id));
+  const missing = ids.filter(id => !kept.includes(id));
+  if (missing.length || kept.length !== (S.order || []).length) {
+    /* Core sets are shuffled among themselves and challenge sets among
+       themselves, but a challenge set never lands before a core one. A
+       returning learner keeps the order already saved; new sets are only
+       ever appended to it. */
+    const spread = list => list.length > 1 ? seededShuffle(list, S.seed + kept.length + list.length) : list;
+    const core = missing.filter(id => !getSet(id).challenge);
+    const chal = missing.filter(id => getSet(id).challenge);
+    S.order = [...kept, ...spread(core), ...spread(chal)];
+  }
+  return S.order;
+}
+const orderPos = id => setOrder().indexOf(id);
+
+/* ============ SOUND + READ ALOUD ============ */
+let actx = null;
+function beep(kind) {
+  if (!S.settings.sound) return;
+  try {
+    actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+    const notes = kind === 'good' ? [523, 659, 784] : kind === 'part' ? [523, 587] : [330, 262];
+    notes.forEach((f, i) => {
+      const o = actx.createOscillator(), g = actx.createGain();
+      o.type = 'sine'; o.frequency.value = f;
+      g.gain.setValueAtTime(0.0001, actx.currentTime + i * 0.1);
+      g.gain.exponentialRampToValueAtTime(0.16, actx.currentTime + i * 0.1 + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, actx.currentTime + i * 0.1 + 0.22);
+      o.connect(g); g.connect(actx.destination);
+      o.start(actx.currentTime + i * 0.1); o.stop(actx.currentTime + i * 0.1 + 0.25);
+    });
+  } catch (e) {}
+}
+const canSpeak = 'speechSynthesis' in window;
+function speak(text) {
+  if (!canSpeak) return;
+  try {
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(String(text).replace(/_+/g, ' blank '));
+    u.lang = 'en-GB'; u.rate = 0.9; u.pitch = 1.05;
+    speechSynthesis.speak(u);
+  } catch (e) {}
+}
+
+/* ============ CONTENT HELPERS ============ */
+const getSet = id => SETS.find(s => s.id === id);
+const blanksOf = item => { const out = []; item.lines.forEach(l => l.replace(/\{([^}]+)\}/g, (m, w) => { out.push(w); return m; })); return out; };
+function itemTotal(item) {
+  switch (item.t) {
+    case 'sort':   return item.chips.length;
+    case 'match':  return item.left.length;
+    case 'fill':   return blanksOf(item).length;
+    case 'order':  return item.items.length;
+    case 'grid':   return item.rows.length * item.cols.length;
+    case 'tfgrid': return item.rows.length;
+    case 'multi':   return item.opts.length;
+    case 'draw':   return 0;
+    default: return 1;
+  }
+}
+function flat(set) { if (!set._flat) { set._flat = []; set.sections.forEach(sec => sec.items.forEach(item => set._flat.push({sec:sec.key, item}))); } return set._flat; }
+const setTotal = set => flat(set).reduce((a, q) => a + itemTotal(q.item), 0);
+const starsFor = pct => pct >= 90 ? 3 : pct >= 70 ? 2 : pct >= 50 ? 1 : 0;
+const starRow = n => `<span class="stars" aria-label="${n} of 3 stars">${[0,1,2].map(i => `<span class="${i < n ? 'star-on' : 'star-off'}">★</span>`).join('')}</span>`;
+const setsFinished = s => Object.values(s.sets).filter(r => r && r.best).length;
+const threeStarSets = s => Object.values(s.sets).filter(r => r && r.best && starsFor(r.best.pct) === 3).length;
+/* Unlocking follows the learner's own order, not the set numbers. */
+function questionLabel(item) { return item.text || item.story || item.tip || item.prompt; }
+function answerText(item) {
+  switch (item.t) {
+    case 'choice': return item.opts[item.ans];
+    case 'sort':   return item.bins.map((b, bi) => `${b[0]}: ${item.chips.filter(c => c[1] === bi).map(c => c[0]).join(', ')}`).join('. ');
+    case 'type':   return item.accept[0];
+    case 'match':  return item.left.map((l, i) => `${l.label} goes with ${item.right[i]}`).join('. ');
+    case 'fill':   return item.lines.map(l => l.replace(/\{([^}]+)\}/g, '$1')).join(' ');
+    case 'order':  return item.items.map((t, i) => `${i + 1}. ${t}`).join('. ');
+    case 'grid':   return item.rows.map(([label, want]) => `${label}: ${want.map((m, i) => `${item.cols[i]} ${m ? 'yes' : 'no'}`).join(', ')}`).join('. ');
+    case 'tfgrid': return item.rows.map(([text, want]) => `${want ? 'True' : 'False'}: ${text}`).join('. ');
+    case 'multi':   return 'Tick: ' + item.opts.filter(o => o[1]).map(o => o[0]).join(', ');
+    case 'keypad': case 'counters': case 'bond': return String(item.ans);
+    default: return '';
+  }
+}
+function speakText(item) {
+  const bits = [item.prompt];
+  if (item.text) bits.push(item.text.replace(/_{2,}/g, ' blank '));
+  if (item.tip) bits.push(item.tip);
+  if (item.t === 'choice') bits.push(item.opts.join(', or '));
+  if (item.t === 'fill') bits.push(item.lines.map(l => l.replace(/\{[^}]+\}/g, 'blank')).join(' '));
+  if (item.t === 'order') bits.push(item.items.join('. '));
+  if (item.t === 'tfgrid') bits.push(item.rows.map(r => r[0]).join('. '));
+  if (item.t === 'multi') bits.push(item.opts.map(o => o[0]).join('. '));
+  if (item.story) bits.push(item.story);
+  if (item.t === 'keypad') bits.push(item.text.replace(/□/g, ' something '));
+  if (item.t === 'bond') bits.push(`The whole is ${item.whole}. One part is ${item.known}. What is the other part?`);
+  return bits.join('. ');
+}
+function blankify(text, word) {
+  const parts = String(text).split(/_{2,}/);
+  if (parts.length < 2) return esc(text);
+  return esc(parts[0]) + (word
+    ? `<span class="blank filled">${esc(word)}</span>`
+    : '<span class="blank"><span class="sr">blank</span>&nbsp;</span>') + esc(parts.slice(1).join(' '));
+}
+
+/* ============ AUTO-SCROLL WHILE DRAGGING ============ */
+function autoScroller(onScroll) {
+  let y = null, raf = null;
+  const step = () => {
+    if (y === null) { raf = null; return; }
+    const dockH = dock.classList.contains('hidden') ? 0 : dock.offsetHeight;
+    const bottom = window.innerHeight - dockH;
+    let d = 0;
+    if (y > bottom - 70) d = Math.min(20, (y - (bottom - 70)) / 3 + 2);
+    else if (y < 120) d = -Math.min(20, (120 - y) / 3 + 2);
+    if (d) { const before = window.scrollY; window.scrollBy(0, d); if (window.scrollY !== before && onScroll) onScroll(); }
+    raf = requestAnimationFrame(step);
+  };
+  return {update(ny) { y = ny; if (!raf) raf = requestAnimationFrame(step); }, stop() { y = null; }};
+}
+
+/* ============ DRAG + TAP HELPER (chips into zones) ============ */
+function dnd(root, o) {
+  let suppress = false;
+  root.addEventListener('pointerdown', e => {
+    const chip = e.target.closest('.chip[data-id]');
+    if (!chip || o.locked() || e.button > 0) return;
+    e.preventDefault();
+    const id = chip.dataset.id, sx = e.clientX, sy = e.clientY;
+    let ghost = null, over = null, lx = sx, ly = sy;
+    const findZone = () => {
+      const hit = document.elementFromPoint(lx, ly);
+      const z = hit && hit.closest('[data-drop]');
+      const zone = z && root.contains(z) ? z : null;
+      if (zone !== over) { if (over) over.classList.remove('over'); if (zone) zone.classList.add('over'); over = zone; }
+    };
+    const scroller = autoScroller(findZone);
+    const move = ev => {
+      lx = ev.clientX; ly = ev.clientY;
+      if (!ghost) {
+        if (Math.hypot(ev.clientX - sx, ev.clientY - sy) < 8) return;
+        ghost = chip.cloneNode(true); ghost.classList.add('ghost'); ghost.classList.remove('sel');
+        document.body.appendChild(ghost); chip.classList.add('dragging');
+      }
+      ghost.style.left = ev.clientX + 'px'; ghost.style.top = ev.clientY + 'px';
+      scroller.update(ev.clientY);
+      findZone();
+    };
+    const end = ev => {
+      scroller.stop();
+      window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', end); window.removeEventListener('pointercancel', end);
+      if (over) over.classList.remove('over');
+      if (ghost) { suppress = true; setTimeout(() => { suppress = false; }, 0); ghost.remove(); chip.classList.remove('dragging'); if (ev.type === 'pointerup' && over) o.drop(id, over.dataset.drop); }
+      else if (ev.type === 'pointerup') setTimeout(() => o.tap(id), 0);
+    };
+    window.addEventListener('pointermove', move); window.addEventListener('pointerup', end); window.addEventListener('pointercancel', end);
+  });
+  root.addEventListener('click', e => {
+    if (o.locked() || suppress || e.target.closest('.chip')) return;
+    const z = e.target.closest('[data-drop]');
+    if (z) o.zoneTap(z.dataset.drop);
+  });
+  root.addEventListener('keydown', e => {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    if (o.locked()) return;
+    const chip = e.target.closest('.chip[data-id]');
+    const z = e.target.closest('[data-drop]');
+    if (chip) { e.preventDefault(); e.stopPropagation(); o.tap(chip.dataset.id); }
+    else if (z) { e.preventDefault(); e.stopPropagation(); o.zoneTap(z.dataset.drop); }
+  });
+}
+
+/* ============ QUESTION TYPES ============ */
+const TYPES = {};
+
+TYPES.choice = (item, root, changed) => {
+  let sel = -1, locked = false;
+  /* A bare number sentence is what the child is actually solving, so it is
+     shown at full size with a real box, not as a line of small text. */
+  root.innerHTML = `${item.text ? (item.big
+      ? `<p class="sentence">${sentenceHTML(item.text, '', null)}</p>`
+      : `<p class="qtext" id="qt">${blankify(item.text, null)}</p>`) : ''}
+    <div class="opts ${item.long ? 'long' : ''}" role="group" aria-label="Answers">${item.opts.map((o, i) =>
+      `<button class="opt" data-i="${i}">${esc(o)}</button>`).join('')}</div>`;
+  const btns = $$('.opt', root);
+  btns.forEach(b => b.addEventListener('click', () => {
+    if (locked) return;
+    sel = +b.dataset.i;
+    btns.forEach(x => { x.classList.toggle('sel', x === b); x.setAttribute('aria-pressed', x === b); });
+    if (item.text && /_{2,}/.test(item.text)) $('#qt', root).innerHTML = blankify(item.text, item.opts[sel]);
+    changed();
+  }));
+  return {
+    ready: () => sel >= 0,
+    check() {
+      locked = true;
+      btns.forEach((b, i) => { b.disabled = true; b.classList.remove('sel'); if (i === item.ans) b.classList.add('ok'); else if (i === sel) b.classList.add('no'); });
+      return {e: sel === item.ans ? 1 : 0, t: 1, answer: esc(item.opts[item.ans])};
+    }
+  };
+};
+
+TYPES.sort = (item, root, changed) => {
+  const chips = shuffle(item.chips.map((c, i) => ({id:i, w:c[0], b:c[1], state:''})));
+  const place = {};
+  let sel = null, locked = false;
+  const chipHtml = c => `<span class="chip ${sel === c.id ? 'sel' : ''} ${c.state}" data-id="${c.id}" role="button" tabindex="0">${esc(c.w)}</span>`;
+  function draw() {
+    const inBank = chips.filter(c => place[c.id] === undefined);
+    root.innerHTML = `<div class="bank" data-drop="bank"><span class="bank-label">${inBank.length ? 'Drag a card to a box, or tap a card and then tap a box.' : 'All sorted! Tap Check when you are ready.'}</span>${inBank.map(chipHtml).join('')}</div>
+      <div class="bins">${item.bins.map((b, bi) => `<div class="bin" data-drop="${bi}" tabindex="0" role="button" aria-label="Box: ${esc(b[0])}"><h3>${esc(b[0])}</h3><div class="hint">${esc(b[1])}</div><div class="inside">${chips.filter(c => place[c.id] === bi).map(chipHtml).join('')}</div></div>`).join('')}</div>`;
+  }
+  function drop(id, zone) { id = +id; if (zone === 'bank') delete place[id]; else place[id] = +zone; sel = null; draw(); changed(); }
+  draw();
+  dnd(root, {
+    locked: () => locked,
+    tap(id) { id = +id; if (place[id] !== undefined) { delete place[id]; sel = null; } else sel = sel === id ? null : id; draw(); changed(); },
+    drop,
+    zoneTap(zone) { if (sel !== null) drop(sel, zone); }
+  });
+  return {
+    ready: () => Object.keys(place).length === chips.length,
+    check() {
+      locked = true; let e = 0;
+      chips.forEach(c => { const ok = place[c.id] === c.b; c.state = ok ? 'ok' : 'no'; if (ok) e++; });
+      sel = null; draw();
+      return {e, t: chips.length, answer: item.bins.map((b, bi) => `<b>${esc(b[0])}:</b> ${item.chips.filter(c => c[1] === bi).map(c => esc(c[0])).join(', ')}`).join('<br>')};
+    }
+  };
+};
+
+TYPES.fill = (item, root, changed) => {
+  const answers = blanksOf(item);
+  const words = shuffle([...answers, ...item.decoys]).map((w, i) => ({id:i, w}));
+  const slots = answers.map(() => null);
+  const spare = item.decoys.length;
+  let sel = null, locked = false, marks = null;
+  function draw() {
+    let k = 0;
+    const lines = item.lines.map(l => {
+      const parts = l.split(/(\{[^}]+\})/);
+      let out = '';
+      for (let pi = 0; pi < parts.length; pi++) {
+        const part = parts[pi];
+        if (!/^\{[^}]+\}$/.test(part)) { out += esc(part); continue; }
+        const si = k++, cid = slots[si], w = cid === null ? null : words[cid];
+        let punct = '';
+        if (parts[pi + 1]) { const m = parts[pi + 1].match(/^[,.!?;:]+/); if (m) { punct = m[0]; parts[pi + 1] = parts[pi + 1].slice(punct.length); } }
+        out += `<span class="nowrap"><span class="slot" data-drop="${si}" role="button" tabindex="0" aria-label="Gap ${si + 1}${w ? ': ' + esc(w.w) : ''}">${w ? `<span class="chip ${marks ? (marks[si] ? 'ok' : 'no') : ''}" data-id="${w.id}">${esc(w.w)}</span>` : ''}</span>${esc(punct)}</span>`;
+      }
+      return `<span class="line">${out}</span>`;
+    }).join('');
+    const bank = words.filter(w => !slots.includes(w.id));
+    root.innerHTML = `<div class="bank" data-drop="bank"><span class="bank-label">Drag a card into a gap, or tap a card and then tap a gap. ${spare} card${spare === 1 ? ' is' : 's are'} left over!</span>${bank.map(w => `<span class="chip ${sel === w.id ? 'sel' : ''}" data-id="${w.id}" role="button" tabindex="0">${esc(w.w)}</span>`).join('')}</div><p class="poemtext">${lines}</p>`;
+  }
+  function drop(id, zone) {
+    id = +id; const from = slots.indexOf(id);
+    if (zone === 'bank') { if (from >= 0) slots[from] = null; }
+    else { const si = +zone; const prev = slots[si]; if (from >= 0) slots[from] = prev; slots[si] = id; }
+    sel = null; draw(); changed();
+  }
+  draw();
+  dnd(root, {
+    locked: () => locked,
+    tap(id) { id = +id; if (slots.includes(id)) drop(id, 'bank'); else { sel = sel === id ? null : id; draw(); } },
+    drop,
+    zoneTap(zone) { if (sel !== null) drop(sel, zone); else if (zone !== 'bank' && slots[+zone] !== null) drop(slots[+zone], 'bank'); }
+  });
+  return {
+    ready: () => slots.every(s => s !== null),
+    check() {
+      locked = true;
+      marks = slots.map((cid, si) => cid !== null && words[cid].w === answers[si]);
+      draw();
+      return {e: marks.filter(Boolean).length, t: answers.length, answer: item.lines.map(l => esc(l).replace(/\{([^}]+)\}/g, '<b>$1</b>')).join('<br>')};
+    }
+  };
+};
+
+TYPES.type = (item, root, changed) => {
+  root.innerHTML = `<p class="qtext" id="qt">${blankify(item.text, null)}</p>
+    <div class="typeline">
+      <label class="sr" for="wr">Your answer</label>
+      <input id="wr" class="write" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" maxlength="24" placeholder="Type one word">
+      ${item.hint ? '<button class="btn btn-small" id="hintBtn" type="button">💡 Hint</button>' : ''}
+    </div>
+    <div id="hintOut"></div>`;
+  const inp = $('#wr', root), qt = $('#qt', root);
+  inp.addEventListener('input', () => { qt.innerHTML = blankify(item.text, inp.value.trim()); changed(); });
+  const hb = $('#hintBtn', root);
+  if (hb) hb.onclick = () => { $('#hintOut', root).innerHTML = `<p class="hintbox">💡 ${esc(item.hint)}</p>`; hb.disabled = true; inp.focus(); };
+  return {
+    ready: () => norm(inp.value).length >= 1,
+    check() {
+      inp.readOnly = true;
+      const ok = answerMatches(inp.value, item.accept);
+      qt.innerHTML = blankify(item.text, inp.value.trim());
+      inp.style.borderColor = ok ? 'var(--leaf)' : 'var(--berry)';
+      const exact = item.accept.some(a => norm(a) === norm(inp.value).replace(/^(a|an|the)\s+/, ''));
+      return {e: ok ? 1 : 0, t: 1, answer: esc(item.accept[0]), nearly: ok && !exact};
+    },
+    focus: () => inp.focus()
+  };
+};
+
+/* The tick-or-cross table from the worksheet. Tap a box to cycle it. */
+TYPES.grid = (item, root, changed) => {
+  const state = item.rows.map(() => item.cols.map(() => 0)); // 0 blank, 1 tick, 2 cross
+  let locked = false, marks = null;
+  function draw() {
+    root.innerHTML = `<div class="gridq"><table>
+      <thead><tr><th></th>${item.cols.map(c => `<th scope="col">${esc(c)}</th>`).join('')}</tr></thead>
+      <tbody>${item.rows.map(([label], r) => `<tr><th class="rowhead" scope="row">${esc(label)}</th>${item.cols.map((col, c) => {
+        const v = state[r][c], ok = marks ? marks[r][c] : null;
+        return `<td><button type="button" class="cell ${v === 1 ? 'tick' : v === 2 ? 'cross' : ''} ${ok === true ? 'ok' : ok === false ? 'no' : ''}"
+          data-r="${r}" data-c="${c}" ${locked ? 'disabled' : ''}
+          aria-label="${esc(label)}, ${esc(col)}: ${v === 1 ? 'tick' : v === 2 ? 'cross' : 'not answered yet'}">${v === 1 ? '✓' : v === 2 ? '✗' : ''}</button></td>`;
+      }).join('')}</tr>`).join('')}</tbody></table></div>
+      <p class="tip">Tap a box to change it: empty → ✓ → ✗ → empty. Fill in every box.</p>`;
+  }
+  root.addEventListener('click', e => {
+    const b = e.target.closest('.cell');
+    if (!b || locked) return;
+    const r = +b.dataset.r, c = +b.dataset.c;
+    state[r][c] = (state[r][c] + 1) % 3;
+    draw(); changed();
+  });
+  draw();
+  return {
+    ready: () => state.every(row => row.every(v => v !== 0)),
+    check() {
+      locked = true;
+      marks = state.map((row, r) => row.map((v, c) => (v === 1) === (item.rows[r][1][c] === 1)));
+      draw();
+      return {e: marks.flat().filter(Boolean).length, t: item.rows.length * item.cols.length,
+        answer: item.rows.map(([label, want]) => `<b>${esc(label)}:</b> ${want.map((m, i) => `${esc(item.cols[i])} ${m ? '✓' : '✗'}`).join(' · ')}`).join('<br>')};
+    }
+  };
+};
+
+/* Tick every one that is true. Scored per option, so a child has to judge
+   each line on its own instead of hunting for the single best answer. */
+TYPES.multi = (item, root, changed) => {
+  const sel = item.opts.map(() => false);
+  let locked = false, marks = null;
+  function draw() {
+    root.innerHTML = `${item.text ? `<p class="qtext">${esc(item.text)}</p>` : ''}
+      <div class="opts long multi" role="group" aria-label="Tick every one that is true">${item.opts.map(([txt, want], i) =>
+        `<button type="button" class="opt ${sel[i] ? 'sel' : ''} ${marks ? (marks[i] ? 'ok' : 'no') : ''}" data-i="${i}"
+           aria-pressed="${sel[i]}" ${locked ? 'disabled' : ''}>
+           <span class="tickbox" aria-hidden="true">${sel[i] ? '\u2713' : ''}</span><span>${esc(txt)}</span>
+           ${marks ? `<span class="should">${want ? 'should be ticked' : 'should be left'}</span>` : ''}
+         </button>`).join('')}</div>
+      <p class="tip">Tick as many as you need \u2014 there may be more than one. Every line you get right is a star.</p>`;
+  }
+  root.addEventListener('click', e => {
+    const b = e.target.closest('.opt');
+    if (!b || locked) return;
+    const i = +b.dataset.i;
+    sel[i] = !sel[i];
+    draw(); changed();
+  });
+  draw();
+  return {
+    ready: () => sel.some(Boolean),
+    check() {
+      locked = true;
+      marks = sel.map((v, i) => v === item.opts[i][1]);
+      draw();
+      return {e: marks.filter(Boolean).length, t: item.opts.length,
+        answer: item.opts.filter(o => o[1]).map(o => `\u2713 ${esc(o[0])}`).join('<br>')};
+    }
+  };
+};
+
+/* Several statements, each one true or false. One star per row. */
+TYPES.tfgrid = (item, root, changed) => {
+  const given = item.rows.map(() => null);
+  let locked = false, marks = null;
+  function draw() {
+    root.innerHTML = `<div class="tflist">${item.rows.map(([text], i) => `
+      <div class="tfrow ${marks ? (marks[i] ? 'ok' : 'no') : ''}">
+        <span>${esc(text)}</span>
+        <span class="tfbtns" role="group" aria-label="True or false: ${esc(text)}">
+          <button type="button" data-i="${i}" data-v="1" aria-pressed="${given[i] === true}" ${locked ? 'disabled' : ''}>True</button>
+          <button type="button" data-i="${i}" data-v="0" aria-pressed="${given[i] === false}" ${locked ? 'disabled' : ''}>False</button>
+        </span>
+      </div>`).join('')}</div>`;
+  }
+  root.addEventListener('click', e => {
+    const b = e.target.closest('[data-v]');
+    if (!b || locked) return;
+    given[+b.dataset.i] = b.dataset.v === '1';
+    draw(); changed();
+  });
+  draw();
+  return {
+    ready: () => given.every(a => a !== null),
+    check() {
+      locked = true;
+      marks = given.map((a, i) => a === item.rows[i][1]);
+      draw();
+      return {e: marks.filter(Boolean).length, t: item.rows.length,
+        answer: item.rows.map(([text, want]) => `<b>${want ? 'True' : 'False'}</b> — ${esc(text)}`).join('<br>')};
+    }
+  };
+};
+
+const LINE_COLORS = ['var(--sky)', 'var(--sun)', '#8E6AC8', '#D0668E', '#2E9C96', '#C07A34'];
+TYPES.match = (item, root, changed, cleanups) => {
+  const n = item.left.length;
+  const rightOrder = shuffleNotSame(item.right.map((_, i) => i));
+  const conn = {};
+  let sel = null, temp = null, locked = false, result = false;
+  root.innerHTML = `<p class="tip" style="margin:0 0 .9rem">Drag from a box on one side to a box on the other, or tap one on each side.</p>
+    <div class="match">
+      <svg class="lines" aria-hidden="true"></svg>
+      <div class="match-col">${item.left.map((l, i) => `<button class="m-item left" data-side="L" data-i="${i}"><span>${esc(l.label)}</span><span class="dot"></span></button>`).join('')}</div>
+      <div class="match-col">${rightOrder.map(ri => `<button class="m-item right" data-side="R" data-i="${ri}">${esc(item.right[ri])}<span class="dot"></span></button>`).join('')}</div>
+    </div>
+    <div class="row" style="justify-content:flex-end;margin-top:.9rem"><button class="btn btn-small" id="clearLines" type="button">Clear lines</button></div>`;
+  const box = $('.match', root), svg = $('svg.lines', root);
+  const itemEl = (side, i) => box.querySelector(`.m-item[data-side="${side}"][data-i="${i}"]`);
+  const dotPt = el => { const b = box.getBoundingClientRect(), r = el.getBoundingClientRect(); return {x: (el.dataset.side === 'L' ? r.right : r.left) - b.left, y: r.top + r.height / 2 - b.top}; };
+  const curve = (a, b) => { const dx = (b.x - a.x) * 0.45; return `M${a.x} ${a.y} C${a.x + dx} ${a.y} ${b.x - dx} ${b.y} ${b.x} ${b.y}`; };
+  function redraw() {
+    let html = '';
+    Object.entries(conn).forEach(([li, ri]) => {
+      const a = dotPt(itemEl('L', li)), b = dotPt(itemEl('R', ri));
+      let color = LINE_COLORS[li % LINE_COLORS.length], extra = '';
+      if (result) { const ok = +li === +ri; color = ok ? 'var(--leaf)' : 'var(--berry)'; if (!ok) extra = 'stroke-dasharray="10 8"'; }
+      html += `<path d="${curve(a, b)}" stroke="${color}" ${extra}/>`;
+    });
+    if (temp) { const bb = box.getBoundingClientRect(); html += `<path d="${curve(dotPt(temp.el), {x: temp.cx - bb.left, y: temp.cy - bb.top})}" stroke="var(--ink-soft)" stroke-dasharray="6 7"/>`; }
+    svg.innerHTML = html;
+    $$('.m-item', box).forEach(el => {
+      const side = el.dataset.side, i = +el.dataset.i;
+      el.classList.toggle('linked', side === 'L' ? conn[i] !== undefined : Object.values(conn).includes(i));
+      el.classList.toggle('sel', !!sel && sel.side === side && sel.i === i);
+    });
+  }
+  function link(li, ri) { for (const k in conn) if (conn[k] === ri) delete conn[k]; conn[li] = ri; sel = null; redraw(); changed(); }
+  function unlink(side, i) { if (side === 'L') delete conn[i]; else for (const k in conn) if (conn[k] === i) delete conn[k]; }
+  function tapItem(side, i) {
+    if (sel && sel.side !== side) { side === 'L' ? link(i, sel.i) : link(sel.i, i); return; }
+    if (sel && sel.side === side && sel.i === i) { unlink(side, i); sel = null; redraw(); changed(); return; }
+    sel = {side, i}; redraw();
+  }
+  box.addEventListener('pointerdown', e => {
+    const el = e.target.closest('.m-item');
+    if (!el || locked || e.button > 0) return;
+    e.preventDefault();
+    const side = el.dataset.side, i = +el.dataset.i, sx = e.clientX, sy = e.clientY;
+    let dragging = false;
+    const scroller = autoScroller(() => { if (temp) redraw(); });
+    const move = ev => {
+      if (!dragging && Math.hypot(ev.clientX - sx, ev.clientY - sy) > 10) dragging = true;
+      if (dragging) { temp = {el, cx: ev.clientX, cy: ev.clientY}; sel = {side, i}; scroller.update(ev.clientY); redraw(); }
+    };
+    const end = ev => {
+      scroller.stop();
+      window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', end); window.removeEventListener('pointercancel', end);
+      if (dragging) {
+        temp = null;
+        const hit = document.elementFromPoint(ev.clientX, ev.clientY);
+        const t = hit && hit.closest('.m-item');
+        if (ev.type === 'pointerup' && t && box.contains(t) && t.dataset.side !== side) { const j = +t.dataset.i; side === 'L' ? link(i, j) : link(j, i); }
+        else { sel = null; redraw(); }
+      } else if (ev.type === 'pointerup') tapItem(side, i);
+    };
+    window.addEventListener('pointermove', move); window.addEventListener('pointerup', end); window.addEventListener('pointercancel', end);
+  });
+  box.addEventListener('click', e => { const el = e.target.closest('.m-item'); if (el && e.detail === 0 && !locked) tapItem(el.dataset.side, +el.dataset.i); });
+  $('#clearLines', root).addEventListener('click', () => { if (locked) return; for (const k in conn) delete conn[k]; sel = null; redraw(); changed(); });
+  const ro = new ResizeObserver(() => redraw()); ro.observe(box);
+  cleanups.push(() => ro.disconnect());
+  requestAnimationFrame(redraw);
+  return {
+    ready: () => Object.keys(conn).length === n,
+    check() {
+      locked = true; result = true; let e = 0;
+      for (let i = 0; i < n; i++) {
+        const ok = conn[i] === i; if (ok) e++;
+        itemEl('L', i).classList.add(ok ? 'ok' : 'no');
+        const r = itemEl('R', i), rOk = Object.entries(conn).some(([li, ri]) => ri === i && +li === i);
+        r.classList.add(rOk ? 'ok' : 'no');
+      }
+      $$('.m-item', box).forEach(b => b.disabled = true);
+      $('#clearLines', root).disabled = true;
+      redraw();
+      return {e, t: n, answer: item.left.map((l, i) => `<b>${esc(l.label)}</b> ➜ ${esc(item.right[i])}`).join('<br>')};
+    }
+  };
+};
+
+/* Put the steps in the right order: drag them, or use the little arrows. */
+TYPES.order = (item, root, changed) => {
+  const n = item.items.length;
+  let seq = shuffleNotSame(item.items.map((_, i) => i));
+  let locked = false, marks = null, dragPos = -1;
+  function draw() {
+    root.innerHTML = `<p class="tip" style="margin:0 0 .9rem">Drag a card up or down, or use the ▲ ▼ arrows, until the order is right.</p>
+      <div class="orderlist">${seq.map((si, p) => `
+        <div class="ord ${dragPos === p ? 'dragging' : ''} ${marks ? (marks[p] ? 'ok' : 'no') : ''}" data-p="${p}" role="listitem" aria-label="Position ${p + 1}: ${esc(item.items[si])}">
+          <span class="num">${p + 1}</span>
+          <span>${esc(item.items[si])}</span>
+          <span class="ord-move">
+            <button type="button" data-up="${p}" aria-label="Move up" ${p === 0 || locked ? 'disabled' : ''}>▲</button>
+            <button type="button" data-down="${p}" aria-label="Move down" ${p === n - 1 || locked ? 'disabled' : ''}>▼</button>
+          </span>
+        </div>`).join('')}</div>`;
+  }
+  function move(from, to) {
+    if (to < 0 || to >= n || from === to) return;
+    const [x] = seq.splice(from, 1); seq.splice(to, 0, x);
+  }
+  draw();
+  root.addEventListener('click', e => {
+    if (locked) return;
+    const up = e.target.closest('[data-up]'), dn = e.target.closest('[data-down]');
+    if (up) { const p = +up.dataset.up; move(p, p - 1); draw(); changed(); const f = $(`[data-up="${p - 1}"]`, root); if (f) f.focus(); }
+    else if (dn) { const p = +dn.dataset.down; move(p, p + 1); draw(); changed(); const f = $(`[data-down="${p + 1}"]`, root); if (f) f.focus(); }
+  });
+  root.addEventListener('pointerdown', e => {
+    const el = e.target.closest('.ord');
+    if (!el || locked || e.button > 0 || e.target.closest('.ord-move')) return;
+    e.preventDefault();
+    const sy = e.clientY;
+    dragPos = +el.dataset.p;
+    let ghost = null;
+    const scroller = autoScroller(() => {});
+    const place = y => {
+      const rows = $$('.ord', root);
+      let target = dragPos;
+      for (let i = 0; i < rows.length; i++) {
+        const r = rows[i].getBoundingClientRect();
+        if (y > r.top && y < r.bottom) { target = i; break; }
+        if (i === 0 && y <= r.top) target = 0;
+        if (i === rows.length - 1 && y >= r.bottom) target = rows.length - 1;
+      }
+      if (target !== dragPos) { move(dragPos, target); dragPos = target; draw(); }
+    };
+    const onMove = ev => {
+      if (!ghost) {
+        if (Math.abs(ev.clientY - sy) < 8) return;
+        ghost = el.cloneNode(true);
+        ghost.classList.add('ghost'); ghost.classList.remove('dragging');
+        ghost.style.width = el.getBoundingClientRect().width + 'px';
+        document.body.appendChild(ghost);
+        draw();
+      }
+      ghost.style.left = ev.clientX + 'px'; ghost.style.top = ev.clientY + 'px';
+      scroller.update(ev.clientY);
+      place(ev.clientY);
+    };
+    const end = () => {
+      scroller.stop();
+      window.removeEventListener('pointermove', onMove); window.removeEventListener('pointerup', end); window.removeEventListener('pointercancel', end);
+      if (ghost) { ghost.remove(); changed(); }
+      dragPos = -1; draw();
+    };
+    window.addEventListener('pointermove', onMove); window.addEventListener('pointerup', end); window.addEventListener('pointercancel', end);
+  });
+  return {
+    ready: () => true,
+    check() {
+      locked = true;
+      marks = seq.map((si, p) => si === p);
+      draw();
+      return {e: marks.filter(Boolean).length, t: n, answer: item.items.map((t, i) => `<b>${i + 1}.</b> ${esc(t)}`).join('<br>')};
+    }
+  };
+};
+
+/* ============ NUMBER PAD ============
+   Every typed answer in this activity is a number from 0 to 20, and a
+   six-year-old should not have to go hunting for a keyboard. */
+function numPad(host, onChange) {
+  let val = '';
+  host.innerHTML = `<div class="numpad" role="group" aria-label="Number keys">
+    ${[1,2,3,4,5,6,7,8,9,0].map(d => `<button type="button" class="numkey" data-d="${d}">${d}</button>`).join('')}
+    <button type="button" class="numkey clear" data-clear="1">⌫ Clear</button>
+  </div>`;
+  host.addEventListener('click', e => {
+    const b = e.target.closest('.numkey');
+    if (!b || b.disabled) return;
+    /* a fresh 0 is replaced rather than kept, so 0 then 5 reads as 5 */
+    if (b.dataset.clear) val = '';
+    else val = (val === '' || val === '0') ? b.dataset.d : (val + b.dataset.d).slice(0, 2);
+    onChange(val);
+  });
+  return {
+    value: () => val,
+    lock: () => $$('.numkey', host).forEach(b => b.disabled = true)
+  };
+}
+/* A number sentence with one box in it, such as "5 + □ = 8". */
+function sentenceHTML(text, val, mark) {
+  return String(text).split(' ').map(tok => tok === '□'
+    ? `<span class="sbox ${val ? 'filled' : ''} ${mark || ''}" role="img" aria-label="${val ? 'box holds ' + val : 'empty box'}">${esc(val || '')}</span>`
+    : `<span>${esc(tok)}</span>`).join('');
+}
+
+/* Fill the box in a number sentence. */
+TYPES.keypad = (item, root, changed) => {
+  let mark = null;
+  root.innerHTML = `${item.story ? `<p class="story-line">${esc(item.story)}</p>` : ''}
+    <p class="sentence" id="sent"></p>
+    <div id="padhost"></div>
+    <p class="tip">Tap the numbers to fill the box.</p>`;
+  const sent = $('#sent', root);
+  const draw = val => { sent.innerHTML = sentenceHTML(item.text, val, mark); };
+  const pad = numPad($('#padhost', root), v => { draw(v); changed(); });
+  draw('');
+  return {
+    ready: () => pad.value() !== '',
+    check() {
+      pad.lock();
+      const got = Number(pad.value());
+      mark = got === item.ans ? 'ok' : 'no';
+      draw(pad.value());
+      return {e: got === item.ans ? 1 : 0, t: 1, answer: `<b>${item.ans}</b>`};
+    }
+  };
+};
+
+/* Count the pictures. They sit in ten-frames, because a row of five is far
+   easier to see at a glance than a row of seven. */
+TYPES.counters = (item, root, changed) => {
+  let mark = null;
+  const total = item.groups.reduce((a, g) => a + g[1], 0), gone = item.gone || 0;
+  const frames = item.groups.map(([emoji, n], gi) => {
+    const last = gi === item.groups.length - 1;
+    const cells = [];
+    for (let i = 0; i < (n > 5 ? 10 : 5); i++) {
+      const filled = i < n, crossed = last && filled && i >= n - gone;
+      cells.push(`<span class="fcell ${filled ? '' : 'empty'} ${crossed ? 'gone' : ''}">${filled ? `<span class="fpic">${emoji}</span>` : ''}</span>`);
+    }
+    return `<div class="frame">${cells.join('')}</div>`;
+  }).join('');
+  root.innerHTML = `${item.text ? `<p class="qtext">${esc(item.text)}</p>` : ''}
+    <div class="frames" role="img" aria-label="${total} picture${total === 1 ? '' : 's'}${gone ? `, ${gone} of them crossed out` : ''}">${frames}</div>
+    <p class="sentence" id="sent"></p>
+    <div id="padhost"></div>
+    <p class="tip">Count the pictures, then tap the number.</p>`;
+  const sent = $('#sent', root);
+  const draw = val => { sent.innerHTML = sentenceHTML('□', val, mark); };
+  const pad = numPad($('#padhost', root), v => { draw(v); changed(); });
+  draw('');
+  return {
+    ready: () => pad.value() !== '',
+    check() {
+      pad.lock();
+      const got = Number(pad.value());
+      mark = got === item.ans ? 'ok' : 'no';
+      draw(pad.value());
+      return {e: got === item.ans ? 1 : 0, t: 1, answer: `<b>${item.ans}</b>`};
+    }
+  };
+};
+
+/* Part, part, whole: the whole on top, its two parts hanging below. */
+TYPES.bond = (item, root, changed) => {
+  root.innerHTML = `<svg class="bondwrap" viewBox="0 0 260 196" role="img"
+      aria-label="A number bond. The whole is ${item.whole}. One part is ${item.known}. The other part is missing.">
+      <path class="bond-link" d="M112 68 L84 114 M148 68 L176 114"/>
+      <circle class="bond-ring" cx="130" cy="42" r="36"/>
+      <text class="bond-num" x="130" y="42" text-anchor="middle" dominant-baseline="central">${item.whole}</text>
+      <circle class="bond-ring" cx="62" cy="148" r="36"/>
+      <text class="bond-num" x="62" y="148" text-anchor="middle" dominant-baseline="central">${item.known}</text>
+      <circle class="bond-hole" id="hole" cx="198" cy="148" r="36"/>
+      <text class="bond-num" id="holeNum" x="198" y="148" text-anchor="middle" dominant-baseline="central"></text>
+    </svg>
+    <div id="padhost"></div>
+    <p class="tip">The big number on top is the whole. The two below are its parts.</p>`;
+  const hole = $('#hole', root), num = $('#holeNum', root);
+  const pad = numPad($('#padhost', root), v => { num.textContent = v; changed(); });
+  return {
+    ready: () => pad.value() !== '',
+    check() {
+      pad.lock();
+      const right = Number(pad.value()) === item.ans;
+      hole.classList.add(right ? 'ok' : 'no');
+      return {e: right ? 1 : 0, t: 1, answer: `<b>${item.ans}</b>`};
+    }
+  };
+};
+
+/* Draw a picture. Saved in My Notebook. */
+const PEN_COLORS = ['#1F2A37', '#C0392B', '#2F76A8', '#2E8B57', '#D9841C', '#8E6AC8'];
+TYPES.draw = (item, root, changed) => {
+  root.innerHTML = `<p class="clue">${esc(item.tip)}</p>
+    <div class="padwrap">
+      <canvas id="pad" class="pad" width="600" height="400" aria-label="Drawing area. Use a finger, a pen or a mouse."></canvas>
+      <div class="padtools" role="group" aria-label="Drawing tools">
+        ${PEN_COLORS.map((c, i) => `<button type="button" class="swatch" data-c="${i}" style="background:${c}" aria-label="Colour ${i + 1}" aria-pressed="${i === 0}"></button>`).join('')}
+        <button type="button" class="btn btn-small" id="undoBtn">↶ Undo</button>
+        <button type="button" class="btn btn-small" id="clearPad">Start again</button>
+      </div>
+      <p class="padnote">Draw your picture, then tap Save. There are no wrong answers here.</p>
+    </div>`;
+  const cv = $('#pad', root), ctx = cv.getContext('2d');
+  let strokes = [], cur = null, color = PEN_COLORS[0], locked = false;
+  function repaint() {
+    ctx.fillStyle = '#FFFFFF'; ctx.fillRect(0, 0, cv.width, cv.height);
+    ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    for (const s of strokes.concat(cur ? [cur] : [])) {
+      if (s.pts.length < 2) { ctx.fillStyle = s.c; ctx.beginPath(); ctx.arc(s.pts[0].x, s.pts[0].y, s.w / 2, 0, 7); ctx.fill(); continue; }
+      ctx.strokeStyle = s.c; ctx.lineWidth = s.w;
+      ctx.beginPath(); ctx.moveTo(s.pts[0].x, s.pts[0].y);
+      for (let i = 1; i < s.pts.length; i++) ctx.lineTo(s.pts[i].x, s.pts[i].y);
+      ctx.stroke();
+    }
+  }
+  const pos = e => { const r = cv.getBoundingClientRect(); return {x: (e.clientX - r.left) * cv.width / r.width, y: (e.clientY - r.top) * cv.height / r.height}; };
+  cv.addEventListener('pointerdown', e => {
+    if (locked) return;
+    e.preventDefault(); cv.setPointerCapture(e.pointerId);
+    cur = {c: color, w: 6, pts: [pos(e)]}; repaint();
+  });
+  cv.addEventListener('pointermove', e => { if (!cur) return; cur.pts.push(pos(e)); repaint(); });
+  const stop = () => { if (!cur) return; strokes.push(cur); cur = null; repaint(); changed(); };
+  cv.addEventListener('pointerup', stop);
+  cv.addEventListener('pointercancel', stop);
+  cv.addEventListener('pointerleave', stop);
+  $$('.swatch', root).forEach(b => b.onclick = () => {
+    color = PEN_COLORS[+b.dataset.c];
+    $$('.swatch', root).forEach(x => x.setAttribute('aria-pressed', x === b));
+  });
+  $('#undoBtn', root).onclick = () => { if (locked) return; strokes.pop(); repaint(); changed(); };
+  $('#clearPad', root).onclick = () => { if (locked) return; strokes = []; repaint(); changed(); };
+  repaint();
+  return {
+    ready: () => strokes.length > 0,
+    check() {
+      locked = true;
+      let url = '';
+      try {
+        const small = document.createElement('canvas');
+        small.width = 360; small.height = 240;
+        const sc = small.getContext('2d');
+        sc.fillStyle = '#FFFFFF'; sc.fillRect(0, 0, 360, 240);
+        sc.drawImage(cv, 0, 0, 360, 240);
+        /* JPEG, not PNG. A drawing on white costs about a tenth as much that
+           way, and every activity on this site shares a few megabytes. */
+        url = small.toDataURL('image/jpeg', 0.72);
+      } catch (e) {}
+      return {e: 0, t: 0, picture: url, strokes: strokes.length};
+    }
+  };
+};
+
+/* ============ APP ============ */
+const app = $('#app'), dock = $('#dock'), dockInner = $('#dockInner'), layer = $('#layer');
+let screen = 'home', Q = null, timer = null, paused = false, cleanups = [], streak = 0;
+
+function runCleanups() { cleanups.forEach(f => { try { f(); } catch (e) {} }); cleanups = []; }
+function showLayer(html) { layer.innerHTML = html; const b = $('button', layer); if (b) b.focus(); }
+function hideLayer() { layer.innerHTML = ''; }
+function confirmBox({title, text, yes, no = 'Cancel', onYes, bot = false}) {
+  showLayer(`<div class="overlay" role="dialog" aria-modal="true" aria-labelledby="cbT"><div class="modal">${bot ? owl() : ''}<h2 id="cbT">${esc(title)}</h2><p>${esc(text)}</p><button class="btn btn-go btn-wide" id="cbYes">${esc(yes)}</button>${no === null ? '' : `<button class="btn btn-wide" id="cbNo">${esc(no)}</button>`}</div></div>`);
+  $('#cbYes').onclick = () => { hideLayer(); onYes(); };
+  const nb = $('#cbNo'); if (nb) nb.onclick = hideLayer;
+}
+
+function go(name) {
+  screen = name; runCleanups(); hideLayer(); stopTimer();
+  dock.className = 'dock hidden'; dockInner.innerHTML = ''; Q = null;
+  ({home:renderHome, quiz:openQuiz, results:renderResults, history:renderHistory, settings:renderSettings}[name] || renderHome)();
+  if (name !== 'quiz') window.scrollTo(0, 0);
+}
+
+/* ---------- Home ---------- */
+function renderHome() {
+  const c = S.current;
+  let resume = '';
+  if (c) {
+    const set = getSet(c.setId), done = Object.keys(c.answers).length;
+    resume = `<section class="resume" aria-labelledby="rsT">
+      <h2 id="rsT">⏸ Paused: ${set.emoji} ${esc(set.title)}</h2>
+      <p>${done} of ${c.queue.length} questions done${c.mode === 'fix' ? ' while fixing mistakes' : ''}. Time so far: ${fmtTime(c.elapsed)}.</p>
+      <div class="row"><button class="btn btn-go" id="contBtn">▶ Continue</button><button class="btn" id="discardBtn">Start over</button></div>
+    </section>`;
+  }
+  const order = setOrder();
+  app.innerHTML = `
+    <header class="hero">
+      <div><h1>Number Friends</h1><p>Counting, adding, taking away and finding the missing number.</p></div>
+      ${owl()}
+    </header>
+    ${storageOK ? '' : '<div class="notice">This browser is not saving progress right now. You can still play, but results may be lost when you close the page.</div>'}
+    ${resume}
+    <section class="sets" aria-labelledby="setsT">
+      <h2 class="label" id="setsT">Choose a set</h2>
+      ${order.map((id, pos) => {
+        const set = getSet(id), rec = S.sets[id], best = rec && rec.best;
+        const meta = best ? `Best: ${best.e} of ${best.t} (${best.pct}%)`
+          : `${flat(set).length} questions, ${setTotal(set)} stars to win`;
+        return `<button class="setcard" data-set="${id}">
+          <span class="emoji" aria-hidden="true">${set.emoji}</span>
+          <span><span class="sc-title">Set ${pos + 1}: ${esc(set.title)}${set.challenge ? '<span class="chal">Challenge</span>' : ''}</span><br><span class="meta">${esc(set.about)}</span><br><span class="meta">${meta}</span></span>
+          <span class="go">${best ? starRow(starsFor(best.pct)) : 'Start ▶'}</span>
+        </button>`;
+      }).join('')}
+    </section>
+    <section class="card" style="margin-top:1.25rem">
+      <h2 style="font-size:1.15rem">What every set covers</h2>
+      <div class="knows">${Object.values(SECTIONS).map(s => `<span class="know">${s.icon} ${esc(s.name)}</span>`).join('')}</div>
+      <p class="tip">Every set covers all six topics, so you can start with any set you like.</p>
+    </section>
+    <nav class="homefoot" aria-label="More">
+      <button class="btn btn-sun" id="histBtn">🏆 My results</button>
+      <button class="btn" id="setBtn">⚙️ Settings for grown-ups</button>
+      <a class="btn" href="/">🏠 All activities</a>
+    </nav>`;
+  if (c) {
+    $('#contBtn').onclick = () => go('quiz');
+    $('#discardBtn').onclick = () => confirmBox({title:'Start over?', text:'The answers in your paused set will be cleared.', yes:'Yes, clear it', no:'Keep it', onYes(){ S.current = null; save(); go('home'); }});
+  }
+  $$('.setcard').forEach(b => b.onclick = () => {
+    const id = +b.dataset.set;
+    tryStart(id);
+  });
+  $('#histBtn').onclick = () => go('history');
+  $('#setBtn').onclick = () => go('settings');
+}
+
+function tryStart(id, mode = 'full', queue = null) {
+  const c = S.current;
+  if (c && c.setId === id && mode === 'full') {
+    confirmBox({title:'That set is paused', text:'Do you want to keep going from where you stopped?', yes:'▶ Continue', no:'Start again', onYes(){ go('quiz'); }});
+    $('#cbNo').onclick = () => { hideLayer(); startSet(id, mode, queue); };
+    return;
+  }
+  if (c) { confirmBox({title:'You have a paused set', text:`Starting now will clear your paused set: ${getSet(c.setId).title}.`, yes:'Start the new set', no:'Cancel', onYes(){ startSet(id, mode, queue); }}); return; }
+  startSet(id, mode, queue);
+}
+function startSet(id, mode = 'full', queue = null) {
+  const f = flat(getSet(id));
+  S.current = {setId:id, mode, queue: queue || f.map((_, i) => i), answers:{}, elapsed:0, started:Date.now()};
+  streak = 0;
+  save(); go('quiz');
+}
+
+/* ---------- Quiz ---------- */
+function startTimer() {
+  stopTimer();
+  let last = Date.now(), ticks = 0;
+  timer = setInterval(() => { const now = Date.now(); if (S.current && !paused) { S.current.elapsed += now - last; if (++ticks % 5 === 0) save(); } last = now; }, 1000);
+}
+function stopTimer() { if (timer) clearInterval(timer); timer = null; }
+function openQuiz() { if (!S.current) return go('home'); paused = false; renderQuestion(); if (screen === 'quiz' && S.current) startTimer(); }
+function tally(c) { let e = 0, t = 0; Object.values(c.answers).forEach(a => { e += a.e; t += a.t; }); return {e, t}; }
+
+function renderQuestion() {
+  runCleanups();
+  const c = S.current, set = getSet(c.setId), f = flat(set);
+  const pos = c.queue.findIndex(i => !c.answers[i]);
+  if (pos < 0) return finishRun();
+  const idx = c.queue[pos], {sec, item} = f[idx];
+  const done = c.queue.length - c.queue.filter(i => !c.answers[i]).length;
+  const pct = done / c.queue.length;
+  const {e, t} = tally(c);
+  app.innerHTML = `
+    <div class="topbar">
+      <button class="btn btn-icon" id="pauseBtn" aria-label="Pause">⏸</button>
+      <span class="where"><b>${set.emoji} ${esc(set.title)}</b><span>Question ${done + 1} of ${c.queue.length}</span></span>
+      ${streak >= 3 ? `<span class="pill fire" aria-label="${streak} right in a row">🔥 ${streak}</span>` : ''}
+      <span class="pill" id="scorePill" aria-label="${e} stars out of ${t}">⭐ ${e}/${t}</span>
+    </div>
+    <div class="track-wrap" aria-hidden="true">
+      <div class="track"></div><div class="fill" style="width:${pct * 100}%"></div>
+      <div class="walker" style="left:${pct * 100}%">${owl()}</div><div class="goal">🏁</div>
+    </div>
+    <article class="card" id="qcard">
+      <span class="sec-tag">${SECTIONS[sec].icon} ${SECTIONS[sec].name}</span>
+      <div class="prompt"><h2>${esc(item.prompt)}</h2>${canSpeak ? '<button class="speak" id="speakBtn" aria-label="Read the question out loud">🔊</button>' : ''}</div>
+      <div id="qbody"></div>
+    </article>
+    <div class="dock-space" id="dockSpace"></div>`;
+  const body = $('#qbody');
+  const h = TYPES[item.t](item, body, () => { const b = $('#checkBtn'); if (b) b.disabled = !h.ready(); }, cleanups);
+  Q = {idx, item, sec, h, checked:false};
+  const sb = $('#speakBtn'); if (sb) sb.onclick = () => speak(speakText(item));
+  $('#pauseBtn').onclick = pause;
+  dock.className = 'dock';
+  dockInner.innerHTML = `<button class="btn btn-go btn-wide" id="checkBtn" disabled>${item.t === 'draw' ? 'Save my drawing' : 'Check my answer'}</button>`;
+  $('#checkBtn').onclick = doCheck;
+  $('#checkBtn').disabled = !h.ready();
+  syncDockSpace();
+}
+function syncDockSpace() { const sp = $('#dockSpace'); if (sp) sp.style.height = (dock.offsetHeight + 24) + 'px'; }
+
+function doCheck() {
+  if (!Q || Q.checked || !Q.h.ready()) return;
+  const c = S.current, set = getSet(c.setId), item = Q.item;
+  const res = Q.h.check();
+  Q.checked = true;
+  c.answers[Q.idx] = {e: res.e, t: res.t};
+
+  if (item.t === 'draw' && res.picture) { S.gallery.unshift({setId:set.id, img:res.picture, tip:item.tip, date:Date.now()}); S.gallery = S.gallery.slice(0, 8); }
+
+  const full = res.t > 0 && res.e === res.t;
+  if (item.t === 'draw') S.stats.draw++;
+  if (Q.sec === 'count' && full) S.stats.count++;
+  if (Q.sec === 'missing' && full) S.stats.missing++;
+  if (Q.sec === 'method' && full) S.stats.method++;
+  if (Q.sec === 'bonds' && full) S.stats.bonds++;
+  if (res.t > 0) { streak = full ? streak + 1 : 0; if (streak > S.stats.streak) S.stats.streak = streak; }
+
+  const earned = newBadges();
+  save();
+
+  const {e, t} = tally(c);
+  const pill = $('#scorePill'); pill.textContent = `⭐ ${e}/${t}`; pill.setAttribute('aria-label', `${e} stars out of ${t}`);
+
+  const kind = res.t === 0 || res.e === res.t ? 'good' : res.e === 0 ? 'bad' : 'part';
+  let title, body = '';
+  if (item.t === 'draw') {
+    title = '🎨 Lovely drawing!';
+    body = `<p>Your picture is saved in My Notebook. ${res.strokes > 12 ? 'You put a lot into that one!' : 'Come back any time and draw another.'}</p>`;
+  } else {
+    /* With a table worth a dozen stars, "nearly all of it" has to mean it. */
+    const frac = res.t ? res.e / res.t : 1;
+    title = kind === 'good' ? '✅ ' + pick(['Great thinking!', 'You got it!', 'Spot on!', 'Well done!', 'Exactly right!'])
+      : kind === 'part' ? '🌟 ' + (frac >= 0.6
+          ? pick(['Almost!', 'So close!', 'Good work, nearly all of it!'])
+          : pick(['A good start!', 'Some of it is right.', 'Part of the way there.']))
+      : '💪 ' + pick(['Nice try!', 'Good try!', 'Not quite yet.']);
+    if (item.t === 'type' && res.nearly) body += `<p>Right word — just watch the spelling: <b>${esc(item.accept[0])}</b>.</p>`;
+    if (kind !== 'good') body += `<p><span class="ans">The answer:</span><br>${res.answer}</p>`;
+    if (kind === 'part' && res.t > 2) body += `<p>You got ${res.e} of the ${res.t} parts right.</p>`;
+  }
+  if (item.explain) body += `<p class="why">💡 ${esc(item.explain)}</p>`;
+  if (streak === 3) body += `<p>🔥 Three right in a row!</p>`;
+  else if (streak >= 6) body += `<p>🔥 ${streak} in a row — you are on fire!</p>`;
+  earned.forEach(b => { body += `<div class="badge-pop"><span class="bi">${b.icon}</span><span><b>New badge: ${esc(b.name)}</b><br><small>${esc(b.desc)}</small></span></div>`; });
+
+  const gain = res.t ? `+${res.e} of ${res.t}` : 'Saved';
+  const last = c.queue.every(i => c.answers[i]);
+  dock.className = 'dock ' + kind;
+  dockInner.innerHTML = `<div class="fb" role="status"><h3>${title}<span class="gain">${gain}</span></h3>${body}</div>
+    <button class="btn btn-go btn-wide" id="nextBtn">${last ? '🏁 See my results' : 'Next question ▶'}</button>`;
+  $('#nextBtn').onclick = next;
+  $('#nextBtn').focus({preventScroll:true});
+  syncDockSpace();
+  beep(res.t === 0 ? 'good' : kind);
+  if (kind === 'good') { const b = $('.walker .mascot'); if (b) { b.classList.remove('happy'); void b.offsetWidth; b.classList.add('happy'); } }
+}
+function next() { if (!Q || !Q.checked) return; renderQuestion(); window.scrollTo(0, 0); const f = Q && Q.h && Q.h.focus; if (f && matchMedia('(pointer: fine)').matches) f(); }
+
+function newBadges() {
+  const out = [];
+  BADGES.forEach(b => { if (!S.badges.includes(b.id) && b.got(S)) { S.badges.push(b.id); out.push(b); } });
+  return out;
+}
+
+function pause() {
+  if (!S.current) return;
+  paused = true; save();
+  const {e, t} = tally(S.current);
+  showLayer(`<div class="overlay" role="dialog" aria-modal="true" aria-labelledby="pT"><div class="modal">${owl('sleepy')}<h2 id="pT">Paused</h2>
+    <p>You have ${e} of ${t} stars so far. Your place is saved, so you can come back any time.</p>
+    <button class="btn btn-go btn-wide" id="resumeBtn">▶ Keep going</button>
+    <button class="btn btn-wide" id="homeBtn">Save and go home</button></div></div>`);
+  $('#resumeBtn').onclick = resumeQuiz;
+  $('#homeBtn').onclick = () => go('home');
+}
+function resumeQuiz() { paused = false; hideLayer(); }
+
+function finishRun() {
+  stopTimer();
+  const c = S.current, set = getSet(c.setId), f = flat(set);
+  let e = 0, t = 0; const bySec = {};
+  c.queue.forEach(i => { const a = c.answers[i], s = f[i].sec; bySec[s] = bySec[s] || {e:0, t:0}; if (a) { e += a.e; t += a.t; bySec[s].e += a.e; bySec[s].t += a.t; } });
+  const pct = t ? Math.round(e / t * 100) : 0;
+  const order = setOrder(), pos = orderPos(set.id), nextId = pos >= 0 && pos + 1 < order.length ? order[pos + 1] : null;
+  const rec = S.sets[set.id] = S.sets[set.id] || {attempts:[], best:null};
+  rec.attempts.unshift({mode:c.mode, e, t, pct, time:c.elapsed, date:Date.now()});
+  rec.attempts = rec.attempts.slice(0, 20);
+  if (c.mode === 'full' && (!rec.best || pct > rec.best.pct || (pct === rec.best.pct && c.elapsed < rec.best.time))) rec.best = {e, t, pct, time:c.elapsed, date:Date.now()};
+  if (c.mode === 'fix') S.stats.fix++;
+  S.lastRun = {setId:set.id, mode:c.mode, e, t, pct, time:c.elapsed, bySec, answers:c.answers, queue:c.queue};
+  S.current = null;
+  const earned = newBadges();
+  S.lastRun.badges = earned.map(b => b.id);
+  save();
+  go('results');
+}
+
+/* ---------- Results ---------- */
+function renderResults() {
+  const r = S.lastRun; if (!r) return go('home');
+  const set = getSet(r.setId), f = flat(set), stars = starsFor(r.pct);
+  const order = setOrder(), pos = orderPos(set.id);
+  const nextSet = pos + 1 < order.length ? getSet(order[pos + 1]) : null;
+  const wrong = r.queue.filter(i => r.answers[i] && r.answers[i].t > 0 && r.answers[i].e < r.answers[i].t);
+  const msg = r.mode === 'fix'
+    ? (r.e === r.t ? 'You fixed every single mistake. Brilliant!' : `You fixed ${r.e} of ${r.t}. Keep going — you are getting better!`)
+    : stars === 3 ? 'Brilliant counting!' : stars === 2 ? 'Really good work!' : stars === 1 ? 'Good try — keep practising!' : 'Everybody starts somewhere. Have another go!';
+  const gotBadges = (r.badges || []).map(id => BADGES.find(b => b.id === id)).filter(Boolean);
+  app.innerHTML = `
+    ${storageOK ? '' : '<div class="notice">⚠️ This browser would not save these results. Nothing is lost while this page stays open — open Settings and use <b>Save backup</b> to keep them.</div>'}
+    <div class="result-head">
+      ${owl(stars >= 2 ? 'happy' : '')}
+      <h1 id="rT" class="sr">Results</h1>
+      <div class="big-stars" aria-label="${stars} of 3 stars">${[0,1,2].map(i => `<span class="${i < stars ? 'star-on' : 'star-off'}">★</span>`).join('')}</div>
+      <p class="score-big">${r.e} / ${r.t}</p>
+      <p>${r.pct}% — ${esc(msg)}</p>
+      <p>Time: ${fmtTime(r.time)}</p>
+    </div>
+    ${gotBadges.length ? `<div class="card" style="margin-bottom:1rem"><h2 style="font-size:1.2rem">🎉 New badges</h2><div class="badges">${gotBadges.map(b => `<div class="badge on"><span class="bi">${b.icon}</span><b>${esc(b.name)}</b><small>${esc(b.desc)}</small></div>`).join('')}</div></div>` : ''}
+    <div class="card">
+      <h2 style="font-size:1.25rem">How each topic went</h2>
+      <div class="bars">${Object.keys(SECTIONS).filter(k => r.bySec[k] && r.bySec[k].t).map(k => {
+        const b = r.bySec[k], p = Math.round(b.e / b.t * 100);
+        return `<div class="bar-row"><span>${SECTIONS[k].icon} ${SECTIONS[k].name}</span><span>${b.e}/${b.t}</span><span class="bar"><i style="width:${p}%"></i></span></div>`;
+      }).join('')}</div>
+      <p class="tip">This set covered: ${set.aligns.map(a => esc(a)).join(' · ')}</p>
+      ${wrong.length ? `<div class="review"><details><summary>🔎 Look again at ${wrong.length} question${wrong.length === 1 ? '' : 's'}</summary><ol>${wrong.map(i => {
+        const it = f[i].item;
+        return `<li><b>${esc(questionLabel(it))}</b><br>Answer: ${esc(answerText(it))}${it.explain ? `<br><span style="color:var(--ink-soft)">💡 ${esc(it.explain)}</span>` : ''}</li>`;
+      }).join('')}</ol></details></div>` : ''}
+      <div class="stack" style="margin-top:1.2rem">
+        ${wrong.length ? `<button class="btn btn-go btn-wide" id="fixBtn">🔁 Fix my mistakes (${wrong.length})</button>` : ''}
+        ${nextSet
+          ? `<button class="btn ${wrong.length ? 'btn-sun' : 'btn-go'} btn-wide" id="upBtn">⬆ Next set: ${nextSet.emoji} ${esc(nextSet.title)}</button>`
+          : `<p class="tip" style="text-align:center">That is the last set. You have done them all! 🏁</p>`}
+        <button class="btn btn-wide" id="againBtn">Try the whole set again</button>
+        <button class="btn btn-wide" id="homeBtn2">🏠 Home</button>
+      </div>
+    </div>`;
+  if (wrong.length) $('#fixBtn').onclick = () => startSet(set.id, 'fix', wrong);
+  if (nextSet) $('#upBtn').onclick = () => tryStart(nextSet.id);
+  $('#againBtn').onclick = () => startSet(set.id, 'full');
+  $('#homeBtn2').onclick = () => go('home');
+}
+
+/* ---------- My results ---------- */
+function renderHistory() {
+  const order = setOrder();
+  const any = order.some(id => S.sets[id] && S.sets[id].attempts.length);
+  app.innerHTML = `
+    <div class="page-head"><button class="btn btn-icon" id="backBtn" aria-label="Back to home">⬅</button><h1>🏆 My results</h1></div>
+    <div class="hist">
+      <section class="card">
+        <h2 style="font-size:1.3rem">Badges (${S.badges.length} of ${BADGES.length})</h2>
+        <div class="badges">${BADGES.map(b => {
+          const on = S.badges.includes(b.id);
+          return `<div class="badge ${on ? 'on' : 'off'}"><span class="bi">${b.icon}</span><b>${on ? esc(b.name) : 'Locked'}</b><small>${esc(b.desc)}</small></div>`;
+        }).join('')}</div>
+      </section>
+      ${!any ? `<div class="card"><p style="margin:0;font-size:1.15rem">No results yet. Pick a set on the home page and start exploring!</p></div>` : ''}
+      ${order.map((id, pos) => {
+        const set = getSet(id), rec = S.sets[id];
+        if (!rec || !rec.attempts.length) return '';
+        return `<section class="card"><h2 style="font-size:1.3rem">${set.emoji} Set ${pos + 1}: ${esc(set.title)}</h2>
+          <p style="margin:.3rem 0">${rec.best ? `Best score: <b>${rec.best.e} of ${rec.best.t}</b> (${rec.best.pct}%) ${starRow(starsFor(rec.best.pct))}` : 'Not finished as a whole set yet'}</p>
+          <div class="knows">${set.aligns.map(a => `<span class="know">${esc(a)}</span>`).join('')}</div>
+          <div class="scroll-x"><table><thead><tr><th>When</th><th>Type</th><th>Score</th><th>Time</th></tr></thead><tbody>
+            ${rec.attempts.slice(0, 8).map(a => `<tr><td>${fmtDate(a.date)}</td><td>${a.mode === 'fix' ? 'Fix mistakes' : 'Whole set'}</td><td>${a.e}/${a.t} (${a.pct}%)</td><td>${fmtTime(a.time)}</td></tr>`).join('')}
+          </tbody></table></div></section>`;
+      }).join('')}
+      ${S.gallery.length ? `<section class="card"><h2 style="font-size:1.3rem">📓 My Notebook</h2>
+        <div class="gallery">${S.gallery.map(g => `<figure><img src="${g.img}" alt="A diagram drawn on ${fmtDate(g.date)}"><figcaption>${fmtDate(g.date)}</figcaption></figure>`).join('')}</div></section>` : ''}
+    </div>`;
+  $('#backBtn').onclick = () => go('home');
+}
+
+/* ---------- Settings ---------- */
+function renderSettings() {
+  const seg = (key, opts) => `<div class="seg" role="group">${opts.map(([v, l]) => `<button data-k="${key}" data-v="${v}" aria-pressed="${String(S.settings[key]) === String(v)}">${l}</button>`).join('')}</div>`;
+  const order = setOrder();
+  app.innerHTML = `
+    <div class="page-head"><button class="btn btn-icon" id="backBtn" aria-label="Back to home">⬅</button><h1>⚙️ Settings</h1></div>
+    <div class="card">
+      <div class="setting"><div><b>Text size</b><small>Bigger text is easier on young eyes.</small></div>${seg('size', [['normal', 'Big'], ['big', 'Bigger']])}</div>
+      <div class="setting"><div><b>Colours</b><small>Dark is gentle at night.</small></div>${seg('theme', [['auto', 'Auto'], ['light', 'Light'], ['dark', 'Dark']])}</div>
+      <div class="setting"><div><b>Sounds</b><small>Little chimes for right and wrong answers.</small></div>${seg('sound', [[true, 'On'], [false, 'Off']])}</div>
+      <div class="setting"><div><b>Backup progress</b><small>Saves a file with stars, badges and the pictures in My Notebook.</small></div><button class="btn btn-small" id="exportBtn">Save backup</button></div>
+      <div class="setting"><div><b>Restore progress</b><small>Load a backup from another device or an earlier day.</small></div><button class="btn btn-small" id="importBtn">Load backup</button><input type="file" id="importFile" accept="application/json,.json" style="display:none"></div>
+      <div class="setting"><div><b>Clear all progress</b><small>Removes scores, badges, pictures and any paused set.</small></div><button class="btn btn-small" id="resetBtn">Clear progress</button></div>
+    </div>
+    <div class="card" style="margin-top:1rem">
+      <h2 style="font-size:1.2rem">This learner's set order</h2>
+      <p style="margin:.5rem 0 0;font-size:1.05rem">Each new learner gets the sets in their own shuffled order, and that order then stays the same for ever, on every visit. Every set covers all six topics, so no order is harder than another. This device is using:</p>
+      <p style="margin:.5rem 0 0;font-size:1.05rem">${order.map((id, i) => `<b>${i + 1}.</b> ${getSet(id).emoji} ${esc(getSet(id).title)}`).join(' &nbsp; ')}</p>
+      <div class="setting" style="border:0"><div><b>Give a new order</b><small>Only for a different child sharing this device. It also clears their progress.</small></div><button class="btn btn-small" id="reshuffleBtn">Shuffle again</button></div>
+    </div>
+    <div class="card" style="margin-top:1rem">
+      <h2 style="font-size:1.2rem">What this covers</h2>
+      <p style="margin:.5rem 0 .5rem;font-size:1.05rem">Year 1 maths: counting to 10, adding and taking away, and finding a missing number in a number sentence. The heart of it is one rule the exercise book teaches four different ways — if the box is the biggest number, add the other two; if it is one of the smaller parts, take away.</p>
+      <div class="knows">${[...new Set(SETS.flatMap(s => s.aligns))].map(a => `<span class="know">${esc(a)}</span>`).join('')}</div>
+    </div>
+    <div class="card" style="margin-top:1rem">
+      <h2 style="font-size:1.2rem">How scoring works</h2>
+      <p style="margin:.5rem 0 0;font-size:1.05rem">Each question counts the first answer. Sorting, matching, ordering and true-or-false lists all give one star per part, so a nearly-right answer still earns most of the stars. Counting, the number pad and the number bonds are worth one star each. Drawings are saved in My Notebook rather than marked. "Fix my mistakes" repeats only what was missed; the best score always comes from a whole-set try.</p>
+      <div id="iosNote"></div>
+    </div>`;
+  $('#backBtn').onclick = () => go('home');
+  $$('.seg button').forEach(b => b.onclick = () => {
+    const k = b.dataset.k; let v = b.dataset.v;
+    if (v === 'true') v = true; else if (v === 'false') v = false;
+    S.settings[k] = v; save(); applySettings(); renderSettings();
+    const again = $(`.seg button[data-k="${k}"][data-v="${b.dataset.v}"]`); if (again) again.focus();
+  });
+  $('#reshuffleBtn').onclick = () => confirmBox({
+    title:'Give a new set order?',
+    text:'This is for a different child using the same device. It picks a fresh order and clears the stars, badges and pictures on this device.',
+    yes:'Yes, new learner', no:'Cancel',
+    onYes(){ const keep = S.settings; S = fresh(); S.settings = keep; S.seed = (Math.random() * 4294967296) >>> 0; setOrder(); save(); go('home'); }
+  });
+  const installed = window.navigator.standalone === true || window.matchMedia('(display-mode: standalone)').matches;
+  const onIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  const note = $('#iosNote');
+  if (note) {
+    if (onIOS && !installed) {
+      note.innerHTML = '<p style="margin:.6rem 0 0;font-size:1.05rem;background:var(--sun-soft);border-left:8px solid var(--sun);border-radius:14px;padding:.7rem .9rem">' +
+        '<b>Worth doing:</b> add this page to the Home Screen (Share → Add to Home Screen) and open it from that icon. ' +
+        'Safari erases saved progress after about a week of not visiting. Home Screen apps keep theirs.</p>';
+    } else if (installed) {
+      note.innerHTML = '<p style="margin:.6rem 0 0;font-size:1.05rem;color:var(--ink-soft)">Running from the Home Screen — progress is kept safely.</p>';
+    }
+  }
+  $('#exportBtn').onclick = () => {
+    try {
+      const stamp = new Date().toISOString().slice(0, 10);
+      const blob = new Blob([JSON.stringify(S, null, 2)], {type: 'application/json'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'number-friends-' + stamp + '.json';
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 2000);
+    } catch (e) {
+      confirmBox({title:'Could not save', text:'This browser would not let the file be saved.', yes:'OK', no:null, onYes(){}});
+    }
+  };
+  $('#importBtn').onclick = () => $('#importFile').click();
+  $('#importFile').onchange = ev => {
+    const f = ev.target.files && ev.target.files[0];
+    ev.target.value = '';
+    if (!f) return;
+    const r = new FileReader();
+    r.onload = () => {
+      let d = null;
+      try { d = JSON.parse(String(r.result)); } catch (e) {}
+      if (!d || typeof d !== 'object' || typeof d.sets !== 'object' || d.sets === null) {
+        confirmBox({title:'That file did not fit', text:'It is not a Number Friends backup. Look for a file named number-friends-....json', yes:'OK', no:null, onYes(){}});
+        return;
+      }
+      const done = Object.keys(d.sets).length, pics = Array.isArray(d.gallery) ? d.gallery.length : 0;
+      const bits = [done + ' set' + (done === 1 ? '' : 's') + ' started', pics + ' drawing' + (pics === 1 ? '' : 's')];
+      if (d.current) bits.push('a paused set');
+      confirmBox({
+        title:'Load this backup?',
+        text:'It has ' + bits.join(', ') + '. This replaces what is on this device now.',
+        yes:'Yes, load it', no:'Cancel',
+        onYes(){
+          S = Object.assign(fresh(), d);
+          S.settings = Object.assign(fresh().settings, d.settings || {});
+          S.stats = Object.assign(freshStats(), d.stats || {});
+          if (S.seed === null || S.seed === undefined) S.seed = (Math.random() * 4294967296) >>> 0;
+          setOrder(); save(); applySettings(); go('home');
+        }
+      });
+    };
+    r.readAsText(f);
+  };
+  $('#resetBtn').onclick = () => confirmBox({
+    title:'Clear all progress?',
+    text:'Scores, badges, pictures and paused sets will be removed. The set order and the settings stay the same.',
+    yes:'Yes, clear everything', no:'Cancel',
+    onYes(){ const keep = S.settings, seed = S.seed, order = S.order; S = fresh(); S.settings = keep; S.seed = seed; S.order = order; save(); go('home'); }
+  });
+}
+
+/* ---------- Global events ---------- */
+document.addEventListener('keydown', e => {
+  if (layer.innerHTML) { if (e.key === 'Escape') { if (paused) resumeQuiz(); else hideLayer(); } return; }
+  if (screen !== 'quiz' || !Q) return;
+  const tag = e.target.tagName;
+  if (e.key === 'Enter' && (tag === 'INPUT' || e.target === document.body)) {
+    e.preventDefault();
+    if (Q.checked) next(); else doCheck();
+  }
+});
+document.addEventListener('visibilitychange', () => { if (!document.hidden) return; if (screen === 'quiz') pause(); else save(); });
+window.addEventListener('resize', syncDockSpace);
+window.addEventListener('pagehide', save);
+
+load(); applySettings(); save(); go('home');
+
+/* ---------- Offline support ---------- */
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(() => {}));
+}
+</script>
+</body>
+</html>
