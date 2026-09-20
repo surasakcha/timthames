@@ -411,9 +411,11 @@ h1,h2,h3{font-family:var(--round);line-height:1.15;margin:0}
   .ord{font-size:.96rem;padding:.5rem .6rem;gap:.5rem}
   .tfrow{font-size:.98rem;grid-template-columns:1fr;gap:.5rem}
   .tfbtns{justify-content:flex-end}
-  .cell{width:2.9rem;height:2.9rem;font-size:1.3rem}
-  .gridq th{font-size:.78rem;min-width:4rem}
-  .gridq th.rowhead{font-size:.95rem}
+  /* a four-column tick table has to fit a phone without sideways scrolling */
+  .cell{width:2.4rem;height:2.4rem;font-size:1.1rem;border-width:2px;border-radius:10px}
+  .gridq table{border-spacing:3px}
+  .gridq th{font-size:.66rem;width:2.9rem;min-width:0;max-width:none;padding:.12rem .08rem;overflow-wrap:anywhere}
+  .gridq th.rowhead{font-size:.85rem;width:3.4rem;padding-right:.3rem;white-space:normal}
   /* the whole map grid has to fit on a phone: a map you scroll sideways
      stops looking like a map */
   .gcell{width:3.5rem;height:3.5rem;border-radius:11px;border-width:2px}

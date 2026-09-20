@@ -412,7 +412,19 @@ const SETS = [
         chips:[['I',0],['them',1],['she',0],['us',1],['they',0],['him',1]],
         explain:'I, she and they can start a sentence and do the action. Them, us and him come after a verb and receive the action.'},
       {t:'build', prompt:'Tap the words to build the sentence.', words:['Wilbur','handed','me','the map.'],
-        explain:'Wilbur is the doer, so he comes first. "Me" receives the map, so the object pronoun goes after the verb "handed".'}
+        explain:'Wilbur is the doer, so he comes first. "Me" receives the map, so the object pronoun goes after the verb "handed".'},
+      {t:'choice', prompt:'Circle the correct pronoun.', text:'( ___ ) is playing football with his friends.', opts:['He','Him'], ans:0,
+        explain:'He is the one playing, so he is the doer. Doers at the start of a sentence are subject pronouns. ' + SUBJ},
+      {t:'choice', prompt:'Circle the correct pronoun.', text:'My mother gave ( ___ ) a new pencil case.', opts:['I','me'], ans:1,
+        explain:'Mother does the giving. I receive the pencil case, so after the verb we need the object pronoun "me". ' + OBJ},
+      {t:'fill', prompt:'Drag the right pronoun into each gap.',
+        lines:['{They} are going to school by bus.','The teacher asked {her} to read the story.','{We} love to visit the zoo on Fridays.'],
+        decoys:['them','she','us'],
+        explain:'At the start of a sentence the doer needs a subject pronoun: They, We. After the verb "asked" the person receiving it needs an object pronoun: her.'},
+      {t:'write', prompt:'Write one sentence that uses BOTH pronouns.', text:'Use "he" and "him" in one sentence. Example: I like my teacher. She helps me.',
+        keys:[['he'],['him']],
+        model:'He is my brother, and I play football with him.',
+        explain:'"He" does something, and "him" has something done to him. One sentence can hold both, as long as each one sits in its own place.'}
     ]},
     {key:'jobs', items:[
       {t:'match', prompt:'Draw a line from each job to what that person does.',
@@ -425,7 +437,18 @@ const SETS = [
       {t:'choice', prompt:'Which job word fits best?', long:true,
         text:'Ibn Firnas made a flying suit that nobody had ever made before. He was an ______.',
         opts:['inventor','athlete','farmer'], ans:0,
-        explain:'An inventor makes something new that did not exist before. That is exactly what Ibn Firnas did with his wings.'}
+        explain:'An inventor makes something new that did not exist before. That is exactly what Ibn Firnas did with his wings.'},
+      {t:'fill', prompt:'Drag the right job into each gap.',
+        lines:['A person who designs houses and buildings is an {architect}.','A person who helps people take care of their teeth is a {dentist}.','A person who studies plants, animals and science is a {scientist}.'],
+        decoys:['engineer','teacher'],
+        explain:'Buildings go with the architect, teeth with the dentist, and plants and animals with the scientist. Read the clue in the sentence before you choose.'},
+      {t:'type', prompt:'Type the job word.', text:'A person who creates new things is an ______.',
+        accept:['inventor'], hint:'It is the verb "invent" with -or on the end.',
+        explain:'invent + or = inventor. That is the worksheet’s own definition: a person who creates new things.'},
+      {t:'choice', prompt:'Which job word fits best?', long:true,
+        text:'Sara draws the plan for a new school hall before anybody starts building it. What is her job?',
+        opts:['architect','dentist','pilot'], ans:0,
+        explain:'An architect designs buildings. The builders only start once the architect’s plan is finished.'}
     ]},
     {key:'wordfam', items:[
       {t:'type', prompt:'Complete the word family.', text:'to invent → the PERSON who does it is an ______.',
@@ -435,7 +458,14 @@ const SETS = [
         explain:'invent + ion = invention. Lots of verbs make a "thing" word with -ion: act → action, collect → collection.'},
       {t:'type', prompt:'Complete the word family.', text:'to build → the PERSON who does it is a ______.',
         accept:['builder'], hint:'Take off the "to" and add -er.',
-        explain:'build + er = builder. The thing they make is a building.'}
+        explain:'build + er = builder. The thing they make is a building.'},
+      {t:'fill', prompt:'Drag the right ending into each gap.',
+        lines:['to design → the PERSON who does it is a {designer}.','to collect → the THING you gather is a {collection}.','to act → the PERSON who does it is an {actor}.'],
+        decoys:['designs','collector'],
+        explain:'Person words usually end in -er or -or: designer, actor. Thing words often end in -ion: collection. Look at whether the sentence wants a person or a thing.'},
+      {t:'sort', prompt:'Is it a PERSON word or a THING word?', bins:[['A person','someone who does it'],['A thing','something that is made']],
+        chips:[['inventor',0],['invention',1],['builder',0],['building',1],['collector',0],['collection',1]],
+        explain:'The -er and -or words are people. The -ion and -ing words are the things those people make.'}
     ]},
     {key:'grammar', items:[
       {t:'type', prompt:'Write "to" and the correct verb.', text:'Ibn Firnas wanted ______ (fly) like a bird.',
@@ -449,7 +479,13 @@ const SETS = [
         decoys:['to sleep','to shout'],
         explain:'You test wings, you fix an engine and you work together. The word after "to" must make sense in the sentence.'},
       {t:'build', prompt:'Tap the words to build the sentence.', words:['My sister','plans','to become','an engineer.'],
-        explain:'"Plans" is one of the verbs that takes to + verb: plans to become. ' + TOV}
+        explain:'"Plans" is one of the verbs that takes to + verb: plans to become. ' + TOV},
+      {t:'type', prompt:'Write "to" and the correct verb.', text:'The inventor tried ______ (solve) the problem.',
+        accept:['to solve'], hint:'Two words. The first one is "to".',
+        explain:'tried + to + solve. ' + TOV},
+      {t:'choice', prompt:'Pick the right form.', long:true, text:'The students want ___ more about inventions.',
+        opts:['to learn','learning','learned'], ans:0,
+        explain:'"Want" is followed by to + the plain verb: want to learn. ' + TOV}
     ]},
     {key:'reading', items:[
       {t:'choice', prompt:'Read the story, then answer.', text:'Where did Abbas Ibn Firnas live?', long:true,
@@ -459,7 +495,7 @@ const SETS = [
         opts:['True','False'], ans:0,
         explain:'True. The story says Orville and Wilbur owned a bicycle shop. Mending bicycles taught them a lot about light, strong machines.'},
       {t:'write', prompt:'Write your answer in a sentence.', text:'What did Ibn Firnas use to make his wings?',
-        keys:[['feather','feathers'],['wood','timber']],
+        keys:[['feather','feathers'],['wood','wooden','timber']],
         model:'He made his wings out of feathers and light wood.',
         explain:'The story names two materials: feathers and light wood. A full answer mentions both.'},
       {t:'write', prompt:'Write your answer in a sentence.', text:'What did the Wright brothers do when one of their tries did not work?',
@@ -468,7 +504,14 @@ const SETS = [
         explain:'They did not give up. They studied the mistake, then built a better wing. That is how inventors work.'},
       {t:'order', prompt:'Put the events in the order they happened.',
         items:['Ibn Firnas glides from a hill in Spain','Orville and Wilbur open a bicycle shop','The brothers test kites and wings','The first aeroplane flies in 1903'],
-        explain:'Ibn Firnas came first, over a thousand years ago. Then the brothers had their shop, then they tested, and 1903 was last.'}
+        explain:'Ibn Firnas came first, over a thousand years ago. Then the brothers had their shop, then they tested, and 1903 was last.'},
+      {t:'choice', prompt:'Read the story, then answer.', long:true, text:'Who built the first successful aeroplane, and in what year?',
+        opts:['Orville and Wilbur Wright, in 1903','Ibn Firnas, in 1903','Orville and Wilbur Wright, in 1876'], ans:0,
+        explain:'The Wright brothers, Orville and Wilbur, flew in 1903. Ibn Firnas lived more than a thousand years earlier.'},
+      {t:'write', prompt:'Write your answer in a sentence.', text:'What do Ibn Firnas and the Wright brothers have in common?',
+        keys:[['curious','patient','brave','never gave up','did not give up','kept trying','not give up','did not stop']],
+        model:'They were all curious, patient and brave, and they never gave up.',
+        explain:'The last line of the story says it: they were not lucky. They were curious, patient and brave, and they did not stop when a try went wrong.'}
     ]},
     {key:'shapes', items:[
       {t:'match', prompt:'Draw a line from each shape to its description.',
@@ -479,7 +522,16 @@ const SETS = [
         opts:[{shape:'hexagon',label:'hexagon'},{shape:'octagon',label:'octagon'},{shape:'pentagon',label:'pentagon'},{shape:'rhombus',label:'rhombus'}], ans:1,
         explain:'An octagon has 8 straight sides. An octopus has 8 arms — "oct" always means eight.'},
       {t:'spell', prompt:'Spell the shape.', clue:'I have 4 equal sides, but my corners are NOT right angles. People often call me a diamond.', ans:'rhombus',
-        explain:'A rhombus is a pushed-over square: the sides stay equal but the corners lean.'}
+        explain:'A rhombus is a pushed-over square: the sides stay equal but the corners lean.'},
+      {t:'choice', prompt:'Tap the star.',
+        opts:[{shape:'star',label:'star'},{shape:'pentagon',label:'pentagon'},{shape:'heart',label:'heart'},{shape:'diamond',label:'diamond'}], ans:0,
+        explain:'A star has five points sticking out. The pentagon also has five corners, but its sides go straight round with no points.'},
+      {t:'type', prompt:'Name the shape.', text:'I have 4 equal sides and 4 right angles. I am a ______.',
+        accept:['square'], hint:'Every side is the same, and every corner is square.',
+        explain:'A square. A rectangle also has four right angles, but only a square has all four sides equal.'},
+      {t:'sort', prompt:'Straight sides, or curved?', bins:[['Only straight sides','made of straight lines'],['Has a curve','at least one curved edge']],
+        chips:[['triangle',0],['square',0],['star',0],['circle',1],['oval',1],['heart',1]],
+        explain:'Triangles, squares and stars are all straight lines joined together. Circles and ovals are curves all the way round, and a heart has two curved bumps.'}
     ]},
     {key:'think', items:[
       {t:'choice', prompt:'Look carefully, then answer.', fig:'ebbinghaus', long:true,
@@ -491,7 +543,11 @@ const SETS = [
         model:'Our brain compares each orange circle with the circles around it, so the one with small circles beside it looks bigger.',
         explain:'Your eyes send the picture, but your brain decides what it means. Brains judge size by comparing, and comparing can fool them.'},
       {t:'draw', prompt:'Design time!', tip:'Draw a flying machine you would invent. Give it wings, wheels, a propeller — anything you like.',
-        explain:'Every aeroplane in the world started as somebody’s drawing. Yours is saved in My Workshop.'}
+        explain:'Every aeroplane in the world started as somebody’s drawing. Yours is saved in My Workshop.'},
+      {t:'choice', prompt:'Think like a scientist.', long:true,
+        text:'The two orange circles look different sizes. How can you find out whether they REALLY are?',
+        opts:['Measure both circles with a ruler','Look at them again for longer','Ask a friend what they think'], ans:0,
+        explain:'A ruler cannot be tricked. Looking longer only gives your brain more time to make the same guess, and a friend’s brain gets tricked in just the same way.'}
     ]}
   ]
 },
@@ -515,7 +571,19 @@ const SETS = [
         chips:[['he',0],['me',1],['we',0],['her',1],['you',0],['them',1]],
         explain:'He, we and you can do the action. Me, her and them receive it. "You" is special — it can do both jobs!'},
       {t:'build', prompt:'Tap the words to build the sentence.', words:['The teacher','showed','us','an old telephone.'],
-        explain:'The teacher is the doer. "Us" receives the showing, so the object pronoun follows the verb "showed".'}
+        explain:'The teacher is the doer. "Us" receives the showing, so the object pronoun follows the verb "showed".'},
+      {t:'choice', prompt:'Circle the correct pronoun.', text:'( ___ ) is my best friend.', opts:['He','Him'], ans:0,
+        explain:'"He" starts the sentence and is the one being a friend, so it is a subject pronoun. ' + SUBJ},
+      {t:'choice', prompt:'Circle the correct pronoun.', text:'The teacher gave ( ___ ) a book.', opts:['she','her'], ans:1,
+        explain:'The teacher does the giving; the girl receives the book. After the verb we use the object pronoun "her". ' + OBJ},
+      {t:'fill', prompt:'Drag the right pronoun into each gap.',
+        lines:['{They} are playing in the park.','I saw {him} at school yesterday.','{We} like playing football.'],
+        decoys:['them','he','us'],
+        explain:'They and We do the action, so they start the sentence. "I saw him" — he is the one being seen, so he becomes "him".'},
+      {t:'write', prompt:'Write one sentence that uses BOTH pronouns.', text:'Use "she" and "her" in one sentence. Example: I like my teacher. She helps me.',
+        keys:[['she'],['her']],
+        model:'She is my sister, and I always help her with her homework.',
+        explain:'"She" does the action and "her" receives it. Put "she" before a verb and "her" after one, and the sentence works.'}
     ]},
     {key:'jobs', items:[
       {t:'sort', prompt:'Sort each job into the right workshop.', bins:[['Works with people','helps or teaches people'],['Works with things','builds, designs or studies']],
@@ -527,7 +595,18 @@ const SETS = [
       {t:'choice', prompt:'Which job word fits best?', long:true,
         text:'Mr Watson worked beside Bell every day and helped him test the machine. He was Bell’s ______.',
         opts:['assistant','customer','neighbour'], ans:0,
-        explain:'An assistant is someone who helps another person with their work. The story calls Mr Watson his helper.'}
+        explain:'An assistant is someone who helps another person with their work. The story calls Mr Watson his helper.'},
+      {t:'match', prompt:'Draw a line from each job to what that person does.',
+        left:[{label:'teacher'},{label:'inventor'},{label:'architect'},{label:'dentist'},{label:'engineer'},{label:'scientist'}],
+        right:['teaches children at school','creates new things','designs houses and buildings','helps people take care of their teeth','designs and makes machines','studies plants, animals and science'],
+        explain:'These six are the exact jobs on the review sheet. Match the clue word: teach → teacher, invent → inventor, buildings → architect, teeth → dentist, machines → engineer, science → scientist.'},
+      {t:'type', prompt:'Type the job word.', text:'A person who designs and makes machines is an ______.',
+        accept:['engineer'], hint:'It begins with "engine".',
+        explain:'An engineer. Engines and machines are their whole job, which is why the word starts with "engine".'},
+      {t:'choice', prompt:'Which job word fits best?', long:true,
+        text:'Every morning Mr Lee stands at the front of the class and explains new words to the children. What is his job?',
+        opts:['teacher','engineer','architect'], ans:0,
+        explain:'A teacher teaches children at school. The other two design and build things rather than explaining them to a class.'}
     ]},
     {key:'wordfam', items:[
       {t:'type', prompt:'Complete the word family.', text:'to teach → the PERSON who does it is a ______.',
@@ -537,7 +616,14 @@ const SETS = [
         explain:'collect + ion = collection. Watch the spelling: collect keeps both of its l’s.'},
       {t:'type', prompt:'Complete the word family.', text:'to invent → the THING that is made is an ______.',
         accept:['invention'], hint:'It ends in -ion.',
-        explain:'invent + ion = invention. The person is an inventor and the thing is an invention.'}
+        explain:'invent + ion = invention. The person is an inventor and the thing is an invention.'},
+      {t:'fill', prompt:'Drag the right ending into each gap.',
+        lines:['to build → the PERSON who does it is a {builder}.','to invent → the THING that is made is an {invention}.','to teach → the PERSON who does it is a {teacher}.'],
+        decoys:['building','inventor'],
+        explain:'Ask "person or thing?" first. Builder and teacher are people, so they end in -er. Invention is a thing, so it ends in -ion.'},
+      {t:'type', prompt:'Complete the word family.', text:'to design → the PERSON who does it is a ______.',
+        accept:['designer'], hint:'Take off the "to" and add -er.',
+        explain:'design + er = designer. ' + EROR}
     ]},
     {key:'grammar', items:[
       {t:'type', prompt:'Write "to" and the correct verb.', text:'Bell hoped ______ (send) a voice along a wire.',
@@ -551,7 +637,13 @@ const SETS = [
         decoys:['to paint','to swim'],
         explain:'You test a machine, you hear words and you ring a friend. Check that the verb matches what is really happening.'},
       {t:'build', prompt:'Tap the words to build the sentence.', words:['We','hope','to make','our school better.'],
-        explain:'"Hope" is followed by to + verb: hope to make. ' + TOV}
+        explain:'"Hope" is followed by to + verb: hope to make. ' + TOV},
+      {t:'type', prompt:'Write "to" and the correct verb.', text:'The young scientist hoped ______ (discover) something interesting.',
+        accept:['to discover'], hint:'Two words. The first one is "to".',
+        explain:'hoped + to + discover. ' + TOV},
+      {t:'choice', prompt:'Pick the right form.', long:true, text:'My sister plans ___ an engineer one day.',
+        opts:['to become','becoming','became'], ans:0,
+        explain:'"Plans" takes to + verb: plans to become. ' + TOV}
     ]},
     {key:'reading', items:[
       {t:'choice', prompt:'Read the story, then answer.', text:'In what year was the telephone invented?',
@@ -570,7 +662,14 @@ const SETS = [
         explain:'The story calls it a smartphone: a telephone small enough for a pocket that also shows maps and pictures.'},
       {t:'order', prompt:'Put the events in the order they happened.',
         items:['People write letters and wait many days','Bell invents the telephone in 1876','Wires are strung from town to town','People carry smartphones in their pockets'],
-        explain:'The story moves forward in time: letters first, then Bell’s invention, then the wires spreading, and smartphones today.'}
+        explain:'The story moves forward in time: letters first, then Bell’s invention, then the wires spreading, and smartphones today.'},
+      {t:'choice', prompt:'Read the story, then answer.', text:'Who invented the telephone?',
+        opts:['Alexander Graham Bell','Thomas Edison','Mr Watson'], ans:0,
+        explain:'Alexander Graham Bell invented it in 1876. Mr Watson was his helper, and Edison worked on the light bulb.'},
+      {t:'write', prompt:'Write your answer in a sentence.', text:'What could Bell’s telephone do that nothing had done before?',
+        keys:[['voice','talk','speak','words','sound'],['wire','along a wire','far away','distance']],
+        model:'It could carry a person’s voice along a wire to somebody far away.',
+        explain:'The story says his machine could carry a person’s voice along a wire. Before that, a voice could only travel as far as a shout.'}
     ]},
     {key:'shapes', items:[
       {t:'match', prompt:'Draw a line from each shape to its description.',
@@ -581,7 +680,16 @@ const SETS = [
         opts:[{shape:'circle',label:'circle'},{shape:'oval',label:'oval'},{shape:'semicircle',label:'semicircle'},{shape:'rhombus',label:'rhombus'}], ans:1,
         explain:'An oval is longer one way than the other, like an egg. A circle is the same width whichever way you measure it.'},
       {t:'spell', prompt:'Spell the shape.', clue:'I have 7 straight sides. I am one more than a hexagon.', ans:'heptagon',
-        explain:'"Hepta" means seven, so a heptagon has 7 sides. Six is hexa, seven is hepta, eight is octa.'}
+        explain:'"Hepta" means seven, so a heptagon has 7 sides. Six is hexa, seven is hepta, eight is octa.'},
+      {t:'choice', prompt:'Tap the heart.',
+        opts:[{shape:'heart',label:'heart'},{shape:'oval',label:'oval'},{shape:'star',label:'star'},{shape:'circle',label:'circle'}], ans:0,
+        explain:'A heart has two round bumps on top and a point at the bottom. It is one of the eight shapes in the review word bank.'},
+      {t:'type', prompt:'Name the shape.', text:'I am round, but I am longer one way than the other, like an egg. I am an ______.',
+        accept:['oval'], hint:'It starts with "o", like the shape of a mouth saying it.',
+        explain:'An oval. A circle is the same width every way you measure it; an oval is stretched.'},
+      {t:'sort', prompt:'How many sides does each shape have?', bins:[['3 sides','a triangle family'],['4 sides','four straight sides'],['No straight sides','only curves']],
+        chips:[['triangle',0],['square',1],['rectangle',1],['diamond',1],['circle',2],['oval',2]],
+        explain:'A diamond is a four-sided shape that has been turned to stand on its point. Circles and ovals have no straight sides at all.'}
     ]},
     {key:'think', items:[
       {t:'choice', prompt:'Look carefully, then answer.', fig:'mullerlyer', long:true,
@@ -594,7 +702,11 @@ const SETS = [
         explain:'Nothing about the lines changed — only the arrows. That is the clue that the trick is happening inside your brain, not in the picture.'},
       {t:'free', prompt:'Write about your own invention.', minWords:12,
         tip:'Invent a new way for people to talk to each other. Write 2 or 3 sentences: What is it called? What does it do? Why is it useful?',
-        explain:'A good invention answers a real problem. Bell’s problem was "letters are too slow". What problem does yours solve?'}
+        explain:'A good invention answers a real problem. Bell’s problem was "letters are too slow". What problem does yours solve?'},
+      {t:'choice', prompt:'Think like a scientist.', long:true,
+        text:'One line looks longer than the other. What should you do BEFORE you decide which is really longer?',
+        opts:['Measure both lines with a ruler','Trust the first thing you saw','Pick the one on the left'], ans:0,
+        explain:'Measure first, decide second. The whole point of an illusion is that the first thing you see is the thing that is wrong.'}
     ]}
   ]
 },
@@ -618,7 +730,19 @@ const SETS = [
         chips:[['she',0],['him',1],['we',0],['me',1],['they',0],['her',1]],
         explain:'Try each word in "___ ran fast". If it sounds right there it is a doer. If it only sounds right in "Tom saw ___", it is a getter.'},
       {t:'build', prompt:'Tap the words to build the sentence.', words:['Edison','gave','them','a difficult job.'],
-        explain:'Edison is the doer and goes first. "Them" receives the job, so the object pronoun follows the verb "gave".'}
+        explain:'Edison is the doer and goes first. "Them" receives the job, so the object pronoun follows the verb "gave".'},
+      {t:'choice', prompt:'Circle the correct pronoun.', text:'Mum called ( ___ ) for dinner.', opts:['I','me'], ans:1,
+        explain:'Mum does the calling. I am the one being called, so after the verb I become "me". ' + OBJ},
+      {t:'choice', prompt:'Circle the correct pronoun.', text:'( ___ ) is reading a story.', opts:['She','Her'], ans:0,
+        explain:'"She" is the one reading. The doer at the start of a sentence is always a subject pronoun. ' + SUBJ},
+      {t:'fill', prompt:'Drag the right pronoun into each gap.',
+        lines:['The teacher helped {us} with our homework.','{He} is playing football with his friends.','Edison showed {them} the new lamp.'],
+        decoys:['we','him','they'],
+        explain:'After "helped" and "showed" the people receiving the help need object pronouns: us, them. At the start of a sentence the doer is "He".'},
+      {t:'write', prompt:'Write one sentence that uses BOTH pronouns.', text:'Use "they" and "them" in one sentence. Example: I like my teacher. She helps me.',
+        keys:[['they'],['them']],
+        model:'They are my friends, and I play with them every day.',
+        explain:'"They" is the doer and "them" receives the action. The example on the worksheet does the same thing with "she" and "me".'}
     ]},
     {key:'jobs', items:[
       {t:'match', prompt:'Draw a line from each job to what that person does.',
@@ -631,7 +755,18 @@ const SETS = [
       {t:'choice', prompt:'Which word fits best?', long:true,
         text:'Edison had a big room full of tools and helpers where he tested every idea. That room is called a ______.',
         opts:['laboratory','library','playground'], ans:0,
-        explain:'A laboratory (or "lab") is a room built for testing and experiments. A library is for books.'}
+        explain:'A laboratory (or "lab") is a room built for testing and experiments. A library is for books.'},
+      {t:'fill', prompt:'Drag the right job into each gap.',
+        lines:['A person who teaches children at school is a {teacher}.','A person who creates new things is an {inventor}.','A person who designs and makes machines is an {engineer}.'],
+        decoys:['architect','scientist'],
+        explain:'These are the review sheet’s own definitions. Teach → teacher, create new things → inventor, machines → engineer.'},
+      {t:'type', prompt:'Type the job word.', text:'A person who designs houses and buildings is an ______.',
+        accept:['architect'], hint:'It starts with "arch", like the curved top of a doorway.',
+        explain:'An architect. They draw the plans; the builders follow them.'},
+      {t:'choice', prompt:'Which job word fits best?', long:true,
+        text:'Dr Amal looks inside your mouth and tells you to brush twice a day. What is her job?',
+        opts:['dentist','scientist','inventor'], ans:0,
+        explain:'A dentist helps people take care of their teeth. Brushing advice is exactly the sort of thing a dentist says.'}
     ]},
     {key:'wordfam', items:[
       {t:'type', prompt:'Complete the word family.', text:'to design → the PERSON who does it is a ______.',
@@ -641,7 +776,14 @@ const SETS = [
         explain:'act + ion = action. The -ion ending turns a doing word into a thing word.'},
       {t:'type', prompt:'Complete the word family.', text:'to help → the PERSON who does it is a ______.',
         accept:['helper'], hint:'Take off the "to" and add -er.',
-        explain:'help + er = helper. Edison had a whole workshop full of them.'}
+        explain:'help + er = helper. Edison had a whole workshop full of them.'},
+      {t:'fill', prompt:'Drag the right ending into each gap.',
+        lines:['to invent → the PERSON who does it is an {inventor}.','to collect → the PERSON who does it is a {collector}.','to build → the THING that is made is a {building}.'],
+        decoys:['invention','collection'],
+        explain:'Inventor and collector are people. A building is the thing a builder makes — it ends in -ing, not -ion.'},
+      {t:'type', prompt:'Complete the word family.', text:'to collect → the THING you gather is a ______.',
+        accept:['collection'], hint:'It ends in -ion.',
+        explain:'collect + ion = collection. This is the worksheet’s question 2: verb to collect, noun (thing) collection.'}
     ]},
     {key:'grammar', items:[
       {t:'type', prompt:'Write "to" and the correct verb.', text:'Thomas Edison wanted ______ (create) a useful invention.',
@@ -655,7 +797,14 @@ const SETS = [
         decoys:['to dance','to forget'],
         explain:'You find a thread, you test a material and you stop working. Read the whole sentence before you choose.'},
       {t:'build', prompt:'Tap the words to build the sentence.', words:['The inventor','tried','to solve','the problem.'],
-        explain:'"Tried" takes to + verb: tried to solve. ' + TOV}
+        explain:'"Tried" takes to + verb: tried to solve. ' + TOV},
+      {t:'type', prompt:'Write "to" and the correct verb.', text:'The students want ______ (learn) more about inventions.',
+        accept:['to learn'], hint:'Two words. The first one is "to".',
+        explain:'want + to + learn. ' + TOV},
+      {t:'fill', prompt:'Drag the right "to + verb" into each gap.',
+        lines:['Edison hoped {to light} every home in the city.','His helpers needed {to test} thousands of threads.','Nobody wanted {to stop} before it worked.'],
+        decoys:['to sing','to sleep'],
+        explain:'Hoped, needed and wanted are all followed by to + verb. Then check the meaning: you light a home, test a thread and stop working.'}
     ]},
     {key:'reading', items:[
       {t:'choice', prompt:'Read the story, then answer.', long:true, text:'What did people use for light before electric lamps?',
@@ -673,7 +822,14 @@ const SETS = [
         explain:'That is a famous way of thinking: a try that goes wrong still teaches you something, so it is not wasted.'},
       {t:'order', prompt:'Put the events in the order they happened.',
         items:['Homes are lit by candles and oil lamps','Edison opens a workshop full of helpers','The team tests thousands of materials','A bulb glows steadily for hours in 1879'],
-        explain:'The story runs forwards: the old way first, then the workshop, then all the testing, and success last of all.'}
+        explain:'The story runs forwards: the old way first, then the workshop, then all the testing, and success last of all.'},
+      {t:'choice', prompt:'Read the story, then answer.', text:'In what year did Edison’s team find a filament that glowed for hours?',
+        opts:['1879','1903','1876'], ans:0,
+        explain:'1879. Bell’s telephone was 1876 and the Wright brothers flew in 1903, so the light bulb came between them.'},
+      {t:'write', prompt:'Write your answer in a sentence.', text:'Name the THREE materials Edison’s team tested for the filament.',
+        keys:[['cotton','thread'],['paper'],['bamboo']],
+        model:'They tested cotton thread, paper and even bamboo.',
+        explain:'The story lists three: cotton thread, paper and bamboo. Each one you name is a star, so two out of three is still worth two.'}
     ]},
     {key:'shapes', items:[
       {t:'sort', prompt:'Sort each shape by how many sides it has.', bins:[['4 sides','exactly four'],['More than 4 sides','five or more']],
@@ -683,7 +839,17 @@ const SETS = [
         opts:[{shape:'pentagon',label:'pentagon'},{shape:'hexagon',label:'hexagon'},{shape:'octagon',label:'octagon'},{shape:'heptagon',label:'heptagon'}], ans:1,
         explain:'A hexagon has 6 sides. Bees build their honeycomb out of hexagons because they fit together with no gaps.'},
       {t:'spell', prompt:'Spell the shape.', clue:'I have 5 straight sides and 5 corners.', ans:'pentagon',
-        explain:'"Penta" means five, so a pentagon has 5 sides. A football has black pentagons on it.'}
+        explain:'"Penta" means five, so a pentagon has 5 sides. A football has black pentagons on it.'},
+      {t:'choice', prompt:'Tap the diamond.',
+        opts:[{shape:'diamond',label:'diamond'},{shape:'square',label:'square'},{shape:'triangle',label:'triangle'},{shape:'star',label:'star'}], ans:0,
+        explain:'A diamond is a four-sided shape standing on one of its points. Turn a square onto its corner and it looks like one. The maths word for it is rhombus.'},
+      {t:'type', prompt:'Name the shape.', text:'I have 3 straight sides and 3 corners. I am a ______.',
+        accept:['triangle'], hint:'"Tri" means three, like a tricycle.',
+        explain:'A triangle. Tri means three: three sides, three corners, three wheels on a tricycle.'},
+      {t:'match', prompt:'Draw a line from each shape to its name.',
+        left:[{shape:'star',label:'star'},{shape:'heart',label:'heart'},{shape:'diamond',label:'diamond'},{shape:'oval',label:'oval'},{shape:'rectangle',label:'rectangle'}],
+        right:['star','heart','diamond','oval','rectangle'],
+        explain:'These five, with circle, square and triangle, make the eight shapes in the review word bank. Say each name as you draw the line.'}
     ]},
     {key:'think', items:[
       {t:'choice', prompt:'Look carefully, then answer.', fig:'ponzo', long:true,
@@ -696,7 +862,11 @@ const SETS = [
         explain:'Your brain uses "lines that come together" as a clue for distance. Artists use the very same trick to make a flat painting look deep.'},
       {t:'free', prompt:'Write about never giving up.', minWords:12,
         tip:'Edison found a thousand ways that did not work. Write 2 or 3 sentences about a time you kept trying at something hard. What was it? What made you carry on?',
-        explain:'Every inventor in this app has the same habit: they treat a try that goes wrong as a clue, not as a full stop.'}
+        explain:'Every inventor in this app has the same habit: they treat a try that goes wrong as a clue, not as a full stop.'},
+      {t:'choice', prompt:'Think like a scientist.', long:true,
+        text:'Why is a ruler better than your eyes for checking an illusion?',
+        opts:['A ruler has no brain, so it cannot be tricked','A ruler is longer than an eye','Rulers are made of plastic'], ans:0,
+        explain:'The trick happens in your brain, when it guesses. A ruler does not guess — it just measures — so there is nothing for the illusion to fool.'}
     ]}
   ]
 },
@@ -720,7 +890,19 @@ const SETS = [
         chips:[['I',0],['her',1],['they',0],['him',1],['he',0],['us',1]],
         explain:'Doers go in front of the verb, getters come after it: "She helped him" — she is the doer, him is the getter.'},
       {t:'build', prompt:'Tap the words to build the sentence.', words:['My teacher','showed','her','the two circles.'],
-        explain:'The teacher is the doer. "Her" receives the showing, so the object pronoun comes straight after "showed".'}
+        explain:'The teacher is the doer. "Her" receives the showing, so the object pronoun comes straight after "showed".'},
+      {t:'choice', prompt:'Circle the correct pronoun.', text:'( ___ ) are going to school by bus.', opts:['They','Them'], ans:0,
+        explain:'"They" are the ones going, so they are the doers and need a subject pronoun. ' + SUBJ},
+      {t:'choice', prompt:'Circle the correct pronoun.', text:'The teacher asked ( ___ ) to read the story.', opts:['she','her'], ans:1,
+        explain:'The teacher asks; the girl is asked. The one receiving the action takes the object pronoun "her". ' + OBJ},
+      {t:'fill', prompt:'Drag the right pronoun into each gap.',
+        lines:['{We} love to visit the zoo on Fridays.','My mother gave {me} a new pencil case.','{She} is reading a story.'],
+        decoys:['us','I','her'],
+        explain:'We and She start their sentences as doers. "Gave me" — I am receiving the pencil case, so I become "me".'},
+      {t:'write', prompt:'Write one sentence that uses BOTH pronouns.', text:'Use "we" and "us" in one sentence. Example: I like my teacher. She helps me.',
+        keys:[['we'],['us']],
+        model:'We asked the teacher a question, and she helped us.',
+        explain:'"We" does the asking; "us" receives the helping. Both words mean the same people — the job in the sentence is what changes.'}
     ]},
     {key:'jobs', items:[
       {t:'match', prompt:'Draw a line from each job to what that person does.',
@@ -733,7 +915,17 @@ const SETS = [
       {t:'choice', prompt:'Which job word fits best?', long:true,
         text:'Maya draws the plans for a new library before the builders start work. She is an ______.',
         opts:['architect','optician','inventor'], ans:0,
-        explain:'An architect designs buildings and draws the plans. The builders then follow those plans.'}
+        explain:'An architect designs buildings and draws the plans. The builders then follow those plans.'},
+      {t:'fill', prompt:'Drag the right job into each gap.',
+        lines:['A person who studies plants, animals and science is a {scientist}.','A person who helps people take care of their teeth is a {dentist}.','A person who creates new things is an {inventor}.'],
+        decoys:['teacher','engineer'],
+        explain:'Read the clue in each sentence: science → scientist, teeth → dentist, new things → inventor.'},
+      {t:'type', prompt:'Type the job word.', text:'A person who teaches children at school is a ______.',
+        accept:['teacher'], hint:'It is the verb "teach" with -er on the end.',
+        explain:'teach + er = teacher. ' + EROR},
+      {t:'sort', prompt:'Who designs it, and who studies it?', bins:[['Designs and makes things','architect, engineer, inventor'],['Studies or helps people','scientist, teacher, dentist']],
+        chips:[['architect',0],['engineer',0],['inventor',0],['scientist',1],['teacher',1],['dentist',1]],
+        explain:'Architects, engineers and inventors all make plans and machines. Scientists study, teachers teach and dentists look after people.'}
     ]},
     {key:'wordfam', items:[
       {t:'type', prompt:'Complete the word family.', text:'to paint → the PERSON who does it is a ______.',
@@ -743,7 +935,14 @@ const SETS = [
         accept:['driver'], hint:'Drop the e, then add -er.',
         explain:'drive loses its e and takes -er: driver. The same happens with write → writer and bake → baker.'},
       {t:'spell', prompt:'Spell the missing word.', clue:'to decide → the choice that you make is a ...', ans:'decision',
-        explain:'decide changes its ending to make decision. Say it slowly: de-ci-sion.'}
+        explain:'decide changes its ending to make decision. Say it slowly: de-ci-sion.'},
+      {t:'fill', prompt:'Drag the right ending into each gap.',
+        lines:['to teach → the PERSON who does it is a {teacher}.','to design → the PERSON who does it is a {designer}.','to act → the THING that somebody does is an {action}.'],
+        decoys:['teaching','actor'],
+        explain:'Teacher and designer are people, so they take -er. Action is a thing, so it takes -ion. Actor would be the person.'},
+      {t:'type', prompt:'Complete the word family.', text:'to invent → the THING that is made is an ______.',
+        accept:['invention'], hint:'It ends in -ion.',
+        explain:'invent + ion = invention. The person is the inventor; the thing is the invention.'}
     ]},
     {key:'grammar', items:[
       {t:'type', prompt:'Write "to" and the correct verb.', text:'We hope ______ (make) our school a better place.',
@@ -757,7 +956,13 @@ const SETS = [
         decoys:['to cook','to sing'],
         explain:'You understand an idea, you measure with a ruler and you look at a picture. Match the verb to what is really happening.'},
       {t:'build', prompt:'Tap the words to build the sentence.', words:['The whole class','decided','to test','the illusion.'],
-        explain:'"Decided" takes to + verb: decided to test. ' + TOV}
+        explain:'"Decided" takes to + verb: decided to test. ' + TOV},
+      {t:'type', prompt:'Write "to" and the correct verb.', text:'Thomas Edison wanted ______ (create) a useful invention.',
+        accept:['to create'], hint:'Two words. The first one is "to".',
+        explain:'wanted + to + create. This is question 1 on the review sheet. ' + TOV},
+      {t:'choice', prompt:'Pick the right form.', long:true, text:'We hope ___ our school a better place.',
+        opts:['to make','making','makes'], ans:0,
+        explain:'"Hope" is followed by to + verb: hope to make. ' + TOV}
     ]},
     {key:'reading', items:[
       {t:'choice', prompt:'Read the story, then answer.', text:'In the story, what are your eyes compared to?',
@@ -775,7 +980,14 @@ const SETS = [
         explain:'Guessing is fine, but measuring is proof. Look, guess, then measure — that is how a scientist thinks.'},
       {t:'order', prompt:'Put the steps of seeing in the right order.',
         items:['Light bounces off an object into your eyes','Your eyes send a message along a nerve','Your brain guesses what the message means','Sometimes the guess is wrong and you see an illusion'],
-        explain:'Seeing is a chain: light, then eyes, then brain, then the guess. The illusion happens at the very last step.'}
+        explain:'Seeing is a chain: light, then eyes, then brain, then the guess. The illusion happens at the very last step.'},
+      {t:'choice', prompt:'Read the story, then answer.', long:true, text:'What does your brain use as clues to work out what is near and what is far?',
+        opts:['Size, colour, shadow and lines','Sound and smell','Only colour'], ans:0,
+        explain:'The story lists four clues: size, colour, shadow and lines. An illusion works by giving the brain a false clue.'},
+      {t:'write', prompt:'Write your answer in a sentence.', text:'Why do scientists study optical illusions?',
+        keys:[['guess','guesses','guessing','wrong','how the brain works','brain works','how the guessing works']],
+        model:'Because a wrong guess shows them how the brain’s guessing works.',
+        explain:'When the brain gets it right you learn nothing about how it did it. When it gets it wrong, the mistake shows you the rule it was using.'}
     ]},
     {key:'shapes', items:[
       {t:'match', prompt:'These are solid (3D) shapes. Draw a line from each one to its description.',
@@ -786,7 +998,16 @@ const SETS = [
         opts:[{shape:'cube',label:'cube'},{shape:'cylinder',label:'cylinder'},{shape:'cone',label:'cone'},{shape:'sphere',label:'sphere'}], ans:1,
         explain:'A cylinder has a circle at the top, a circle at the bottom and a curved side — exactly like a tin can.'},
       {t:'spell', prompt:'Spell the solid shape.', clue:'I am a solid shape with 6 square faces. A dice has my shape.', ans:'cube',
-        explain:'A cube has 6 square faces, 12 edges and 8 vertices. Every face is exactly the same size.'}
+        explain:'A cube has 6 square faces, 12 edges and 8 vertices. Every face is exactly the same size.'},
+      {t:'choice', prompt:'Tap the rectangle.',
+        opts:[{shape:'square',label:'square'},{shape:'rectangle',label:'rectangle'},{shape:'diamond',label:'diamond'},{shape:'trapezium',label:'trapezium'}], ans:1,
+        explain:'A rectangle has four right angles, but it is longer one way than the other. A square is the special rectangle where all four sides match.'},
+      {t:'type', prompt:'Name the shape.', text:'I have 5 points sticking out, and you see me in the night sky. I am a ______.',
+        accept:['star'], hint:'Twinkle, twinkle, little ...',
+        explain:'A star. Count the points: five. A pentagon also has five corners, but a star’s corners stick right out.'},
+      {t:'sort', prompt:'Flat shape or solid shape?', bins:[['Flat (2D)','you can draw it on paper'],['Solid (3D)','you can hold it in your hand']],
+        chips:[['heart',0],['star',0],['diamond',0],['cube',1],['sphere',1],['cone',1]],
+        explain:'Heart, star and diamond are drawn flat. A cube, a sphere and a cone take up space — you could pick them up.'}
     ]},
     {key:'think', items:[
       {t:'choice', prompt:'Look carefully, then answer.', fig:'contrast', long:true,
@@ -798,7 +1019,11 @@ const SETS = [
         model:'The backgrounds behind them are different, and my brain compares each square with the colour around it.',
         explain:'Your brain almost never judges a colour on its own. It always asks "compared with what?" — which is useful in real life, and fooled by this picture.'},
       {t:'draw', prompt:'Design time!', tip:'Draw your own eye trick. Try two shapes that are really the same size but look different, or a pattern that seems to move.',
-        explain:'Artists have used illusions for hundreds of years to make flat walls look like deep rooms. Yours is saved in My Workshop.'}
+        explain:'Artists have used illusions for hundreds of years to make flat walls look like deep rooms. Yours is saved in My Workshop.'},
+      {t:'choice', prompt:'Think like a scientist.', long:true,
+        text:'Your eyes say the two squares are different greys. A colour-checker says they are exactly the same. Which one should you believe?',
+        opts:['The checker, because it measures instead of guessing','Your eyes, because you saw it yourself','Neither of them'], ans:0,
+        explain:'Seeing it yourself is exactly the problem: the illusion is built to fool the seeing. A measurement does not care what it looks like.'}
     ]}
   ]
 },
@@ -822,7 +1047,19 @@ const SETS = [
         chips:[['you',0],['them',1],['I',0],['her',1],['we',0],['him',1]],
         explain:'Say each word in "___ pushed the cart" and then in "The cart hit ___". The first slot needs a doer, the second needs a getter.'},
       {t:'build', prompt:'Tap the words to build the sentence.', words:['Karl','pushed','it','along the road.'],
-        explain:'Karl is the doer. "It" stands for the running machine and receives the push, so it comes after the verb.'}
+        explain:'Karl is the doer. "It" stands for the running machine and receives the push, so it comes after the verb.'},
+      {t:'choice', prompt:'Circle the correct pronoun.', text:'I saw ( ___ ) at school yesterday.', opts:['he','him'], ans:1,
+        explain:'I do the seeing; he is the one being seen. After the verb "saw" we use the object pronoun "him". ' + OBJ},
+      {t:'choice', prompt:'Circle the correct pronoun.', text:'( ___ ) like playing football.', opts:['We','Us'], ans:0,
+        explain:'"We" are the ones who like it. The doer at the front of the sentence is a subject pronoun. ' + SUBJ},
+      {t:'fill', prompt:'Drag the right pronoun into each gap.',
+        lines:['{He} is my best friend.','Grandpa gave {us} an old bicycle.','The builders let {them} watch the crane.'],
+        decoys:['him','we','they'],
+        explain:'"He" starts the sentence as the doer. "Gave us" and "let them" — the people on the receiving end take object pronouns.'},
+      {t:'write', prompt:'Write one sentence that uses BOTH pronouns.', text:'Use "I" and "me" in one sentence. Example: I like my teacher. She helps me.',
+        keys:[['i'],['me']],
+        model:'I made a bicycle out of wood, and my dad helped me paint it.',
+        explain:'"I" does something and "me" has something done for them. The worksheet’s own example is "I like my teacher. She helps me."'}
     ]},
     {key:'jobs', items:[
       {t:'sort', prompt:'Sort each job into the right part of the work.', bins:[['Plans it first','designs and draws'],['Makes or mends it','works with tools']],
@@ -834,7 +1071,18 @@ const SETS = [
       {t:'choice', prompt:'Which job would you ask?', long:true,
         text:'Your town needs a safe new bridge over the river. Who should design it?',
         opts:['an engineer','a dentist','a photographer'], ans:0,
-        explain:'Engineers work out how to make things strong and safe. Building a bridge needs someone who understands weight and materials.'}
+        explain:'Engineers work out how to make things strong and safe. Building a bridge needs someone who understands weight and materials.'},
+      {t:'match', prompt:'Draw a line from each job to what that person does.',
+        left:[{label:'engineer'},{label:'architect'},{label:'scientist'},{label:'dentist'},{label:'teacher'},{label:'inventor'}],
+        right:['designs and makes machines','designs houses and buildings','studies plants, animals and science','helps people take care of their teeth','teaches children at school','creates new things'],
+        explain:'Six jobs, six definitions, all from the review sheet. If two look similar, find the one word that only fits one job: machines, buildings, science, teeth, school, new.'},
+      {t:'type', prompt:'Type the job word.', text:'A person who studies plants, animals and science is a ______.',
+        accept:['scientist'], hint:'It starts with "science".',
+        explain:'A scientist. Science + ist, the way art + ist makes artist.'},
+      {t:'choice', prompt:'Which job word fits best?', long:true,
+        text:'Karl looked at how people walked and made a machine that let them roll along instead. What was Karl?',
+        opts:['an inventor','a dentist','a teacher'], ans:0,
+        explain:'An inventor creates new things. The running machine was brand new — nobody had made one before.'}
     ]},
     {key:'wordfam', items:[
       {t:'type', prompt:'Complete the word family.', text:'to ride → the PERSON who does it is a ______.',
@@ -844,7 +1092,14 @@ const SETS = [
         explain:'build + ing = building. The person is a builder and the thing is a building.'},
       {t:'type', prompt:'Complete the word family.', text:'to travel → the PERSON who does it is a ______.',
         accept:['traveller','traveler'], hint:'Take off the "to" and add -er. In British English the l doubles.',
-        explain:'British English writes traveller with two l’s and American English writes traveler with one. Both are correct here.'}
+        explain:'British English writes traveller with two l’s and American English writes traveler with one. Both are correct here.'},
+      {t:'fill', prompt:'Drag the right ending into each gap.',
+        lines:['to build → the PERSON who does it is a {builder}.','to design → the THING that is drawn is a {design}.','to ride → the PERSON who does it is a {rider}.'],
+        decoys:['building','designer'],
+        explain:'Builder and rider are the people. A design is the thing a designer draws — here the verb and the thing are the same word.'},
+      {t:'type', prompt:'Complete the word family.', text:'to build → the PERSON who does it is a ______.',
+        accept:['builder'], hint:'Take off the "to" and add -er.',
+        explain:'build + er = builder. This is question 3 on the review sheet.'}
     ]},
     {key:'grammar', items:[
       {t:'type', prompt:'Write "to" and the correct verb.', text:'Karl wanted ______ (move) faster than walking.',
@@ -858,7 +1113,14 @@ const SETS = [
         decoys:['to swim','to sleep'],
         explain:'You shape clay, you roll a load and you add a wheel. Each verb has to match the job in that sentence.'},
       {t:'build', prompt:'Tap the words to build the sentence.', words:['They','hope','to build','a faster bicycle.'],
-        explain:'"Hope" takes to + verb: hope to build. ' + TOV}
+        explain:'"Hope" takes to + verb: hope to build. ' + TOV},
+      {t:'type', prompt:'Write "to" and the correct verb.', text:'We hope ______ (make) our school a better place.',
+        accept:['to make'], hint:'Two words. The first one is "to".',
+        explain:'hope + to + make. ' + TOV},
+      {t:'fill', prompt:'Drag the right "to + verb" into each gap.',
+        lines:['Karl wanted {to move} faster than walking.','The potters learned {to spin} the wheel by hand.','Today engineers plan {to build} even lighter bicycles.'],
+        decoys:['to eat','to swim'],
+        explain:'Wanted, learned and plan all take to + verb. Then match the meaning: you move faster, spin a wheel and build a bicycle.'}
     ]},
     {key:'reading', items:[
       {t:'choice', prompt:'Read the story, then answer.', text:'What were the very first wheels used for?',
@@ -876,7 +1138,14 @@ const SETS = [
         explain:'Karl von Drais, 1817. His wooden two-wheeler came before pedals were ever added.'},
       {t:'order', prompt:'Put the events in the order they happened.',
         items:['Potters spin flat wheels to shape clay','Someone joins two wheels with an axle','Karl von Drais builds the running machine','Bicycles and cars fill the roads'],
-        explain:'Pots came first, then carts, then the running machine in 1817, and modern roads last of all.'}
+        explain:'Pots came first, then carts, then the running machine in 1817, and modern roads last of all.'},
+      {t:'choice', prompt:'Read the story, then answer.', text:'Where was the wheel first made?',
+        opts:['Mesopotamia','Germany','America'], ans:0,
+        explain:'The story says it was made more than five thousand years ago in a land called Mesopotamia. Germany is where the running machine came from, much later.'},
+      {t:'write', prompt:'Write your answer in a sentence.', text:'Why was the running machine different from a bicycle today?',
+        keys:[['no pedals','pedals','without pedals','not have pedals'],['feet','push','pushed','foot','ground']],
+        model:'It had no pedals, so you pushed yourself along the ground with your feet.',
+        explain:'Two things to say: it had no pedals, and you moved it by pushing with your feet. Those two facts are the whole difference.'}
     ]},
     {key:'shapes', items:[
       {t:'match', prompt:'Draw a line from each shape to the fact that fits it.',
@@ -887,7 +1156,17 @@ const SETS = [
         opts:['0','1','4'], ans:0,
         explain:'A circle has no corners and no straight sides at all, which is exactly why it rolls so smoothly.'},
       {t:'spell', prompt:'Spell the shape.', clue:'I have 4 sides and just one pair of parallel sides. I look like a plant pot from the front.', ans:'trapezium',
-        explain:'Parallel sides stay exactly the same distance apart for ever, like railway tracks. A trapezium has one such pair.'}
+        explain:'Parallel sides stay exactly the same distance apart for ever, like railway tracks. A trapezium has one such pair.'},
+      {t:'choice', prompt:'Tap the circle.',
+        opts:[{shape:'oval',label:'oval'},{shape:'circle',label:'circle'},{shape:'semicircle',label:'semicircle'},{shape:'heart',label:'heart'}], ans:1,
+        explain:'A circle is round and the same width every way. The oval is stretched, and the semicircle is only half.'},
+      {t:'type', prompt:'Name the shape.', text:'I have 4 sides. My opposite sides are equal, but I am longer than I am tall. I am a ______.',
+        accept:['rectangle'], hint:'A door is this shape.',
+        explain:'A rectangle. Doors, books and phones are all rectangles: four right angles, with the long sides matching each other.'},
+      {t:'match', prompt:'Draw a line from each shape to its name.',
+        left:[{shape:'circle',label:'circle'},{shape:'square',label:'square'},{shape:'triangle',label:'triangle'},{shape:'heart',label:'heart'},{shape:'star',label:'star'},{shape:'diamond',label:'diamond'}],
+        right:['circle','square','triangle','heart','star','diamond'],
+        explain:'Six of the eight shapes in the review word bank. The other two are rectangle and oval.'}
     ]},
     {key:'think', items:[
       {t:'choice', prompt:'Look carefully, then answer.', fig:'zollner', long:true,
@@ -900,7 +1179,11 @@ const SETS = [
         explain:'Take the short strokes away and the illusion vanishes completely. Whenever something looks odd, ask what is sitting NEXT to it.'},
       {t:'free', prompt:'Write about your own invention.', minWords:12,
         tip:'Invent a machine with wheels that would help somebody in your school or your street. Write 2 or 3 sentences: What is it called? What does it do? Why is it useful?',
-        explain:'The best inventions start with a real problem. Look around your school — what is heavy, slow or awkward to move?'}
+        explain:'The best inventions start with a real problem. Look around your school — what is heavy, slow or awkward to move?'},
+      {t:'choice', prompt:'Think like a scientist.', long:true,
+        text:'Sam is SURE the long lines are crooked. What is the fair way to settle it?',
+        opts:['Lay a ruler along each line and see whether it fits','Ask Sam to look harder','Take a vote in the class'], ans:0,
+        explain:'A ruler along the line is a test anyone can repeat and nobody can argue with. Looking harder and voting are both just more guessing.'}
     ]}
   ]
 },
@@ -924,7 +1207,19 @@ const SETS = [
         chips:[['they',0],['her',1],['it',0],['me',1],['he',0],['us',1]],
         explain:'"It" is a tricky one — it can do both jobs. Here it is sitting with the doers: "It swims in the water".'},
       {t:'build', prompt:'Tap the words to build the sentence.', words:['Pasteur','told','her','about the germs.'],
-        explain:'Pasteur is the doer, so he goes first. "Her" receives the telling, so the object pronoun follows "told".'}
+        explain:'Pasteur is the doer, so he goes first. "Her" receives the telling, so the object pronoun follows "told".'},
+      {t:'choice', prompt:'Circle the correct pronoun.', text:'( ___ ) are playing in the park.', opts:['They','Them'], ans:0,
+        explain:'"They" are doing the playing, so the sentence starts with a subject pronoun. ' + SUBJ},
+      {t:'choice', prompt:'Circle the correct pronoun.', text:'The teacher helped ( ___ ) with our homework.', opts:['we','us'], ans:1,
+        explain:'The teacher does the helping; we receive it. After the verb "helped" the object pronoun is "us". ' + OBJ},
+      {t:'fill', prompt:'Drag the right pronoun into each gap.',
+        lines:['Mum called {me} for dinner.','{They} are going to school by bus.','Pasteur showed {her} the germs under the microscope.'],
+        decoys:['I','them','she'],
+        explain:'"Called me" and "showed her" — both are people on the receiving end. "They" begins the sentence as the doer.'},
+      {t:'write', prompt:'Write one sentence that uses BOTH pronouns.', text:'Use "it" twice: once as the doer, once as the receiver. Example: The dog is small. It barks, and I feed it.',
+        keys:[['it']],
+        model:'It is a tiny creature, and I watched it through the microscope.',
+        explain:'"It" is the one pronoun that looks the same in both jobs. "It barks" — doer. "I feed it" — receiver. Same word, two places.'}
     ]},
     {key:'jobs', items:[
       {t:'match', prompt:'Draw a line from each job to what that person does.',
@@ -937,7 +1232,18 @@ const SETS = [
       {t:'choice', prompt:'Which job word fits best?', long:true,
         text:'Louis Pasteur tested his ideas again and again to find out what was really true. He was a ______.',
         opts:['scientist','shopkeeper','driver'], ans:0,
-        explain:'Testing an idea carefully to find out whether it is true is exactly what a scientist does.'}
+        explain:'Testing an idea carefully to find out whether it is true is exactly what a scientist does.'},
+      {t:'fill', prompt:'Drag the right job into each gap.',
+        lines:['A person who designs houses and buildings is an {architect}.','A person who designs and makes machines is an {engineer}.','A person who teaches children at school is a {teacher}.'],
+        decoys:['dentist','inventor'],
+        explain:'Buildings → architect. Machines → engineer. School → teacher. The clue word is always in the sentence.'},
+      {t:'type', prompt:'Type the job word.', text:'A person who helps people take care of their teeth is a ______.',
+        accept:['dentist'], hint:'It begins with "dent", an old word for tooth.',
+        explain:'A dentist. "Dent" means tooth, which is why "dental" means to do with teeth.'},
+      {t:'choice', prompt:'Which job word fits best?', long:true,
+        text:'Marie Curie spent years testing a glowing material to find out exactly what it was. What was she?',
+        opts:['a scientist','an architect','a dentist'], ans:0,
+        explain:'A scientist studies things carefully to find out what is true. Curie did that with radium for years.'}
     ]},
     {key:'wordfam', items:[
       {t:'type', prompt:'Complete the word family.', text:'to collect → the PERSON who does it is a ______.',
@@ -947,7 +1253,14 @@ const SETS = [
         explain:'protect + ion = protection. Same pattern as invent → invention and collect → collection.'},
       {t:'type', prompt:'Complete the word family.', text:'to write → the PERSON who does it is a ______.',
         accept:['writer'], hint:'Drop the e, then add -er.',
-        explain:'write loses its e and takes -er: writer. The thing they make is writing.'}
+        explain:'write loses its e and takes -er: writer. The thing they make is writing.'},
+      {t:'fill', prompt:'Drag the right ending into each gap.',
+        lines:['to collect → the THING you gather is a {collection}.','to invent → the PERSON who does it is an {inventor}.','to paint → the THING that is made is a {painting}.'],
+        decoys:['collector','invention'],
+        explain:'Collection and painting are things; inventor is a person. Watch the endings: -ion and -ing for things, -or and -er for people.'},
+      {t:'type', prompt:'Complete the word family.', text:'to design → the PERSON who does it is a ______.',
+        accept:['designer'], hint:'Take off the "to" and add -er.',
+        explain:'design + er = designer. This is question 4 on the review sheet.'}
     ]},
     {key:'grammar', items:[
       {t:'type', prompt:'Write "to" and the correct verb.', text:'Leeuwenhoek wanted ______ (see) things nobody had ever seen.',
@@ -961,7 +1274,13 @@ const SETS = [
         decoys:['to drive','to jump'],
         explain:'You study a rock, you wash your hands and you cure an illness. Always read to the end of the sentence first.'},
       {t:'build', prompt:'Tap the words to build the sentence.', words:['We','want','to learn','more about science.'],
-        explain:'"Want" takes to + verb: want to learn. ' + TOV}
+        explain:'"Want" takes to + verb: want to learn. ' + TOV},
+      {t:'type', prompt:'Write "to" and the correct verb.', text:'My sister plans ______ (become) an engineer one day.',
+        accept:['to become'], hint:'Two words. The first one is "to".',
+        explain:'plans + to + become. ' + TOV},
+      {t:'choice', prompt:'Pick the right form.', long:true, text:'The inventor tried ___ the problem.',
+        opts:['to solve','solving','solved'], ans:0,
+        explain:'"Tried" takes to + verb: tried to solve. ' + TOV}
     ]},
     {key:'reading', items:[
       {t:'choice', prompt:'Read the story, then answer.', long:true, text:'What was Antonie van Leeuwenhoek’s job before he made microscopes?',
@@ -979,7 +1298,14 @@ const SETS = [
         explain:'That gentle heating is named after Pasteur himself — it is called pasteurising the milk.'},
       {t:'order', prompt:'Put the events in the order they happened.',
         items:['Nobody knows that tiny living things exist','Leeuwenhoek builds a microscope and sees them','Pasteur shows that germs can make people ill','Marie Curie wins a Nobel Prize in 1903'],
-        explain:'Each discovery made the next one possible: first the lens, then the germs, then Curie’s careful experiments.'}
+        explain:'Each discovery made the next one possible: first the lens, then the germs, then Curie’s careful experiments.'},
+      {t:'choice', prompt:'Read the story, then answer.', text:'How did Pasteur make milk safe to drink?',
+        opts:['By heating it gently to kill the germs','By freezing it','By adding sugar'], ans:0,
+        explain:'The story says heating milk gently kills the germs. That gentle heating is still done to milk today.'},
+      {t:'write', prompt:'Write your answer in a sentence.', text:'What did Leeuwenhoek see in a drop of pond water?',
+        keys:[['creature','creatures','tiny living','living things','tiny things','germs','animals'],['swimming','swim','moving','crowded','full of','lots of','many']],
+        model:'He saw that the water was crowded with tiny creatures swimming about.',
+        explain:'Two parts: the water was full of tiny creatures, and they were swimming about. Nobody had ever seen them before.'}
     ]},
     {key:'shapes', items:[
       {t:'sort', prompt:'Sort each shape into flat or solid.', bins:[['Flat shape (2D)','you can draw it on paper'],['Solid shape (3D)','you can hold it in your hand']],
@@ -989,7 +1315,16 @@ const SETS = [
         opts:[{shape:'cube',label:'cube'},{shape:'cone',label:'cone'},{shape:'pyramid',label:'pyramid'},{shape:'cylinder',label:'cylinder'}], ans:2,
         explain:'A square-based pyramid has a square underneath and 4 triangle faces that meet at a point on top.'},
       {t:'spell', prompt:'Spell the solid shape.', clue:'I am a solid shape with 2 flat circle faces and 1 curved face. A tin of beans has my shape.', ans:'cylinder',
-        explain:'A cylinder has a circle at each end joined by one curved face. Watch the y in the middle: c-y-l-i-n-d-e-r.'}
+        explain:'A cylinder has a circle at each end joined by one curved face. Watch the y in the middle: c-y-l-i-n-d-e-r.'},
+      {t:'choice', prompt:'Tap the oval.',
+        opts:[{shape:'circle',label:'circle'},{shape:'heart',label:'heart'},{shape:'oval',label:'oval'},{shape:'star',label:'star'}], ans:2,
+        explain:'An oval is a stretched circle. A drop of pond water on a slide spreads into an oval.'},
+      {t:'type', prompt:'Name the shape.', text:'I have two round bumps on top and a point at the bottom. I am a ______.',
+        accept:['heart'], hint:'You see this shape on a card in February.',
+        explain:'A heart. It is one of the eight shapes in the review word bank, and the only one with two bumps.'},
+      {t:'sort', prompt:'How many sides does each shape have?', bins:[['4 sides','four straight sides'],['5 or more corners','five points or more'],['No straight sides','only curves']],
+        chips:[['square',0],['diamond',0],['star',1],['pentagon',1],['circle',2],['heart',2]],
+        explain:'Square and diamond both have four sides. A star has five points and a pentagon five corners. Circle and heart are curves.'}
     ]},
     {key:'think', items:[
       {t:'choice', prompt:'Look carefully, then answer.', fig:'vertline', long:true,
@@ -1001,7 +1336,11 @@ const SETS = [
         model:'I should believe the ruler, because my brain only guesses but a ruler really measures.',
         explain:'This is the heart of science. Your first look is a guess, and a guess is worth having — but a measurement is what settles it.'},
       {t:'draw', prompt:'Design time!', tip:'Draw a tool or machine that would help a doctor or a scientist. What would it look at, lift, listen to or measure?',
-        explain:'Leeuwenhoek’s microscope was just glass, brass and patience. Yours is saved in My Workshop.'}
+        explain:'Leeuwenhoek’s microscope was just glass, brass and patience. Yours is saved in My Workshop.'},
+      {t:'choice', prompt:'Think like a scientist.', long:true,
+        text:'Leeuwenhoek could not see the tiny creatures with his eyes. What did he use instead of guessing?',
+        opts:['A tool that let him look closer — a microscope','A bigger drop of water','A brighter lamp'], ans:0,
+        explain:'When your eyes are not enough, a scientist reaches for a tool. A microscope for tiny things, a ruler for an illusion — the idea is the same.'}
     ]}
   ]
 }
@@ -1035,6 +1374,9 @@ const SHAPES = {
   cylinder:'<path class="face" d="M16 26 V74 a34 14 0 0 0 68 0 V26 Z"/><ellipse class="face" cx="50" cy="26" rx="34" ry="14"/>',
   cone:'<path class="face" d="M50 12 L84 74 a34 14 0 0 1 -68 0 Z"/><path class="hid" d="M16 74 a34 14 0 0 1 68 0"/>',
   sphere:'<circle class="face" cx="50" cy="50" r="40"/><ellipse class="hid" cx="50" cy="50" rx="40" ry="14"/>',
+  star:'<polygon class="face" points="50,6 61,38 95,38 68,58 78,92 50,72 22,92 32,58 5,38 39,38"/>',
+  heart:'<path class="face" d="M50 88 C20 66 8 50 8 33 C8 20 18 10 30 10 C39 10 46 15 50 22 C54 15 61 10 70 10 C82 10 92 20 92 33 C92 50 80 66 50 88 Z"/>',
+  diamond:'<polygon class="face" points="50,4 82,50 50,96 18,50"/>',
   pyramid:'<polygon class="face" points="50,10 12,74 50,90 88,74"/><path class="edge" d="M50 10 L50 90"/><path class="hid" d="M12 74 L50 58 L88 74 M50 58 L50 10"/>'
 };
 
@@ -1161,7 +1503,11 @@ const tolFor = w => w.length >= 8 ? 2 : w.length >= 5 ? 1 : w.length >= 4 ? 1 : 
 function hasKey(text, key) {
   const t = norm(text), k = norm(key);
   if (!k) return false;
-  if (t.includes(k)) return true;
+  /* A short key must stand as a whole word: "he" is hiding inside "the" and
+     "she", and a pronoun question is exactly where that would go wrong.
+     Longer keys may still sit inside a longer word (invent -> inventors). */
+  if ((' ' + t + ' ').includes(' ' + k + ' ')) return true;
+  if (k.length >= 5 && t.includes(k)) return true;
   if (k.includes(' ')) return false;
   const tol = tolFor(k);
   return tol > 0 && t.split(' ').some(w => Math.abs(w.length - k.length) <= tol && lev(w, k) <= tol);
