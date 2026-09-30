@@ -28,6 +28,10 @@ Static, zero-build collection of practice apps. Every push to `main` deploys aut
     │                           separating mixtures, dissolving, natural
     │                           resources, fair tests
     │                           (6 core sets + 2 challenge sets)
+    ├── science-champions/
+    │   └── index.html          Year 3–4 science: the four real TEDET Grade 3
+    │                           papers (2022–2025) in easy English, every
+    │                           picture redrawn (4 sets of 30)
     └── world-explorers/
         └── index.html          Year 3–4 social studies: climate zones, the
                                 compass, map keys and grids, landforms,
@@ -305,6 +309,57 @@ are true of every row they are asked about. Worth remembering when adding rows:
 the audit can prove the rows are *distinct*, but only reading them proves they
 are *true*.
 
+## Science Champions
+
+The four TEDET science papers for Grade 3 (Prathom 3) — 2022 to 2025, B.E.
+2565–2568 — rewritten in easy English for a Year 4 child who is still learning
+English. 4 sets × 30 questions (120 questions, 264 stars).
+
+**One set is one real paper.** This is the one app whose sets are *not*
+parallel and *not* shuffled: Set 1 is TEDET 2565, "Q18" on screen is question
+18 on the paper, and every question keeps its five answers ①–⑤ in the paper's
+order, so a grown-up can hold the paper next to the tablet. `setOrder()` simply
+returns the papers oldest first. Sections are the paper's own runs of
+questions on one topic: **Plants** · **Animals and Us** · **Materials and
+Forces** · **Light, Sound and Energy** · **Air and Weather** · **Earth and
+Space**.
+
+**More than one right answer.** A TEDET question may have several right
+answers, and 36 of the 120 do. Those are `multi` questions ("Tick every answer
+that fits"), scored one star per line judged correctly, as in Science
+Detectives; the other 84 are `choice`. The paper itself gives the mark only
+when every line is right, and the Settings page says so. Picture answers
+(balance boards, graphs, light paths) use the same two types in a two-column
+picture grid. Only very short text answers — a letter or a number — sit in the
+big two-column grid; anything longer, such as "ⓐ and ⓒ only", is a full-width
+list, so it never wraps mid-phrase on a phone.
+
+**The English.** Sentences average about nine words, and a science word is
+explained the first time it appears: *transparent (see-through)*, *fertiliser
+(plant food)*, *meteorites (rocks from space that land on Earth)*. A story,
+chat, table or numbered method that comes before a question gets its own box
+above it. The 🔊 button reads the whole question, and `sayable()` turns ①–⑤,
+ⓐ–ⓔ, °C, mL, ✓ and ✗ into words first.
+
+**The pictures.** Every picture on the papers is redrawn — as inline SVG, as
+emoji cards or as a table — and a figure that carries an answer (the
+bean-growth bar chart, the balance boards, the shadow cube, the dust table)
+holds its numbers in one place, so the question and the drawing cannot
+disagree. Words drawn on a pale scene such as a map or a sky use a fixed dark
+ink (`INK`) instead of the theme colour, so they stay readable in dark mode.
+
+### Where a paper could be read two ways
+
+Every answer was worked out from the science rather than copied, and the
+harder ones were checked by calculation: the shadows of the 27-box cube, the
+turning effects on the hanging board, bar heights read off the chart, which
+way each fold of the agamograph faces, and which part of Thailand sees the
+Songkran sunrise first. A few answer lines were reworded so that each is
+clearly right or clearly wrong for a child — "young that look like itself"
+became "more of its own kind", because a tadpole does not look like a frog.
+Every explanation says why the wrong lines are wrong, not only which line is
+right.
+
 ## Adding a new quiz
 
 1. Create `apps/<folder-name>/index.html` — one self-contained HTML file.
@@ -322,10 +377,10 @@ are *true*.
 ### Storage rule for new apps
 
 All apps share one browser origin **and one storage allowance** — about 5 MB
-between the five of them — so keys must be namespaced per app, and a new app
+between the six of them — so keys must be namespaced per app, and a new app
 has to assume the others have already used most of the room. In use today:
 `englishExplorer.v1`, `inventorsLab.v1`, `scienceDetectives.v1`,
-`worldExplorers.v1` and `numberFriends.v1`.
+`worldExplorers.v1`, `numberFriends.v1` and `scienceChampions.v1`.
 
 Each app keeps **two** keys:
 
